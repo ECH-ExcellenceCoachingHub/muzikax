@@ -96,8 +96,8 @@ export default function AIFloatingButton() {
                 }}
                 className="flex items-center bg-white text-gray-800 px-4 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
               >
-                <div className="w-8 h-8 bg-[#FF8C00]/10 rounded-full flex items-center justify-center mr-3">
-                  <svg className="w-4 h-4 text-[#FF8C00]" fill="currentColor" viewBox="0 0 24 24">
+                <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center mr-3">
+                  <svg className="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
                   </svg>
                 </div>

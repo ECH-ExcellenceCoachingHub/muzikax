@@ -7,11 +7,11 @@ export default function NotFound() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-gray-900 flex items-center justify-center px-4">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-background">
       <div className="text-center max-w-2xl">
         {/* Error Illustration */}
         <div className="mb-8">
-          <div className="inline-flex items-center justify-center w-32 h-32 bg-gradient-to-br from-[#FF8C00] to-[#FFB020] rounded-full">
+          <div className="inline-flex items-center justify-center w-32 h-32 bg-gradient-to-br from-primary to-primary-light rounded-full">
             <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.47-.881-6.08-2.33l-.118-.118a1 1 0 010-1.414l.118-.118A7.962 7.962 0 0112 9c2.34 0 4.47.881 6.08 2.33l.118.118a1 1 0 010 1.414l-.118.118z"></path>
             </svg>
@@ -19,7 +19,7 @@ export default function NotFound() {
         </div>
 
         {/* Error Content */}
-        <h1 className="text-6xl md:text-8xl font-bold text-white mb-4">404</h1>
+        <h1 className="text-6xl md:text-8xl font-bold mb-4 text-text-primary">404</h1>
         <h2 className="text-2xl md:text-3xl font-semibold text-gray-300 mb-6">
           Page Not Found
         </h2>
@@ -41,7 +41,7 @@ export default function NotFound() {
           
           <Link 
             href="/" 
-            className="px-6 py-3 bg-gradient-to-r from-[#FF8C00] to-[#FFB020] hover:from-[#FF7A00] hover:to-[#FFA010] text-white font-medium rounded-lg transition-all duration-300 flex items-center justify-center"
+            className="px-6 py-3 bg-gradient-to-r from-primary to-primary-light hover:from-primary hover:to-primary-light text-white font-medium rounded-lg transition-all duration-300 flex items-center justify-center"
           >
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
@@ -52,7 +52,7 @@ export default function NotFound() {
 
         {/* Helpful Links */}
         <div className="mt-12 pt-8 border-t border-gray-800">
-          <h3 className="text-lg font-medium text-white mb-4">You might be looking for:</h3>
+          <h3 className="text-lg font-medium mb-4 text-text-primary">You might be looking for:</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-md mx-auto">
             <Link 
               href="/explore" 

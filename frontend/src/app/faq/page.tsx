@@ -115,12 +115,12 @@ export default function FAQPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen text-white bg-background">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#FF8C00] to-[#FFB020] py-16">
+      <div className="bg-gradient-to-r from-primary to-primary-light py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Frequently Asked Questions</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-text-primary">Frequently Asked Questions</h1>
             <p className="text-xl text-white/90 max-w-3xl mx-auto">
               Find answers to common questions about MuzikaX. Can't find what you're looking for?
             </p>
@@ -140,16 +140,16 @@ export default function FAQPage() {
         
         {/* Quick Links */}
         <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6 text-center text-[#FF8C00]">Quick Links</h2>
+          <h2 className="text-2xl font-bold mb-6 text-center text-text-primary">Quick Links</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {quickLinks.map((link, index) => (
               <Link 
                 key={index}
                 href={link.href}
-                className="bg-gray-800/30 backdrop-blur-lg rounded-xl p-6 border border-gray-700 text-center hover:bg-gray-700/30 transition-all duration-300 group"
+                className="rounded-xl p-6 text-center group mx-surface"
               >
                 <div className="text-3xl mb-3">{link.icon}</div>
-                <h3 className="font-semibold text-white group-hover:text-[#FF8C00] transition-colors">
+                <h3 className="font-semibold group-hover:text-primary transition-colors text-text-primary">
                   {link.title}
                 </h3>
               </Link>
@@ -162,7 +162,7 @@ export default function FAQPage() {
           {faqCategories.map((category, categoryIndex) => (
             <div key={categoryIndex} className="bg-gray-800/30 backdrop-blur-lg rounded-xl border border-gray-700 overflow-hidden">
               <div className="bg-gray-700/30 px-6 py-4 border-b border-gray-700">
-                <h2 className="text-2xl font-bold flex items-center">
+                <h2 className="text-2xl font-bold flex items-center text-text-primary">
                   <span className="mr-3 text-3xl">{category.icon}</span>
                   {category.title}
                 </h2>
@@ -181,7 +181,7 @@ export default function FAQPage() {
                           {faq.question}
                         </span>
                         <svg
-                          className={`w-6 h-6 text-[#FF8C00] transition-transform duration-300 ${
+                          className={`w-6 h-6 text-primary transition-transform duration-300 ${
                             openQuestion === questionIndex ? 'rotate-180' : ''
                           }`}
                           fill="none"
@@ -210,8 +210,8 @@ export default function FAQPage() {
         </div>
 
         {/* Still Need Help */}
-        <div className="mt-16 bg-gradient-to-r from-[#FF8C00]/10 to-[#FFB020]/10 rounded-xl p-8 border border-[#FF8C00]/20 text-center">
-          <h2 className="text-2xl font-bold mb-4 text-[#FF8C00]">Still Need Help?</h2>
+        <div className="mt-16 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-xl p-8 border border-primary/20 text-center">
+          <h2 className="text-2xl font-bold mb-4 text-text-primary">Still Need Help?</h2>
           <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
             Our support team is here to help you with any questions that aren't covered in our FAQ. 
             We typically respond within 24 hours.
@@ -220,7 +220,7 @@ export default function FAQPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
               href="/contact" 
-              className="bg-gradient-to-r from-[#FF8C00] to-[#FFB020] text-white px-8 py-3 rounded-full font-semibold hover:from-[#FF7A00] hover:to-[#FFA010] transition-all duration-300 inline-flex items-center justify-center"
+              className="bg-gradient-to-r from-primary to-primary-light text-white px-8 py-3 rounded-full font-semibold hover:from-primary hover:to-primary-light transition-all duration-300 inline-flex items-center justify-center"
             >
               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
@@ -242,21 +242,21 @@ export default function FAQPage() {
 
         {/* Community Support */}
         <div className="mt-12 bg-gray-800/30 backdrop-blur-lg rounded-xl p-8 border border-gray-700">
-          <h2 className="text-2xl font-bold mb-4 text-center text-[#FF8C00]">Community Resources</h2>
+          <h2 className="text-2xl font-bold mb-4 text-center text-text-primary">Community Resources</h2>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="text-center">
               <div className="text-4xl mb-3">📚</div>
-              <h3 className="font-semibold mb-2 text-white">Help Center</h3>
+              <h3 className="font-semibold mb-2 text-text-primary">Help Center</h3>
               <p className="text-gray-400 text-sm">Browse our comprehensive guides and tutorials</p>
             </div>
             <div className="text-center">
               <div className="text-4xl mb-3">👥</div>
-              <h3 className="font-semibold mb-2 text-white">Community Forum</h3>
+              <h3 className="font-semibold mb-2 text-text-primary">Community Forum</h3>
               <p className="text-gray-400 text-sm">Connect with other MuzikaX users and creators</p>
             </div>
             <div className="text-center">
               <div className="text-4xl mb-3">📺</div>
-              <h3 className="font-semibold mb-2 text-white">Video Tutorials</h3>
+              <h3 className="font-semibold mb-2 text-text-primary">Video Tutorials</h3>
               <p className="text-gray-400 text-sm">Watch step-by-step video guides for all features</p>
             </div>
           </div>

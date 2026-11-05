@@ -170,8 +170,8 @@ export default function Loading() {
     <div className="fixed inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center z-50 overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-[#FF8C00]/10 rounded-full blur-3xl animate-pulse sm:w-96 sm:h-96"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-[#FFB020]/10 rounded-full blur-3xl animate-pulse sm:w-96 sm:h-96" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl animate-pulse sm:w-96 sm:h-96"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary-light/10 rounded-full blur-3xl animate-pulse sm:w-96 sm:h-96" style={{ animationDelay: '1s' }}></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-#FFB020/5 rounded-full blur-3xl animate-pulse sm:w-[500px] sm:h-[500px]" style={{ animationDelay: '2s' }}></div>
       </div>
 
@@ -182,16 +182,16 @@ export default function Loading() {
           <div className="relative w-32 h-32 mx-auto mb-4 sm:w-40 sm:h-40 md:w-44 md:h-44 flex items-center justify-center">
             {/* Outer ring */}
             <div className="absolute inset-0 rounded-full border-4 border-gray-800 animate-spin shadow-2xl sm:border-[5px]" style={{ animationDuration: '3s' }}>
-              <div className="absolute inset-0 rounded-full border-t-2 border-[#FF8C00]"></div>
+              <div className="absolute inset-0 rounded-full border-t-2 border-primary"></div>
             </div>
             
             {/* Middle ring */}
             <div className="absolute inset-3 sm:inset-4 rounded-full border-2 border-gray-700 animate-spin shadow-xl sm:border-[3px]" style={{ animationDuration: '2s', animationDirection: 'reverse' }}>
-              <div className="absolute inset-0 rounded-full border-b-2 border-[#FFB020]"></div>
+              <div className="absolute inset-0 rounded-full border-b-2 border-primary-light"></div>
             </div>
             
             {/* Inner circle with actual logo */}
-            <div className="absolute inset-6 sm:inset-8 rounded-full bg-gradient-to-br from-[#FF8C00] to-[#FFB020] flex items-center justify-center shadow-2xl overflow-hidden">
+            <div className="absolute inset-6 sm:inset-8 rounded-full bg-gradient-to-br from-primary to-primary-light flex items-center justify-center shadow-2xl overflow-hidden">
               <Image
                 src="/muzikax.png"
                 alt="MuzikaX Logo"
@@ -204,10 +204,10 @@ export default function Loading() {
 
             {/* Orbiting dots */}
             <div className="absolute inset-0 animate-spin" style={{ animationDuration: '4s' }}>
-              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1 w-2 h-2 sm:w-3 sm:h-3 bg-[#FF8C00] rounded-full shadow-lg"></div>
+              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1 w-2 h-2 sm:w-3 sm:h-3 bg-primary rounded-full shadow-lg"></div>
             </div>
             <div className="absolute inset-0 animate-spin" style={{ animationDuration: '4s', animationDelay: '1.33s' }}>
-              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1 w-2 h-2 sm:w-3 sm:h-3 bg-[#FFB020] rounded-full shadow-lg"></div>
+              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1 w-2 h-2 sm:w-3 sm:h-3 bg-primary-light rounded-full shadow-lg"></div>
             </div>
             <div className="absolute inset-0 animate-spin" style={{ animationDuration: '4s', animationDelay: '2.66s' }}>
               <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1 w-2 h-2 sm:w-3 sm:h-3 bg-#FFB020 rounded-full shadow-lg"></div>
@@ -216,7 +216,7 @@ export default function Loading() {
         </div>
 
         {/* Brand Name */}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-[#FF8C00] via-[#FFB020] to-#FFB020 bg-clip-text text-transparent animate-pulse w-full text-center">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 animate-pulse w-full text-center text-text-primary">
           MuzikaX
         </h1>
 
@@ -240,7 +240,7 @@ export default function Loading() {
             {hasCachedContent && (
               <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-3 sm:p-4 backdrop-blur-sm max-h-48 sm:max-h-60 overflow-y-auto mx-auto">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-white font-semibold text-xs sm:text-sm">Available Offline Content</h3>
+                  <h3 className="font-semibold text-xs sm:text-sm text-text-primary">Available Offline Content</h3>
                   <span className="text-xs text-gray-400">
                     {offlineData?.lastSyncTime ? `Last synced ${formatTimeAgo(offlineData.lastSyncTime)}` : ''}
                   </span>
@@ -249,7 +249,7 @@ export default function Loading() {
                 <div className="space-y-2">
                   {offlineData?.recentTracks && offlineData.recentTracks.length > 0 && (
                     <div className="flex items-center gap-2 text-xs">
-                      <div className="w-2 h-2 bg-[#FF8C00] rounded-full flex-shrink-0"></div>
+                      <div className="w-2 h-2 bg-primary rounded-full flex-shrink-0"></div>
                       <span className="text-gray-300">
                         {offlineData.recentTracks.length} Recent Tracks
                       </span>
@@ -258,7 +258,7 @@ export default function Loading() {
 
                   {offlineData?.popularTracks && offlineData.popularTracks.length > 0 && (
                     <div className="flex items-center gap-2 text-xs">
-                      <div className="w-2 h-2 bg-[#FFB020] rounded-full flex-shrink-0"></div>
+                      <div className="w-2 h-2 bg-primary-light rounded-full flex-shrink-0"></div>
                       <span className="text-gray-300">
                         {offlineData.popularTracks.length} Popular Songs
                       </span>
@@ -314,7 +314,7 @@ export default function Loading() {
         <div className="w-full max-w-[80vw] sm:max-w-64 mx-auto mb-3 sm:mb-4 px-4">
           <div className="h-2 bg-gray-800 rounded-full overflow-hidden shadow-inner">
             <div 
-              className="h-full bg-gradient-to-r from-[#FF8C00] via-[#FFB020] to-#FFB020 rounded-full transition-all duration-300 ease-out"
+              className="h-full bg-gradient-to-r from-primary via-primary-light to-#FFB020 rounded-full transition-all duration-300 ease-out"
               style={{ width: `${Math.min(loadingProgress, 100)}%` }}
             ></div>
           </div>
@@ -332,13 +332,13 @@ export default function Loading() {
                 <div className="flex justify-center flex-wrap gap-2 text-xs text-gray-400 mt-2">
                   {preloadData.recentTracks.length > 0 && (
                     <span className="flex items-center gap-1">
-                      <div className="w-2 h-2 bg-[#FF8C00] rounded-full"></div>
+                      <div className="w-2 h-2 bg-primary rounded-full"></div>
                       {preloadData.recentTracks.length} Tracks
                     </span>
                   )}
                   {preloadData.popularTracks.length > 0 && (
                     <span className="flex items-center gap-1">
-                      <div className="w-2 h-2 bg-[#FFB020] rounded-full"></div>
+                      <div className="w-2 h-2 bg-primary-light rounded-full"></div>
                       {preloadData.popularTracks.length} Popular
                     </span>
                   )}
@@ -363,7 +363,7 @@ export default function Loading() {
           {[...Array(5)].map((_, i) => (
             <div
               key={i}
-              className="w-1 bg-gradient-to-t from-[#FF8C00] to-[#FFB020] rounded-full animate-sound-wave"
+              className="w-1 bg-gradient-to-t from-primary to-primary-light rounded-full animate-sound-wave"
               style={{
                 animationDelay: `${i * 0.1}s`,
                 height: `${20 + Math.random() * 80}%`

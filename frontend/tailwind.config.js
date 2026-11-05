@@ -1,3 +1,17 @@
+const neutralScale = {
+  50: "#FAFAFA",
+  100: "#F4F4F5",
+  200: "#E4E4E7",
+  300: "#D4D4D8",
+  400: "#A1A1AA",
+  500: "#71717A",
+  600: "#4A4A50",
+  700: "#2A2A2E",
+  800: "#1A1A1D",
+  900: "#121214",
+  950: "#0A0A0B",
+};
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -9,41 +23,52 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // Design tokens (see :root in src/app/globals.css). Opacity modifiers work: bg-surface/60
         background: {
-          DEFAULT: "var(--background)",
-          deep: "var(--background-deep)",
+          DEFAULT: "rgb(var(--background-rgb) / <alpha-value>)",
+          deep: "rgb(var(--background-deep-rgb) / <alpha-value>)",
         },
         surface: {
-          DEFAULT: "var(--surface)",
-          elevated: "var(--elevated)",
+          DEFAULT: "rgb(var(--surface-rgb) / <alpha-value>)",
+          elevated: "rgb(var(--elevated-rgb) / <alpha-value>)",
+          overlay: "rgb(var(--overlay-rgb) / <alpha-value>)",
         },
-        foreground: "var(--foreground)",
+        foreground: "rgb(var(--text-primary-rgb) / <alpha-value>)",
         primary: {
-          DEFAULT: "var(--primary)",
-          hover: "var(--primary-hover)",
-          light: "var(--primary-light)",
+          DEFAULT: "rgb(var(--primary-rgb) / <alpha-value>)",
+          hover: "rgb(var(--primary-hover-rgb) / <alpha-value>)",
+          light: "rgb(var(--primary-light-rgb) / <alpha-value>)",
           glow: "var(--primary-glow)",
         },
         text: {
-          primary: "var(--text-primary)",
-          secondary: "var(--text-secondary)",
-          muted: "var(--text-muted)",
+          primary: "rgb(var(--text-primary-rgb) / <alpha-value>)",
+          secondary: "rgb(var(--text-secondary-rgb) / <alpha-value>)",
+          muted: "rgb(var(--text-muted-rgb) / <alpha-value>)",
         },
         border: {
           light: "var(--border-light)",
           medium: "var(--border-medium)",
+          strong: "var(--border-strong)",
         },
         glass: {
           bg: "var(--glass-bg)",
           border: "var(--glass-border)",
         },
+        // One neutral scale for the whole app. Tailwind's stock gray/slate are
+        // blue-tinted, which made every page look slightly different.
+        // 950 = canvas, 900 = surface, 800 = elevated, 700 = overlay / borders.
+        gray: neutralScale,
+        slate: neutralScale,
+        zinc: neutralScale,
+        neutral: neutralScale,
+        stone: neutralScale,
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'primary-gradient': 'linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%)',
-        'gold-gradient': 'linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%)',
-        'sunset-gradient': 'linear-gradient(135deg, #FF6B35 0%, #FFA500 50%, #FFD700 100%)',
+        'primary-gradient': 'linear-gradient(135deg, #FF8C00 0%, #FFB020 100%)',
+        'gold-gradient': 'linear-gradient(135deg, #FF8C00 0%, #FFB020 100%)',
+        'sunset-gradient': 'linear-gradient(135deg, #FF8C00 0%, #FFB020 100%)',
       },
       fontFamily: {
         sans: ['Inter', 'Poppins', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],

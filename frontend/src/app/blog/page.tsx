@@ -132,12 +132,12 @@ The journey from bedroom producer to studio professional takes time and practice
     : blogPosts.filter(post => post.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen text-white bg-background">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#FF8C00] to-[#FFB020] py-16">
+      <div className="bg-gradient-to-r from-primary to-primary-light py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">MuzikaX Blog</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-text-primary">MuzikaX Blog</h1>
             <p className="text-xl text-white/90 max-w-3xl mx-auto">
               Insights, stories, and resources for music creators and enthusiasts
             </p>
@@ -154,7 +154,7 @@ The journey from bedroom producer to studio professional takes time and practice
               onClick={() => setSelectedCategory(category)}
               className={`px-6 py-2 rounded-full font-medium transition-all ${
                 selectedCategory === category
-                  ? "bg-[#FF8C00] text-white"
+                  ? "bg-primary text-white"
                   : "bg-gray-800 text-gray-300 hover:bg-gray-700"
               }`}
             >
@@ -168,17 +168,17 @@ The journey from bedroom producer to studio professional takes time and practice
           {filteredPosts.map((post) => (
             <article 
               key={post.id} 
-              className="bg-gray-800/30 backdrop-blur-lg rounded-xl overflow-hidden border border-gray-700 hover:border-[#FF8C00]/50 transition-all duration-300 group"
+              className="rounded-xl overflow-hidden group mx-surface"
             >
               <div className="p-6">
                 <div className="flex items-center gap-4 mb-4">
-                  <span className="px-3 py-1 bg-[#FF8C00]/20 text-[#FF8C00] text-sm font-medium rounded-full">
+                  <span className="px-3 py-1 bg-primary/20 text-primary text-sm font-medium rounded-full">
                     {post.category}
                   </span>
                   <span className="text-gray-400 text-sm">{post.readTime}</span>
                 </div>
                 
-                <h2 className="text-2xl font-bold mb-3 text-white group-hover:text-[#FF8C00] transition-colors">
+                <h2 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors text-text-primary">
                   <Link href={`/blog/${post.slug}`}>
                     {post.title}
                   </Link>
@@ -190,7 +190,7 @@ The journey from bedroom producer to studio professional takes time and practice
                 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-gradient-to-br from-[#FF8C00] to-[#FFB020] rounded-full flex items-center justify-center">
+                    <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary-light rounded-full flex items-center justify-center">
                       <span className="text-white font-bold">
                         {post.author.split(' ').map(n => n[0]).join('')}
                       </span>
@@ -203,7 +203,7 @@ The journey from bedroom producer to studio professional takes time and practice
                   
                   <Link 
                     href={`/blog/${post.slug}`}
-                    className="text-[#FF8C00] hover:text-[#FF7A00] font-medium flex items-center gap-1 group-hover:gap-2 transition-all"
+                    className="text-primary hover:text-primary font-medium flex items-center gap-1 group-hover:gap-2 transition-all"
                   >
                     Read More
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -217,8 +217,8 @@ The journey from bedroom producer to studio professional takes time and practice
         </div>
 
         {/* Newsletter Signup */}
-        <div className="mt-16 bg-gradient-to-r from-[#FF8C00]/10 to-[#FFB020]/10 rounded-xl p-8 border border-[#FF8C00]/20 text-center">
-          <h2 className="text-2xl font-bold mb-4 text-[#FF8C00]">Stay Updated</h2>
+        <div className="mt-16 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-xl p-8 border border-primary/20 text-center">
+          <h2 className="text-2xl font-bold mb-4 text-text-primary">Stay Updated</h2>
           <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
             Subscribe to our newsletter for the latest music industry insights, artist spotlights, and platform updates delivered to your inbox.
           </p>
@@ -227,9 +227,9 @@ The journey from bedroom producer to studio professional takes time and practice
             <input
               type="email"
               placeholder="Enter your email"
-              className="flex-1 px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent text-white placeholder-gray-400"
+              className="flex-1 px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-white placeholder-gray-400"
             />
-            <button className="bg-gradient-to-r from-[#FF8C00] to-[#FFB020] text-white px-6 py-3 rounded-lg font-semibold hover:from-[#FF7A00] hover:to-[#FFA010] transition-all">
+            <button className="bg-gradient-to-r from-primary to-primary-light text-white px-6 py-3 rounded-lg font-semibold hover:from-primary hover:to-primary-light transition-all">
               Subscribe
             </button>
           </div>

@@ -30,7 +30,7 @@ export default function TopArtistsSection({ creators, loading }: TopArtistsSecti
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-black text-white gradient-text-animated"
+          className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-black text-text-primary"
         >
           🎤 Top Artists
         </motion.h2>
@@ -80,7 +80,7 @@ export default function TopArtistsSection({ creators, loading }: TopArtistsSecti
                     <img
                       src={artist.avatar}
                       alt={artist.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                     />
                   ) : (
                     generateAvatar(artist.name)
@@ -108,7 +108,7 @@ export default function TopArtistsSection({ creators, loading }: TopArtistsSecti
 
               {/* Info */}
               <div className="text-center mt-2 md:mt-3">
-                <h3 className="text-xs md:text-sm lg:text-base font-bold text-white group-hover:text-gold-400 transition-colors truncate max-w-[120px] md:max-w-[140px] lg:max-w-[160px]">
+                <h3 className="text-xs md:text-sm lg:text-base font-bold group-hover:text-gold-400 transition-colors truncate max-w-[120px] md:max-w-[140px] lg:max-w-[160px] text-text-primary">
                   {artist.name}
                 </h3>
                 <p className="text-xs text-gray-400 mt-0.5">

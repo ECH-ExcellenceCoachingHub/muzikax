@@ -165,7 +165,7 @@ export default function MobileNavbar() {
           {/* Left: Logo */}
           <Link href="/" className="flex items-center group flex-shrink-0">
             <div className="w-8 h-8 rounded-lg overflow-hidden shadow-md">
-              <img src="/muzikax.png" alt="MuzikaX Logo" className="w-full h-full object-cover rounded-lg transition-transform group-hover:scale-105" />
+              <img src="/muzikax.png" alt="MuzikaX Logo" className="w-full h-full object-cover rounded-lg transition-transform group-hover:scale-[1.04]" />
             </div>
             <span className="ml-2 text-xl font-black text-white tracking-tighter">MuzikaX</span>
           </Link>
@@ -206,7 +206,7 @@ export default function MobileNavbar() {
                 <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
-                <span className="absolute -top-0.5 -right-0.5 text-[8px] font-black uppercase bg-gradient-to-r from-[#FF8C00] to-[#FFB020] text-white px-1 rounded-sm border border-gray-900 shadow-sm leading-none py-0.5 min-w-[16px] text-center">
+                <span className="absolute -top-0.5 -right-0.5 text-[8px] font-black uppercase bg-gradient-to-r from-primary to-primary-light text-white px-1 rounded-sm border border-gray-900 shadow-sm leading-none py-0.5 min-w-[16px] text-center">
                   {language === 'en' ? 'EN' : language === 'rw' ? 'RW' : 'SW'}
                 </span>
               </button>
@@ -230,7 +230,7 @@ export default function MobileNavbar() {
             >
               {/* Header with Close Button */}
               <div className="px-6 py-4 border-b border-gray-800/50 flex items-center justify-between">
-                <h2 className="text-base font-semibold text-white">
+                <h2 className="text-base font-semibold text-text-primary">
                   Select Language
                 </h2>
                 <button
@@ -253,16 +253,16 @@ export default function MobileNavbar() {
                     setLanguage('en');
                     setShowLanguageModal(false);
                   }}
-                  className="w-full flex items-center justify-between px-5 py-4 rounded-xl bg-gradient-to-r from-blue-600/20 to-blue-600/10 border border-blue-500/30 hover:border-blue-400 transition-all duration-200 group active:scale-[0.98]"
+                  className={`w-full flex items-center justify-between px-4 py-3.5 rounded-xl border transition-colors duration-150 active:scale-[0.99] ${actualLanguage === 'en' ? 'bg-primary/10 border-primary/40' : 'bg-surface border-transparent hover:bg-surface-overlay'}`}
                 >
                   <div className="flex items-center space-x-4">
                     <span className="text-3xl">🇬🇧</span>
                     <div className="flex flex-col">
                       <span className="text-base font-semibold text-white">English</span>
-                      <span className="text-xs opacity-60">United Kingdom</span>
+                      <span className="text-xs text-text-muted">United Kingdom</span>
                     </div>
                   </div>
-                  <svg className="w-6 h-6 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className={`w-5 h-5 text-primary ${actualLanguage === 'en' ? '' : 'invisible'}`} fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                 </button>
@@ -274,16 +274,16 @@ export default function MobileNavbar() {
                     setLanguage('rw');
                     setShowLanguageModal(false);
                   }}
-                  className="w-full flex items-center justify-between px-5 py-4 rounded-xl bg-gradient-to-r from-yellow-500/20 to-red-500/10 border border-yellow-500/30 hover:border-yellow-400 transition-all duration-200 group active:scale-[0.98]"
+                  className={`w-full flex items-center justify-between px-4 py-3.5 rounded-xl border transition-colors duration-150 active:scale-[0.99] ${actualLanguage === 'rw' ? 'bg-primary/10 border-primary/40' : 'bg-surface border-transparent hover:bg-surface-overlay'}`}
                 >
                   <div className="flex items-center space-x-4">
                     <span className="text-3xl">🇷🇼</span>
                     <div className="flex flex-col">
                       <span className="text-base font-semibold text-white">Kinyarwanda</span>
-                      <span className="text-xs opacity-60">Rwanda</span>
+                      <span className="text-xs text-text-muted">Rwanda</span>
                     </div>
                   </div>
-                  <svg className="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className={`w-5 h-5 text-primary ${actualLanguage === 'rw' ? '' : 'invisible'}`} fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                 </button>
@@ -295,16 +295,16 @@ export default function MobileNavbar() {
                     setLanguage('sw');
                     setShowLanguageModal(false);
                   }}
-                  className="w-full flex items-center justify-between px-5 py-4 rounded-xl bg-gradient-to-r from-green-600/20 to-blue-600/10 border border-green-500/30 hover:border-green-400 transition-all duration-200 group active:scale-[0.98]"
+                  className={`w-full flex items-center justify-between px-4 py-3.5 rounded-xl border transition-colors duration-150 active:scale-[0.99] ${actualLanguage === 'sw' ? 'bg-primary/10 border-primary/40' : 'bg-surface border-transparent hover:bg-surface-overlay'}`}
                 >
                   <div className="flex items-center space-x-4">
                     <span className="text-3xl">🇹🇿</span>
                     <div className="flex flex-col">
                       <span className="text-base font-semibold text-white">Kiswahili</span>
-                      <span className="text-xs opacity-60">Tanzania/Kenya</span>
+                      <span className="text-xs text-text-muted">Tanzania/Kenya</span>
                     </div>
                   </div>
-                  <svg className="w-6 h-6 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className={`w-5 h-5 text-primary ${actualLanguage === 'sw' ? '' : 'invisible'}`} fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                 </button>
@@ -342,7 +342,7 @@ export default function MobileNavbar() {
                 e.preventDefault();
                 togglePlayPause();
               }}
-              className="w-9 h-9 rounded-full bg-gradient-to-br from-[#FF8C00] to-[#FFA500] flex items-center justify-center active:scale-90 transition-transform duration-150 shadow-lg shadow-[#FF8C00]/30 flex-shrink-0"
+              className="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-primary-hover flex items-center justify-center active:scale-90 transition-transform duration-150 shadow-lg shadow-primary/30 flex-shrink-0"
             >
               {isPlaying ? (
                 <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -375,13 +375,13 @@ export default function MobileNavbar() {
                 href={item.href}
                 className={`relative flex flex-col items-center justify-center py-3 px-1.5 flex-1 active:scale-90 transition-all duration-200 group ${
                   active
-                    ? 'text-[#FF8C00]'
+                    ? 'text-primary'
                     : 'text-gray-400 hover:text-gray-200'
                 }`}
               >
                 {/* Active indicator background glow */}
                 {active && (
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#FF8C00]/10 to-transparent rounded-t-lg" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent rounded-t-lg" />
                 )}
                 
                 {/* Icon with scale animation */}
@@ -393,14 +393,14 @@ export default function MobileNavbar() {
                 
                 {/* Label with active state */}
                 <span className={`relative z-10 text-[10px] mt-1 font-medium transition-all duration-200 ${
-                  active ? 'text-[#FF8C00] font-semibold tracking-wide' : 'text-gray-400'
+                  active ? 'text-primary font-semibold tracking-wide' : 'text-gray-400'
                 }`}>
                   {item.name}
                 </span>
                 
                 {/* Active dot indicator */}
                 {active && (
-                  <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-[#FF8C00] rounded-full shadow-lg shadow-[#FF8C00]/50" />
+                  <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-primary rounded-full shadow-lg shadow-primary/50" />
                 )}
               </Link>
             );

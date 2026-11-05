@@ -26,7 +26,7 @@ const LiveRoomCard = ({ liveRoom, onJoinClick }) => {
   };
 
   return (
-    <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 border border-gray-700 hover:border-[#FF4D67]/30 transition-all duration-300">
+    <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 border border-gray-700 hover:border-primary/30 transition-all duration-300">
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center space-x-3">
           <div className="bg-gradient-to-br from-[#00CED1] to-[#20B2AA] w-12 h-12 rounded-full flex items-center justify-center">

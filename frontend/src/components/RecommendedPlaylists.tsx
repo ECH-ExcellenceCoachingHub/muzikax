@@ -156,10 +156,10 @@ export default function RecommendedPlaylists({
     return (
       <section className={`${sectionPadding} ${className}`}>
         <div className="flex justify-between items-center mb-6">
-          <h2 className={`font-bold text-white ${
+          <h2 className={`font-bold ${
             titleSize === 'sm' ? 'text-base sm:text-lg' : 
             titleSize === 'md' ? 'text-xl' : 'text-2xl'
-          } ${titleClassName}`}>{t('recommendedPlaylists')}</h2>
+          } ${titleClassName} text-text-primary`}>{t('recommendedPlaylists')}</h2>
         </div>
         <div className="flex space-x-4 overflow-x-auto pb-4">
           {[...Array(5)].map((_, index) => (
@@ -183,13 +183,13 @@ export default function RecommendedPlaylists({
   return (
     <section className={`${sectionPadding} ${className}`}>
       <div className="flex justify-between items-center mb-6">
-        <h2 className={`font-bold text-white ${
+        <h2 className={`font-bold ${
             titleSize === 'sm' ? 'text-base sm:text-lg' : 
             titleSize === 'md' ? 'text-xl' : 'text-xl sm:text-2xl'
-          } ${titleClassName}`}>{t('recommendedPlaylists')}</h2>
+          } ${titleClassName} text-text-primary`}>{t('recommendedPlaylists')}</h2>
         <button 
           onClick={handleViewAll}
-          className="text-[#FF8C00] hover:text-[#FF8C00]/80 text-sm font-medium transition-colors"
+          className="text-primary hover:text-primary/80 text-sm font-medium transition-colors"
         >
           {t('viewAll')}
         </button>
@@ -213,10 +213,10 @@ export default function RecommendedPlaylists({
                   <img 
                     src={playlist.tracks[0].coverURL}
                     alt={playlist.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-300"
                   />
                 ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-[#FF8C00] to-[#FFB020] flex items-center justify-center">
+                  <div className="w-full h-full bg-gradient-to-br from-primary to-primary-light flex items-center justify-center">
                     <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
                     </svg>
@@ -224,10 +224,10 @@ export default function RecommendedPlaylists({
                 )}
                 
                 {/* Play Overlay */}
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <div className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div className="absolute inset-0 flex items-end justify-end p-2 sm:p-3 pointer-events-none">
+                  <div className="mx-card-play !static [&_svg]:w-4 [&_svg]:h-4 [&_svg]:text-black">
                     <svg className="w-6 h-6 text-gray-900 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                      <path fillRule="evenodd" d="M6.3 2.84A1.5 1.5 0 004 4.11v11.78a1.5 1.5 0 002.3 1.27l9.344-5.891a1.5 1.5 0 000-2.538L6.3 2.84z" clipRule="evenodd" />
                     </svg>
                   </div>
                 </div>
@@ -239,7 +239,7 @@ export default function RecommendedPlaylists({
               </div>
               
               {/* Playlist Info */}
-              <h3 className="font-semibold text-white truncate mb-1 group-hover:text-[#FF8C00] transition-colors">
+              <h3 className="font-semibold truncate mb-1 group-hover:text-primary transition-colors text-text-primary">
                 {playlist.name}
               </h3>
               <p className="text-gray-400 text-sm truncate">

@@ -17,7 +17,7 @@ interface Creator {
 const generateAvatar = (name: string) => {
   const firstLetter = name.charAt(0).toUpperCase()
   return (
-    <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br from-[#FF8C00] to-[#FFB020] flex items-center justify-center mx-auto">
+    <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br from-primary to-primary-light flex items-center justify-center mx-auto">
       <span className="text-3xl font-bold text-white">{firstLetter}</span>
     </div>
   )
@@ -140,7 +140,7 @@ export default function ArtistsPage() {
   
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black py-8">
+      <div className="min-h-screen py-8 bg-background">
         <div className="container mx-auto px-4">
           <div className="flex justify-center items-center h-64">
             <div className="text-white">Loading artists...</div>
@@ -152,7 +152,7 @@ export default function ArtistsPage() {
   
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black py-8">
+      <div className="min-h-screen py-8 bg-background">
         <div className="container mx-auto px-4">
           <div className="flex justify-center items-center h-64">
             <div className="text-red-500">{error}</div>
@@ -163,22 +163,22 @@ export default function ArtistsPage() {
   }
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black py-8">
+    <div className="min-h-screen py-8 bg-background">
       <div className="container mx-auto px-4">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold text-white">Artists</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-text-primary">Artists</h1>
           
           <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
             <input
               type="text"
               placeholder="Search artists..."
-              className="px-4 py-2 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+              className="px-4 py-2 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
             
             <select
-              className="px-4 py-2 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+              className="px-4 py-2 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as 'popular' | 'alphabetical')}
             >
@@ -215,8 +215,8 @@ export default function ArtistsPage() {
                       generateAvatar(creator.name)
                     )}
                   </div>
-                  <h3 className="font-bold text-white text-base truncate w-full">{creator.name}</h3>
-                  <p className="text-[#FFB020] text-sm mb-3 capitalize">
+                  <h3 className="font-bold text-base truncate w-full text-text-primary">{creator.name}</h3>
+                  <p className="text-primary-light text-sm mb-3 capitalize">
                     {creator.creatorType || 'Artist'}
                   </p>
                   <p className="text-gray-500 text-xs mb-4">
@@ -226,7 +226,7 @@ export default function ArtistsPage() {
                     className={`w-full px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                       followedArtists[creator._id]
                         ? 'bg-gray-700 text-white hover:bg-gray-600'
-                        : 'bg-transparent border border-[#FFB020] text-[#FFB020] hover:bg-[#FFB020]/10'
+                        : 'bg-transparent border border-primary-light text-primary-light hover:bg-primary-light/10'
                     }`}
                     onClick={(e) => handleFollowClick(creator._id, e)}
                   >

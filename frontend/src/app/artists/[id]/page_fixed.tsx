@@ -232,7 +232,7 @@ export default function ArtistProfilePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black py-8">
+      <div className="min-h-screen py-8 bg-background">
         <div className="container mx-auto px-4">
           <div className="flex justify-center items-center h-64">
             <div className="text-white">Loading artist profile...</div>
@@ -244,7 +244,7 @@ export default function ArtistProfilePage() {
   
   if (error || !creator) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black py-8">
+      <div className="min-h-screen py-8 bg-background">
         <div className="container mx-auto px-4">
           <div className="flex justify-center items-center h-64">
             <div className="text-red-500">{error || 'Artist not found'}</div>
@@ -255,7 +255,7 @@ export default function ArtistProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black py-8">
+    <div className="min-h-screen py-8 bg-background">
       <div className="container mx-auto px-4">
         {/* Back button */}
         <button 

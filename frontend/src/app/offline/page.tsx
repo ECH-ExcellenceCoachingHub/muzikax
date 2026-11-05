@@ -214,7 +214,7 @@ export default function OfflinePage() {
 
   return (
     <div 
-      className={`min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-900 transition-all duration-300 ${isDragging ? 'scale-[1.02]' : ''}`} 
+      className={`min-h-screen bg-background transition-all duration-300 ${isDragging ? 'scale-[1.02]' : ''}`} 
       onDrop={handleDrop} 
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
@@ -226,7 +226,7 @@ export default function OfflinePage() {
             <svg className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 mx-auto mb-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
             </svg>
-            <h2 className="text-xl sm:text-2xl md:text-4xl font-bold mb-2">Drop Your Audio Files Here!</h2>
+            <h2 className="text-xl sm:text-2xl md:text-4xl font-bold mb-2 text-text-primary">Drop Your Audio Files Here!</h2>
             <p className="text-base sm:text-lg md:text-xl opacity-90">Supports MP3, WAV, OGG, M4A</p>
           </div>
         </div>
@@ -271,7 +271,7 @@ export default function OfflinePage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
             </svg>
           </div>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent px-2">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold px-2 text-text-primary">
             {isMobileApp ? 'Local Music Player' : 'Offline Music Player'}
           </h1>
           <p className="text-gray-300 text-sm sm:text-base md:text-lg lg:text-xl px-3 max-w-2xl mx-auto leading-relaxed">
@@ -299,7 +299,7 @@ export default function OfflinePage() {
                 className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-lg sm:rounded-xl object-cover shadow-lg flex-shrink-0" 
               />
               <div className="flex-1 min-w-0">
-                <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white truncate leading-tight">{currentTrack.title}</h2>
+                <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold truncate leading-tight text-text-primary">{currentTrack.title}</h2>
                 <p className="text-xs sm:text-sm md:text-base text-gray-400 truncate mt-0.5">{currentTrack.artist}</p>
               </div>
             </div>
@@ -345,11 +345,11 @@ export default function OfflinePage() {
         {/* Local File Upload Section */}
         <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 space-y-3 sm:space-y-4">
           <div className="flex items-center justify-between flex-wrap gap-2 sm:gap-3">
-            <h2 className="text-base sm:text-lg md:text-xl font-semibold text-white">Load More Audio Files</h2>
+            <h2 className="text-base sm:text-lg md:text-xl font-semibold text-text-primary">Load More Audio Files</h2>
             <div className="flex gap-1.5 sm:gap-2 w-full sm:w-auto">
               <button
                 onClick={requestFileSystemAccess}
-                className="flex-1 sm:flex-none px-3 sm:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg font-medium hover:from-blue-600 hover:to-purple-600 transition-all duration-200 flex items-center justify-center gap-1.5 sm:gap-2 active:scale-95 text-xs sm:text-sm md:text-base"
+                className="flex-1 sm:flex-none px-3 sm:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-primary to-primary-light text-white rounded-lg font-medium hover:from-primary-hover hover:to-primary-light transition-all duration-200 flex items-center justify-center gap-1.5 sm:gap-2 active:scale-95 text-xs sm:text-sm md:text-base"
                 title="Modern file picker (recommended)"
               >
                 <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -396,7 +396,7 @@ export default function OfflinePage() {
               {localFiles.map((file, index) => (
                 <div
                   key={`${file.name}-${index}`}
-                  className="flex items-center justify-between bg-gray-700/50 rounded-lg p-2 sm:p-3 group hover:bg-gray-600/50 transition-colors"
+                  className="flex items-center justify-between bg-gray-700/50 rounded-lg p-2 sm:p-3 group mx-surface"
                 >
                   <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
                     <div className="w-8 h-8 sm:w-10 sm:h-10 rounded bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center flex-shrink-0">
@@ -438,11 +438,11 @@ export default function OfflinePage() {
         {/* Downloaded Tracks Section */}
         {offlineTracks.length > 0 && (
           <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6">
-            <h2 className="text-base sm:text-lg md:text-xl font-semibold text-white mb-2 sm:mb-3 md:mb-4">Your Downloaded Tracks</h2>
+            <h2 className="text-base sm:text-lg md:text-xl font-semibold mb-2 sm:mb-3 md:mb-4 text-text-primary">Your Downloaded Tracks</h2>
             <p className="text-xs sm:text-sm md:text-base text-gray-400 mb-3 sm:mb-4">These tracks are available for offline playback</p>
             <Link
               href="/tracks"
-              className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 sm:py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg font-medium hover:from-blue-600 hover:to-purple-600 transition-all active:scale-95 text-xs sm:text-sm md:text-base"
+              className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 sm:py-3 bg-gradient-to-r from-primary to-primary-light text-white rounded-lg font-medium hover:from-primary-hover hover:to-primary-light transition-all active:scale-95 text-xs sm:text-sm md:text-base"
             >
               <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />

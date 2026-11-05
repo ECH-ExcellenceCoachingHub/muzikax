@@ -195,7 +195,7 @@ export default function ContentManagementPage() {
                   type="text"
                   id="search"
                   placeholder="Search by title..."
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
@@ -208,7 +208,7 @@ export default function ContentManagementPage() {
                 </label>
                 <select
                   id="sort-by"
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary"
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
                 >
@@ -226,7 +226,7 @@ export default function ContentManagementPage() {
                 </label>
                 <select
                   id="sort-order"
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary"
                   value={sortOrder}
                   onChange={(e) => setSortOrder(e.target.value)}
                 >
@@ -242,7 +242,7 @@ export default function ContentManagementPage() {
                 </label>
                 <select
                   id="type-filter"
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary"
                   value={typeFilter}
                   onChange={(e) => setTypeFilter(e.target.value)}
                 >
@@ -260,7 +260,7 @@ export default function ContentManagementPage() {
                 </label>
                 <select
                   id="payment-type-filter"
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary"
                   value={paymentTypeFilter}
                   onChange={(e) => setPaymentTypeFilter(e.target.value)}
                 >
@@ -277,7 +277,7 @@ export default function ContentManagementPage() {
                 </label>
                 <select
                   id="genre-filter"
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary"
                   value={genreFilter}
                   onChange={(e) => setGenreFilter(e.target.value)}
                 >
@@ -302,7 +302,7 @@ export default function ContentManagementPage() {
                 </label>
                 <select
                   id="creator-type-filter"
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary"
                   value={creatorTypeFilter}
                   onChange={(e) => setCreatorTypeFilter(e.target.value)}
                 >
@@ -320,7 +320,7 @@ export default function ContentManagementPage() {
                 </label>
                 <select
                   id="play-count-filter"
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary"
                   value={playCountFilter}
                   onChange={(e) => setPlayCountFilter(e.target.value)}
                 >
@@ -339,7 +339,7 @@ export default function ContentManagementPage() {
                 </label>
                 <select
                   id="like-count-filter"
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary"
                   value={likeCountFilter}
                   onChange={(e) => setLikeCountFilter(e.target.value)}
                 >
@@ -358,7 +358,7 @@ export default function ContentManagementPage() {
                 <input
                   type="date"
                   id="date-from"
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary"
                   value={dateFrom}
                   onChange={(e) => setDateFrom(e.target.value)}
                 />
@@ -372,7 +372,7 @@ export default function ContentManagementPage() {
                 <input
                   type="date"
                   id="date-to"
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary"
                   value={dateTo}
                   onChange={(e) => setDateTo(e.target.value)}
                 />
@@ -407,7 +407,7 @@ export default function ContentManagementPage() {
           <div className="card-bg rounded-2xl p-4 sm:p-6">
             {loading ? (
               <div className="flex justify-center items-center h-64">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FF8C00]"></div>
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
               </div>
             ) : error ? (
               <div className="text-red-500 text-center py-8">{error}</div>
@@ -550,7 +550,7 @@ export default function ContentManagementPage() {
                 value={deletionReason}
                 onChange={(e) => setDeletionReason(e.target.value)}
                 placeholder="Enter reason for deleting this track..."
-                className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF8C00] min-h-[100px]"
+                className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary min-h-[100px]"
               />
             </div>
             

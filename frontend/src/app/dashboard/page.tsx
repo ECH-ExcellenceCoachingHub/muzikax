@@ -51,9 +51,9 @@ export default function Dashboard() {
   
   // Mock data
   const stats: StatCard[] = [
-    { title: 'Total Plays', value: '24.8K', change: '+12%', icon: 'play', color: 'from-[#FF8C00] to-[#FF8C00]' },
-    { title: 'Total Likes', value: '3.2K', change: '+8%', icon: 'heart', color: 'from-[#FFB020] to-[#FFB020]' },
-    { title: 'Followers', value: '1.5K', change: '+5%', icon: 'users', color: 'from-[#6366F1] to-[#6366F1]' },
+    { title: 'Total Plays', value: '24.8K', change: '+12%', icon: 'play', color: 'from-primary to-primary' },
+    { title: 'Total Likes', value: '3.2K', change: '+8%', icon: 'heart', color: 'from-primary-light to-primary-light' },
+    { title: 'Followers', value: '1.5K', change: '+5%', icon: 'users', color: 'from-primary to-primary' },
     { title: 'Revenue', value: 'RWF 42.1K', change: '+18%', icon: 'currency', color: 'from-[#10B981] to-[#10B981]' }
   ]
   
@@ -65,13 +65,13 @@ export default function Dashboard() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black py-6 sm:py-8">
-      <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#FF8C00]/10 rounded-full blur-3xl -z-10"></div>
-      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-[#FFB020]/10 rounded-full blur-3xl -z-10"></div>
+    <div className="min-h-screen py-6 sm:py-8 bg-background">
+      <div className="absolute -top-40 -left-40 w-96 h-96 bg-primary/10 rounded-full blur-3xl -z-10"></div>
+      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-primary-light/10 rounded-full blur-3xl -z-10"></div>
       
       <div className="container mx-auto px-4 sm:px-8">
         <div className="mb-6 sm:mb-8">
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">Creator Dashboard</h1>
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-text-primary">Creator Dashboard</h1>
           <p className="text-gray-400 text-sm sm:text-base">Monitor your music performance and analytics</p>
         </div>
 
@@ -84,7 +84,7 @@ export default function Dashboard() {
                 type="button"
                 className={`px-2 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm font-medium rounded-md transition-colors ${
                   timeRange === range
-                    ? 'bg-[#FF8C00] text-white'
+                    ? 'bg-primary text-white'
                     : 'text-gray-400 hover:text-white'
                 }`}
                 onClick={() => setTimeRange(range)}
@@ -98,7 +98,7 @@ export default function Dashboard() {
         {/* Stats Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
           {stats.map((stat, index) => (
-            <div key={index} className="card-bg rounded-2xl p-4 sm:p-6 transition-all duration-300 hover:border-[#FF8C00]/50 hover:bg-gradient-to-br hover:from-gray-900/70 hover:to-gray-900/50 hover:shadow-xl hover:shadow-[#FF8C00]/10">
+            <div key={index} className="card-bg rounded-2xl p-4 sm:p-6 transition-all duration-300 hover:border-primary/50 hover:bg-gradient-to-br hover:from-gray-900/70 hover:to-gray-900/50 hover:shadow-xl hover:shadow-primary/10">
               <div className="flex justify-between items-start">
                 <div>
                   <p className="text-gray-400 text-xs sm:text-sm mb-1">{stat.title}</p>
@@ -140,15 +140,15 @@ export default function Dashboard() {
           {/* Chart Placeholder */}
           <div className="lg:col-span-2 card-bg rounded-2xl p-4 sm:p-6">
             <div className="flex justify-between items-center mb-4 sm:mb-6">
-              <h2 className="text-lg sm:text-xl font-bold text-white">Performance Overview</h2>
-              <button className="text-xs sm:text-sm text-[#FF8C00] hover:text-[#FF8C00]/80 transition-colors">
+              <h2 className="text-lg sm:text-xl font-bold text-text-primary">Performance Overview</h2>
+              <button className="text-xs sm:text-sm text-primary hover:text-primary/80 transition-colors">
                 View Report
               </button>
             </div>
             <div className="h-64 sm:h-80 flex items-center justify-center bg-gray-800/30 rounded-xl border border-gray-700/50">
               <div className="text-center">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#FF8C00]/10 flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                  <svg className="w-6 h-6 sm:w-8 sm:h-8 text-[#FF8C00]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                  <svg className="w-6 h-6 sm:w-8 sm:h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                   </svg>
                 </div>
@@ -162,8 +162,8 @@ export default function Dashboard() {
         {/* Recent Tracks */}
         <div className="card-bg rounded-2xl p-4 sm:p-6">
           <div className="flex justify-between items-center mb-4 sm:mb-6">
-            <h2 className="text-lg sm:text-xl font-bold text-white">Recent Tracks</h2>
-            <button className="text-xs sm:text-sm text-[#FF8C00] hover:text-[#FF8C00]/80 transition-colors">
+            <h2 className="text-lg sm:text-xl font-bold text-text-primary">Recent Tracks</h2>
+            <button className="text-xs sm:text-sm text-primary hover:text-primary/80 transition-colors">
               View All
             </button>
           </div>

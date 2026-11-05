@@ -65,7 +65,7 @@ export default function ModernNavbar() {
     if (mountedAuth) {
       const fetchUnreadCount = async () => {
         try {
-          const token = localStorage.getItem('token')
+           const token = localStorage.getItem('accessToken') || localStorage.getItem('token')
           if (token) {
             notificationService.setToken(token)
             const response = await notificationService.getUnreadCount()
@@ -224,7 +224,7 @@ export default function ModernNavbar() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                   </svg>
                   {unreadCount > 0 && (
-                    <span className="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-gradient-to-r from-red-500 to-pink-500 rounded-full ring-2 ring-[#0B0F1A] animate-pulse" />
+                    <span className="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-gradient-to-r from-red-500 to-pink-500 rounded-full ring-2 ring-background animate-pulse" />
                   )}
                 </button>
               )}
@@ -383,7 +383,7 @@ export default function ModernNavbar() {
                   <button
                     key={cat.id}
                     onClick={() => handleCategorySelect(cat.id)}
-                    className="flex flex-col items-center gap-2 p-4 rounded-2xl hover:bg-white/5 hover:scale-105 transition-all duration-300 group"
+                    className="flex flex-col items-center gap-2 p-4 rounded-2xl group mx-surface"
                   >
                     <span className="text-3xl group-hover:scale-110 transition-transform duration-300">{cat.icon}</span>
                     <span className="text-xs font-medium text-gray-300 group-hover:text-white text-center">

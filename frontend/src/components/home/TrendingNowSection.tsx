@@ -66,7 +66,7 @@ export default function TrendingNowSection({ tracks, loading, rawTracks }: Trend
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-black text-white gradient-text-animated"
+          className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-black text-text-primary"
         >
           🔥 {t('trendingNow' as any)}
         </motion.h2>
@@ -118,7 +118,7 @@ export default function TrendingNowSection({ tracks, loading, rawTracks }: Trend
                       <img
                         src={track.coverImage}
                         alt={track.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                       />
                     ) : (
                       <div className="w-full h-full bg-gradient-to-br from-gold-500 via-orange-500 to-red-600 flex items-center justify-center relative overflow-hidden">
@@ -150,7 +150,7 @@ export default function TrendingNowSection({ tracks, loading, rawTracks }: Trend
                   {/* Info Section */}
                   <div className="p-4 md:p-5 lg:p-6 relative">
                     <div className="flex items-start justify-between gap-2 mb-2">
-                      <h3 className="text-sm md:text-base lg:text-lg font-bold text-white leading-tight line-clamp-2 flex-1 tracking-wide">
+                      <h3 className="text-sm md:text-base lg:text-lg font-bold leading-tight line-clamp-2 flex-1 tracking-wide text-text-primary">
                         {track.title}
                       </h3>
                     </div>

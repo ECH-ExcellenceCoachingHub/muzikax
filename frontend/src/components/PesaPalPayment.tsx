@@ -264,7 +264,7 @@ export default function PesaPalPayment({
         {/* Header */}
         <div className="bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 p-4 sm:p-6 flex items-center justify-between relative flex-shrink-0">
           <div>
-            <h2 className="text-white font-bold text-lg sm:text-xl">Buy Beat</h2>
+            <h2 className="font-bold text-lg sm:text-xl text-text-primary">Buy Beat</h2>
             <p className="text-white/80 text-xs sm:text-sm mt-1">Secure payment processing</p>
           </div>
           <button
@@ -281,7 +281,7 @@ export default function PesaPalPayment({
           <div className="bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl p-4 sm:p-6 mb-6 border border-gray-700 shadow-lg">
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="flex-1">
-                <h3 className="text-white font-bold text-base sm:text-lg mb-1 sm:mb-2 truncate">{trackTitle}</h3>
+                <h3 className="font-bold text-base sm:text-lg mb-1 sm:mb-2 truncate text-text-primary">{trackTitle}</h3>
                 <div className="flex items-center gap-1 sm:gap-2">
                   <span className="text-green-400 font-extrabold text-xl sm:text-2xl">{price.toLocaleString()}</span>
                   <span className="text-gray-400 font-medium text-sm">RWF</span>
@@ -315,7 +315,7 @@ export default function PesaPalPayment({
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="your@email.com"
-                    className="w-full bg-gray-800 border-2 border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 text-sm"
+                    className="w-full bg-gray-800 border-2 border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 text-sm"
                   />
                 </div>
                 <p className="text-xs text-gray-400 ml-1">

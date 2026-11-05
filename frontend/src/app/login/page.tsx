@@ -431,16 +431,16 @@ function LoginContent() {
   }
 
   return (
-    <div className="min-h-screen min-h-[100dvh] flex items-center justify-center bg-gradient-to-br from-[#0a0a0a] via-[#111111] to-[#0d0d0d] px-3 py-6 sm:p-4 relative overflow-hidden">
+    <div className="min-h-screen min-h-[100dvh] flex items-center justify-center px-3 py-6 sm:p-4 relative overflow-hidden bg-background">
       {/* Enhanced background effects */}
-      <div className="absolute top-1/4 left-0 w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 bg-[#FF8C00]/10 rounded-full blur-3xl -z-10 opacity-40 animate-pulse-slow"></div>
-      <div className="absolute bottom-1/4 right-0 w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 bg-[#FFA500]/10 rounded-full blur-3xl -z-10 opacity-40 animate-pulse-slow"></div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-96 sm:h-96 bg-gradient-to-r from-[#FFD700]/3 to-[#FF8C00]/3 rounded-full blur-3xl -z-10"></div>
+      <div className="absolute top-1/4 left-0 w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 bg-primary/10 rounded-full blur-3xl -z-10 opacity-40 animate-pulse-slow"></div>
+      <div className="absolute bottom-1/4 right-0 w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 bg-primary-hover/10 rounded-full blur-3xl -z-10 opacity-40 animate-pulse-slow"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-96 sm:h-96 bg-gradient-to-r from-primary-light/3 to-primary/3 rounded-full blur-3xl -z-10"></div>
       
-      <div className="w-full max-w-md mx-auto space-y-4 sm:space-y-5 bg-[#141414]/95 sm:bg-[#141414]/98 backdrop-blur-xl rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border border-[#2a2a2a]/60 shadow-2xl shadow-black/50 relative z-10 animate-fade-in">
+      <div className="w-full max-w-md mx-auto space-y-4 sm:space-y-5 bg-surface/95 sm:bg-surface/98 backdrop-blur-xl rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border border-surface-overlay/60 shadow-2xl shadow-black/50 relative z-10 animate-fade-in">
         <div className="text-center">
           <div className="flex justify-center mb-2.5 sm:mb-3">
-            <div className="w-14 h-14 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-xl overflow-hidden shadow-xl shadow-black/40 bg-black border border-[#2a2a2a]/50">
+            <div className="w-14 h-14 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-xl overflow-hidden shadow-xl shadow-black/40 bg-black border border-surface-overlay/50">
               <img 
                 src="/muzikax.png" 
                 alt="MuzikaX - Rwanda's Digital Music Ecosystem" 
@@ -448,10 +448,10 @@ function LoginContent() {
               />
             </div>
           </div>
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#FFD700] via-[#FFA500] to-[#FF8C00] bg-clip-text text-transparent mb-1 sm:mb-1.5 tracking-tight">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-1.5 tracking-tight text-text-primary">
             MuzikaX
           </h1>
-          <h2 className="text-base sm:text-lg md:text-xl font-semibold text-white mb-1.5 sm:mb-2">
+          <h2 className="text-base sm:text-lg md:text-xl font-semibold mb-1.5 sm:mb-2 text-text-primary">
             {isLogin ? (t('login') || 'Welcome back') : (t('signUp') || 'Create account')}
           </h2>
           <p className="text-gray-400 text-xs sm:text-sm max-w-sm mx-auto leading-relaxed">
@@ -469,12 +469,12 @@ function LoginContent() {
         <div
           role="tablist"
           aria-label="Authentication mode"
-          className="relative flex items-center bg-[#101010]/90 backdrop-blur-sm rounded-xl p-1 shadow-inner shadow-black/40 border border-[#2a2a2a]/60"
+          className="relative flex items-center bg-background/90 backdrop-blur-sm rounded-xl p-1 shadow-inner shadow-black/40 border border-surface-overlay/60"
         >
           {/* Sliding highlight */}
           <span
             aria-hidden="true"
-            className={`pointer-events-none absolute inset-y-1 left-1 w-[calc(50%_-_0.25rem)] rounded-lg bg-gradient-to-r from-[#FFD700] via-[#FFA500] to-[#FF8C00] shadow-lg shadow-[#FF8C00]/30 transition-transform duration-300 ease-out will-change-transform ${
+            className={`pointer-events-none absolute inset-y-1 left-1 w-[calc(50%_-_0.25rem)] rounded-lg bg-gradient-to-r from-primary-light via-primary-hover to-primary shadow-lg shadow-primary/30 transition-transform duration-300 ease-out will-change-transform ${
               isLogin ? 'translate-x-0' : 'translate-x-full'
             }`}
           />
@@ -482,7 +482,7 @@ function LoginContent() {
             type="button"
             role="tab"
             aria-selected={isLogin}
-            className={`relative z-10 flex-1 py-2.5 px-3 rounded-lg text-sm font-semibold tracking-wide transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8C00] focus-visible:ring-offset-2 focus-visible:ring-offset-[#141414] touch-manipulation ${
+            className={`relative z-10 flex-1 py-2.5 px-3 rounded-lg text-sm font-semibold tracking-wide transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#121214] touch-manipulation ${
               isLogin ? 'text-[#1a1200]' : 'text-gray-400 hover:text-white'
             }`}
             onClick={() => {
@@ -496,7 +496,7 @@ function LoginContent() {
             type="button"
             role="tab"
             aria-selected={!isLogin}
-            className={`relative z-10 flex-1 py-2.5 px-3 rounded-lg text-sm font-semibold tracking-wide transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8C00] focus-visible:ring-offset-2 focus-visible:ring-offset-[#141414] touch-manipulation ${
+            className={`relative z-10 flex-1 py-2.5 px-3 rounded-lg text-sm font-semibold tracking-wide transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#121214] touch-manipulation ${
               !isLogin ? 'text-[#1a1200]' : 'text-gray-400 hover:text-white'
             }`}
             onClick={() => {
@@ -523,7 +523,7 @@ function LoginContent() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-3 sm:px-3.5 py-2.5 sm:py-2.75 bg-[#1a1a1a]/70 backdrop-blur-sm border border-[#2a2a2a]/60 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent transition-all duration-300 text-sm shadow-sm hover:border-[#3a3a3a] touch-manipulation"
+                className="w-full px-3 sm:px-3.5 py-2.5 sm:py-2.75 bg-surface-elevated/70 backdrop-blur-sm border border-surface-overlay/60 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 text-sm shadow-sm hover:border-gray-700 touch-manipulation"
                 placeholder="you@example.com"
               />
             </div>
@@ -538,7 +538,7 @@ function LoginContent() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-2.5 sm:py-2.75 px-4 sm:px-5 bg-gradient-to-r from-[#FFD700] via-[#FFA500] to-[#FF8C00] rounded-lg text-white font-semibold hover:opacity-95 hover:shadow-lg hover:shadow-[#FF8C00]/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF8C00] focus:ring-offset-[#141414] text-sm flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed transform hover:-translate-y-0.5 active:translate-y-0 touch-manipulation"
+                className="w-full py-2.5 sm:py-2.75 px-4 sm:px-5 bg-gradient-to-r from-primary-light via-primary-hover to-primary rounded-lg text-white font-semibold hover:opacity-95 hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-[#121214] text-sm flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed transform hover:-translate-y-0.5 active:translate-y-0 touch-manipulation"
               >
                 {isLoading ? (
                   <>
@@ -565,7 +565,7 @@ function LoginContent() {
                 <button
                   type="button"
                   onClick={() => setShowForgotPassword(true)}
-                  className="text-xs font-medium text-[#FFA500] hover:text-[#FF8C00] transition-colors duration-300 touch-manipulation"
+                  className="text-xs font-medium text-primary-hover hover:text-primary transition-colors duration-300 touch-manipulation"
                 >
                   Forgot password?
                 </button>
@@ -579,7 +579,7 @@ function LoginContent() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-3 sm:px-3.5 py-2.5 sm:py-2.75 bg-[#1a1a1a]/70 backdrop-blur-sm border border-[#2a2a2a]/60 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent transition-all duration-300 text-sm pr-11 shadow-sm hover:border-[#3a3a3a] touch-manipulation"
+                  className="w-full px-3 sm:px-3.5 py-2.5 sm:py-2.75 bg-surface-elevated/70 backdrop-blur-sm border border-surface-overlay/60 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 text-sm pr-11 shadow-sm hover:border-gray-700 touch-manipulation"
                   placeholder="••••••••"
                 />
                 <button
@@ -614,7 +614,7 @@ function LoginContent() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-2.5 sm:py-2.75 px-4 sm:px-5 gradient-primary rounded-lg text-white font-semibold hover:opacity-95 hover:shadow-lg hover:shadow-[#FF8C00]/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF8C00] focus:ring-offset-[#141414] text-sm flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed transform hover:-translate-y-0.5 active:translate-y-0 touch-manipulation"
+                className="w-full py-2.5 sm:py-2.75 px-4 sm:px-5 gradient-primary rounded-lg text-white font-semibold hover:opacity-95 hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-[#121214] text-sm flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed transform hover:-translate-y-0.5 active:translate-y-0 touch-manipulation"
               >
                 {isLoading ? (
                   <>
@@ -635,13 +635,13 @@ function LoginContent() {
           <div className="mt-4 sm:mt-6">
             <div className="text-center mb-4">
               <div className="flex justify-center mb-2">
-                <div className="w-12 h-12 bg-gradient-to-r from-[#FFD700] to-[#FF8C00] rounded-full flex items-center justify-center">
+                <div className="w-12 h-12 bg-gradient-to-r from-primary-light to-primary rounded-full flex items-center justify-center">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                   </svg>
                 </div>
               </div>
-              <h2 className="text-lg font-bold text-white mb-1">
+              <h2 className="text-lg font-bold mb-1 text-text-primary">
                 Two-Factor Authentication
               </h2>
               <p className="text-gray-400 text-xs">
@@ -664,7 +664,7 @@ function LoginContent() {
                   required
                   value={otp}
                   onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
-                  className="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 rounded-lg text-white text-center text-2xl tracking-widest focus:outline-none focus:ring-2 focus:ring-[#FFD700] focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 rounded-lg text-white text-center text-2xl tracking-widest focus:outline-none focus:ring-2 focus:ring-primary-light focus:border-transparent transition-all"
                   placeholder="000000"
                   autoComplete="off"
                 />
@@ -679,7 +679,7 @@ function LoginContent() {
                 <button
                   type="submit"
                   disabled={isLoading || otp.length !== 6}
-                  className="w-full py-3 px-4 gradient-primary rounded-lg text-white font-medium hover:opacity-90 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FFD700] focus:ring-offset-gray-900 text-base flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="w-full py-3 px-4 gradient-primary rounded-lg text-white font-medium hover:opacity-90 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-light focus:ring-offset-gray-900 text-base flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                   {isLoading ? (
                     <>
@@ -700,7 +700,7 @@ function LoginContent() {
                   type="button"
                   onClick={handleResendOTP}
                   disabled={isLoading}
-                  className="text-sm text-[#FFD700] hover:text-[#FF8C00] transition-colors disabled:opacity-50"
+                  className="text-sm text-primary-light hover:text-primary transition-colors disabled:opacity-50"
                 >
                   Resend Code
                 </button>
@@ -741,7 +741,7 @@ function LoginContent() {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-3.5 py-2.5 bg-[#1a1a1a]/70 backdrop-blur-sm border border-[#2a2a2a]/60 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent transition-all duration-300 text-sm shadow-sm hover:border-[#3a3a3a]"
+                className="w-full px-3.5 py-2.5 bg-surface-elevated/70 backdrop-blur-sm border border-surface-overlay/60 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 text-sm shadow-sm hover:border-gray-700"
                 placeholder="John Doe"
               />
             </div>
@@ -759,7 +759,7 @@ function LoginContent() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-3.5 py-2.5 bg-[#1a1a1a]/70 backdrop-blur-sm border border-[#2a2a2a]/60 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent transition-all duration-300 text-sm pr-11 shadow-sm hover:border-[#3a3a3a]"
+                  className="w-full px-3.5 py-2.5 bg-surface-elevated/70 backdrop-blur-sm border border-surface-overlay/60 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 text-sm pr-11 shadow-sm hover:border-gray-700"
                   placeholder="••••••••"
                 />
                 <button
@@ -779,7 +779,7 @@ function LoginContent() {
                   )}
                 </button>
               </div>
-              <div className="mt-2 space-y-1.5 bg-[#1a1a1a]/50 rounded-md p-2.5">
+              <div className="mt-2 space-y-1.5 bg-surface-elevated/50 rounded-md p-2.5">
                 <p className="text-xs font-medium text-gray-500">Password requirements:</p>
                 <ul className="text-xs space-y-1">
                   <li className={password.length >= 8 ? "text-green-400 font-medium" : "text-gray-600"}>
@@ -813,24 +813,24 @@ function LoginContent() {
                   type="checkbox"
                   checked={agreeToTerms}
                   onChange={(e) => setAgreeToTerms(e.target.checked)}
-                  className="h-3.5 w-3.5 text-[#FF8C00] focus:ring-[#FF8C00] border-gray-600 rounded bg-[#1a1a1a] cursor-pointer"
+                  className="h-3.5 w-3.5 text-primary focus:ring-primary border-gray-600 rounded bg-surface-elevated cursor-pointer"
                 />
               </div>
               <div className="text-xs">
                 <label htmlFor="terms" className="text-gray-400 cursor-pointer">
                   I agree to the{' '}
-                  <Link href="/terms" className="text-[#FFA500] hover:text-[#FF8C00] font-medium transition-colors">
+                  <Link href="/terms" className="text-primary-hover hover:text-primary font-medium transition-colors">
                     Terms of Service
                   </Link>
                   {' '}and{' '}
-                  <Link href="/privacy" className="text-[#FFA500] hover:text-[#FF8C00] font-medium transition-colors">
+                  <Link href="/privacy" className="text-primary-hover hover:text-primary font-medium transition-colors">
                     Privacy Policy
                   </Link>
                 </label>
               </div>
             </div>
             
-            <div className="text-xs text-gray-500 bg-[#1a1a1a]/50 rounded-md p-2.5">
+            <div className="text-xs text-gray-500 bg-surface-elevated/50 rounded-md p-2.5">
               Start as user, upgrade to creator when ready to upload music.
             </div>
 
@@ -838,7 +838,7 @@ function LoginContent() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-2.5 px-5 gradient-primary rounded-lg text-white font-semibold hover:opacity-95 hover:shadow-lg hover:shadow-[#FF8C00]/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF8C00] focus:ring-offset-[#141414] text-sm flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed transform hover:-translate-y-0.5 active:translate-y-0"
+                className="w-full py-2.5 px-5 gradient-primary rounded-lg text-white font-semibold hover:opacity-95 hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-[#121214] text-sm flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed transform hover:-translate-y-0.5 active:translate-y-0"
               >
                 {isLoading ? (
                   <>
@@ -857,10 +857,10 @@ function LoginContent() {
         <div className="mt-0.5 sm:mt-1">
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-[#2a2a2a]/50"></div>
+              <div className="w-full border-t border-surface-overlay/50"></div>
             </div>
             <div className="relative flex justify-center text-xs">
-              <span className="px-3 bg-gradient-to-b from-transparent via-[#141414] to-transparent text-gray-500 font-medium">
+              <span className="px-3 bg-gradient-to-b from-transparent via-surface to-transparent text-gray-500 font-medium">
                 Or continue with
               </span>
             </div>
@@ -870,7 +870,7 @@ function LoginContent() {
             <button 
               onClick={() => googleLogin()}
               disabled={isLoading}
-              className="w-full inline-flex justify-center py-2.5 sm:py-2.75 px-4 rounded-lg bg-[#1a1a1a]/70 backdrop-blur-sm text-gray-400 hover:text-white hover:bg-[#252525]/70 transition-all duration-300 border border-[#2a2a2a]/50 items-center font-medium shadow-sm hover:shadow-md disabled:opacity-50 text-sm touch-manipulation"
+              className="w-full inline-flex justify-center py-2.5 sm:py-2.75 px-4 rounded-lg bg-surface-elevated/70 backdrop-blur-sm text-gray-400 hover:text-white hover:bg-surface-overlay/70 transition-all duration-300 border border-surface-overlay/50 items-center font-medium shadow-sm hover:shadow-md disabled:opacity-50 text-sm touch-manipulation"
             >
               <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-2.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"></path>
@@ -888,7 +888,7 @@ function LoginContent() {
                 setIsLogin(!isLogin)
                 setStep(1)
               }}
-              className="font-semibold text-[#FFA500] hover:text-[#FF8C00] transition-colors duration-300 touch-manipulation"
+              className="font-semibold text-primary-hover hover:text-primary transition-colors duration-300 touch-manipulation"
             >
               {isLogin ? 'Sign up' : 'Sign in'}
             </button>
@@ -900,14 +900,14 @@ function LoginContent() {
       {showForgotPassword && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
           <div 
-            className="bg-[#141414]/98 backdrop-blur-xl border border-[#2a2a2a]/50 rounded-2xl shadow-2xl w-full max-w-md transform transition-all duration-300 animate-in fade-in zoom-in-95 overflow-auto"
+            className="bg-surface/98 backdrop-blur-xl border border-surface-overlay/50 rounded-2xl shadow-2xl w-full max-w-md transform transition-all duration-300 animate-in fade-in zoom-in-95 overflow-auto"
             onClick={(e) => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
           >
             {/* Header */}
-            <div className="px-5 sm:px-6 py-4 border-b border-[#2a2a2a]/50 flex items-center justify-between">
-              <h2 className="text-lg font-bold text-white">Reset Password</h2>
+            <div className="px-5 sm:px-6 py-4 border-b border-surface-overlay/50 flex items-center justify-between">
+              <h2 className="text-lg font-bold text-text-primary">Reset Password</h2>
               <button
                 onClick={() => {
                   setShowForgotPassword(false)
@@ -915,7 +915,7 @@ function LoginContent() {
                   setResetEmail('')
                   setResetError('')
                 }}
-                className="p-1.5 rounded-full text-gray-500 hover:bg-[#252525] hover:text-white transition-all duration-300"
+                className="p-1.5 rounded-full text-gray-500 hover:bg-surface-overlay hover:text-white transition-all duration-300"
                 aria-label="Close"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -944,7 +944,7 @@ function LoginContent() {
                         required
                         value={resetEmail}
                         onChange={(e) => setResetEmail(e.target.value)}
-                        className="w-full px-3.5 py-2.5 bg-[#1a1a1a]/70 backdrop-blur-sm border border-[#2a2a2a]/60 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent transition-all duration-300 text-sm shadow-sm hover:border-[#3a3a3a]"
+                        className="w-full px-3.5 py-2.5 bg-surface-elevated/70 backdrop-blur-sm border border-surface-overlay/60 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 text-sm shadow-sm hover:border-gray-700"
                         placeholder="you@example.com"
                       />
                     </div>
@@ -958,7 +958,7 @@ function LoginContent() {
                     <button
                       type="submit"
                       disabled={isLoading || !resetEmail}
-                      className="w-full py-2.5 px-5 gradient-primary rounded-lg text-white font-semibold hover:opacity-95 hover:shadow-lg hover:shadow-[#FF8C00]/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF8C00] focus:ring-offset-[#141414] text-sm flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed transform hover:-translate-y-0.5 active:translate-y-0"
+                      className="w-full py-2.5 px-5 gradient-primary rounded-lg text-white font-semibold hover:opacity-95 hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-[#121214] text-sm flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed transform hover:-translate-y-0.5 active:translate-y-0"
                     >
                       {isLoading ? (
                         <>
@@ -974,12 +974,12 @@ function LoginContent() {
                 </>
               ) : (
                 <div className="text-center py-5">
-                  <div className="w-16 h-16 bg-gradient-to-r from-[#FFD700] to-[#FF8C00] rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-[#FF8C00]/25">
+                  <div className="w-16 h-16 bg-gradient-to-r from-primary-light to-primary rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-primary/25">
                     <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-2">Email Sent!</h3>
+                  <h3 className="text-xl font-bold mb-2 text-text-primary">Email Sent!</h3>
                   <p className="text-xs text-gray-400 mb-4 leading-relaxed">
                     Check your inbox for password reset instructions.
                   </p>
@@ -989,7 +989,7 @@ function LoginContent() {
                       setResetSent(false)
                       setResetEmail('')
                     }}
-                    className="w-full py-2.5 px-5 bg-[#1a1a1a]/80 hover:bg-[#252525]/80 backdrop-blur-sm text-white rounded-lg font-semibold transition-all duration-300 text-sm shadow-sm hover:shadow-md"
+                    className="w-full py-2.5 px-5 bg-surface-elevated/80 hover:bg-surface-overlay/80 backdrop-blur-sm text-white rounded-lg font-semibold transition-all duration-300 text-sm shadow-sm hover:shadow-md"
                   >
                     Back to Login
                   </button>
@@ -1004,21 +1004,21 @@ function LoginContent() {
       {requires2FA && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
           <div 
-            className="bg-[#141414]/98 backdrop-blur-xl border border-[#2a2a2a]/50 rounded-2xl shadow-2xl w-full max-w-md transform transition-all duration-300 animate-in fade-in zoom-in-95 overflow-auto"
+            className="bg-surface/98 backdrop-blur-xl border border-surface-overlay/50 rounded-2xl shadow-2xl w-full max-w-md transform transition-all duration-300 animate-in fade-in zoom-in-95 overflow-auto"
             onClick={(e) => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
           >
             {/* Header */}
-            <div className="px-5 sm:px-6 py-4 border-b border-[#2a2a2a]/50 flex items-center justify-between">
-              <h2 className="text-lg font-bold text-white">Two-Factor Authentication</h2>
+            <div className="px-5 sm:px-6 py-4 border-b border-surface-overlay/50 flex items-center justify-between">
+              <h2 className="text-lg font-bold text-text-primary">Two-Factor Authentication</h2>
               <button
                 onClick={() => {
                   setRequires2FA(false)
                   setOtp('')
                   setOtpError('')
                 }}
-                className="p-1.5 rounded-full text-gray-500 hover:bg-[#252525] hover:text-white transition-all duration-300"
+                className="p-1.5 rounded-full text-gray-500 hover:bg-surface-overlay hover:text-white transition-all duration-300"
                 aria-label="Close"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1030,7 +1030,7 @@ function LoginContent() {
             {/* Content */}
             <div className="px-5 sm:px-6 py-5">
               <div className="text-center mb-5">
-                <div className="w-16 h-16 bg-gradient-to-r from-[#FFD700] to-[#FF8C00] rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg shadow-[#FF8C00]/25">
+                <div className="w-16 h-16 bg-gradient-to-r from-primary-light to-primary rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg shadow-primary/25">
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                   </svg>
@@ -1061,7 +1061,7 @@ function LoginContent() {
                     required
                     value={otp}
                     onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
-                    className="w-full px-4 py-3 bg-[#1a1a1a]/70 backdrop-blur-sm border-2 border-[#2a2a2a]/60 rounded-lg text-white text-center text-2xl tracking-[0.2em] focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent transition-all duration-300 font-mono shadow-sm hover:border-[#3a3a3a]"
+                    className="w-full px-4 py-3 bg-surface-elevated/70 backdrop-blur-sm border-2 border-surface-overlay/60 rounded-lg text-white text-center text-2xl tracking-[0.2em] focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 font-mono shadow-sm hover:border-gray-700"
                     placeholder="000000"
                     autoComplete="off"
                   />
@@ -1075,7 +1075,7 @@ function LoginContent() {
                 <button
                   type="submit"
                   disabled={isLoading || otp.length !== 6}
-                  className="w-full py-2.5 px-5 gradient-primary rounded-lg text-white font-semibold hover:opacity-95 hover:shadow-lg hover:shadow-[#FF8C00]/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF8C00] focus:ring-offset-[#141414] text-sm flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed transform hover:-translate-y-0.5 active:translate-y-0"
+                  className="w-full py-2.5 px-5 gradient-primary rounded-lg text-white font-semibold hover:opacity-95 hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-[#121214] text-sm flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed transform hover:-translate-y-0.5 active:translate-y-0"
                 >
                   {isLoading ? (
                     <>
@@ -1094,7 +1094,7 @@ function LoginContent() {
                 <button
                   onClick={handleResendOTP}
                   disabled={isLoading}
-                  className="text-xs text-[#FFA500] hover:text-[#FF8C00] transition-colors duration-300 font-semibold disabled:opacity-50"
+                  className="text-xs text-primary-hover hover:text-primary transition-colors duration-300 font-semibold disabled:opacity-50"
                 >
                   Didn't receive the code? Resend
                 </button>
@@ -1110,8 +1110,8 @@ function LoginContent() {
 export default function Login() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center bg-gray-900">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#FFD700]"></div>
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-light"></div>
       </div>
     }>
       <LoginContent />

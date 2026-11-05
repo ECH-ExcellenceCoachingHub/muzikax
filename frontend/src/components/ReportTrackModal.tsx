@@ -55,7 +55,7 @@ export default function ReportTrackModal({ trackId, isOpen, onClose }: ReportTra
     <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
       <div className="bg-gray-900 rounded-2xl border border-gray-700 w-full max-w-md p-6">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold text-white">Report Track</h2>
+          <h2 className="text-xl font-bold text-text-primary">Report Track</h2>
           <button 
             onClick={onClose}
             className="text-gray-400 hover:text-white"
@@ -75,7 +75,7 @@ export default function ReportTrackModal({ trackId, isOpen, onClose }: ReportTra
               value={reason}
               onChange={(e) => setReason(e.target.value)}
               required
-              className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent"
+              className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
             >
               <option value="">Select a reason</option>
               <option value="copyright">Copyright infringement</option>
@@ -92,7 +92,7 @@ export default function ReportTrackModal({ trackId, isOpen, onClose }: ReportTra
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={4}
-              className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent"
+              className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               placeholder="Provide more details about why you're reporting this track..."
             />
           </div>
@@ -117,7 +117,7 @@ export default function ReportTrackModal({ trackId, isOpen, onClose }: ReportTra
               className={`px-4 py-2 rounded-lg text-white transition-colors ${
                 isSubmitting || !reason
                   ? 'bg-gray-700 cursor-not-allowed'
-                  : 'bg-[#FF8C00] hover:bg-[#FF8C00]/90'
+                  : 'bg-primary hover:bg-primary/90'
               }`}
             >
               {isSubmitting ? 'Submitting...' : 'Submit Report'}

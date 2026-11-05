@@ -17,7 +17,7 @@ export default function ConditionalSidebar() {
   }
   
   const isAdminPage = pathname?.startsWith('/admin');
-  const isPlayerPage = pathname === '/player';
+  const isPlayerPage = pathname === '/player' || pathname === '/dj';
   const isLoginPage = pathname === '/login';
   const isRegisterPage = pathname === '/register';
   

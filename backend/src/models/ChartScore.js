@@ -90,6 +90,15 @@ const ChartScoreSchema = new mongoose.Schema({
     default: 0
   },
   
+  // Per-window state, so daily/weekly/monthly never overwrite each other:
+  // windows.<daily|weekly|monthly> = { rank, previousRank, isNew, hasHistory, periodStartAt,
+  //   activeInPeriod, score, metrics: { periodPlays, periodUniqueListeners, periodLikes,
+  //   periodShares, totalPlays, likes, shares }, updatedAt }
+  windows: {
+    type: mongoose.Schema.Types.Mixed,
+    default: {}
+  },
+
   // Time tracking
   lastUpdated: {
     type: Date,

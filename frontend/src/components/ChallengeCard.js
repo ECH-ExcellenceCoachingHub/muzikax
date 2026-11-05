@@ -41,10 +41,10 @@ const ChallengeCard = ({ challenge, onParticipateClick }) => {
   };
 
   return (
-    <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 border border-gray-700 hover:border-[#FF4D67]/30 transition-all duration-300">
+    <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 border border-gray-700 hover:border-primary/30 transition-all duration-300">
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center space-x-3">
-          <div className="bg-gradient-to-br from-[#FFD700] to-[#FFA500] w-12 h-12 rounded-full flex items-center justify-center">
+          <div className="bg-gradient-to-br from-primary-light to-primary-hover w-12 h-12 rounded-full flex items-center justify-center">
             {getChallengeIcon(challenge.type)}
           </div>
           <div>
@@ -95,7 +95,7 @@ const ChallengeCard = ({ challenge, onParticipateClick }) => {
           challenge.hasParticipated
             ? 'bg-gray-700 text-white cursor-default'
             : challenge.isActive
-            ? 'bg-gradient-to-r from-[#FF4D67] to-[#FF6B8B] text-white hover:from-[#FF6B8B] hover:to-[#FF8FA3]'
+            ? 'bg-gradient-to-r from-primary to-primary-hover text-white hover:from-primary-hover hover:to-primary-hover'
             : 'bg-gray-600 text-gray-400 cursor-not-allowed'
         }`}
       >

@@ -162,13 +162,13 @@ const AlbumDetailClient = ({ album }: AlbumDetailClientProps) => {
       
       {/* Track List */}
       <div className="card-bg rounded-2xl p-4 sm:p-6">
-        <h2 className="text-xl sm:text-2xl font-bold text-white mb-6">Tracks</h2>
+        <h2 className="text-xl sm:text-2xl font-bold mb-6 text-text-primary">Tracks</h2>
         
         <div className="space-y-2">
           {album.tracks.map((track, index) => (
             <div 
               key={track._id || track.id}
-              className="flex items-center gap-2 sm:gap-4 p-2 sm:p-3 rounded-lg hover:bg-gray-800/50 transition-colors group"
+              className="flex items-center gap-2 sm:gap-4 p-2 sm:p-3 rounded-lg group mx-surface"
             >
               {/* Track Cover Image */}
               <div className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0">
@@ -179,7 +179,7 @@ const AlbumDetailClient = ({ album }: AlbumDetailClientProps) => {
                     className="w-full h-full rounded object-cover shadow-lg"
                   />
                 ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-[#FF8C00] to-[#FFB020] rounded flex items-center justify-center">
+                  <div className="w-full h-full bg-gradient-to-br from-primary to-primary-light rounded flex items-center justify-center">
                     <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                       <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
                     </svg>
@@ -192,7 +192,7 @@ const AlbumDetailClient = ({ album }: AlbumDetailClientProps) => {
               </div>
               
               <div className="flex-1 min-w-0">
-                <h3 className="font-medium text-white text-sm sm:text-base truncate group-hover:text-[#FFB020] transition-colors">{track.title}</h3>
+                <h3 className="font-medium text-sm sm:text-base truncate group-hover:text-primary-light transition-colors text-text-primary">{track.title}</h3>
                 <p className="text-xs sm:text-sm text-gray-400 truncate">
                   {typeof track.creatorId === 'object' && track.creatorId !== null 
                     ? (track.creatorId as any).name 

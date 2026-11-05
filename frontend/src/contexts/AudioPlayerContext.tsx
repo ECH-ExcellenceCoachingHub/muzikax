@@ -1,6 +1,7 @@
 'use client'
 
 import { createContext, useContext, useState, useEffect, useRef, ReactNode } from 'react';
+import { getSoundEngine } from '../utils/soundEngine';
 import { useRouter } from 'next/navigation';
 import { fetchCommentsForTrack, addCommentToTrack, incrementTrackPlayCount } from '../services/trackService';
 import { getUserFavorites, getUserPlaylists, addTrackToFavorites, removeTrackFromFavorites, addTrackToPlaylist as addTrackToPlaylistService, createPlaylist as createPlaylistService } from '../services/userService';
@@ -193,19 +194,11 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
     // Only initialize if audio element exists and not already initialized
     if (audioRef.current && !audioContextRef.current) {
       try {
-        const AudioContextClass = (window.AudioContext || (window as any).webkitAudioContext);
-        const ctx = new AudioContextClass();
-        audioContextRef.current = ctx;
-        
-        const analyser = ctx.createAnalyser();
-        analyser.fftSize = 256;
-        analyser.smoothingTimeConstant = 0.8;
-        analyserRef.current = analyser;
-        
-        const frequencyData = new Uint8Array(analyser.frequencyBinCount);
-        frequencyDataRef.current = frequencyData;
-        
-        console.log('✅ Audio context and analyser initialized');
+        const engine = getSoundEngine();
+        engine.attach(audioRef.current);
+        audioContextRef.current = engine.audioContext;
+        analyserRef.current = engine.analyser;
+        frequencyDataRef.current = engine.analyser ? new Uint8Array(engine.analyser.frequencyBinCount) : null;
       } catch (error) {
         console.error('❌ Failed to initialize audio context:', error);
       }
@@ -213,8 +206,8 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
     
     return () => {
       // Cleanup audio context on unmount
-      if (audioContextRef.current && audioContextRef.current.state !== 'closed') {
-        audioContextRef.current.close();
+      // The audio context belongs to the shared sound engine: release refs, don't close it.
+      if (audioContextRef.current) {
         audioContextRef.current = null;
         analyserRef.current = null;
         frequencyDataRef.current = null;
@@ -493,6 +486,8 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
     // Add crossorigin attribute to allow Web Audio API to process cross-origin audio
     audio.crossOrigin = 'anonymous';
     audioRef.current = audio;
+    // Route through the shared sound engine (EQ/effects persist across tracks)
+    getSoundEngine().attach(audio);
     
     // Set initial volume
     audio.volume = volume;
@@ -548,29 +543,11 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
       if (!audioContextRef.current && audioRef.current) {
         setTimeout(() => {
           try {
-            const AudioContextClass = (window.AudioContext || (window as any).webkitAudioContext);
-            const ctx = new AudioContextClass();
-            audioContextRef.current = ctx;
-            
-            const analyser = ctx.createAnalyser();
-            analyser.fftSize = 256;
-            analyser.smoothingTimeConstant = 0.8;
-            analyserRef.current = analyser;
-            
-            const frequencyData = new Uint8Array(analyser.frequencyBinCount);
-            frequencyDataRef.current = frequencyData;
-            
-            // Try to connect audio element to analyser
-            try {
-              const source = ctx.createMediaElementSource(audio);
-              source.connect(analyser);
-              analyser.connect(ctx.destination);
-              console.log('✅ Audio context connected successfully');
-            } catch (connectError: any) {
-              // May fail if already connected or CORS issues
-              console.warn('⚠️ Audio context connection limited:', connectError.message);
-            }
-            
+            const engine = getSoundEngine();
+            engine.attach(audioRef.current);
+            audioContextRef.current = engine.audioContext;
+            analyserRef.current = engine.analyser;
+            frequencyDataRef.current = engine.analyser ? new Uint8Array(engine.analyser.frequencyBinCount) : null;
             console.log('✅ Audio context and analyser initialized in onloadedmetadata');
           } catch (error) {
             console.error('❌ Failed to initialize audio context:', error);
@@ -1084,6 +1061,8 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
     // Add crossorigin attribute to allow Web Audio API to process cross-origin audio
     audio.crossOrigin = 'anonymous';
     audioRef.current = audio;
+    // Route through the shared sound engine (EQ/effects persist across tracks)
+    getSoundEngine().attach(audio);
     
     // Set up event listeners
     audio.onplay = () => {

@@ -169,12 +169,12 @@ Proper tagging, consistent naming conventions, and organized project files strea
   const selectedGuide = guides.find(guide => guide.id === activeGuide) || guides[0];
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen text-white bg-background">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#FF8C00] to-[#FFB020] py-16">
+      <div className="bg-gradient-to-r from-primary to-primary-light py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Music Guides & Resources</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-text-primary">Music Guides & Resources</h1>
             <p className="text-xl text-white/90 max-w-3xl mx-auto">
               Expert guides to help you discover, create, and share music more effectively
             </p>
@@ -191,7 +191,7 @@ Proper tagging, consistent naming conventions, and organized project files strea
               onClick={() => setActiveCategory(category)}
               className={`px-6 py-2 rounded-full font-medium transition-all ${
                 activeCategory === category
-                  ? "bg-[#FF8C00] text-white"
+                  ? "bg-primary text-white"
                   : "bg-gray-800 text-gray-300 hover:bg-gray-700"
               }`}
             >
@@ -210,8 +210,8 @@ Proper tagging, consistent naming conventions, and organized project files strea
                   onClick={() => setActiveGuide(guide.id)}
                   className={`bg-gray-800/30 backdrop-blur-lg rounded-xl p-6 border cursor-pointer transition-all ${
                     selectedGuide.id === guide.id
-                      ? "border-[#FF8C00] bg-gray-700/30"
-                      : "border-gray-700 hover:border-[#FF8C00]/50"
+                      ? "border-primary bg-gray-700/30"
+                      : "border-gray-700 hover:border-primary/50"
                   }`}
                 >
                   <div className="flex items-start justify-between mb-3">
@@ -228,7 +228,7 @@ Proper tagging, consistent naming conventions, and organized project files strea
                   </div>
                   
                   <h3 className={`font-semibold mb-2 ${
-                    selectedGuide.id === guide.id ? "text-[#FF8C00]" : "text-white"
+                    selectedGuide.id === guide.id ? "text-primary" : "text-white"
                   }`}>
                     {guide.title}
                   </h3>
@@ -245,7 +245,7 @@ Proper tagging, consistent naming conventions, and organized project files strea
           <div className="lg:col-span-2">
             <div className="bg-gray-800/30 backdrop-blur-lg rounded-xl p-8 border border-gray-700">
               <div className="flex items-center gap-4 mb-6">
-                <span className="px-4 py-2 bg-[#FF8C00]/20 text-[#FF8C00] font-medium rounded-full">
+                <span className="px-4 py-2 bg-primary/20 text-primary font-medium rounded-full">
                   {selectedGuide.category}
                 </span>
                 <div className="flex items-center gap-2">
@@ -262,7 +262,7 @@ Proper tagging, consistent naming conventions, and organized project files strea
                 </div>
               </div>
 
-              <h2 className="text-3xl font-bold mb-6 text-[#FF8C00]">
+              <h2 className="text-3xl font-bold mb-6 text-text-primary">
                 {selectedGuide.title}
               </h2>
 
@@ -278,11 +278,11 @@ Proper tagging, consistent naming conventions, and organized project files strea
 
               {selectedGuide.steps && (
                 <div className="mt-8">
-                  <h3 className="text-xl font-bold mb-4 text-white">Key Steps:</h3>
+                  <h3 className="text-xl font-bold mb-4 text-text-primary">Key Steps:</h3>
                   <ol className="space-y-3">
                     {selectedGuide.steps.map((step, index) => (
                       <li key={index} className="flex items-start">
-                        <span className="flex-shrink-0 w-8 h-8 bg-[#FF8C00] rounded-full flex items-center justify-center text-white font-bold text-sm mr-3 mt-1">
+                        <span className="flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold text-sm mr-3 mt-1">
                           {index + 1}
                         </span>
                         <span className="text-gray-300 pt-1">{step}</span>
@@ -294,11 +294,11 @@ Proper tagging, consistent naming conventions, and organized project files strea
 
               {selectedGuide.tips && (
                 <div className="mt-8">
-                  <h3 className="text-xl font-bold mb-4 text-white">Pro Tips:</h3>
+                  <h3 className="text-xl font-bold mb-4 text-text-primary">Pro Tips:</h3>
                   <ul className="space-y-2">
                     {selectedGuide.tips.map((tip, index) => (
                       <li key={index} className="flex items-start">
-                        <span className="text-[#FF8C00] mr-3 mt-1">•</span>
+                        <span className="text-primary mr-3 mt-1">•</span>
                         <span className="text-gray-300">{tip}</span>
                       </li>
                     ))}
@@ -309,7 +309,7 @@ Proper tagging, consistent naming conventions, and organized project files strea
               {/* Related Actions */}
               <div className="mt-12 pt-8 border-t border-gray-700">
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <button className="flex-1 bg-gradient-to-r from-[#FF8C00] to-[#FFB020] text-white px-6 py-3 rounded-lg font-semibold hover:from-[#FF7A00] hover:to-[#FFA010] transition-all">
+                  <button className="flex-1 bg-gradient-to-r from-primary to-primary-light text-white px-6 py-3 rounded-lg font-semibold hover:from-primary hover:to-primary-light transition-all">
                     Save Guide for Later
                   </button>
                   <button className="flex-1 border border-gray-600 text-gray-300 px-6 py-3 rounded-lg font-semibold hover:bg-gray-700/50 transition-colors">
@@ -322,22 +322,22 @@ Proper tagging, consistent naming conventions, and organized project files strea
         </div>
 
         {/* Additional Resources */}
-        <div className="mt-16 bg-gradient-to-r from-[#FF8C00]/10 to-[#FFB020]/10 rounded-xl p-8 border border-[#FF8C00]/20">
-          <h2 className="text-2xl font-bold mb-4 text-center text-[#FF8C00]">Additional Learning Resources</h2>
+        <div className="mt-16 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-xl p-8 border border-primary/20">
+          <h2 className="text-2xl font-bold mb-4 text-center text-text-primary">Additional Learning Resources</h2>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="text-center">
               <div className="text-4xl mb-3">🎓</div>
-              <h3 className="font-semibold mb-2 text-white">Video Tutorials</h3>
+              <h3 className="font-semibold mb-2 text-text-primary">Video Tutorials</h3>
               <p className="text-gray-400 text-sm">Step-by-step visual guides for hands-on learning</p>
             </div>
             <div className="text-center">
               <div className="text-4xl mb-3">📚</div>
-              <h3 className="font-semibold mb-2 text-white">Industry Reports</h3>
+              <h3 className="font-semibold mb-2 text-text-primary">Industry Reports</h3>
               <p className="text-gray-400 text-sm">Latest trends and insights from music industry experts</p>
             </div>
             <div className="text-center">
               <div className="text-4xl mb-3">💬</div>
-              <h3 className="font-semibold mb-2 text-white">Community Forums</h3>
+              <h3 className="font-semibold mb-2 text-text-primary">Community Forums</h3>
               <p className="text-gray-400 text-sm">Connect with other creators and share experiences</p>
             </div>
           </div>

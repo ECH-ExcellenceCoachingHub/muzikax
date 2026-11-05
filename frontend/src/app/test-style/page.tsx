@@ -4,8 +4,8 @@ import Link from "next/link";
 
 export default function TestStylePage() {
   return (
-    <div className="min-h-screen bg-background text-foreground p-8">
-      <h1 className="text-3xl font-bold mb-4">Style Test Page</h1>
+    <div className="min-h-screen text-foreground p-8 bg-background">
+      <h1 className="text-3xl font-bold mb-4 text-text-primary">Style Test Page</h1>
       <p className="mb-4">This page tests if Tailwind styles are working correctly.</p>
       
       <div className="bg-primary text-white p-4 rounded-lg mb-4">

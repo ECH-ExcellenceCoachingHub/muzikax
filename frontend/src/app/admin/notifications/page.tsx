@@ -224,7 +224,7 @@ export default function AdminNotificationsPage() {
                   <select
                     value={notificationType}
                     onChange={(e) => setNotificationType(e.target.value as any)}
-                    className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+                    className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary"
                   >
                     <option value="info">Info</option>
                     <option value="warning">Warning</option>
@@ -243,7 +243,7 @@ export default function AdminNotificationsPage() {
                         setSendToAllCreators(e.target.checked);
                         if (e.target.checked) setSendToAllUsers(false);
                       }}
-                      className="h-4 w-4 text-[#FF8C00] focus:ring-[#FF8C00] border-gray-700 rounded bg-gray-800"
+                      className="h-4 w-4 text-primary focus:ring-primary border-gray-700 rounded bg-gray-800"
                     />
                     <label htmlFor="sendToAllCreators" className="ml-2 block text-sm text-gray-400">
                       Send to all creators
@@ -259,7 +259,7 @@ export default function AdminNotificationsPage() {
                         setSendToAllUsers(e.target.checked);
                         if (e.target.checked) setSendToAllCreators(false);
                       }}
-                      className="h-4 w-4 text-[#FF8C00] focus:ring-[#FF8C00] border-gray-700 rounded bg-gray-800"
+                      className="h-4 w-4 text-primary focus:ring-primary border-gray-700 rounded bg-gray-800"
                     />
                     <label htmlFor="sendToAllUsers" className="ml-2 block text-sm text-gray-400">
                       Send to all users (fans & creators)
@@ -278,13 +278,13 @@ export default function AdminNotificationsPage() {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Search users by name or email..."
-                        className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+                        className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary"
                       />
                     </div>
                     <select
                       value={selectedUser}
                       onChange={(e) => setSelectedUser(e.target.value)}
-                      className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+                      className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary"
                     >
                       <option value="">Select a user</option>
                       {filteredUsers.map((user) => (
@@ -311,7 +311,7 @@ export default function AdminNotificationsPage() {
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="Enter notification title"
-                    className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+                    className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary"
                   />
                 </div>
 
@@ -324,14 +324,14 @@ export default function AdminNotificationsPage() {
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Enter notification message"
                     rows={4}
-                    className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+                    className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={sending}
-                  className="w-full px-4 py-3 bg-[#FF8C00] hover:bg-[#FF8C00]/80 disabled:opacity-50 text-white rounded-lg transition-colors font-medium"
+                  className="w-full px-4 py-3 bg-primary hover:bg-primary/80 disabled:opacity-50 text-white rounded-lg transition-colors font-medium"
                 >
                   {sending ? 'Sending...' : 'Send Notification'}
                 </button>
@@ -344,7 +344,7 @@ export default function AdminNotificationsPage() {
               
               {loading ? (
                 <div className="flex justify-center py-8">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#FF8C00]"></div>
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
                 </div>
               ) : notifications.length === 0 ? (
                 <div className="text-center py-8">

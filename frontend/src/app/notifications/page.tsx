@@ -274,14 +274,14 @@ export default function NotificationsPage() {
 
   if (!isAuthenticated) {
     return (
-      <div className="flex min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FF8C00]"></div>
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black pt-14 md:pt-0">
+    <div className="min-h-screen pt-14 md:pt-0 bg-background">
       {/* Mobile Header with Back Button */}
       <div className="md:hidden bg-gray-900/50 backdrop-blur-lg border-b border-gray-800 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 py-4">
@@ -294,7 +294,7 @@ export default function NotificationsPage() {
               <FaArrowLeft className="w-5 h-5" />
             </button>
             <div>
-              <h1 className="text-xl font-black text-white">Notifications</h1>
+              <h1 className="text-xl font-black text-text-primary">Notifications</h1>
               <p className="text-xs text-gray-400">Stay updated</p>
             </div>
           </div>
@@ -306,7 +306,7 @@ export default function NotificationsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-white">Notifications</h1>
+              <h1 className="text-2xl font-bold text-text-primary">Notifications</h1>
               <p className="text-gray-400 mt-1">Stay updated with platform announcements and messages</p>
             </div>
             <div className="flex items-center space-x-3">
@@ -318,7 +318,7 @@ export default function NotificationsPage() {
               </button>
               <Link 
                 href="/profile" 
-                className="px-4 py-2 bg-[#FF8C00] hover:bg-[#FF8C00]/80 text-white rounded-lg transition-colors text-sm"
+                className="px-4 py-2 bg-primary hover:bg-primary/80 text-white rounded-lg transition-colors text-sm"
               >
                 Back to Profile
               </Link>
@@ -334,7 +334,7 @@ export default function NotificationsPage() {
 
         {loading ? (
           <div className="flex justify-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FF8C00]"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
           </div>
         ) : notifications.length === 0 ? (
           <div className="text-center py-12">
@@ -371,7 +371,7 @@ export default function NotificationsPage() {
                           {notification.title}
                         </h3>
                         {!notification.read && (
-                          <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#FF8C00] text-white">
+                          <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary text-white">
                             New
                           </span>
                         )}
@@ -390,9 +390,9 @@ export default function NotificationsPage() {
                             const status = trackProgress?.status || notification.data?.status || 'processing'
                             
                             return (
-                              <div className="bg-gray-700/50 rounded-lg p-4 border border-purple-500/30">
+                              <div className="bg-gray-700/50 rounded-lg p-4 border border-primary/30">
                                 <div className="flex items-center justify-between mb-2">
-                                  <span className="text-sm font-medium text-purple-300">
+                                  <span className="text-sm font-medium text-primary-light">
                                     {status === 'completed' ? '✅ Stems Ready!' : 
                                      status === 'failed' ? '⚠️ Processing Failed' :
                                      '⚙️ Processing...'}
@@ -405,7 +405,7 @@ export default function NotificationsPage() {
                                     className={`h-3 rounded-full transition-all duration-500 ${
                                       status === 'completed' ? 'bg-gradient-to-r from-green-500 to-emerald-600' :
                                       status === 'failed' ? 'bg-gradient-to-r from-red-500 to-orange-600' :
-                                      'bg-gradient-to-r from-[#FF8C00] to-purple-600 animate-pulse'
+                                      'bg-gradient-to-r from-primary to-purple-600 animate-pulse'
                                     }`}
                                     style={{ width: `${progress}%` }}
                                   ></div>
@@ -438,7 +438,7 @@ export default function NotificationsPage() {
                         <div className="mt-2 text-sm text-gray-400">
                           From: <span className="text-gray-300">{notification.senderId.name}</span>
                           {notification.senderId.role === 'admin' && (
-                            <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-purple-500/20 text-purple-300">
+                            <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-purple-500/20 text-primary-light">
                               Admin
                             </span>
                           )}
@@ -464,14 +464,14 @@ export default function NotificationsPage() {
                                 value={replyMessage}
                                 onChange={(e) => setReplyMessage(e.target.value)}
                                 placeholder="Write your reply..."
-                                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+                                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary"
                                 rows={3}
                               />
                               <div className="flex items-center space-x-2">
                                 <button
                                   onClick={() => handleReply(notification._id)}
                                   disabled={replyLoading || !replyMessage.trim()}
-                                  className="px-4 py-2 bg-[#FF8C00] hover:bg-[#FF8C00]/80 disabled:opacity-50 text-white rounded-lg transition-colors text-sm"
+                                  className="px-4 py-2 bg-primary hover:bg-primary/80 disabled:opacity-50 text-white rounded-lg transition-colors text-sm"
                                 >
                                   {replyLoading ? 'Sending...' : 'Send Reply'}
                                 </button>

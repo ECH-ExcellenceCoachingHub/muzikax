@@ -130,10 +130,10 @@ export default function AlbumDetailPage({ params }: { params: Promise<{ id: stri
   
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black py-8 sm:py-12">
+      <div className="min-h-screen py-8 sm:py-12 bg-background">
         <div className="container mx-auto px-4 sm:px-8">
           <div className="max-w-7xl mx-auto text-center py-12">
-            <h2 className="text-2xl font-bold text-white mb-4">Error Loading Album</h2>
+            <h2 className="text-2xl font-bold mb-4 text-text-primary">Error Loading Album</h2>
             <p className="text-gray-400">{error}</p>
           </div>
         </div>
@@ -143,10 +143,10 @@ export default function AlbumDetailPage({ params }: { params: Promise<{ id: stri
   
   if (loading || !album || !albumId) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black py-8 sm:py-12">
+      <div className="min-h-screen py-8 sm:py-12 bg-background">
         <div className="container mx-auto px-4 sm:px-8">
           <div className="max-w-7xl mx-auto text-center py-12">
-            <h2 className="text-2xl font-bold text-white mb-4">Loading Album...</h2>
+            <h2 className="text-2xl font-bold mb-4 text-text-primary">Loading Album...</h2>
           </div>
         </div>
       </div>
@@ -154,9 +154,9 @@ export default function AlbumDetailPage({ params }: { params: Promise<{ id: stri
   }
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black py-8 sm:py-12 overflow-hidden relative">
-      <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#FF4D67]/10 rounded-full blur-3xl -z-10"></div>
-      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-[#FFCB2B]/10 rounded-full blur-3xl -z-10"></div>
+    <div className="min-h-screen py-8 sm:py-12 overflow-hidden relative bg-background">
+      <div className="absolute -top-40 -left-40 w-96 h-96 bg-primary/10 rounded-full blur-3xl -z-10"></div>
+      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-primary-light/10 rounded-full blur-3xl -z-10"></div>
       
       <div className="container mx-auto px-4 sm:px-8">
         <div className="max-w-7xl mx-auto">
@@ -182,7 +182,7 @@ export default function AlbumDetailPage({ params }: { params: Promise<{ id: stri
                     className="w-full h-full object-cover rounded-2xl shadow-2xl"
                   />
                 ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-[#FF4D67] to-[#FFCB2B] rounded-2xl flex items-center justify-center">
+                  <div className="w-full h-full bg-gradient-to-br from-primary to-primary-light rounded-2xl flex items-center justify-center">
                     <svg className="w-24 h-24 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                       <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
                     </svg>
@@ -193,8 +193,8 @@ export default function AlbumDetailPage({ params }: { params: Promise<{ id: stri
             
             <div className="flex-1 text-center md:text-left">
               <div className="flex flex-col justify-end h-full">
-                <p className="text-[#FFCB2B] text-sm uppercase tracking-wider mb-2">Album</p>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">{album.title}</h1>
+                <p className="text-primary-light text-sm uppercase tracking-wider mb-2">Album</p>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight text-text-primary">{album.title}</h1>
                 <p className="text-xl sm:text-2xl text-gray-300 mb-6 font-medium">
                   <Link href={`/artist/${album.artist}`} className="hover:text-white transition-colors">
                     {album.artist}
@@ -211,7 +211,7 @@ export default function AlbumDetailPage({ params }: { params: Promise<{ id: stri
                 
                 {album.description && (
                   <div className="mt-6 max-w-2xl">
-                    <h3 className="text-lg font-semibold text-white mb-2">About</h3>
+                    <h3 className="text-lg font-semibold mb-2 text-text-primary">About</h3>
                     <p className="text-gray-400 text-sm sm:text-base leading-relaxed">{album.description}</p>
                   </div>
                 )}

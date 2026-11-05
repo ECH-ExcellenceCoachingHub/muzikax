@@ -69,7 +69,7 @@ export default function ArtistCard({ creator, followStatus, setFollowStatus }: A
   const generateAvatar = (name: string) => {
     const firstLetter = name.charAt(0).toUpperCase()
     return (
-      <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-[#FF8C00] to-[#FFB020] flex items-center justify-center mx-auto">
+      <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-primary to-primary-light flex items-center justify-center mx-auto">
         <span className="text-xl sm:text-2xl font-bold text-white">{firstLetter}</span>
       </div>
     )
@@ -77,7 +77,7 @@ export default function ArtistCard({ creator, followStatus, setFollowStatus }: A
 
   return (
     <div 
-      className="flex-shrink-0 w-40 sm:w-44 md:w-48 group card-bg rounded-xl p-4 transition-all duration-300 hover:border-[#FFB020]/50 hover:bg-gradient-to-br hover:from-gray-900/70 hover:to-gray-900/50 hover:shadow-xl hover:shadow-[#FFB020]/10 cursor-pointer"
+      className="flex-shrink-0 w-40 sm:w-44 md:w-48 group card-bg rounded-xl p-4 cursor-pointer"
       onClick={() => router.push(`/artists/${creator._id || creator.id}`)}
     >
       <div className="flex flex-col items-center text-center">
@@ -92,7 +92,7 @@ export default function ArtistCard({ creator, followStatus, setFollowStatus }: A
             generateAvatar(creator.name)
           )}
           {creator.verified && (
-            <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-[#FF8C00] border-2 border-gray-900 flex items-center justify-center">
+            <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-primary border-2 border-gray-900 flex items-center justify-center">
               <svg
                 className="w-3 h-3 text-white"
                 fill="currentColor"
@@ -108,17 +108,17 @@ export default function ArtistCard({ creator, followStatus, setFollowStatus }: A
             </div>
           )}
         </div>
-        <h3 className="font-bold text-white text-sm sm:text-base truncate w-full">
+        <h3 className="font-bold text-sm sm:text-base truncate w-full text-text-primary">
           {creator.name}
         </h3>
-        <p className="text-[#FFB020] text-xs sm:text-sm mb-2">
+        <p className="text-primary-light text-xs sm:text-sm mb-2">
           {creator.type}
         </p>
         <p className="text-gray-500 text-xs mb-2">
           {(creator.followersCount || creator.followers || 0).toLocaleString()} {t('followers')}
         </p>
         <button 
-          className={`w-full px-3 py-1.5 ${followStatus[creator._id || creator.id || ''] ? 'bg-gray-600 hover:bg-gray-700 border-gray-600' : 'bg-transparent border border-[#FFB020] text-[#FFB020] hover:bg-[#FFB020]/10'} rounded-full text-xs font-medium transition-colors`}
+          className={`w-full px-3 py-1.5 ${followStatus[creator._id || creator.id || ''] ? 'bg-gray-600 hover:bg-gray-700 border-gray-600' : 'bg-transparent border border-primary-light text-primary-light hover:bg-primary-light/10'} rounded-full text-xs font-medium transition-colors`}
           onClick={handleFollowToggle}
         >
           {followStatus[creator._id || creator.id || ''] ? t('unfollow') : t('follow')}

@@ -236,7 +236,7 @@ const AIMusicAssistant: React.FC = () => {
           setIsMinimized(false);
           openAssistant();
         }}
-        className="fixed bottom-20 sm:bottom-28 right-4 sm:right-6 z-[9999] bg-gradient-to-r from-[#FF8C00] to-[#FFB020] text-white p-3.5 sm:p-4 rounded-full shadow-2xl hover:shadow-[#FF8C00]/50 transition-all duration-300 hover:scale-110 active:scale-95 group touch-manipulation"
+        className="fixed bottom-20 sm:bottom-28 right-4 sm:right-6 z-[9999] bg-gradient-to-r from-primary to-primary-light text-white p-3.5 sm:p-4 rounded-full shadow-2xl hover:shadow-primary/50 transition-all duration-300 hover:scale-110 active:scale-95 group touch-manipulation"
         aria-label="Open AI Music Assistant"
         style={{ WebkitTapHighlightColor: 'transparent' }}
       >
@@ -247,7 +247,7 @@ const AIMusicAssistant: React.FC = () => {
           <div className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-green-400 rounded-full animate-pulse border-2 border-gray-900"></div>
         </div>
         {/* Tooltip - only show on desktop */}
-        <span className="hidden sm:block absolute bottom-full left-1/2 -translate-x-1/2 mb-3 bg-gray-900 text-white px-4 py-2 rounded-lg shadow-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300 text-sm font-semibold border border-[#FF8C00]/30">
+        <span className="hidden sm:block absolute bottom-full left-1/2 -translate-x-1/2 mb-3 bg-gray-900 text-white px-4 py-2 rounded-lg shadow-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300 text-sm font-semibold border border-primary/30">
           🎵 MuzikaX AI Assistant
           {/* Arrow pointing down */}
           <span className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-gray-900"></span>
@@ -274,11 +274,11 @@ const AIMusicAssistant: React.FC = () => {
           isMinimized 
             ? 'h-auto' 
             : 'h-[85vh] sm:max-h-[600px]'
-        } bg-gray-900/95 backdrop-blur-xl border border-gray-700/50 rounded-t-2xl sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden transition-all duration-300`}
+        } bg-surface-elevated border border-border-medium rounded-t-2xl sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden transition-all duration-300`}
         style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
       >
         {/* Header - Larger touch targets for mobile */}
-        <div className="bg-gradient-to-r from-[#FF8C00] to-[#FFB020] p-3 sm:p-4 flex items-center justify-between flex-shrink-0">
+        <div className="bg-gradient-to-r from-primary to-primary-light p-3 sm:p-4 flex items-center justify-between flex-shrink-0">
           <div 
             className="flex items-center space-x-3 cursor-pointer flex-1 min-w-0"
             onClick={handleMinimize}
@@ -290,7 +290,7 @@ const AIMusicAssistant: React.FC = () => {
               </svg>
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="text-white font-bold text-sm sm:text-base truncate">MuzikaX AI Assistant</h3>
+              <h3 className="font-bold text-sm sm:text-base truncate text-text-primary">MuzikaX AI Assistant</h3>
             </div>
           </div>
           <div className="flex items-center space-x-1 sm:space-x-2 flex-shrink-0">
@@ -342,7 +342,7 @@ const AIMusicAssistant: React.FC = () => {
               <div
                 className={`max-w-[85%] sm:max-w-[80%] rounded-2xl px-4 py-3 ${
                   message.role === 'user'
-                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white'
+                    ? 'bg-gradient-to-r from-primary to-primary-light text-white'
                     : 'bg-gray-800 text-gray-100'
                 }`}
               >
@@ -395,7 +395,7 @@ const AIMusicAssistant: React.FC = () => {
                           className={`text-xs px-2 py-1 rounded transition-colors ${
                             addingToQueue 
                               ? 'bg-gray-600 text-gray-400 cursor-not-allowed' 
-                              : 'bg-[#FF8C00]/20 text-[#FF8C00] hover:bg-[#FF8C00]/30'
+                              : 'bg-primary/20 text-primary hover:bg-primary/30'
                           }`}
                         >
                           {addingToQueue ? '⏳ Adding...' : '▶️ Play All'}
@@ -405,7 +405,7 @@ const AIMusicAssistant: React.FC = () => {
                     {message.tracks.map((track, index) => (
                       <div
                         key={index}
-                        className="bg-white/10 rounded-lg p-3 cursor-pointer hover:bg-white/20 transition-all group"
+                        className="rounded-lg p-3 cursor-pointer group mx-surface"
                         onClick={() => {
                           // Transform track data to match audio player format
                           const trackToPlay = {
@@ -420,8 +420,8 @@ const AIMusicAssistant: React.FC = () => {
                         }}
                       >
                         <div className="flex items-center space-x-3">
-                          <div className="w-8 h-8 bg-[#FF8C00]/20 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-[#FF8C00]/30 transition-colors">
-                            <svg className="w-4 h-4 text-[#FF8C00]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-primary/30 transition-colors">
+                            <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
                             </svg>
                           </div>
@@ -430,7 +430,7 @@ const AIMusicAssistant: React.FC = () => {
                             <p className="text-xs text-white/70 truncate">{track.artist?.name || 'Unknown Artist'}</p>
                           </div>
                           <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-                            <svg className="w-5 h-5 text-[#FFB020]" fill="currentColor" viewBox="0 0 20 20">
+                            <svg className="w-5 h-5 text-primary-light" fill="currentColor" viewBox="0 0 20 20">
                               <path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" />
                             </svg>
                           </div>
@@ -465,26 +465,26 @@ const AIMusicAssistant: React.FC = () => {
           <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
             <button
               onClick={() => handleQuickAction("Play calm Rwandan songs for studying")}
-              className="flex-shrink-0 px-3 py-2 sm:py-1.5 bg-[#FF8C00]/20 text-[#FF8C00] rounded-full text-xs font-medium hover:bg-[#FF8C00]/30 transition-colors active:scale-95 touch-manipulation"
+              className="flex-shrink-0 px-3 py-2 sm:py-1.5 bg-primary/20 text-primary rounded-full text-xs font-medium hover:bg-primary/30 transition-colors active:scale-95 touch-manipulation"
             >
               📚 Study Music
             </button>
             <button
               onClick={() => handleQuickAction("Give me trending Afrobeat in Kigali")}
-              className="flex-shrink-0 px-3 py-2 sm:py-1.5 bg-[#FFB020]/20 text-[#FFB020] rounded-full text-xs font-medium hover:bg-[#FFB020]/30 transition-colors active:scale-95 touch-manipulation"
+              className="flex-shrink-0 px-3 py-2 sm:py-1.5 bg-primary-light/20 text-primary-light rounded-full text-xs font-medium hover:bg-primary-light/30 transition-colors active:scale-95 touch-manipulation"
             >
               🔥 Trending Now
             </button>
             <button
               onClick={() => handleQuickAction("Find songs like The Ben but faster")}
-              className="flex-shrink-0 px-3 py-2 sm:py-1.5 bg-[#FF8C00]/20 text-[#FF8C00] rounded-full text-xs font-medium hover:bg-[#FF8C00]/30 transition-colors active:scale-95 touch-manipulation"
+              className="flex-shrink-0 px-3 py-2 sm:py-1.5 bg-primary/20 text-primary rounded-full text-xs font-medium hover:bg-primary/30 transition-colors active:scale-95 touch-manipulation"
             >
               🎤 Similar Artists
             </button>
             {!isAuthenticated && (
               <button
                 onClick={() => sendMessage("Create a playlist for me")}
-                className="flex-shrink-0 px-3 py-2 sm:py-1.5 bg-[#FFB020]/20 text-[#FFB020] rounded-full text-xs font-medium hover:bg-[#FFB020]/30 transition-colors active:scale-95 touch-manipulation flex items-center space-x-1"
+                className="flex-shrink-0 px-3 py-2 sm:py-1.5 bg-primary-light/20 text-primary-light rounded-full text-xs font-medium hover:bg-primary-light/30 transition-colors active:scale-95 touch-manipulation flex items-center space-x-1"
               >
                 <span>🎵</span>
                 <span>Create Playlist</span>
@@ -504,8 +504,8 @@ const AIMusicAssistant: React.FC = () => {
               disabled={isListening}
               className={`p-3 rounded-full transition-colors flex-shrink-0 ${
                 isListening
-                  ? 'bg-[#FF8C00] text-white animate-pulse'
-                  : 'bg-gray-700 text-gray-300 hover:bg-[#FF8C00] hover:text-white'
+                  ? 'bg-primary text-white animate-pulse'
+                  : 'bg-gray-700 text-gray-300 hover:bg-primary hover:text-white'
               } active:scale-95 touch-manipulation`}
               aria-label="Voice input"
             >
@@ -520,12 +520,12 @@ const AIMusicAssistant: React.FC = () => {
               onChange={(e) => setInputValue(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && sendMessage(inputValue)}
               placeholder="Ask me anything about music..."
-              className="flex-1 bg-gray-700 text-white placeholder-gray-400 rounded-full px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm"
+              className="flex-1 bg-gray-700 text-white placeholder-gray-400 rounded-full px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary text-sm"
             />
             <button
               onClick={() => sendMessage(inputValue)}
               disabled={!inputValue.trim() || isLoading}
-              className="p-3 bg-gradient-to-r from-[#FF8C00] to-[#FFB020] text-white rounded-full hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95 touch-manipulation flex-shrink-0"
+              className="p-3 bg-gradient-to-r from-primary to-primary-light text-white rounded-full hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95 touch-manipulation flex-shrink-0"
               aria-label="Send message"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -540,14 +540,14 @@ const AIMusicAssistant: React.FC = () => {
       {/* Login Prompt Modal */}
       {showLoginPrompt && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-          <div className="bg-gradient-to-br from-gray-900 via-black to-gray-900 rounded-2xl shadow-2xl max-w-sm w-full border border-[#FF8C00]/30 p-6 animate-in fade-in zoom-in duration-300">
+          <div className="bg-gradient-to-br from-gray-900 via-black to-gray-900 rounded-2xl shadow-2xl max-w-sm w-full border border-primary/30 p-6 animate-in fade-in zoom-in duration-300">
             <div className="flex items-center space-x-3 mb-4">
-              <div className="w-10 h-10 bg-[#FF8C00]/20 rounded-full flex items-center justify-center flex-shrink-0">
-                <svg className="w-5 h-5 text-[#FF8C00]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-bold text-white">Login Required</h3>
+              <h3 className="text-lg font-bold text-text-primary">Login Required</h3>
             </div>
 
             <p className="text-gray-300 text-sm mb-4">
@@ -582,7 +582,7 @@ const AIMusicAssistant: React.FC = () => {
               </button>
               <button
                 onClick={handleNavigateToLogin}
-                className="flex-1 px-4 py-2.5 bg-gradient-to-r from-[#FF8C00] to-[#FFB020] text-white rounded-lg text-sm font-semibold hover:shadow-lg hover:shadow-[#FF8C00]/50 transition-all transform hover:scale-105"
+                className="flex-1 px-4 py-2.5 bg-gradient-to-r from-primary to-primary-light text-white rounded-lg text-sm font-semibold hover:shadow-lg hover:shadow-primary/50 transition-all transform hover:scale-105"
               >
                 Login 🚀
               </button>

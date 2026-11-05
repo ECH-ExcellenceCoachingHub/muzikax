@@ -153,7 +153,7 @@ export default function AdminReportsPage() {
         <div className="max-w-7xl mx-auto w-full">
         <div className="flex justify-end mb-6">
           <div className="text-white">
-            Total Reports: <span className="text-[#FF8C00]">{totalReports}</span>
+            Total Reports: <span className="text-primary">{totalReports}</span>
           </div>
         </div>
 
@@ -165,7 +165,7 @@ export default function AdminReportsPage() {
               <select
                 value={filters.status}
                 onChange={(e) => handleFilterChange('status', e.target.value)}
-                className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+                className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 <option value="">All Statuses</option>
                 <option value="pending">Pending</option>
@@ -180,7 +180,7 @@ export default function AdminReportsPage() {
               <select
                 value={filters.reason}
                 onChange={(e) => handleFilterChange('reason', e.target.value)}
-                className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+                className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 <option value="">All Reasons</option>
                 <option value="copyright">Copyright</option>
@@ -194,7 +194,7 @@ export default function AdminReportsPage() {
               <select
                 value={filters.sortBy}
                 onChange={(e) => handleFilterChange('sortBy', e.target.value)}
-                className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+                className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 <option value="createdAt">Created Date</option>
                 <option value="status">Status</option>
@@ -207,7 +207,7 @@ export default function AdminReportsPage() {
               <select
                 value={filters.sortOrder}
                 onChange={(e) => handleFilterChange('sortOrder', e.target.value)}
-                className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+                className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 <option value="desc">Descending</option>
                 <option value="asc">Ascending</option>
@@ -315,7 +315,7 @@ function DetailsModal({ report, onUpdateStatus }: { report: Report; onUpdateStat
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="text-[#FF8C00] hover:text-[#FF8C00]/80 font-medium"
+        className="text-primary hover:text-primary/80 font-medium"
       >
         View Details
       </button>

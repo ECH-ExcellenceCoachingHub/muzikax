@@ -88,12 +88,18 @@ const SoloPlayer = ({ onClose }: SoloPlayerProps) => {
         {/* Sound Engine Button */}
         <button 
           onClick={() => setShowSoundEngine(!showSoundEngine)}
-          className={`p-3 transition-all bg-white/5 hover:bg-white/10 rounded-full backdrop-blur-xl border border-white/10 pointer-events-auto ${
-            showSoundEngine ? 'text-purple-400 hover:text-purple-300 shadow-[0_0_20px_rgba(168,85,247,0.4)]' : 'text-white/70 hover:text-white'
+          className={`inline-flex items-center gap-2 h-11 px-4 rounded-full backdrop-blur-xl border transition-colors pointer-events-auto ${
+            showSoundEngine
+              ? 'bg-primary text-black border-primary'
+              : 'bg-black/30 text-white/80 hover:text-white hover:bg-black/50 border-white/10'
           }`}
-          title="MuzikaX Sound Engine 🎧"
+          aria-label="Sound settings"
+          title="Sound settings"
         >
-          <span className="text-xl">🎧</span>
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
+            <path strokeLinecap="round" d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6" />
+          </svg>
+          <span className="text-sm font-semibold">Sound</span>
         </button>
 
         <button 
@@ -118,12 +124,12 @@ const SoloPlayer = ({ onClose }: SoloPlayerProps) => {
       <div className="relative z-10 w-full max-w-5xl px-6 sm:px-12 py-10 flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 min-h-screen md:min-h-0">
         {/* Track Thumbnail Container */}
         <div className="w-full max-w-[280px] sm:max-w-[380px] md:max-w-[450px] aspect-square relative group flex-shrink-0">
-          <div className={`absolute -inset-4 bg-gradient-to-tr from-purple-500/20 to-blue-500/20 blur-2xl rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 ${isPlaying ? 'opacity-40 animate-pulse' : ''}`} />
+          <div className={`absolute -inset-4 bg-gradient-to-tr from-primary/20 to-primary-light/20 blur-2xl rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 ${isPlaying ? 'opacity-40 animate-pulse' : ''}`} />
           <div className={`relative w-full h-full rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-1000 ease-out border border-white/10 ${isPlaying ? 'scale-100 rotate-0' : 'scale-90 -rotate-2 opacity-80'}`}>
             <img 
               src={currentTrack.coverImage} 
               alt={currentTrack.title}
-              className="w-full h-full object-cover transform transition-transform duration-[2000ms] group-hover:scale-110"
+              className="w-full h-full object-cover transform transition-transform duration-[2000ms] group-hover:scale-[1.04]"
             />
           </div>
         </div>
@@ -131,7 +137,7 @@ const SoloPlayer = ({ onClose }: SoloPlayerProps) => {
         {/* Track Controls & Info Side */}
         <div className="flex-1 w-full flex flex-col items-center md:items-start">
           <div className="text-center md:text-left mb-8 w-full">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-3 tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-3 tracking-tight leading-tight text-text-primary">
               {currentTrack.title}
             </h2>
             <p className="text-lg sm:text-xl text-white/50 font-medium">
@@ -147,7 +153,7 @@ const SoloPlayer = ({ onClose }: SoloPlayerProps) => {
               className="group relative h-2 w-full bg-white/5 rounded-full cursor-pointer overflow-hidden mb-4"
             >
               <div 
-                className="absolute h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-100 ease-linear rounded-full"
+                className="absolute h-full bg-gradient-to-r from-primary to-primary-light transition-all duration-100 ease-linear rounded-full"
                 style={{ width: `${(progress / duration) * 100}%` }}
               />
               {/* Hover indicator point */}
@@ -178,7 +184,7 @@ const SoloPlayer = ({ onClose }: SoloPlayerProps) => {
               onClick={togglePlayPause}
               className="w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center bg-white text-black rounded-full shadow-[0_10px_30px_rgba(255,255,255,0.2)] hover:shadow-[0_15px_40px_rgba(255,255,255,0.3)] hover:scale-110 active:scale-95 transition-all duration-300 relative group overflow-hidden"
             >
-              <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-primary-light/10 opacity-0 group-hover:opacity-100 transition-opacity" />
               {isPlaying ? (
                 <svg className="w-8 h-8 sm:w-10 sm:h-10 relative z-10" fill="currentColor" viewBox="0 0 24 24">
                   <rect x="6" y="5" width="4" height="14" rx="1.5" />

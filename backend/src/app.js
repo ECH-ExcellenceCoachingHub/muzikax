@@ -165,6 +165,8 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/tracks', trackRoutes);
+// DJ mode: recorded mixes + live sets
+app.use('/api/dj', require('./routes/djRoutes'));
 app.use('/api/users', userRoutes);
 
 // Register post routes early to avoid conflicts

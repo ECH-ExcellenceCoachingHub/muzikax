@@ -29,13 +29,13 @@ export default function SettingsPage() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-white mb-4">Please Log In</h2>
+          <h2 className="text-2xl font-bold mb-4 text-text-primary">Please Log In</h2>
           <p className="text-gray-400 mb-6">You need to be logged in to view settings</p>
           <button
             onClick={() => router.push('/auth/login')}
-            className="inline-block bg-[#FF8C00] hover:bg-[#FF8C00]/80 text-white py-2 px-6 rounded-lg transition-colors"
+            className="inline-block bg-primary hover:bg-primary/80 text-white py-2 px-6 rounded-lg transition-colors"
           >
             Go to Login
           </button>
@@ -45,13 +45,13 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black pb-20 pt-14 md:pt-0">
+    <div className="min-h-screen pb-20 pt-14 md:pt-0 bg-background">
       {/* Header */}
       <div className="sticky top-0 z-50 bg-gray-900/95 backdrop-blur-lg border-b border-gray-800">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-black text-white">Settings</h1>
+              <h1 className="text-2xl font-black text-text-primary">Settings</h1>
               <p className="text-sm text-gray-400">Manage your account settings</p>
             </div>
             <button
@@ -68,24 +68,24 @@ export default function SettingsPage() {
 
       <div className="container mx-auto px-4 py-6 max-w-4xl">
         {/* Account Settings */}
-        <div className="bg-gradient-to-br from-[#FF8C00]/10 to-[#FF8C00]/5 backdrop-blur-sm rounded-2xl border border-[#FF8C00]/20 p-6 mb-6">
+        <div className="bg-gradient-to-br from-primary/10 to-primary/5 backdrop-blur-sm rounded-2xl border border-primary/20 p-6 mb-6">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-full bg-[#FF8C00]/20 flex items-center justify-center">
-              <svg className="w-5 h-5 text-[#FF8C00]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+              <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
             </div>
-            <h2 className="text-xl font-bold text-white">Account Settings</h2>
+            <h2 className="text-xl font-bold text-text-primary">Account Settings</h2>
           </div>
 
           <div className="space-y-4">
             {/* Profile */}
             <button
               onClick={() => router.push('/edit-profile')}
-              className="w-full p-4 bg-gray-800/50 rounded-xl hover:bg-gray-700/50 transition-all flex items-center justify-between group"
+              className="w-full p-4 rounded-xl flex items-center justify-between group mx-surface"
             >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#FF8C00] to-[#FFB020] flex items-center justify-center">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary-light flex items-center justify-center">
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                   </svg>
@@ -103,10 +103,10 @@ export default function SettingsPage() {
             {/* Email Notifications */}
             <button
               onClick={() => router.push('/settings/notifications')}
-              className="w-full p-4 bg-gray-800/50 rounded-xl hover:bg-gray-700/50 transition-all flex items-center justify-between group"
+              className="w-full p-4 rounded-xl flex items-center justify-between group mx-surface"
             >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#6366F1] to-[#8B5CF6] flex items-center justify-center">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary-light flex items-center justify-center">
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
@@ -140,24 +140,24 @@ export default function SettingsPage() {
 
         {/* Creator Settings (for creators only) */}
         {user.role === 'creator' && (
-          <div className="bg-gradient-to-br from-[#FFB020]/10 to-[#FFB020]/5 backdrop-blur-sm rounded-2xl border border-[#FFB020]/20 p-6 mb-6">
+          <div className="bg-gradient-to-br from-primary-light/10 to-primary-light/5 backdrop-blur-sm rounded-2xl border border-primary-light/20 p-6 mb-6">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full bg-[#FFB020]/20 flex items-center justify-center">
-                <svg className="w-5 h-5 text-[#FFB020]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-10 h-10 rounded-full bg-primary-light/20 flex items-center justify-center">
+                <svg className="w-5 h-5 text-primary-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
                 </svg>
               </div>
-              <h2 className="text-xl font-bold text-white">Creator Settings</h2>
+              <h2 className="text-xl font-bold text-text-primary">Creator Settings</h2>
             </div>
 
             <div className="space-y-4">
               {/* Monetization */}
               <button
                 onClick={() => router.push('/monetization')}
-                className="w-full p-4 bg-gray-800/50 rounded-xl hover:bg-gray-700/50 transition-all flex items-center justify-between group"
+                className="w-full p-4 rounded-xl flex items-center justify-between group mx-surface"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#FFB020] to-[#FF9500] flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-light to-[#FF9500] flex items-center justify-center">
                     <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
@@ -175,10 +175,10 @@ export default function SettingsPage() {
               {/* Analytics */}
               <button
                 onClick={() => router.push('/library?tab=analytics')}
-                className="w-full p-4 bg-gray-800/50 rounded-xl hover:bg-gray-700/50 transition-all flex items-center justify-between group"
+                className="w-full p-4 rounded-xl flex items-center justify-between group mx-surface"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#6366F1] to-[#8B5CF6] flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary-light flex items-center justify-center">
                     <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                     </svg>
@@ -204,7 +204,7 @@ export default function SettingsPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
               </svg>
             </div>
-            <h2 className="text-xl font-bold text-white">Danger Zone</h2>
+            <h2 className="text-xl font-bold text-text-primary">Danger Zone</h2>
           </div>
 
           <div className="space-y-4">
@@ -236,7 +236,7 @@ export default function SettingsPage() {
       {showLogoutModal && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-gray-900 rounded-2xl p-6 max-w-sm w-full border border-gray-700">
-            <h3 className="text-xl font-bold text-white mb-2">Log Out?</h3>
+            <h3 className="text-xl font-bold mb-2 text-text-primary">Log Out?</h3>
             <p className="text-gray-400 mb-6">Are you sure you want to log out of your account?</p>
             
             <div className="flex gap-3">

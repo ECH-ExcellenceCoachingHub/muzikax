@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { SECTION_TITLE_CLASS } from "./SectionHeader";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "../../contexts/LanguageContext";
 import { FaHeart, FaComment, FaFire, FaImage, FaVideo, FaMicrophone, FaQuoteLeft } from "react-icons/fa";
@@ -67,10 +68,10 @@ export default function TrendingVibesSection({ limit = 5 }: TrendingVibesSection
   // thumbnail still reads as MuzikaX instead of a random pastel.
   const getVideoFallbackThumbnail = (vibeId: string) => {
     const gradients = [
-      "linear-gradient(135deg, #1c1408 0%, #0d0d0d 60%, #241705 100%)",
-      "linear-gradient(135deg, #221803 0%, #111111 55%, #14100a 100%)",
-      "linear-gradient(135deg, #14100a 0%, #0d0d0d 50%, #2a1c06 100%)",
-      "linear-gradient(135deg, #1a1305 0%, #151515 60%, #0d0d0d 100%)",
+      "linear-gradient(135deg, #1c1408 0%, #0A0A0B 60%, #241705 100%)",
+      "linear-gradient(135deg, #221803 0%, #0A0A0B 55%, #14100a 100%)",
+      "linear-gradient(135deg, #14100a 0%, #0A0A0B 50%, #2a1c06 100%)",
+      "linear-gradient(135deg, #1a1305 0%, #121214 60%, #0A0A0B 100%)",
     ];
 
     const index = vibeId.charCodeAt(vibeId.length - 1) % gradients.length;
@@ -91,14 +92,7 @@ export default function TrendingVibesSection({ limit = 5 }: TrendingVibesSection
   };
 
   const sectionHeading = (
-    <div className="flex items-center gap-2.5 sm:gap-3">
-      <span className="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-[#FFD700] via-[#FFA500] to-[#FF8C00] flex items-center justify-center shadow-lg shadow-[#FF8C00]/20">
-        <FaFire className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-black" />
-      </span>
-      <h2 className="text-lg sm:text-xl font-bold tracking-tight bg-gradient-to-r from-[#FFD700] via-[#FFA500] to-[#FF8C00] bg-clip-text text-transparent">
-        {t('trendingVibes')}
-      </h2>
-    </div>
+    <h2 className={SECTION_TITLE_CLASS}>{t('trendingVibes')}</h2>
   );
 
   if (loading) {
@@ -107,7 +101,7 @@ export default function TrendingVibesSection({ limit = 5 }: TrendingVibesSection
         <div className="flex items-center justify-between mb-4">{sectionHeading}</div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
           {Array.from({ length: limit }).map((_, i) => (
-            <div key={i} className="rounded-2xl border border-white/[0.06] bg-[#121212] overflow-hidden animate-pulse">
+            <div key={i} className="rounded-2xl border border-white/[0.06] bg-surface overflow-hidden animate-pulse">
               <div className="aspect-[4/3] w-full bg-white/[0.04]" />
               <div className="flex items-center gap-2.5 px-3 py-2.5">
                 <div className="w-8 h-8 rounded-full bg-white/[0.06]" />
@@ -140,7 +134,7 @@ export default function TrendingVibesSection({ limit = 5 }: TrendingVibesSection
         {sectionHeading}
         <button
           onClick={() => router.push("/community")}
-          className="flex-shrink-0 inline-flex items-center gap-1.5 rounded-full border border-white/10 px-3 py-1.5 text-[11px] sm:text-xs font-semibold text-gray-300 hover:text-black hover:bg-gradient-to-r hover:from-[#FFD700] hover:to-[#FF8C00] hover:border-transparent transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8C00]"
+          className="flex-shrink-0 inline-flex items-center gap-1.5 rounded-full border border-white/10 px-3 py-1.5 text-[11px] sm:text-xs font-semibold text-gray-300 hover:text-black hover:bg-gradient-to-r hover:from-primary-light hover:to-primary hover:border-transparent transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         >
           {t('viewAll')}
           <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -161,17 +155,17 @@ export default function TrendingVibesSection({ limit = 5 }: TrendingVibesSection
               aria-label={`${t('viewPost' as any)} — ${vibe.userName}`}
               // Block (not flex) layout: the cover's aspect-ratio only resolves
               // reliably when the slot is a normal block box.
-              className="group relative block overflow-hidden rounded-2xl border border-white/[0.06] bg-[#121212] text-left transition-all duration-300 hover:-translate-y-1 hover:border-[#FF8C00]/40 hover:shadow-xl hover:shadow-black/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8C00] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+              className="mx-card group block !p-0 !gap-0 overflow-hidden"
             >
               {/* Cover — identical footprint on every card, whatever the post type */}
-              <div className="relative w-full aspect-[4/3] overflow-hidden bg-[#0d0d0d]">
+              <div className="mx-card-media !rounded-none relative w-full aspect-[4/3]">
                 {hasMedia ? (
                   <>
                     {vibe.postType === "image" ? (
                       <img
                         src={vibe.mediaUrl}
                         alt=""
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        className="absolute inset-0 w-full h-full object-cover"
                       />
                     ) : (
                       <>
@@ -179,12 +173,12 @@ export default function TrendingVibesSection({ limit = 5 }: TrendingVibesSection
                           <img
                             src={vibe.mediaThumbnail}
                             alt=""
-                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            className="absolute inset-0 w-full h-full object-cover"
                           />
                         ) : (
                           <div className="absolute inset-0" style={{ background: getVideoFallbackThumbnail(vibe.id) }} />
                         )}
-                        <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/50 backdrop-blur-sm ring-1 ring-white/20 flex items-center justify-center text-white transition-all duration-300 group-hover:bg-[#FF8C00] group-hover:text-black group-hover:scale-110">
+                        <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/50 backdrop-blur-sm ring-1 ring-white/20 flex items-center justify-center text-white transition-all duration-300 group-hover:bg-primary group-hover:text-black group-hover:scale-110">
                           <svg className="w-4 h-4 fill-current ml-0.5" viewBox="0 0 24 24">
                             <path d="M8 5v14l11-7z" />
                           </svg>
@@ -197,11 +191,11 @@ export default function TrendingVibesSection({ limit = 5 }: TrendingVibesSection
                     </div>
                   </>
                 ) : (
-                  <div className="absolute inset-0 flex flex-col justify-center bg-gradient-to-br from-[#1c1408] via-[#141414] to-[#0d0d0d] px-4 py-5">
-                    <FaQuoteLeft className="mb-2.5 w-3.5 h-3.5 shrink-0 text-[#FF8C00]/60" />
+                  <div className="absolute inset-0 flex flex-col justify-center bg-gradient-to-br from-[#1c1408] via-surface to-background px-4 py-5">
+                    <FaQuoteLeft className="mb-2.5 w-3.5 h-3.5 shrink-0 text-primary/60" />
                     <p className="line-clamp-4 text-sm leading-relaxed text-gray-200">{vibe.content}</p>
                     {vibe.postType === "audio" && (
-                      <span className="mt-3 inline-flex w-fit items-center gap-1.5 rounded-full bg-[#FF8C00]/15 px-2.5 py-1 text-[11px] font-medium text-[#FFA500]">
+                      <span className="mt-3 inline-flex w-fit items-center gap-1.5 rounded-full bg-primary/15 px-2.5 py-1 text-[11px] font-medium text-primary-hover">
                         <FaMicrophone className="w-2.5 h-2.5" />
                         {t('voiceNote' as any)}
                       </span>
@@ -223,15 +217,15 @@ export default function TrendingVibesSection({ limit = 5 }: TrendingVibesSection
                   <img
                     src={vibe.userAvatar}
                     alt=""
-                    className="w-8 h-8 shrink-0 rounded-full object-cover ring-1 ring-white/10 transition-all duration-300 group-hover:ring-[#FF8C00]/60"
+                    className="w-8 h-8 shrink-0 rounded-full object-cover ring-1 ring-white/10"
                   />
                 ) : (
-                  <div className="w-8 h-8 shrink-0 rounded-full bg-gradient-to-br from-[#FFD700] via-[#FFA500] to-[#FF8C00] flex items-center justify-center ring-1 ring-white/10 transition-all duration-300 group-hover:ring-[#FF8C00]/60">
+                  <div className="w-8 h-8 shrink-0 rounded-full bg-gradient-to-br from-primary-light via-primary-hover to-primary flex items-center justify-center ring-1 ring-white/10">
                     <span className="text-black font-bold text-xs">{firstLetter}</span>
                   </div>
                 )}
                 <div className="min-w-0 flex-1">
-                  <h3 className="truncate text-[13px] font-semibold text-white transition-colors duration-300 group-hover:text-[#FFA500]">
+                  <h3 className="truncate text-[13px] font-semibold text-text-primary">
                     {vibe.userName}
                   </h3>
                   <p className="truncate text-[11px] text-gray-500">{t('communityVibe' as any)}</p>
@@ -242,7 +236,7 @@ export default function TrendingVibesSection({ limit = 5 }: TrendingVibesSection
               <div className="flex items-center justify-between border-t border-white/[0.06] px-3 py-2.5">
                 <div className="flex items-center gap-4 text-xs">
                   <span className="flex items-center gap-1.5">
-                    <FaHeart className="w-3 h-3 text-[#FF8C00]/80" />
+                    <FaHeart className="w-3 h-3 text-primary/80" />
                     <span className="font-medium text-gray-400">{vibe.likes}</span>
                   </span>
                   <span className="flex items-center gap-1.5">
@@ -250,7 +244,7 @@ export default function TrendingVibesSection({ limit = 5 }: TrendingVibesSection
                     <span className="font-medium text-gray-400">{vibe.commentCount}</span>
                   </span>
                 </div>
-                <span className="flex items-center gap-1 text-[11px] font-semibold text-gray-500 transition-colors duration-300 group-hover:text-[#FFA500]">
+                <span className="flex items-center gap-1 text-[11px] font-semibold text-text-muted transition-colors duration-200 group-hover:text-text-primary">
                   {t('viewPost' as any)}
                   <svg className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />

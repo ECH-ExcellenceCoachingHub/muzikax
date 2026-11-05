@@ -268,7 +268,7 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-white">Loading album...</div>
       </div>
     )
@@ -276,13 +276,13 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
 
   if (error && error.includes('authorized')) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-white text-center max-w-md p-6">
-          <h2 className="text-xl mb-4">Access Denied</h2>
+          <h2 className="text-xl mb-4 text-text-primary">Access Denied</h2>
           <p className="text-gray-400 mb-6">{error}</p>
           <button 
             onClick={() => router.push('/profile')}
-            className="px-4 py-2 bg-[#FF4D67] text-white rounded-lg hover:bg-[#FF4D67]/80 transition-colors"
+            className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/80 transition-colors"
           >
             Back to Profile
           </button>
@@ -292,9 +292,9 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black py-8 sm:py-12">
-      <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#FF4D67]/10 rounded-full blur-3xl -z-10"></div>
-      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-[#FFCB2B]/10 rounded-full blur-3xl -z-10"></div>
+    <div className="min-h-screen py-8 sm:py-12 bg-background">
+      <div className="absolute -top-40 -left-40 w-96 h-96 bg-primary/10 rounded-full blur-3xl -z-10"></div>
+      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-primary-light/10 rounded-full blur-3xl -z-10"></div>
       
       <div className="container mx-auto px-4 sm:px-8">
         <div className="max-w-2xl mx-auto">
@@ -309,7 +309,7 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
               Back
             </button>
             
-            <h1 className="text-2xl sm:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#FF4D67] to-[#FFCB2B] mb-2">
+            <h1 className="text-2xl sm:text-3xl font-bold mb-2 text-text-primary">
               Edit Album
             </h1>
             <p className="text-gray-400">
@@ -342,7 +342,7 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
                     name="title"
                     value={formData.title}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF4D67] focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                     placeholder="Enter album title"
                   />
                 </div>
@@ -356,7 +356,7 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
                     name="genre"
                     value={formData.genre}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF4D67] focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                   >
                     <option value="">Select a genre</option>
                     <option value="afrobeat">Afrobeat</option>
@@ -393,7 +393,7 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
                     value={formData.description}
                     onChange={handleChange}
                     rows={4}
-                    className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF4D67] focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                     placeholder="Describe your album..."
                   />
                 </div>
@@ -402,7 +402,7 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="flex-1 px-6 py-3 bg-[#FF4D67] text-white rounded-lg hover:bg-[#FF4D67]/80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
+                    className="flex-1 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
                   >
                     {submitting ? 'Updating...' : 'Update Album'}
                   </button>

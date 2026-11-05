@@ -88,8 +88,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   if (isLoading || !isAdmin) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gray-950">
-        <div className="h-12 w-12 animate-spin rounded-full border-b-2 border-[#FF8C00]" />
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <div className="h-12 w-12 animate-spin rounded-full border-b-2 border-primary" />
         <span className="sr-only">Checking admin access</span>
       </div>
     )
@@ -97,13 +97,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const brand = (
     <Link href="/admin" className="group flex items-center gap-3 overflow-hidden">
-      <span className="h-10 w-10 flex-shrink-0 overflow-hidden rounded-xl shadow-lg ring-2 ring-[#FF8C00]/30 transition-all duration-300 group-hover:ring-[#FFB020]/50">
+      <span className="h-10 w-10 flex-shrink-0 overflow-hidden rounded-xl shadow-lg ring-2 ring-primary/30 transition-all duration-300 group-hover:ring-primary-light/50">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/muzikax.png" alt="MuzikaX" className="h-full w-full object-cover" />
       </span>
       {!isCollapsed && (
         <span className="min-w-0">
-          <span className="block truncate bg-gradient-to-r from-[#FF8C00] to-[#FFB020] bg-clip-text text-lg font-bold text-transparent">
+          <span className="block truncate bg-gradient-to-r from-primary to-primary-light bg-clip-text text-lg font-bold text-transparent">
             MuzikaX
           </span>
           <span className="block text-xs font-medium text-gray-500">Admin Panel</span>
@@ -113,7 +113,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   )
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white">
+    <div className="min-h-screen text-white bg-background">
       {/* ---------- Desktop sidebar ---------- */}
       <aside
         className={`fixed inset-y-0 left-0 z-40 hidden border-r border-gray-800/60 bg-gray-900/60 backdrop-blur-xl transition-[width] duration-300 lg:flex lg:flex-col ${
@@ -150,7 +150,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <button
           type="button"
           onClick={toggleCollapsed}
-          className="absolute -right-3 top-20 flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-r from-[#FF8C00] to-[#FFB020] text-white shadow-lg transition-transform hover:scale-110"
+          className="absolute -right-3 top-20 flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-r from-primary to-primary-light text-white shadow-lg transition-transform hover:scale-110"
           aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
         >
           <svg
@@ -224,8 +224,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className="relative flex-1 overflow-x-hidden">
           {/* Ambient glow, pinned to the viewport so it never adds scroll height */}
           <div className="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
-            <div className="absolute -left-32 -top-32 h-80 w-80 rounded-full bg-[#FF8C00]/10 blur-3xl" />
-            <div className="absolute -bottom-32 -right-32 h-80 w-80 rounded-full bg-[#FFB020]/10 blur-3xl" />
+            <div className="absolute -left-32 -top-32 h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
+            <div className="absolute -bottom-32 -right-32 h-80 w-80 rounded-full bg-primary-light/10 blur-3xl" />
           </div>
 
           <div className="relative z-10 mx-auto w-full max-w-[1600px] px-4 py-6 sm:px-6 lg:px-8">

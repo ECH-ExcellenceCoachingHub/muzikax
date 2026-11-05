@@ -208,7 +208,7 @@ export default function BeatsPage() {
   // Loading state
   if (beatsLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-white">Loading beats...</div>
       </div>
     );
@@ -229,9 +229,9 @@ export default function BeatsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0604] pt-14 md:pt-0">
+    <div className="min-h-screen pt-14 md:pt-0 bg-background">
       {/* Mobile Header - Minimalist */}
-      <div className="md:hidden sticky top-0 z-50 bg-[#0a0604]/95 backdrop-blur-xl border-b border-white/5">
+      <div className="md:hidden sticky top-0 z-50 bg-background/95 backdrop-blur-xl border-b border-white/5">
         <div className="px-4 py-3">
           <div className="flex items-center gap-3">
             <button
@@ -242,14 +242,14 @@ export default function BeatsPage() {
               <FaArrowLeft className="w-5 h-5" />
             </button>
             <div>
-              <h1 className="text-lg font-bold text-white tracking-tight">Beats</h1>
+              <h1 className="text-lg font-bold tracking-tight text-text-primary">Beats</h1>
             </div>
           </div>
         </div>
       </div>
 
       {/* Mobile Search & Filters - Clean Design */}
-      <div className="md:hidden sticky top-[3.2rem] z-40 bg-[#0a0604]/95 backdrop-blur-xl border-b border-white/5">
+      <div className="md:hidden sticky top-[3.2rem] z-40 bg-background/95 backdrop-blur-xl border-b border-white/5">
         {/* Search Bar */}
         <div className="px-4 py-3">
           <div className="relative">
@@ -258,7 +258,7 @@ export default function BeatsPage() {
               placeholder="Search beats..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full py-2.5 px-4 pl-10 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#F59E0B]/50 focus:border-[#F59E0B]/50 transition-all text-sm"
+              className="w-full py-2.5 px-4 pl-10 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all text-sm"
             />
             <div className="absolute left-3.5 top-1/2 transform -translate-y-1/2 text-white/40">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -288,7 +288,7 @@ export default function BeatsPage() {
                 onClick={() => setSelectedFilter(filter)}
                 className={`px-4 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
                   selectedFilter === filter
-                    ? 'bg-[#F59E0B] text-black'
+                    ? 'bg-primary text-black'
                     : 'bg-white/5 text-white/70 hover:bg-white/10 border border-white/10'
                 }`}
               >
@@ -315,7 +315,7 @@ export default function BeatsPage() {
                 onClick={() => setSelectedGenre(genre.id)}
                 className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
                   selectedGenre === genre.id
-                    ? 'bg-[#F59E0B]/20 text-[#F59E0B] border border-[#F59E0B]/30'
+                    ? 'bg-primary/20 text-primary border border-primary/30'
                     : 'bg-white/5 text-white/60 hover:bg-white/10 border border-white/10'
                 }`}
               >
@@ -329,11 +329,11 @@ export default function BeatsPage() {
       {/* Hero Section - Minimalist */}
       <div className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
         {/* Subtle gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#F59E0B]/5 via-transparent to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent"></div>
         
         <div className="container mx-auto px-4 sm:px-8 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 tracking-tight text-text-primary">
               Beats
             </h1>
             <p className="text-base sm:text-lg text-white/60 max-w-xl mx-auto">
@@ -353,7 +353,7 @@ export default function BeatsPage() {
               placeholder="Search by beat name, producer, or genre..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-5 py-3.5 pl-12 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#F59E0B]/50 focus:border-[#F59E0B]/50 transition-all"
+              className="w-full px-5 py-3.5 pl-12 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
             />
             <svg
               className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white/40"
@@ -384,7 +384,7 @@ export default function BeatsPage() {
                   key={filter}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     selectedFilter === filter 
-                      ? 'bg-[#F59E0B] text-black' 
+                      ? 'bg-primary text-black' 
                       : 'bg-white/5 text-white/70 hover:bg-white/10 border border-white/10'
                   }`}
                   onClick={() => setSelectedFilter(filter)}
@@ -414,7 +414,7 @@ export default function BeatsPage() {
                   key={genre.id}
                   className={`px-3 py-2 rounded-full text-sm font-medium transition-all ${
                     selectedGenre === genre.id
-                      ? 'bg-[#F59E0B]/20 text-[#F59E0B] border border-[#F59E0B]/30'
+                      ? 'bg-primary/20 text-primary border border-primary/30'
                       : 'bg-white/5 text-white/60 hover:bg-white/10 border border-white/10'
                   }`}
                   onClick={() => setSelectedGenre(genre.id)}
@@ -429,13 +429,13 @@ export default function BeatsPage() {
                   <summary className="px-3 py-2 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 border border-white/10 cursor-pointer list-none transition-all">
                     +{genres.length - 10} more
                   </summary>
-                  <div className="absolute z-20 mt-2 p-3 bg-[#121821] border border-white/10 rounded-xl shadow-2xl grid grid-cols-2 sm:grid-cols-3 gap-2 w-72 backdrop-blur-xl">
+                  <div className="absolute z-20 mt-2 p-3 bg-surface border border-white/10 rounded-xl shadow-2xl grid grid-cols-2 sm:grid-cols-3 gap-2 w-72 backdrop-blur-xl">
                     {genres.slice(10).map((genre) => (
                       <button
                         key={genre.id}
                         className={`px-3 py-2 rounded-full text-xs font-medium transition-all ${
                           selectedGenre === genre.id
-                            ? 'bg-[#F59E0B]/20 text-[#F59E0B] border border-[#F59E0B]/30'
+                            ? 'bg-primary/20 text-primary border border-primary/30'
                             : 'bg-white/5 text-white/60 hover:bg-white/10 border border-white/10'
                         }`}
                         onClick={() => {
@@ -467,7 +467,7 @@ export default function BeatsPage() {
       <div className="container mx-auto px-4 sm:px-8 pb-16">
         {beatsLoading ? (
           <div className="flex items-center justify-center py-20">
-            <div className="inline-block animate-spin rounded-full h-8 w-8 border-2 border-[#F59E0B] border-t-transparent"></div>
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-2 border-primary border-t-transparent"></div>
           </div>
         ) : filteredTracks.length === 0 ? (
           <div className="text-center py-20">
@@ -476,7 +476,7 @@ export default function BeatsPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
             </div>
-            <h3 className="text-lg font-medium text-white mb-2">No beats found</h3>
+            <h3 className="text-lg font-medium mb-2 text-text-primary">No beats found</h3>
             <p className="text-white/50 text-sm mb-6 max-w-md mx-auto">
               {selectedFilter === 'all' && selectedGenre === null && !searchQuery
                 ? 'No beats available at the moment.'
@@ -502,7 +502,7 @@ export default function BeatsPage() {
               {filteredTracks.map((track: ITrack) => {
                 const isPaid = track.paymentType === 'paid';
                 return (
-                  <div key={track._id} className="group bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden border border-white/5 hover:border-white/10 transition-all duration-300 active:scale-[0.98]">
+                  <div key={track._id} className="group rounded-xl overflow-hidden active:scale-[0.98] mx-surface">
                     <div className="flex gap-3 p-3">
                       {/* Cover Image */}
                       <div className="relative w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden">
@@ -558,11 +558,11 @@ export default function BeatsPage() {
                               setCurrentPlaylist(playlistTracks);
                             }
                           }}
-                          className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
+                          className="absolute inset-0 flex items-end justify-end p-2 sm:p-3"
                         >
-                          <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd"></path>
-                          </svg>
+                          <span className="mx-card-play !static"><svg className="w-4 h-4 ml-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M6.3 2.84A1.5 1.5 0 004 4.11v11.78a1.5 1.5 0 002.3 1.27l9.344-5.891a1.5 1.5 0 000-2.538L6.3 2.84z" clipRule="evenodd"></path>
+                          </svg></span>
                         </button>
                       </div>
                       
@@ -570,7 +570,7 @@ export default function BeatsPage() {
                       <div className="flex-1 min-w-0 flex flex-col justify-between">
                         <div>
                           <div className="flex items-start justify-between gap-2 mb-1">
-                            <h3 className="font-semibold text-white text-sm truncate flex-1">{track.title}</h3>
+                            <h3 className="font-semibold text-sm truncate flex-1 text-text-primary">{track.title}</h3>
                             <button 
                               onClick={(e) => {
                                 e.stopPropagation();
@@ -586,10 +586,10 @@ export default function BeatsPage() {
                                 };
                                 toggleFavorite(track._id, mockTrack);
                               }}
-                              className="p-1.5 rounded-full hover:bg-white/10 transition-colors flex-shrink-0"
+                              className="mx-card-play !static pointer-events-auto hover:bg-primary-hover [&_svg]:w-4 [&_svg]:h-4"
                             >
                               <svg 
-                                className={`w-4 h-4 transition-all ${favoriteStatus[track._id] ? 'text-[#F59E0B] fill-current' : 'text-white/40 hover:text-white/70'}`}
+                                className={`w-4 h-4 transition-all ${favoriteStatus[track._id] ? 'text-primary fill-current' : 'text-white/40 hover:text-white/70'}`}
                                 fill={favoriteStatus[track._id] ? "currentColor" : "none"}
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -631,7 +631,7 @@ export default function BeatsPage() {
                                   audioUrl: track.audioURL
                                 });
                               }}
-                              className="w-full py-2 bg-[#F59E0B] hover:bg-[#F59E0B]/90 text-black rounded-lg text-xs font-semibold transition-colors"
+                              className="w-full py-2 bg-primary hover:bg-primary/90 text-black rounded-lg text-xs font-semibold transition-colors"
                             >
                               Buy • {track.price?.toLocaleString()} RWF
                             </button>
@@ -669,12 +669,12 @@ export default function BeatsPage() {
               {filteredTracks.map((track: ITrack) => {
                 const isPaid = track.paymentType === 'paid';
                 return (
-                  <div key={track._id} className="group bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden border border-white/5 hover:border-white/10 transition-all duration-300 hover:shadow-2xl hover:shadow-[#F59E0B]/5">
+                  <div key={track._id} className="group rounded-xl overflow-hidden mx-surface">
                     <div className="relative aspect-square">
                       <img 
                         src={track.coverURL || '/placeholder-cover.jpg'} 
                         alt={track.title} 
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
                           target.src = '/placeholder-cover.jpg';
@@ -687,7 +687,7 @@ export default function BeatsPage() {
                       {/* Payment type badge */}
                       <div className="absolute top-3 left-3">
                         {isPaid ? (
-                          <span className="px-2.5 py-1 bg-[#F59E0B] text-black text-xs font-bold rounded-full shadow-lg">
+                          <span className="px-2.5 py-1 bg-primary text-black text-xs font-bold rounded-full shadow-lg">
                             {track.price?.toLocaleString()} RWF
                           </span>
                         ) : (
@@ -717,7 +717,7 @@ export default function BeatsPage() {
                           className="p-2 rounded-full bg-black/30 backdrop-blur-sm text-white opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 hover:bg-black/50"
                         >
                           <svg 
-                            className={`w-4 h-4 transition-all ${favoriteStatus[track._id] ? 'text-[#F59E0B] fill-current scale-110' : 'stroke-current'}`}
+                            className={`w-4 h-4 transition-all ${favoriteStatus[track._id] ? 'text-primary fill-current scale-110' : 'stroke-current'}`}
                             fill={favoriteStatus[track._id] ? "currentColor" : "none"}
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -773,7 +773,7 @@ export default function BeatsPage() {
                               setCurrentPlaylist(playlistTracks);
                             }
                           }}
-                          className="w-14 h-14 bg-[#F59E0B] rounded-full flex items-center justify-center shadow-lg shadow-[#F59E0B]/30 transform scale-50 group-hover:scale-100 transition-all duration-300 hover:scale-110"
+                          className="w-14 h-14 bg-primary rounded-full flex items-center justify-center shadow-lg shadow-primary/30 transform scale-50 group-hover:scale-100 transition-all duration-300 hover:scale-110"
                         >
                           <svg className="w-6 h-6 text-black ml-1" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M6.3 2.84A1.5 1.5 0 004 4.11v11.78a1.5 1.5 0 002.3 1.27l9.344-5.891a1.5 1.5 0 000-2.538L6.3 2.84z" />
@@ -783,7 +783,7 @@ export default function BeatsPage() {
                     </div>
                           
                     <div className="p-4">
-                      <h3 className="font-semibold text-white text-base mb-1 truncate group-hover:text-[#F59E0B] transition-colors">{track.title}</h3>
+                      <h3 className="font-semibold text-base mb-1 truncate group-hover:text-primary transition-colors text-text-primary">{track.title}</h3>
                       <p className="text-white/50 text-sm mb-3 truncate">
                         {typeof track.creatorId === 'object' && track.creatorId !== null 
                           ? (track.creatorId as any).name 
@@ -816,7 +816,7 @@ export default function BeatsPage() {
                               audioUrl: track.audioURL
                             });
                           }}
-                          className="w-full py-2.5 bg-[#F59E0B] hover:bg-[#F59E0B]/90 text-black rounded-lg text-sm font-semibold transition-colors flex items-center justify-center gap-2"
+                          className="w-full py-2.5 bg-primary hover:bg-primary/90 text-black rounded-lg text-sm font-semibold transition-colors flex items-center justify-center gap-2"
                         >
                           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>

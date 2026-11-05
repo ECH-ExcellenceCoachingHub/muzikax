@@ -2,9 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { Capacitor } from '@capacitor/core';
+import { usePathname } from 'next/navigation';
 
 const PWAInstallPrompt = () => {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const pathname = usePathname();
   const [showInstallPrompt, setShowInstallPrompt] = useState(false);
   const [isInstalled, setIsInstalled] = useState(false);
 
@@ -108,6 +110,8 @@ const PWAInstallPrompt = () => {
   };
 
   if (!showInstallPrompt || isInstalled) return null;
+  // never cover the DJ booth or the full-screen player
+  if (pathname === '/dj' || pathname === '/player') return null;
 
   return (
     <div
@@ -117,9 +121,9 @@ const PWAInstallPrompt = () => {
       // action buttons on every breakpoint (all of those live below ~8rem).
       className="fixed left-3 right-3 sm:left-auto sm:right-6 sm:w-[21rem] z-[9998] bottom-[calc(9rem_+_env(safe-area-inset-bottom))] animate-slide-up-fade"
     >
-      <div className="flex items-center gap-2.5 sm:gap-3 rounded-2xl border border-[#FF8C00]/30 bg-[#121212]/95 backdrop-blur-xl px-2.5 py-2.5 sm:px-3 shadow-2xl shadow-black/60">
+      <div className="flex items-center gap-2.5 sm:gap-3 rounded-2xl border border-primary/30 bg-surface/95 backdrop-blur-xl px-2.5 py-2.5 sm:px-3 shadow-2xl shadow-black/60">
         {/* App icon */}
-        <div className="flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-xl overflow-hidden bg-black ring-1 ring-[#FF8C00]/25">
+        <div className="flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-xl overflow-hidden bg-black ring-1 ring-primary/25">
           <img src="/app.png" alt="" className="w-full h-full object-cover" />
         </div>
 
@@ -136,7 +140,7 @@ const PWAInstallPrompt = () => {
         {/* Install */}
         <button
           onClick={installApp}
-          className="flex-shrink-0 bg-gradient-to-r from-[#FFD700] via-[#FFA500] to-[#FF8C00] text-[#1a1200] font-bold text-xs px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg shadow-md shadow-[#FF8C00]/25 hover:brightness-110 active:scale-95 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8C00] focus-visible:ring-offset-2 focus-visible:ring-offset-[#121212]"
+          className="flex-shrink-0 bg-gradient-to-r from-primary-light via-primary-hover to-primary text-[#1a1200] font-bold text-xs px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg shadow-md shadow-primary/25 hover:brightness-110 active:scale-95 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#121214]"
         >
           Install
         </button>
@@ -145,7 +149,7 @@ const PWAInstallPrompt = () => {
         <button
           onClick={closePrompt}
           aria-label="Dismiss install prompt"
-          className="flex-shrink-0 text-gray-500 hover:text-white transition-colors p-1 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8C00]"
+          className="flex-shrink-0 text-gray-500 hover:text-white transition-colors p-1 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

@@ -163,7 +163,7 @@ export default function Monetization() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-white">Loading...</div>
       </div>
     )
@@ -171,9 +171,9 @@ export default function Monetization() {
 
   if (!isAuthenticated || user?.role !== 'creator') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-white text-center">
-          <h2 className="text-2xl font-bold mb-4">Access Denied</h2>
+          <h2 className="text-2xl font-bold mb-4 text-text-primary">Access Denied</h2>
           <p>Only creators can access monetization features.</p>
         </div>
       </div>
@@ -182,7 +182,7 @@ export default function Monetization() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black py-8">
+      <div className="min-h-screen py-8 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-white text-center">Loading monetization data...</div>
         </div>
@@ -191,9 +191,9 @@ export default function Monetization() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black py-8 overflow-x-hidden relative pt-14 md:pt-0">
-      <div className="absolute -top-40 -left-20 w-64 h-64 sm:w-96 sm:h-96 bg-[#FF8C00]/10 rounded-full blur-3xl -z-10"></div>
-      <div className="absolute -bottom-40 -right-20 w-64 h-64 sm:w-96 sm:h-96 bg-[#FFB020]/10 rounded-full blur-3xl -z-10"></div>
+    <div className="min-h-screen py-8 overflow-x-hidden relative pt-14 md:pt-0 bg-background">
+      <div className="absolute -top-40 -left-20 w-64 h-64 sm:w-96 sm:h-96 bg-primary/10 rounded-full blur-3xl -z-10"></div>
+      <div className="absolute -bottom-40 -right-20 w-64 h-64 sm:w-96 sm:h-96 bg-primary-light/10 rounded-full blur-3xl -z-10"></div>
       
       {/* Mobile Header with Back Button */}
       <div className="md:hidden sticky top-0 z-50 bg-gray-900/95 backdrop-blur-lg border-b border-gray-800">
@@ -207,7 +207,7 @@ export default function Monetization() {
               <FaArrowLeft className="w-5 h-5" />
             </button>
             <div>
-              <h1 className="text-xl font-black text-white">Monetization</h1>
+              <h1 className="text-xl font-black text-text-primary">Monetization</h1>
               <p className="text-xs text-gray-400">Earn from your music</p>
             </div>
           </div>
@@ -220,7 +220,7 @@ export default function Monetization() {
           <div className="w-full overflow-x-hidden">
           {/* Desktop Header */}
           <div className="hidden md:block text-center mb-8">
-            <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#FF8C00] to-[#FFB020] mb-2">
+            <h1 className="text-3xl font-bold mb-2 text-text-primary">
               Monetization Center
             </h1>
             <p className="text-gray-400">
@@ -243,13 +243,13 @@ export default function Monetization() {
               {/* How Monetization Works (Beta Phase) - NEW SECTION */}
               <div className="card-bg rounded-2xl p-4 sm:p-6 mb-6 border border-gray-700/50 bg-gradient-to-br from-gray-800/50 to-gray-900/50">
                 <div className="flex flex-col sm:flex-row items-start gap-4 mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-r from-[#FF8C00] to-[#FFB020] rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-gradient-to-r from-primary to-primary-light rounded-full flex items-center justify-center flex-shrink-0">
                     <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                   </div>
                   <div>
-                    <h2 className="text-lg sm:text-xl font-bold text-white mb-2">How Monetization Works (Beta Phase) 🔥</h2>
+                    <h2 className="text-lg sm:text-xl font-bold mb-2 text-text-primary">How Monetization Works (Beta Phase) 🔥</h2>
                     <p className="text-gray-400 text-sm sm:text-base mb-4">
                       We are currently growing our platform and user base. During this early stage, direct cash payouts are not yet active.
                     </p>
@@ -267,7 +267,7 @@ export default function Monetization() {
                   </div>
                   
                   <div className="p-4 bg-purple-900/20 rounded-lg border border-purple-700">
-                    <div className="text-purple-400 font-bold mb-2 text-sm sm:text-base">💡 Why Beta?</div>
+                    <div className="text-primary-light font-bold mb-2 text-sm sm:text-base">💡 Why Beta?</div>
                     <ul className="text-gray-300 text-xs sm:text-sm space-y-1">
                       <li>• Building sustainable foundation</li>
                       <li>• Ensuring quality metrics</li>
@@ -289,7 +289,7 @@ export default function Monetization() {
               {/* Status Card */}
               <div className="card-bg rounded-2xl p-6 mb-6 border border-gray-700/50">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-bold text-white">Monetization Status</h2>
+                  <h2 className="text-xl font-bold text-text-primary">Monetization Status</h2>
                   <span className={`px-3 py-1 rounded-full text-sm font-medium ${
                     status.status === 'approved' ? 'bg-green-900/30 text-green-400 border border-green-700' :
                     status.status === 'pending' ? 'bg-yellow-900/30 text-yellow-400 border border-yellow-700' :
@@ -303,7 +303,7 @@ export default function Monetization() {
                 {status.status === 'not_applied' && (
                   <div className="text-center py-8">
                     <div className="mb-6">
-                      <h3 className="text-lg font-medium text-white mb-2">Get Started with Monetization</h3>
+                      <h3 className="text-lg font-medium mb-2 text-text-primary">Get Started with Monetization</h3>
                       <p className="text-gray-400 mb-6">
                         To start earning from your music streams, you need to meet our requirements:
                       </p>
@@ -345,7 +345,7 @@ export default function Monetization() {
                         <button
                           onClick={handleApply}
                           disabled={loading}
-                          className="px-6 py-3 bg-gradient-to-r from-[#FF8C00] to-[#FFB020] text-white font-medium rounded-lg hover:opacity-90 transition-opacity"
+                          className="px-6 py-3 bg-gradient-to-r from-primary to-primary-light text-white font-medium rounded-lg hover:opacity-90 transition-opacity"
                         >
                           {loading ? 'Applying...' : 'Apply for Monetization'}
                         </button>
@@ -366,7 +366,7 @@ export default function Monetization() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                       </svg>
                     </div>
-                    <h3 className="text-lg font-medium text-white mb-2">Application Under Review</h3>
+                    <h3 className="text-lg font-medium mb-2 text-text-primary">Application Under Review</h3>
                     <p className="text-gray-400">
                       Your monetization application is being reviewed by our team. This usually takes 1-3 business days.
                     </p>
@@ -433,14 +433,14 @@ export default function Monetization() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
                       </svg>
                     </div>
-                    <h3 className="text-lg font-medium text-white mb-2">Application Rejected</h3>
+                    <h3 className="text-lg font-medium mb-2 text-text-primary">Application Rejected</h3>
                     <p className="text-gray-400 mb-4">
                       {status.rejectionReason || 'Your application did not meet our requirements.'}
                     </p>
                     <button
                       onClick={handleApply}
                       disabled={loading}
-                      className="px-6 py-3 bg-gradient-to-r from-[#FF8C00] to-[#FFB020] text-white font-medium rounded-lg hover:opacity-90 transition-opacity"
+                      className="px-6 py-3 bg-gradient-to-r from-primary to-primary-light text-white font-medium rounded-lg hover:opacity-90 transition-opacity"
                     >
                       {loading ? 'Reapplying...' : 'Reapply'}
                     </button>
@@ -451,7 +451,7 @@ export default function Monetization() {
               {/* Earnings Report (only for approved creators) */}
               {status.status === 'approved' && report && (
                 <div className="card-bg rounded-2xl p-6 border border-gray-700/50">
-                  <h2 className="text-xl font-bold text-white mb-4">Earnings Report</h2>
+                  <h2 className="text-xl font-bold mb-4 text-text-primary">Earnings Report</h2>
                   
                   {/* Summary */}
                   <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
@@ -479,7 +479,7 @@ export default function Monetization() {
 
                   {/* Track Earnings */}
                   <div className="mb-6">
-                    <h3 className="text-lg font-medium text-white mb-3">Earnings by Track</h3>
+                    <h3 className="text-lg font-medium mb-3 text-text-primary">Earnings by Track</h3>
                     <div className="overflow-x-auto">
                       <table className="w-full text-sm">
                         <thead>
@@ -505,7 +505,7 @@ export default function Monetization() {
                   {/* Payout History */}
                   {report.payoutHistory.length > 0 && (
                     <div>
-                      <h3 className="text-lg font-medium text-white mb-3">Payout History</h3>
+                      <h3 className="text-lg font-medium mb-3 text-text-primary">Payout History</h3>
                       <div className="space-y-2">
                         {report.payoutHistory.map((payout, index) => (
                           <div key={index} className="flex justify-between items-center p-3 bg-gray-800/30 rounded-lg">
@@ -537,7 +537,7 @@ export default function Monetization() {
       {showPayoutModal && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="card-bg rounded-2xl p-6 max-w-md w-full border border-gray-700/50">
-            <h3 className="text-xl font-bold text-white mb-4">Request Payout</h3>
+            <h3 className="text-xl font-bold mb-4 text-text-primary">Request Payout</h3>
             
             <form onSubmit={handlePayout}>
               <div className="mb-4">
@@ -549,7 +549,7 @@ export default function Monetization() {
                   max={status?.earnings?.pendingEarnings}
                   value={payoutAmount}
                   onChange={(e) => setPayoutAmount(e.target.value)}
-                  className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+                  className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="0.00"
                   required
                 />
@@ -563,7 +563,7 @@ export default function Monetization() {
                 <select
                   value={payoutMethod}
                   onChange={(e) => setPayoutMethod(e.target.value)}
-                  className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+                  className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary"
                 >
                   <option value="mobile_money">Mobile Money</option>
                   <option value="bank_transfer">Bank Transfer</option>
@@ -582,7 +582,7 @@ export default function Monetization() {
                 <button
                   type="submit"
                   disabled={payoutLoading}
-                  className="flex-1 px-4 py-2 bg-gradient-to-r from-[#FF8C00] to-[#FFB020] text-white rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
+                  className="flex-1 px-4 py-2 bg-gradient-to-r from-primary to-primary-light text-white rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
                 >
                   {payoutLoading ? 'Processing...' : 'Request Payout'}
                 </button>

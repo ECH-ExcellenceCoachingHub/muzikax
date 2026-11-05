@@ -1,9 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useAudioPlayer } from "../../contexts/AudioPlayerContext";
-import { useLanguage } from "../../contexts/LanguageContext";
 import {
   getGlobalCharts,
   getCountryCharts,
@@ -13,388 +11,373 @@ import {
   type TimeWindow,
 } from "../../services/chartService";
 import ChartTrackCard from "../../components/ChartTrackCard";
-import LoadingSpinner from "../../components/LoadingSpinner";
 import { useWebSocket } from "../../hooks/useWebSocket";
-import { FaArrowLeft, FaSyncAlt, FaPauseCircle, FaPlayCircle } from "react-icons/fa";
 
 type ChartType = "global" | "country" | "genre" | "trending";
 type CountryCode = "RW" | "US" | "KE" | "TZ" | "UG" | "NG" | "GH" | "ZA";
 
+const CHART_TYPES: { id: ChartType; label: string; blurb: string }[] = [
+  { id: "global", label: "Top 50", blurb: "The most played tracks on MuzikaX" },
+  { id: "country", label: "Country", blurb: "What listeners in one country are playing" },
+  { id: "genre", label: "Genre", blurb: "The top tracks in a single genre" },
+  { id: "trending", label: "Trending", blurb: "Fastest rising: plays this week vs last week" },
+];
+
+const WINDOWS: { id: TimeWindow; label: string; period: string }[] = [
+  { id: "daily", label: "Today", period: "today" },
+  { id: "weekly", label: "This week", period: "this week" },
+  { id: "monthly", label: "This month", period: "this month" },
+];
+
 const COUNTRIES: { code: CountryCode; name: string }[] = [
   { code: "RW", name: "Rwanda" },
-  { code: "US", name: "United States" },
   { code: "KE", name: "Kenya" },
   { code: "TZ", name: "Tanzania" },
   { code: "UG", name: "Uganda" },
   { code: "NG", name: "Nigeria" },
   { code: "GH", name: "Ghana" },
   { code: "ZA", name: "South Africa" },
+  { code: "US", name: "United States" },
 ];
 
-const GENRES = [
-  "Afrobeat",
-  "Hip Hop",
-  "R&B",
-  "Amapiano",
-  "Dancehall",
-  "Afropop",
-  "Gospel",
-  "Traditional",
-];
+const GENRES = ["Afrobeat", "Hip Hop", "R&B", "Amapiano", "Dancehall", "Afropop", "Gospel", "Traditional"];
+
+const AUTO_REFRESH_MS = 60_000;
+
+function Segmented<T extends string>({
+  options,
+  value,
+  onChange,
+  size = "md",
+}: {
+  options: { id: T; label: string }[];
+  value: T;
+  onChange: (v: T) => void;
+  size?: "sm" | "md";
+}) {
+  return (
+    <div
+      role="tablist"
+      className="flex items-center gap-1 bg-surface border border-border-light rounded-full p-1 w-fit max-w-full overflow-x-auto scrollbar-hide"
+    >
+      {options.map((o) => {
+        const active = o.id === value;
+        return (
+          <button
+            key={o.id}
+            role="tab"
+            aria-selected={active}
+            onClick={() => onChange(o.id)}
+            className={`whitespace-nowrap rounded-full font-semibold transition-colors duration-150 ${
+              size === "sm" ? "px-3 py-1 text-xs" : "px-4 py-1.5 text-sm"
+            } ${active ? "bg-surface-overlay text-text-primary" : "text-text-secondary hover:text-text-primary"}`}
+          >
+            {o.label}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function Select({
+  value,
+  onChange,
+  options,
+  label,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  options: { value: string; label: string }[];
+  label: string;
+}) {
+  return (
+    <label className="relative inline-flex items-center">
+      <span className="sr-only">{label}</span>
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="appearance-none h-9 pl-4 pr-9 rounded-full bg-surface border border-border-light text-sm font-semibold text-text-primary hover:border-border-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-primary cursor-pointer"
+      >
+        {options.map((o) => (
+          <option key={o.value} value={o.value} className="bg-surface-elevated">
+            {o.label}
+          </option>
+        ))}
+      </select>
+      <svg
+        className="pointer-events-none absolute right-3 w-3.5 h-3.5 text-text-secondary"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2.5}
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+      </svg>
+    </label>
+  );
+}
+
+function SkeletonRows() {
+  return (
+    <div className="space-y-1" aria-hidden="true">
+      {Array.from({ length: 8 }).map((_, i) => (
+        <div key={i} className="flex items-center gap-4 px-3 py-2 animate-pulse">
+          <div className="w-9 h-6 rounded bg-surface-elevated" />
+          <div className="w-12 h-12 md:w-14 md:h-14 rounded-md bg-surface-elevated" />
+          <div className="flex-1 space-y-2">
+            <div className="h-3.5 w-2/5 rounded bg-surface-elevated" />
+            <div className="h-3 w-1/4 rounded bg-surface-elevated" />
+          </div>
+          <div className="hidden md:block h-3.5 w-14 rounded bg-surface-elevated" />
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export default function ChartsPage() {
-  const router = useRouter();
-  const { t } = useLanguage()
   const [chartType, setChartType] = useState<ChartType>("global");
   const [timeWindow, setTimeWindow] = useState<TimeWindow>("weekly");
-  const [selectedCountry, setSelectedCountry] = useState<CountryCode>("RW");
-  const [selectedGenre, setSelectedGenre] = useState(GENRES[0]);
+  const [country, setCountry] = useState<CountryCode>("RW");
+  const [genre, setGenre] = useState(GENRES[0]);
   const [charts, setCharts] = useState<ChartTrack[]>([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [lastUpdated, setLastUpdated] = useState<string>("");
-  const [isRefreshing, setIsRefreshing] = useState(false);
-  const [autoRefreshEnabled, setAutoRefreshEnabled] = useState(true);
-  const [dataFreshness, setDataFreshness] = useState<any>(null);
+  const [updatedAt, setUpdatedAt] = useState<Date | null>(null);
 
-  const { playTrack, setCurrentPlaylist } = useAudioPlayer();
-  
-  // WebSocket for real-time updates
-  const { isConnected, latestUpdate } = useWebSocket(chartType);
+  const { playTrack, setCurrentPlaylist, currentTrack, isPlaying } = useAudioPlayer();
+  const { latestUpdate } = useWebSocket(chartType);
+  const requestId = useRef(0);
+
+  const windowInfo = chartType === "trending" ? WINDOWS[1] : WINDOWS.find((w) => w.id === timeWindow)!;
+  const typeInfo = CHART_TYPES.find((c) => c.id === chartType)!;
+
+  const fetchCharts = useCallback(
+    async (silent = false) => {
+      const id = ++requestId.current; // ignore responses from superseded requests
+      if (silent) setRefreshing(true);
+      else setLoading(true);
+      setError(null);
+      try {
+        const response =
+          chartType === "global"
+            ? await getGlobalCharts(timeWindow, 50)
+            : chartType === "country"
+            ? await getCountryCharts(country, timeWindow, 50)
+            : chartType === "genre"
+            ? await getGenreCharts(genre, timeWindow, 50)
+            : await getTrendingTracks(50);
+        if (id !== requestId.current) return;
+        setCharts((response.charts || []) as ChartTrack[]);
+        const stamp = "updatedAt" in response && response.updatedAt ? new Date(response.updatedAt as any) : new Date();
+        setUpdatedAt(isNaN(stamp.getTime()) ? new Date() : stamp);
+      } catch (err) {
+        if (id !== requestId.current) return;
+        if (!silent) setError(err instanceof Error ? err.message : "Couldn't load charts.");
+      } finally {
+        if (id === requestId.current) {
+          setLoading(false);
+          setRefreshing(false);
+        }
+      }
+    },
+    [chartType, timeWindow, country, genre]
+  );
 
   useEffect(() => {
     fetchCharts();
-  }, [chartType, timeWindow, selectedCountry, selectedGenre]);
+  }, [fetchCharts]);
 
-  // Auto-refresh charts every 60 seconds
+  // Quiet background refresh
   useEffect(() => {
-    if (!autoRefreshEnabled) return;
-    
-    const interval = setInterval(() => {
-      console.log('🔄 Auto-refreshing charts...');
-      fetchCharts(true); // Silent refresh
-    }, 60000); // Every 60 seconds
+    const t = setInterval(() => fetchCharts(true), AUTO_REFRESH_MS);
+    return () => clearInterval(t);
+  }, [fetchCharts]);
 
-    return () => clearInterval(interval);
-  }, [autoRefreshEnabled, chartType, timeWindow, selectedCountry, selectedGenre]);
-
-  // Handle real-time chart updates
+  // Real-time push from the server: refresh silently
   useEffect(() => {
-    if (latestUpdate) {
-      console.log('📡 Received real-time chart update:', latestUpdate);
-      // Optionally refresh charts or show notification
-      const toast = document.createElement('div');
-      toast.className = 'fixed bottom-20 left-1/2 transform -translate-x-1/2 bg-[#FF8C00] text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in';
-      toast.textContent = 'Charts updated in real-time! 🎵';
-      document.body.appendChild(toast);
-      setTimeout(() => toast.remove(), 3000);
-    }
-  }, [latestUpdate]);
+    if (latestUpdate) fetchCharts(true);
+  }, [latestUpdate, fetchCharts]);
 
-  const fetchCharts = async (silent = false) => {
-    if (!silent) {
-      setLoading(true);
-    }
-    setIsRefreshing(silent);
-    setError(null);
+  const toPlayerTrack = (t: ChartTrack) => ({
+    id: t._id,
+    title: t.title,
+    artist: typeof t.creatorId === "object" && t.creatorId ? t.creatorId.name : t.artist || "Unknown Artist",
+    coverImage: t.coverURL || "/placeholder-playlist.png",
+    audioUrl: t.audioURL,
+    creatorId: typeof t.creatorId === "object" && t.creatorId ? t.creatorId._id : undefined,
+  });
 
-    try {
-      let response;
-
-      switch (chartType) {
-        case "global":
-          response = await getGlobalCharts(timeWindow, 50);
-          break;
-        case "country":
-          response = await getCountryCharts(selectedCountry, timeWindow, 50);
-          break;
-        case "genre":
-          response = await getGenreCharts(selectedGenre, timeWindow, 50);
-          break;
-        case "trending":
-          response = await getTrendingTracks(50);
-          break;
-      }
-
-      if (response && 'charts' in response) {
-        // Only update if data has changed
-        const newCharts = response.charts as ChartTrack[];
-        const hasChanges = JSON.stringify(newCharts) !== JSON.stringify(charts);
-        
-        if (hasChanges || !silent) {
-          setCharts(newCharts);
-          if (!silent) {
-            console.log(`✅ Charts loaded: ${newCharts.length} tracks`);
-          }
-        }
-        
-        if ('updatedAt' in response) {
-          setLastUpdated(response.updatedAt || new Date().toISOString());
-        } else {
-          setLastUpdated(new Date().toISOString());
-        }
-        
-        if ('dataFreshness' in response) {
-          setDataFreshness(response.dataFreshness);
-        }
-      }
-    } catch (err) {
-      console.error("Error fetching charts:", err);
-      if (!silent) {
-        setError(
-          err instanceof Error ? err.message : "Failed to load charts. Please try again."
-        );
-      }
-    } finally {
-      setLoading(false);
-      setIsRefreshing(false);
-    }
+  const handlePlay = (track: ChartTrack) => {
+    playTrack(toPlayerTrack(track));
+    setCurrentPlaylist(charts.filter((t) => t.audioURL).map(toPlayerTrack));
   };
 
-  const handlePlayTrack = (track: ChartTrack, index: number) => {
-    playTrack({
-      id: track._id,
-      title: track.title,
-      artist:
-        typeof track.creatorId === "object" && track.creatorId !== null
-          ? (track.creatorId as any).name
-          : "Unknown Artist",
-      coverImage: track.coverURL || "/placeholder-playlist.png",
-      audioUrl: track.audioURL,
-      creatorId:
-        typeof track.creatorId === "object" && track.creatorId !== null
-          ? (track.creatorId as any)._id
-          : undefined,
-    });
+  const firstInactive = charts.findIndex((t) => t.activeInPeriod === false);
+  const activeCount = firstInactive === -1 ? charts.length : firstInactive;
+  const periodPlaysTotal = charts
+    .slice(0, activeCount)
+    .reduce((sum, t) => sum + (t.metrics?.periodPlays || 0), 0);
 
-    // Set playlist to all chart tracks
-    const playlistTracks = charts.map((t) => ({
-      id: t._id,
-      title: t.title,
-      artist:
-        typeof t.creatorId === "object" && t.creatorId !== null
-          ? (t.creatorId as any).name
-          : "Unknown Artist",
-      coverImage: t.coverURL || "/placeholder-playlist.png",
-      audioUrl: t.audioURL,
-      creatorId:
-        typeof t.creatorId === "object" && t.creatorId !== null
-          ? (t.creatorId as any)._id
-          : undefined,
-    }));
-
-    setCurrentPlaylist(playlistTracks);
-  };
-
-  const getRankIcon = (currentRank: number, previousRank: number) => {
-    const diff = previousRank - currentRank;
-    if (diff > 0) return { icon: "↑", color: "text-green-500", label: "Up" };
-    if (diff < 0) return { icon: "↓", color: "text-red-500", label: "Down" };
-    return { icon: "→", color: "text-gray-500", label: "Same" };
-  };
+  const scopeLabel =
+    chartType === "country"
+      ? COUNTRIES.find((c) => c.code === country)?.name
+      : chartType === "genre"
+      ? genre
+      : chartType === "trending"
+      ? "Trending"
+      : "Global";
 
   return (
-    <div className="min-h-screen bg-[var(--background)] text-white pb-20 md:pb-12">
-      {/* Back Button & Title Header */}
-      <div className="sticky top-0 z-40 bg-[var(--card-bg)] backdrop-blur-xl border-b border-white/10">
-        <div className="px-4 md:px-8 py-3 md:py-4">
-          {/* Back Button Row */}
-          <div className="flex items-center gap-3 mb-3">
+    <div className="min-h-screen bg-background pb-28 md:pb-12">
+      <div className="max-w-6xl mx-auto px-4 md:px-8 pt-20 md:pt-8">
+        {/* Header */}
+        <header className="flex flex-col gap-1 mb-6">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-primary">MuzikaX Charts</p>
+          <div className="flex items-end justify-between gap-4">
+            <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-text-primary">
+              {chartType === "global" ? "Top 50" : scopeLabel}
+            </h1>
             <button
-              onClick={() => router.back()}
-              className="flex items-center gap-2 text-gray-400 hover:text-white transition-all active:scale-95 min-h-[44px] px-3 py-2 rounded-lg hover:bg-gray-800/50"
-              aria-label="Go back"
+              onClick={() => fetchCharts(true)}
+              disabled={refreshing || loading}
+              className="shrink-0 inline-flex items-center gap-2 h-9 px-3.5 rounded-full border border-border-light text-sm font-semibold text-text-secondary hover:text-text-primary hover:border-border-medium transition-colors disabled:opacity-60"
+              aria-label="Refresh charts"
             >
-              <FaArrowLeft className="text-lg" />
-              <span className="text-sm font-medium hidden md:inline">Back</span>
+              <svg
+                className={`w-4 h-4 ${refreshing ? "animate-spin" : ""}`}
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h5M20 20v-5h-5M5.6 15a7 7 0 0011.8 2.4M18.4 9A7 7 0 006.6 6.6" />
+              </svg>
+              <span className="hidden sm:inline">Refresh</span>
             </button>
           </div>
-          
-          {/* Title */}
-          <div className="flex items-center justify-between">
-            <h1 className="text-2xl md:text-3xl font-bold">{t('charts')} Charts</h1>
-            <div className="flex items-center gap-2">
-              {/* Auto-refresh toggle */}
-              <button
-                onClick={() => setAutoRefreshEnabled(!autoRefreshEnabled)}
-                className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-sm min-h-[44px] ${
-                  autoRefreshEnabled
-                    ? 'bg-green-500/20 text-green-400 hover:bg-green-500/30'
-                    : 'bg-gray-800/50 text-gray-400 hover:bg-gray-700/50'
-                }`}
-                title={autoRefreshEnabled ? 'Disable auto-refresh' : 'Enable auto-refresh'}
-              >
-                {autoRefreshEnabled ? <FaPauseCircle className="text-sm" /> : <FaPlayCircle className="text-sm" />}
-                <span className="hidden md:inline text-xs">{autoRefreshEnabled ? 'Auto' : 'Manual'}</span>
-              </button>
-              
-              {/* Manual refresh button */}
-              <button
-                onClick={() => fetchCharts(false)}
-                disabled={isRefreshing}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-800/50 text-gray-400 hover:text-white hover:bg-gray-700/50 transition-all text-sm min-h-[44px] disabled:opacity-50 disabled:cursor-not-allowed active:scale-95"
-                title="Refresh charts now"
-              >
-                <FaSyncAlt className={`text-sm ${isRefreshing ? 'animate-spin' : ''}`} />
-                <span className="hidden md:inline text-xs">Refresh</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+          <p className="text-sm text-text-secondary">
+            {typeInfo.blurb}
+            {chartType !== "trending" && <> · {windowInfo.label}</>}
+            {updatedAt && (
+              <span className="text-text-muted">
+                {" "}
+                · Updated {updatedAt.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+              </span>
+            )}
+          </p>
+        </header>
 
-      {/* Controls - Mobile Responsive */}
-      <div className="max-w-7xl mx-auto px-4 py-4 md:py-6">
-        {/* Chart Type Tabs - Scrollable on mobile */}
-        <div className="flex gap-2 overflow-x-auto scrollbar-hide mb-4 pb-2">
-          {(["global", "country", "genre", "trending"] as ChartType[]).map(
-            (type) => (
-              <button
-                key={type}
-                onClick={() => setChartType(type)}
-                className={`px-4 py-2 rounded-lg font-medium capitalize whitespace-nowrap transition-all text-sm md:text-base flex-shrink-0 ${
-                  chartType === type
-                    ? "bg-[#FF8C00] text-white"
-                    : "bg-gray-800/50 text-gray-400 hover:text-white hover:bg-gray-700/50"
-                }`}
-              >
-                {type === 'global' ? 'Global' : type === 'country' ? 'Country' : type === 'genre' ? 'Genre' : 'Trending'}
-              </button>
-            )
-          )}
-        </div>
-
-        {/* Time Window & Selectors Row */}
-        <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
-          {/* Time Window Selector (not for trending) */}
-          {chartType !== "trending" && (
-            <div className="flex gap-2 overflow-x-auto scrollbar-hide w-full md:w-auto pb-2 md:pb-0">
-              {(["daily", "weekly", "monthly"] as TimeWindow[]).map(
-                (window) => (
-                  <button
-                    key={window}
-                    onClick={() => setTimeWindow(window)}
-                    className={`px-3 py-1.5 rounded-md text-xs md:text-sm font-medium capitalize transition-all whitespace-nowrap ${
-                      timeWindow === window
-                        ? "bg-white text-[#FF8C00]"
-                        : "bg-gray-800/50 text-gray-400 hover:text-white"
-                    }`}
-                  >
-                    {window}
-                  </button>
-                )
-              )}
-            </div>
-          )}
-
-          {/* Country/Genre Selectors */}
-          <div className="flex gap-4 w-full md:w-auto">
+        {/* Controls */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-6">
+          <Segmented options={CHART_TYPES} value={chartType} onChange={setChartType} />
+          <div className="flex items-center gap-3 flex-wrap">
+            {chartType !== "trending" && (
+              <Segmented options={WINDOWS} value={timeWindow} onChange={setTimeWindow} size="sm" />
+            )}
             {chartType === "country" && (
-              <select
-                value={selectedCountry}
-                onChange={(e) => setSelectedCountry(e.target.value as CountryCode)}
-                className="bg-gray-800/50 text-white px-4 py-2 rounded-lg border border-gray-700 focus:border-[#FF8C00] focus:outline-none w-full md:w-auto text-sm md:text-base appearance-none cursor-pointer active:scale-95 transition-transform"
-                style={{ minHeight: '44px' }}
-              >
-                {COUNTRIES.map((country) => (
-                  <option key={country.code} value={country.code}>
-                    {country.name}
-                  </option>
-                ))}
-              </select>
+              <Select
+                label="Country"
+                value={country}
+                onChange={(v) => setCountry(v as CountryCode)}
+                options={COUNTRIES.map((c) => ({ value: c.code, label: c.name }))}
+              />
             )}
-
             {chartType === "genre" && (
-              <select
-                value={selectedGenre}
-                onChange={(e) => setSelectedGenre(e.target.value)}
-                className="bg-gray-800/50 text-white px-4 py-2 rounded-lg border border-gray-700 focus:border-[#FF8C00] focus:outline-none w-full md:w-auto text-sm md:text-base appearance-none cursor-pointer active:scale-95 transition-transform"
-                style={{ minHeight: '44px' }}
-              >
-                {GENRES.map((genre) => (
-                  <option key={genre} value={genre}>
-                    {genre}
-                  </option>
-                ))}
-              </select>
+              <Select label="Genre" value={genre} onChange={setGenre} options={GENRES.map((g) => ({ value: g, label: g }))} />
             )}
           </div>
         </div>
 
-        {/* Last Updated - Mobile friendly */}
-        <div className="mt-4 flex items-center justify-between text-xs md:text-sm text-gray-400">
-          <div className="flex items-center gap-2">
-            <span>Last updated:</span>
-            <span className="text-white font-medium">
-              {new Date(lastUpdated).toLocaleTimeString()}
-            </span>
-            {isRefreshing && (
-              <span className="text-[#FF8C00] animate-pulse">• Updating...</span>
-            )}
-          </div>
-          {dataFreshness && (
-            <div className="hidden md:flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-              <span>Auto-refresh: {dataFreshness.nextUpdateIn}</span>
-            </div>
-          )}
-        </div>
-      </div>
+        {/* Summary */}
+        {!loading && !error && charts.length > 0 && (
+          <p className="text-xs text-text-muted mb-3">
+            {activeCount > 0
+              ? `${activeCount} ${activeCount === 1 ? "track" : "tracks"} played ${windowInfo.period} · ${periodPlaysTotal.toLocaleString()} ${
+                  periodPlaysTotal === 1 ? "play" : "plays"
+                }`
+              : `No plays ${windowInfo.period} yet. Showing the most popular tracks of all time.`}
+          </p>
+        )}
 
-      {/* Charts Content - Mobile Responsive */}
-      <div className="max-w-7xl mx-auto px-4 pb-12 md:pb-12">
-        {loading ? (
-          <div className="flex justify-center items-center py-20">
-            <LoadingSpinner size="lg" />
+        {/* Table */}
+        <section className="rounded-2xl border border-border-light bg-surface p-2 md:p-3">
+          {/* Column headers */}
+          <div className="hidden md:grid grid-cols-[3rem_minmax(0,1fr)_9rem_7rem_7rem_2.5rem] gap-4 px-3 pb-2 mb-1 border-b border-border-light text-[11px] font-semibold uppercase tracking-wider text-text-muted">
+            <span className="text-center">#</span>
+            <span>Title</span>
+            <span>Genre</span>
+            <span className="text-right">{chartType === "trending" ? "Plays this week" : `Plays ${windowInfo.period}`}</span>
+            <span className="text-right">All time</span>
+            <span />
           </div>
-        ) : error ? (
-          <div className="bg-red-500/10 border border-red-500/50 rounded-lg p-4 md:p-6 text-center">
-            <p className="text-red-400 text-sm md:text-base">{error}</p>
-            <button
-              onClick={ ()=> fetchCharts()}
-              className="mt-4 px-6 py-2.5 bg-red-500 hover:bg-red-600 rounded-lg transition-colors text-sm md:text-base min-h-[44px]"
-            >
-              Try Again
-            </button>
-          </div>
-        ) : charts.length === 0 ? (
-          <div className="text-center py-20 px-4">
-            <div className="mb-6">
-              <div className="text-6xl mb-4">🎵</div>
-              <h3 className="text-xl font-semibold text-white mb-2">
-                {chartType === 'country' ? `No charts available for ${COUNTRIES.find(c => c.code === selectedCountry)?.name}` : 'No charts available'}
-              </h3>
-              <p className="text-gray-400 text-sm md:text-base max-w-md mx-auto mb-6">
-                {chartType === 'country' 
-                  ? `Tracks need to be played from ${COUNTRIES.find(c => c.code === selectedCountry)?.name} to appear in the charts. Start playing and sharing music!`
-                  : 'Start playing, sharing, and engaging with music to see tracks appear in the charts.'
-                }
-              </p>
+
+          {loading ? (
+            <SkeletonRows />
+          ) : error ? (
+            <div className="py-16 text-center">
+              <p className="text-text-primary font-semibold">Couldn&apos;t load charts</p>
+              <p className="text-sm text-text-secondary mt-1">{error}</p>
               <button
-                onClick={() => fetchCharts(false)}
-                className="px-6 py-3 bg-[#FF8C00] hover:bg-[#FF7A00] rounded-lg transition-colors text-sm md:text-base min-h-[44px] font-medium"
+                onClick={() => fetchCharts()}
+                className="mt-5 h-10 px-6 rounded-full bg-primary hover:bg-primary-hover text-black text-sm font-bold transition-colors"
               >
-                Refresh Charts
+                Try again
               </button>
             </div>
-          </div>
-        ) : (
-          <div className="space-y-2 md:space-y-3">
-            {charts.map((track, index) => {
-              const rankInfo = getRankIcon(track.rank, track.previousRank || 0);
-              return (
-                <ChartTrackCard
-                  key={track._id}
-                  track={track}
-                  rank={track.rank}
-                  rankChange={rankInfo}
-                  onPlay={() => handlePlayTrack(track, index)}
-                  isPlaying={false}
-                />
-              );
-            })}
-          </div>
-        )}
+          ) : charts.length === 0 ? (
+            <div className="py-16 px-4 text-center">
+              <div className="mx-auto mb-4 w-12 h-12 rounded-full bg-surface-elevated flex items-center justify-center">
+                <svg className="w-5 h-5 text-text-secondary" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 20V10M10 20V4M16 20v-7M22 20H2" />
+                </svg>
+              </div>
+              <p className="text-text-primary font-semibold">
+                {chartType === "country"
+                  ? `No plays from ${scopeLabel} ${windowInfo.period} yet`
+                  : chartType === "genre"
+                  ? `No ${genre} tracks yet`
+                  : chartType === "trending"
+                  ? "Nothing is trending this week yet"
+                  : "No chart data yet"}
+              </p>
+              <p className="text-sm text-text-secondary mt-1 max-w-sm mx-auto">
+                Charts are built from real plays. Check back as listeners discover new music.
+              </p>
+            </div>
+          ) : (
+            <ol className="space-y-0.5">
+              {charts.map((track, i) => (
+                <li key={track._id}>
+                  {i === firstInactive && firstInactive > 0 && (
+                    <div className="flex items-center gap-3 px-3 pt-4 pb-2">
+                      <span className="text-[11px] font-semibold uppercase tracking-wider text-text-muted whitespace-nowrap">
+                        Not played {windowInfo.period} · ranked by all-time popularity
+                      </span>
+                      <span className="h-px flex-1 bg-border-light" />
+                    </div>
+                  )}
+                  <ChartTrackCard
+                    track={track}
+                    onPlay={() => handlePlay(track)}
+                    isCurrent={currentTrack?.id === track._id}
+                    isPlaying={isPlaying}
+                    periodLabel={windowInfo.period}
+                  />
+                </li>
+              ))}
+            </ol>
+          )}
+        </section>
+
+        <p className="mt-4 text-xs text-text-muted">
+          Rankings use plays, unique listeners, likes and shares inside the selected period. Movement compares with the
+          previous period once enough history exists.
+        </p>
       </div>
     </div>
   );

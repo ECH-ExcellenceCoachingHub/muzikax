@@ -224,7 +224,7 @@ export default function ForYouPage() {
   })
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black py-8 pt-14 md:pt-0">
+    <div className="min-h-screen py-8 pt-14 md:pt-0 bg-background">
       {/* Mobile Header with Back Button */}
       <div className="md:hidden sticky top-0 z-50 bg-gray-900/95 backdrop-blur-lg border-b border-gray-800">
         <div className="container mx-auto px-4 py-4">
@@ -237,7 +237,7 @@ export default function ForYouPage() {
               <FaArrowLeft className="w-5 h-5" />
             </button>
             <div>
-              <h1 className="text-xl font-black text-white">For You</h1>
+              <h1 className="text-xl font-black text-text-primary">For You</h1>
               <p className="text-xs text-gray-400">Your recommendations</p>
             </div>
           </div>
@@ -247,7 +247,7 @@ export default function ForYouPage() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-white mb-2">For You</h1>
+            <h1 className="text-3xl font-bold mb-2 text-text-primary">For You</h1>
             <p className="text-gray-400">Personalized recommendations based on your listening habits</p>
           </div>
           
@@ -257,25 +257,25 @@ export default function ForYouPage() {
             <div className="flex bg-gray-800 rounded-lg p-1">
               <button 
                 onClick={() => setFilterBy('music')}
-                className={`px-3 py-1 rounded-md text-sm transition-colors ${filterBy === 'music' ? 'bg-[#FF8C00] text-white' : 'text-gray-300 hover:text-white'}`}
+                className={`px-3 py-1 rounded-md text-sm transition-colors ${filterBy === 'music' ? 'bg-primary text-white' : 'text-gray-300 hover:text-white'}`}
               >
                 Music
               </button>
               <button 
                 onClick={() => setFilterBy('beats')}
-                className={`px-3 py-1 rounded-md text-sm transition-colors ${filterBy === 'beats' ? 'bg-[#FF8C00] text-white' : 'text-gray-300 hover:text-white'}`}
+                className={`px-3 py-1 rounded-md text-sm transition-colors ${filterBy === 'beats' ? 'bg-primary text-white' : 'text-gray-300 hover:text-white'}`}
               >
                 Beats
               </button>
               <button 
                 onClick={() => setFilterBy('mixes')}
-                className={`px-3 py-1 rounded-md text-sm transition-colors ${filterBy === 'mixes' ? 'bg-[#FF8C00] text-white' : 'text-gray-300 hover:text-white'}`}
+                className={`px-3 py-1 rounded-md text-sm transition-colors ${filterBy === 'mixes' ? 'bg-primary text-white' : 'text-gray-300 hover:text-white'}`}
               >
                 Mixes
               </button>
               <button 
                 onClick={() => setFilterBy('all')}
-                className={`px-3 py-1 rounded-md text-sm transition-colors ${filterBy === 'all' ? 'bg-[#FF8C00] text-white' : 'text-gray-300 hover:text-white'}`}
+                className={`px-3 py-1 rounded-md text-sm transition-colors ${filterBy === 'all' ? 'bg-primary text-white' : 'text-gray-300 hover:text-white'}`}
               >
                 All
               </button>
@@ -287,7 +287,7 @@ export default function ForYouPage() {
             <select 
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="bg-gray-800 text-white rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+              className="bg-gray-800 text-white rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
             >
               <option value="new_and_popular">New & Popular</option>
               <option value="popular">Most Popular</option>
@@ -300,19 +300,19 @@ export default function ForYouPage() {
         
         {loading ? (
           <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#FF8C00]"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {sortedTracks.map((track) => (
-              <div key={track.id} className="group card-bg rounded-xl overflow-hidden transition-all duration-300 hover:border-[#FF8C00]/50 hover:bg-gradient-to-br hover:from-gray-900/70 hover:to-gray-900/50 hover:shadow-xl hover:shadow-[#FF8C00]/10">
+              <div key={track.id} className="group card-bg rounded-xl overflow-hidden">
                 <div className="relative">
                   <img 
                     src={track.coverImage} 
                     alt={track.title} 
                     className="w-full aspect-square object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                  <div className="absolute inset-0 flex items-end justify-end p-2 sm:p-3 pointer-events-none">
                     <button 
                       onClick={(e) => {
                         e.stopPropagation();
@@ -335,10 +335,10 @@ export default function ForYouPage() {
                           playTrack(audioPlayerTrack);
                         }
                       }}
-                      className="w-12 h-12 sm:w-14 sm:h-14 rounded-full gradient-primary flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300"
+                      className="mx-card-play !static pointer-events-auto hover:bg-primary-hover [&_svg]:w-4 [&_svg]:h-4"
                     >
                       <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd"></path>
+                        <path fillRule="evenodd" d="M6.3 2.84A1.5 1.5 0 004 4.11v11.78a1.5 1.5 0 002.3 1.27l9.344-5.891a1.5 1.5 0 000-2.538L6.3 2.84z" clipRule="evenodd"></path>
                       </svg>
                     </button>
                     <AddToQueueButton 
@@ -362,7 +362,7 @@ export default function ForYouPage() {
                 
                 <div className="p-4">
                   <div className="flex justify-between items-start mb-2">
-                    <h3 className="font-bold text-white text-base truncate">{track.title}</h3>
+                    <h3 className="font-bold text-base truncate text-text-primary">{track.title}</h3>
                     {track.category && (
                       <span className="ml-2 px-2 py-1 bg-gray-800 text-gray-300 text-xs rounded-full capitalize">
                         {track.category}

@@ -75,6 +75,25 @@ function calculateTrackScore(track, dailyStats) {
 }
 
 /**
+ * Score a track on activity INSIDE the time window only (from DailyStats).
+ * Log scale so one viral track doesn't flatten the rest.
+ */
+function calculatePeriodScore(period) {
+  if (!period) return 0;
+  const l = (n) => Math.log10((n || 0) + 1);
+  return (
+    l(period.plays) * 50 +
+    l(period.uniqueListeners) * 25 +
+    l(period.likes) * 10 +
+    l(period.shares) * 10 +
+    l(period.playlistAdditions) * 5
+  );
+}
+
+// Tracks with activity in the window always outrank tracks without any.
+const ACTIVE_BASE = 1000;
+
+/**
  * Get date range for time window
  * @param {string} timeWindow - 'daily', 'weekly', or 'monthly'
  * @returns {Object} Start and end dates
@@ -149,41 +168,47 @@ async function calculateScoresForTimeWindow(timeWindow = 'weekly') {
       statsMap[trackId].days += 1;
     });
     
-    // Calculate scores for each track
+    // Period-first ranking:
+    //   1. tracks played inside the window, ordered by their in-window score
+    //   2. then tracks with no plays in the window, ordered by all-time score
+    // Every track carries honest period numbers and all-time totals.
     const tracksWithScores = tracks.map(track => {
       const trackId = track._id.toString();
-      const aggregatedStats = statsMap[trackId];
-      
-      // If no stats in this period, use overall track stats
-      const statsToUse = aggregatedStats || {
-        plays: track.plays,
-        uniqueListeners: Math.floor(track.plays * 0.7), // Estimate
-        likes: track.likes,
-        shares: track.shares,
-        reposts: track.reposts,
-        playlistAdditions: track.playlistAdditions
-      };
-      
-      const scoreData = calculateTrackScore(track, statsToUse);
-      
+      const period = statsMap[trackId] || null;
+      const allTime = calculateTrackScore(track, period);
+      const periodPlays = period?.plays || 0;
+      const activeInPeriod = periodPlays > 0;
+      const periodScore = calculatePeriodScore(period);
+
+      const chartScore = activeInPeriod
+        ? ACTIVE_BASE + periodScore + allTime.totalScore / 1000 // all-time only breaks ties
+        : allTime.totalScore;
+
       return {
         ...track,
-        chartScore: scoreData.totalScore,
-        scoreBreakdown: scoreData.breakdown,
-        chartMetrics: scoreData.metrics,
+        chartScore,
+        scoreBreakdown: { ...allTime.breakdown, periodScore },
+        chartMetrics: {
+          ...allTime.metrics, // all-time totals (totalPlays, likes, shares, ...)
+          uniqueListeners: period?.uniqueListeners || 0,
+          periodPlays,
+          periodUniqueListeners: period?.uniqueListeners || 0,
+          periodLikes: period?.likes || 0,
+          periodShares: period?.shares || 0,
+          activeInPeriod
+        },
         timeWindow
       };
     });
-    
-    // Sort by score descending
+
     tracksWithScores.sort((a, b) => b.chartScore - a.chartScore);
-    
-    // Assign ranks
+
+    // Ranks only. Movement (previousRank) comes from stored history in updateChartScores —
+    // never invented here.
     tracksWithScores.forEach((track, index) => {
       track.rank = index + 1;
-      track.previousRank = Math.floor(Math.random() * 10); // Placeholder - will be updated with historical data
     });
-    
+
     return tracksWithScores;
   } catch (error) {
     console.error('Error calculating scores:', error);
@@ -199,7 +224,53 @@ async function calculateScoresForTimeWindow(timeWindow = 'weekly') {
 async function updateChartScores(timeWindow = 'weekly') {
   try {
     const tracksWithScores = await calculateScoresForTimeWindow(timeWindow);
-    
+
+    // ---- Rank history (change vs the previous period) ----
+    const PERIOD_MS = { daily: 864e5, weekly: 7 * 864e5, monthly: 30 * 864e5 };
+    const now = new Date();
+    const existing = await ChartScore.find({}, { trackId: 1, [`windows.${timeWindow}`]: 1 }).lean();
+    const prevMap = new Map(existing.map(d => [String(d.trackId), (d.windows && d.windows[timeWindow]) || null]));
+    const anchor = existing.reduce((max, d) => {
+      const at = d.windows?.[timeWindow]?.periodStartAt;
+      return at && (!max || new Date(at) > max) ? new Date(at) : max;
+    }, null);
+    // Rotate once per period: the rank a track held at the end of the last period becomes previousRank.
+    const rotate = !anchor || now - anchor >= (PERIOD_MS[timeWindow] || PERIOD_MS.weekly);
+    const periodStartAt = rotate ? now : anchor;
+    const hasHistory = rotate ? !!anchor : existing.some(d => d.windows?.[timeWindow]?.hasHistory);
+
+    // Rank among tracks that were active in the window (that's what the movement compares)
+    let activeRank = 0;
+    const windowState = new Map();
+    tracksWithScores.forEach(track => {
+      const id = String(track._id);
+      const prev = prevMap.get(id);
+      const active = !!track.chartMetrics.activeInPeriod;
+      const rank = active ? ++activeRank : null;
+      let previousRank;
+      if (rotate) previousRank = prev && prev.activeInPeriod && prev.rank ? prev.rank : null;
+      else previousRank = prev ? prev.previousRank ?? null : null;
+      windowState.set(id, {
+        rank,
+        previousRank: active ? previousRank : null,
+        isNew: active && hasHistory && previousRank == null,
+        hasHistory,
+        periodStartAt,
+        activeInPeriod: active,
+        score: track.chartScore,
+        metrics: {
+          periodPlays: track.chartMetrics.periodPlays,
+          periodUniqueListeners: track.chartMetrics.periodUniqueListeners,
+          periodLikes: track.chartMetrics.periodLikes,
+          periodShares: track.chartMetrics.periodShares,
+          totalPlays: track.chartMetrics.totalPlays,
+          likes: track.chartMetrics.likes,
+          shares: track.chartMetrics.shares
+        },
+        updatedAt: now
+      });
+    });
+
     // Bulk update chart scores
     const bulkOps = tracksWithScores.map(track => ({
       updateOne: {
@@ -218,6 +289,7 @@ async function updateChartScores(timeWindow = 'weekly') {
             playVelocity: track.chartMetrics.velocity,
             growthRate: calculateGrowthRate(track),
             globalRank: track.rank,
+            [`windows.${timeWindow}`]: windowState.get(String(track._id)),
             lastUpdated: new Date(),
             calculatedAt: new Date()
           }
@@ -531,6 +603,7 @@ module.exports = {
   calculateTrackScore,
   calculateScoresForTimeWindow,
   updateChartScores,
+  calculatePeriodScore,
   getCountryCharts,
   getGenreCharts,
   getTimeWindowRange,

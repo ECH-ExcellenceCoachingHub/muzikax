@@ -176,7 +176,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-gradient-to-b from-[#0a0604] via-[#0B0F14] to-[#0a0604] text-white w-full max-w-full overflow-x-hidden">
+      <body className="min-h-screen flex flex-col text-white w-full max-w-full overflow-x-hidden bg-background">
         {/* Structured Data for Rich Snippets */}
         <Script
           id="root-structured-data"

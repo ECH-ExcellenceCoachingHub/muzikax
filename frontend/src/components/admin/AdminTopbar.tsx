@@ -106,7 +106,7 @@ export default function AdminTopbar({
             aria-haspopup="menu"
             aria-expanded={menuOpen}
           >
-            <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-[#FF8C00] to-[#FFB020] text-sm font-bold text-white">
+            <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-primary to-primary-light text-sm font-bold text-white">
               {user?.avatar ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={user.avatar} alt="" className="h-full w-full object-cover" />

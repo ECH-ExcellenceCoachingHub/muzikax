@@ -199,12 +199,12 @@ export default function HelpPage() {
   const currentCategory = helpCategories.find(cat => cat.id === activeCategory);
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen text-white bg-background">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#FF8C00] to-[#FFB020] py-16">
+      <div className="bg-gradient-to-r from-primary to-primary-light py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Help Center</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-text-primary">Help Center</h1>
             <p className="text-xl text-white/90 max-w-3xl mx-auto">
               Find answers, guides, and support for everything MuzikaX
             </p>
@@ -227,16 +227,16 @@ export default function HelpPage() {
         
         {/* Quick Actions */}
         <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6 text-center text-[#FF8C00]">Quick Actions</h2>
+          <h2 className="text-2xl font-bold mb-6 text-center text-text-primary">Quick Actions</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {quickActions.map((action, index) => (
               <Link 
                 key={index}
                 href={action.href}
-                className="bg-gray-800/30 backdrop-blur-lg rounded-xl p-6 border border-gray-700 text-center hover:bg-gray-700/30 transition-all duration-300 group hover:border-[#FF8C00]/50"
+                className="rounded-xl p-6 text-center group mx-surface"
               >
                 <div className="text-3xl mb-3">{action.icon}</div>
-                <h3 className="font-semibold text-white group-hover:text-[#FF8C00] transition-colors">
+                <h3 className="font-semibold group-hover:text-primary transition-colors text-text-primary">
                   {action.title}
                 </h3>
               </Link>
@@ -248,7 +248,7 @@ export default function HelpPage() {
           {/* Sidebar - Category Navigation */}
           <div className="lg:col-span-1">
             <div className="bg-gray-800/30 backdrop-blur-lg rounded-xl border border-gray-700 p-4 sticky top-4">
-              <h3 className="text-lg font-bold mb-4 text-[#FF8C00]">Help Categories</h3>
+              <h3 className="text-lg font-bold mb-4 text-text-primary">Help Categories</h3>
               <div className="space-y-2">
                 {helpCategories.map((category) => (
                   <button
@@ -256,7 +256,7 @@ export default function HelpPage() {
                     onClick={() => setActiveCategory(category.id)}
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 text-left ${
                       activeCategory === category.id
-                        ? "bg-gradient-to-r from-[#FF8C00]/20 to-[#FFB020]/10 border border-[#FF8C00]/30 text-white"
+                        ? "bg-gradient-to-r from-primary/20 to-primary-light/10 border border-primary/30 text-white"
                         : "text-gray-400 hover:text-white hover:bg-gray-700/30"
                     }`}
                   >
@@ -270,16 +270,16 @@ export default function HelpPage() {
               <div className="mt-6 pt-6 border-t border-gray-700">
                 <h4 className="text-sm font-semibold text-gray-400 mb-3">Additional Resources</h4>
                 <div className="space-y-2">
-                  <Link href="/terms" className="block text-sm text-gray-400 hover:text-[#FF8C00] transition-colors">
+                  <Link href="/terms" className="block text-sm text-gray-400 hover:text-primary transition-colors">
                     Terms of Use
                   </Link>
-                  <Link href="/privacy" className="block text-sm text-gray-400 hover:text-[#FF8C00] transition-colors">
+                  <Link href="/privacy" className="block text-sm text-gray-400 hover:text-primary transition-colors">
                     Privacy Policy
                   </Link>
-                  <Link href="/copyright" className="block text-sm text-gray-400 hover:text-[#FF8C00] transition-colors">
+                  <Link href="/copyright" className="block text-sm text-gray-400 hover:text-primary transition-colors">
                     Copyright Policy
                   </Link>
-                  <Link href="/about" className="block text-sm text-gray-400 hover:text-[#FF8C00] transition-colors">
+                  <Link href="/about" className="block text-sm text-gray-400 hover:text-primary transition-colors">
                     About MuzikaX
                   </Link>
                 </div>
@@ -293,7 +293,7 @@ export default function HelpPage() {
               <div>
                 <div className="bg-gray-800/30 backdrop-blur-lg rounded-xl border border-gray-700 overflow-hidden mb-8">
                   <div className="bg-gray-700/30 px-6 py-4 border-b border-gray-700">
-                    <h2 className="text-2xl font-bold flex items-center">
+                    <h2 className="text-2xl font-bold flex items-center text-text-primary">
                       <span className="mr-3 text-3xl">{currentCategory.icon}</span>
                       {currentCategory.title}
                     </h2>
@@ -304,13 +304,13 @@ export default function HelpPage() {
                       {currentCategory.items.map((item, index) => (
                         <div 
                           key={index} 
-                          className="bg-gray-700/20 rounded-lg p-6 border border-gray-600/50 hover:border-[#FF8C00]/30 transition-all duration-300"
+                          className="bg-gray-700/20 rounded-lg p-6 border border-gray-600/50 hover:border-primary/30 transition-all duration-300"
                         >
-                          <h3 className="text-xl font-semibold mb-2 text-white">{item.title}</h3>
+                          <h3 className="text-xl font-semibold mb-2 text-text-primary">{item.title}</h3>
                           <p className="text-gray-300 mb-4">{item.description}</p>
                           <Link 
                             href={item.link}
-                            className="inline-flex items-center gap-2 text-[#FF8C00] hover:text-[#FFB020] transition-colors font-medium"
+                            className="inline-flex items-center gap-2 text-primary hover:text-primary-light transition-colors font-medium"
                           >
                             {item.linkText}
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -325,7 +325,7 @@ export default function HelpPage() {
 
                 {/* Related Categories */}
                 <div className="bg-gray-800/30 backdrop-blur-lg rounded-xl border border-gray-700 p-6">
-                  <h3 className="text-xl font-bold mb-4 text-[#FF8C00]">Related Help Topics</h3>
+                  <h3 className="text-xl font-bold mb-4 text-text-primary">Related Help Topics</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {helpCategories
                       .filter(cat => cat.id !== activeCategory)
@@ -351,8 +351,8 @@ export default function HelpPage() {
         </div>
 
         {/* Still Need Help */}
-        <div className="mt-16 bg-gradient-to-r from-[#FF8C00]/10 to-[#FFB020]/10 rounded-xl p-8 border border-[#FF8C00]/20 text-center">
-          <h2 className="text-2xl font-bold mb-4 text-[#FF8C00]">Still Need Help?</h2>
+        <div className="mt-16 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-xl p-8 border border-primary/20 text-center">
+          <h2 className="text-2xl font-bold mb-4 text-text-primary">Still Need Help?</h2>
           <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
             Can't find what you're looking for? Our support team is ready to help you with any questions or issues.
           </p>
@@ -360,7 +360,7 @@ export default function HelpPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
               href="/contact" 
-              className="bg-gradient-to-r from-[#FF8C00] to-[#FFB020] text-white px-8 py-3 rounded-full font-semibold hover:from-[#FF7A00] hover:to-[#FFA010] transition-all duration-300 inline-flex items-center justify-center"
+              className="bg-gradient-to-r from-primary to-primary-light text-white px-8 py-3 rounded-full font-semibold hover:from-primary hover:to-primary-light transition-all duration-300 inline-flex items-center justify-center"
             >
               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
@@ -382,22 +382,22 @@ export default function HelpPage() {
 
         {/* Help Statistics */}
         <div className="mt-12 bg-gray-800/30 backdrop-blur-lg rounded-xl p-8 border border-gray-700">
-          <h2 className="text-2xl font-bold mb-6 text-center text-[#FF8C00]">Help Center Stats</h2>
+          <h2 className="text-2xl font-bold mb-6 text-center text-text-primary">Help Center Stats</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className="text-center">
-              <div className="text-4xl font-bold text-[#FF8C00] mb-2">50+</div>
+              <div className="text-4xl font-bold text-primary mb-2">50+</div>
               <div className="text-gray-400 text-sm">Help Articles</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-[#FFB020] mb-2">24h</div>
+              <div className="text-4xl font-bold text-primary-light mb-2">24h</div>
               <div className="text-gray-400 text-sm">Average Response Time</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-[#FF8C00] mb-2">98%</div>
+              <div className="text-4xl font-bold text-primary mb-2">98%</div>
               <div className="text-gray-400 text-sm">Satisfaction Rate</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-[#FFB020] mb-2">24/7</div>
+              <div className="text-4xl font-bold text-primary-light mb-2">24/7</div>
               <div className="text-gray-400 text-sm">Support Available</div>
             </div>
           </div>

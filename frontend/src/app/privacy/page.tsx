@@ -28,12 +28,12 @@ export default function PrivacyPolicy() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen text-white bg-background">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#FF8C00] to-[#FFB020] py-16">
+      <div className="bg-gradient-to-r from-primary to-primary-light py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Privacy Policy</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-text-primary">Privacy Policy</h1>
             <p className="text-xl text-white/90 max-w-3xl mx-auto">
               Protecting your personal information is our priority. This policy explains how we collect, use, and protect your data.
             </p>
@@ -49,7 +49,7 @@ export default function PrivacyPolicy() {
           {/* Table of Contents - Sticky sidebar */}
           <div className="lg:w-1/4">
             <div className="sticky top-24 bg-gray-800/50 backdrop-blur-lg rounded-xl p-6 border border-gray-700">
-              <h2 className="text-lg font-semibold mb-4 text-[#FF8C00]">Table of Contents</h2>
+              <h2 className="text-lg font-semibold mb-4 text-text-primary">Table of Contents</h2>
               <nav className="space-y-2">
                 {sections.map((section) => (
                   <button
@@ -57,7 +57,7 @@ export default function PrivacyPolicy() {
                     onClick={() => scrollToSection(section.id)}
                     className={`block text-left w-full px-3 py-2 rounded-lg transition-all ${
                       activeSection === section.id
-                        ? "bg-[#FF8C00] text-white"
+                        ? "bg-primary text-white"
                         : "text-gray-300 hover:text-white hover:bg-gray-700/50"
                     }`}
                   >
@@ -73,7 +73,7 @@ export default function PrivacyPolicy() {
             <div className="bg-gray-800/30 backdrop-blur-lg rounded-xl p-8 border border-gray-700">
               
               <section id="introduction" className="mb-12 scroll-mt-24">
-                <h2 className="text-2xl font-bold mb-4 text-[#FF8C00]">1. Introduction</h2>
+                <h2 className="text-2xl font-bold mb-4 text-text-primary">1. Introduction</h2>
                 <p className="text-gray-300 mb-4">
                   MuzikaX ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our digital music platform.
                 </p>
@@ -83,9 +83,9 @@ export default function PrivacyPolicy() {
               </section>
 
               <section id="information-collection" className="mb-12 scroll-mt-24">
-                <h2 className="text-2xl font-bold mb-4 text-[#FF8C00]">2. Information We Collect</h2>
+                <h2 className="text-2xl font-bold mb-4 text-text-primary">2. Information We Collect</h2>
                 
-                <h3 className="text-xl font-semibold mb-3 text-white">2.1 Information You Provide</h3>
+                <h3 className="text-xl font-semibold mb-3 text-text-primary">2.1 Information You Provide</h3>
                 <p className="text-gray-300 mb-4">
                   We collect information you provide directly to us, including:
                 </p>
@@ -97,7 +97,7 @@ export default function PrivacyPolicy() {
                   <li><strong>Preferences:</strong> Language settings, notification preferences, playlist information</li>
                 </ul>
 
-                <h3 className="text-xl font-semibold mb-3 text-white">2.2 Information Collected Automatically</h3>
+                <h3 className="text-xl font-semibold mb-3 text-text-primary">2.2 Information Collected Automatically</h3>
                 <p className="text-gray-300 mb-4">
                   When you access our Services, we automatically collect certain information:
                 </p>
@@ -108,7 +108,7 @@ export default function PrivacyPolicy() {
                   <li><strong>Location Data:</strong> Approximate location based on IP address</li>
                 </ul>
 
-                <h3 className="text-xl font-semibold mb-3 text-white">2.3 Information from Third Parties</h3>
+                <h3 className="text-xl font-semibold mb-3 text-text-primary">2.3 Information from Third Parties</h3>
                 <p className="text-gray-300">
                   We may receive information about you from third parties, including:
                 </p>
@@ -120,7 +120,7 @@ export default function PrivacyPolicy() {
               </section>
 
               <section id="how-we-use" className="mb-12 scroll-mt-24">
-                <h2 className="text-2xl font-bold mb-4 text-[#FF8C00]">3. How We Use Your Information</h2>
+                <h2 className="text-2xl font-bold mb-4 text-text-primary">3. How We Use Your Information</h2>
                 <p className="text-gray-300 mb-4">
                   We use the information we collect for various purposes:
                 </p>
@@ -136,17 +136,17 @@ export default function PrivacyPolicy() {
               </section>
 
               <section id="sharing-information" className="mb-12 scroll-mt-24">
-                <h2 className="text-2xl font-bold mb-4 text-[#FF8C00]">4. Sharing Your Information</h2>
+                <h2 className="text-2xl font-bold mb-4 text-text-primary">4. Sharing Your Information</h2>
                 <p className="text-gray-300 mb-4">
                   We may share your information in the following circumstances:
                 </p>
                 
-                <h3 className="text-xl font-semibold mb-3 text-white">4.1 With Your Consent</h3>
+                <h3 className="text-xl font-semibold mb-3 text-text-primary">4.1 With Your Consent</h3>
                 <p className="text-gray-300 mb-4">
                   We will share your information when you have given us explicit permission to do so.
                 </p>
 
-                <h3 className="text-xl font-semibold mb-3 text-white">4.2 Service Providers</h3>
+                <h3 className="text-xl font-semibold mb-3 text-text-primary">4.2 Service Providers</h3>
                 <p className="text-gray-300 mb-4">
                   We work with trusted third-party service providers who help us operate our platform:
                 </p>
@@ -157,14 +157,14 @@ export default function PrivacyPolicy() {
                   <li>Customer support services</li>
                 </ul>
 
-                <h3 className="text-xl font-semibold mb-3 text-white">4.3 Legal Requirements</h3>
+                <h3 className="text-xl font-semibold mb-3 text-text-primary">4.3 Legal Requirements</h3>
                 <p className="text-gray-300">
                   We may disclose your information if required to do so by law or in response to valid requests by public authorities.
                 </p>
               </section>
 
               <section id="data-security" className="mb-12 scroll-mt-24">
-                <h2 className="text-2xl font-bold mb-4 text-[#FF8C00]">5. Data Security</h2>
+                <h2 className="text-2xl font-bold mb-4 text-text-primary">5. Data Security</h2>
                 <p className="text-gray-300 mb-4">
                   We implement appropriate technical and organizational measures to protect your personal information:
                 </p>
@@ -181,7 +181,7 @@ export default function PrivacyPolicy() {
               </section>
 
               <section id="your-rights" className="mb-12 scroll-mt-24">
-                <h2 className="text-2xl font-bold mb-4 text-[#FF8C00]">6. Your Rights</h2>
+                <h2 className="text-2xl font-bold mb-4 text-text-primary">6. Your Rights</h2>
                 <p className="text-gray-300 mb-4">
                   Depending on your location, you may have the following rights regarding your personal information:
                 </p>
@@ -199,7 +199,7 @@ export default function PrivacyPolicy() {
               </section>
 
               <section id="cookies" className="mb-12 scroll-mt-24">
-                <h2 className="text-2xl font-bold mb-4 text-[#FF8C00]">7. Cookies and Tracking Technologies</h2>
+                <h2 className="text-2xl font-bold mb-4 text-text-primary">7. Cookies and Tracking Technologies</h2>
                 <p className="text-gray-300 mb-4">
                   We use cookies and similar tracking technologies to enhance your experience:
                 </p>
@@ -215,21 +215,21 @@ export default function PrivacyPolicy() {
               </section>
 
               <section id="children-privacy" className="mb-12 scroll-mt-24">
-                <h2 className="text-2xl font-bold mb-4 text-[#FF8C00]">8. Children's Privacy</h2>
+                <h2 className="text-2xl font-bold mb-4 text-text-primary">8. Children's Privacy</h2>
                 <p className="text-gray-300">
                   Our Services are not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If we become aware that we have collected personal information from a child under 13, we will take steps to delete such information.
                 </p>
               </section>
 
               <section id="international-transfer" className="mb-12 scroll-mt-24">
-                <h2 className="text-2xl font-bold mb-4 text-[#FF8C00]">9. International Data Transfer</h2>
+                <h2 className="text-2xl font-bold mb-4 text-text-primary">9. International Data Transfer</h2>
                 <p className="text-gray-300">
                   Your information may be transferred to and maintained on computers located outside of your state, province, country or other governmental jurisdiction where the data protection laws may differ from those of your jurisdiction. We will take all steps reasonably necessary to ensure that your data is treated securely and in accordance with this Privacy Policy.
                 </p>
               </section>
 
               <section id="changes-policy" className="mb-12 scroll-mt-24">
-                <h2 className="text-2xl font-bold mb-4 text-[#FF8C00]">10. Changes to This Privacy Policy</h2>
+                <h2 className="text-2xl font-bold mb-4 text-text-primary">10. Changes to This Privacy Policy</h2>
                 <p className="text-gray-300">
                   We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date. You are advised to review this Privacy Policy periodically for any changes.
                 </p>
@@ -237,7 +237,7 @@ export default function PrivacyPolicy() {
 
               {/* Contact Information */}
               <div className="mt-12 pt-8 border-t border-gray-700">
-                <h2 className="text-2xl font-bold mb-4 text-[#FF8C00]">Contact Us</h2>
+                <h2 className="text-2xl font-bold mb-4 text-text-primary">Contact Us</h2>
                 <p className="text-gray-300 mb-4">
                   If you have any questions about this Privacy Policy, please contact us:
                 </p>
@@ -248,7 +248,7 @@ export default function PrivacyPolicy() {
                 </div>
                 
                 <div className="mt-6 p-4 bg-blue-900/20 border border-blue-700 rounded-lg">
-                  <h3 className="font-semibold text-blue-300 mb-2">Data Subject Requests</h3>
+                  <h3 className="font-semibold text-blue-300 mb-2 text-text-primary">Data Subject Requests</h3>
                   <p className="text-gray-300 text-sm">
                     For requests regarding your personal data rights, please email privacy@muzikax.com with subject line "Data Subject Request".
                   </p>

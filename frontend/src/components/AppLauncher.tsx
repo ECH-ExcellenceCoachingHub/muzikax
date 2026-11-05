@@ -88,7 +88,7 @@ export default function AppLauncher() {
           </div>
           
           {/* App Name - Responsive Text */}
-          <h1 className="mt-4 sm:mt-6 text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-wider text-center w-full">
+          <h1 className="mt-4 sm:mt-6 text-2xl sm:text-3xl md:text-4xl font-bold tracking-wider text-center w-full text-text-primary">
             MUZIKAX
           </h1>
           <p className="mt-2 text-sm sm:text-base md:text-lg text-gray-400 text-center w-full px-2">

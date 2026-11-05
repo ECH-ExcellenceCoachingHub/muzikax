@@ -228,7 +228,7 @@ export default function ChartsAnalyticsPage() {
                     <td className="py-3 px-4 text-right">{(track.plays / 1000).toFixed(1)}K</td>
                     <td className="py-3 px-4 text-right">{(track.likes / 1000).toFixed(1)}K</td>
                     <td className="py-3 px-4 text-right">{(track.shares / 1000).toFixed(1)}K</td>
-                    <td className="py-3 px-4 text-right font-bold text-[#FF8C00]">
+                    <td className="py-3 px-4 text-right font-bold text-primary">
                       {(track.score / 1000).toFixed(1)}K
                     </td>
                   </tr>

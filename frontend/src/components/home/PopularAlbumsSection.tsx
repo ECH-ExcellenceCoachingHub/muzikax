@@ -59,14 +59,14 @@ export default function PopularAlbumsSection({ albums, loading }: PopularAlbumsS
   return (
     <section className="w-full px-4 md:px-8 lg:px-12 xl:px-16 2xl:px-24 py-2 sm:py-4 lg:py-6 border-t border-white/5">
       <div className="flex items-center justify-between mb-2 md:mb-4">
-        <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-white gradient-text-animated">
+        <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-text-primary">
           Popular Albums
         </h2>
         <a
           href="/albums"
-          className="text-[#FF8C00] hover:text-[#FFB020] text-xs md:text-sm lg:text-base transition-colors font-semibold hover:underline"
+          className="text-xs font-semibold uppercase tracking-widest text-text-secondary hover:text-text-primary transition-colors duration-200"
         >
-          View All →
+          See All
         </a>
       </div>
 
@@ -100,9 +100,9 @@ export default function PopularAlbumsSection({ albums, loading }: PopularAlbumsS
               <div className="rounded-[14px] glassmorphism-advanced p-0.5 backdrop-blur-xl cursor-pointer hover:bg-[var(--card-bg)]/70 transition-colors">
                 <div className="relative scanline-overlay">
                   {album.coverImage && album.coverImage.trim() !== '' ? (
-                    <img src={album.coverImage} alt={album.title} className="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-110 reflective-surface" />
+                    <img src={album.coverImage} alt={album.title} className="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-[1.04] reflective-surface" />
                   ) : (
-                    <div className="w-full aspect-square bg-gradient-to-br from-[#FF8C00] to-[#FFB020] flex items-center justify-center neon-glow">
+                    <div className="w-full aspect-square bg-gradient-to-br from-primary to-primary-light flex items-center justify-center neon-glow">
                       <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
                       </svg>
@@ -110,7 +110,7 @@ export default function PopularAlbumsSection({ albums, loading }: PopularAlbumsS
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-[var(--card-bg)] via-[var(--card-bg)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center backdrop-blur-sm">
                     <button 
-                      className="w-12 h-12 sm:w-14 sm:h-14 rounded-full gradient-primary flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 fab-spring shadow-2xl hover:shadow-[#FF8C00]/50 pulse-ring"
+                      className="w-12 h-12 sm:w-14 sm:h-14 rounded-full gradient-primary flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 fab-spring shadow-2xl hover:shadow-primary/50 pulse-ring"
                       onClick={(e) => {
                         e.stopPropagation();
                         handlePlayAlbum(album.id, album);
@@ -132,7 +132,7 @@ export default function PopularAlbumsSection({ albums, loading }: PopularAlbumsS
                 </div>
 
                 <div className="p-3 md:p-4">
-                  <h3 className="font-bold text-white text-xs md:text-sm lg:text-base mb-1 truncate tracking-wide drop-shadow-md">
+                  <h3 className="font-bold text-xs md:text-sm lg:text-base mb-1 truncate tracking-wide drop-shadow-md text-text-primary">
                     {album.title}
                   </h3>
                   <p className="text-gray-300 text-xs md:text-sm truncate font-medium">

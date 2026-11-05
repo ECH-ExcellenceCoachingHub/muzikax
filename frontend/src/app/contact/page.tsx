@@ -88,12 +88,12 @@ export default function ContactPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen text-white bg-background">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#FF8C00] to-[#FFB020] py-16">
+      <div className="bg-gradient-to-r from-primary to-primary-light py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">{t('contactUsTitle')}</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-text-primary">{t('contactUsTitle')}</h1>
             <p className="text-xl text-white/90 max-w-3xl mx-auto">
               {t('contactUsSubtitle')}
             </p>
@@ -106,7 +106,7 @@ export default function ContactPage() {
           
           {/* Contact Form */}
           <div className="bg-gray-800/30 backdrop-blur-lg rounded-xl p-8 border border-gray-700">
-            <h2 className="text-2xl font-bold mb-6 text-[#FF8C00]">{t('sendUsMessage')}</h2>
+            <h2 className="text-2xl font-bold mb-6 text-text-primary">{t('sendUsMessage')}</h2>
             
             {submitStatus === "success" && (
               <div className="mb-6 p-4 bg-green-900/30 border border-green-700 rounded-lg">
@@ -142,7 +142,7 @@ export default function ContactPage() {
                   value={formData.name}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent text-white placeholder-gray-400"
+                  className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-white placeholder-gray-400"
                   placeholder={t('enterFullName')}
                 />
               </div>
@@ -158,7 +158,7 @@ export default function ContactPage() {
                   value={formData.email}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent text-white placeholder-gray-400"
+                  className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-white placeholder-gray-400"
                   placeholder={t('enterEmail')}
                 />
               </div>
@@ -173,7 +173,7 @@ export default function ContactPage() {
                   value={formData.subject}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent text-white"
+                  className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-white"
                 >
                   <option value="">{t('selectSubject')}</option>
                   <option value="general">{t('generalInquiry')}</option>
@@ -197,7 +197,7 @@ export default function ContactPage() {
                   onChange={handleInputChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent text-white placeholder-gray-400 resize-vertical"
+                  className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-white placeholder-gray-400 resize-vertical"
                   placeholder={t('howWeCanHelp')}
                 ></textarea>
               </div>
@@ -205,7 +205,7 @@ export default function ContactPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-[#FF8C00] to-[#FFB020] text-white font-semibold py-3 px-6 rounded-lg hover:from-[#FF7A00] hover:to-[#FFA010] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-gradient-to-r from-primary to-primary-light text-white font-semibold py-3 px-6 rounded-lg hover:from-primary hover:to-primary-light transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <div className="flex items-center justify-center">
@@ -225,24 +225,24 @@ export default function ContactPage() {
           {/* Contact Information */}
           <div>
             <div className="bg-gray-800/30 backdrop-blur-lg rounded-xl p-8 border border-gray-700 mb-8">
-              <h2 className="text-2xl font-bold mb-6 text-[#FF8C00]">{t('contactMethods')}</h2>
+              <h2 className="text-2xl font-bold mb-6 text-text-primary">{t('contactMethods')}</h2>
               
               <div className="space-y-6">
                 {contactMethods.map((method, index) => (
                   <div key={index} className="p-4 bg-gray-700/30 rounded-lg">
-                    <h3 className="font-semibold text-white mb-2">{method.title}</h3>
-                    <p className="text-[#FF8C00] mb-2">{method.email}</p>
+                    <h3 className="font-semibold mb-2 text-text-primary">{method.title}</h3>
+                    <p className="text-primary mb-2">{method.email}</p>
                     <p className="text-gray-400 text-sm">{method.description}</p>
                   </div>
                 ))}
               </div>
 
               <div className="mt-8 pt-6 border-t border-gray-700">
-                <h3 className="font-semibold text-white mb-4">{t('contactInfo')}</h3>
+                <h3 className="font-semibold mb-4 text-text-primary">{t('contactInfo')}</h3>
                 <div className="text-gray-300 space-y-3">
                   <div>
                     <p className="font-medium text-white">{t('phone')}:</p>
-                    <a href="tel:+250793828834" className="text-[#FF8C00] hover:underline">
+                    <a href="tel:+250793828834" className="text-primary hover:underline">
                       +250 793 828 834
                     </a>
                   </div>
@@ -260,7 +260,7 @@ export default function ContactPage() {
 
             {/* Social Links */}
             <div className="bg-gray-800/30 backdrop-blur-lg rounded-xl p-8 border border-gray-700">
-              <h2 className="text-2xl font-bold mb-6 text-[#FF8C00]">{t('connectWithUs')}</h2>
+              <h2 className="text-2xl font-bold mb-6 text-text-primary">{t('connectWithUs')}</h2>
               
               <div className="flex space-x-4">
                 <a href="#" className="flex items-center justify-center w-12 h-12 bg-[#1DA1F2] rounded-full hover:bg-[#1a91da] transition-colors">
@@ -290,12 +290,12 @@ export default function ContactPage() {
 
         {/* FAQ Section */}
         <div className="mt-16">
-          <h2 className="text-3xl font-bold mb-8 text-center text-[#FF8C00]">{t('faqTitle')}</h2>
+          <h2 className="text-3xl font-bold mb-8 text-center text-text-primary">{t('faqTitle')}</h2>
           
           <div className="grid md:grid-cols-2 gap-8">
             {faqItems.map((item, index) => (
               <div key={index} className="bg-gray-800/30 backdrop-blur-lg rounded-xl p-6 border border-gray-700">
-                <h3 className="font-semibold text-lg mb-3 text-white">{item.question}</h3>
+                <h3 className="font-semibold text-lg mb-3 text-text-primary">{item.question}</h3>
                 <p className="text-gray-300">{item.answer}</p>
               </div>
             ))}
@@ -306,7 +306,7 @@ export default function ContactPage() {
               {t('stillHaveQuestions')}{" "}
               <button 
                 onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
-                className="text-[#FF8C00] hover:underline font-medium"
+                className="text-primary hover:underline font-medium"
               >
                 {t('contactUsDirectly')}
               </button>

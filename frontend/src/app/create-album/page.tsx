@@ -106,7 +106,7 @@ export default function CreateAlbum() {
   // Show loading state while checking auth
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-white">Loading...</div>
       </div>
     )
@@ -305,9 +305,9 @@ export default function CreateAlbum() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black py-8 sm:py-12">
-      <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#FF8C00]/10 rounded-full blur-3xl -z-10"></div>
-      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-[#FFB020]/10 rounded-full blur-3xl -z-10"></div>
+    <div className="min-h-screen py-8 sm:py-12 bg-background">
+      <div className="absolute -top-40 -left-40 w-96 h-96 bg-primary/10 rounded-full blur-3xl -z-10"></div>
+      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-primary-light/10 rounded-full blur-3xl -z-10"></div>
       
       <div className="container mx-auto px-4 sm:px-8">
         <div className="max-w-4xl mx-auto">
@@ -322,7 +322,7 @@ export default function CreateAlbum() {
               Back
             </button>
             
-            <h1 className="text-2xl sm:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#FF8C00] to-[#FFB020] mb-2">
+            <h1 className="text-2xl sm:text-3xl font-bold mb-2 text-text-primary">
               Create New Album
             </h1>
             <p className="text-gray-400">
@@ -355,7 +355,7 @@ export default function CreateAlbum() {
                     name="title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                     placeholder="Enter album title"
                   />
                 </div>
@@ -369,7 +369,7 @@ export default function CreateAlbum() {
                     name="genre"
                     value={genre}
                     onChange={(e) => setGenre(e.target.value)}
-                    className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                   >
                     {genres.map((g) => (
                       <option key={g} value={g}>
@@ -389,7 +389,7 @@ export default function CreateAlbum() {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     rows={4}
-                    className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                     placeholder="Describe your album..."
                   />
                 </div>
@@ -422,7 +422,7 @@ export default function CreateAlbum() {
                           type="file"
                           accept="image/*"
                           onChange={handleCoverFileChange}
-                          className="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-[#FF8C00] file:text-white hover:file:bg-[#FF8C00]/80"
+                          className="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/80"
                         />
                         {uploadProgress['cover'] > 0 && uploadProgress['cover'] <= 100 && (
                           <div className="w-full mt-2">
@@ -432,7 +432,7 @@ export default function CreateAlbum() {
                             </div>
                             <div className="w-full bg-gray-700 rounded-full h-1.5 overflow-hidden">
                               <div 
-                                className={`h-1.5 rounded-full transition-all duration-300 ${uploadProgress['cover'] === 100 ? 'bg-yellow-500 animate-pulse' : 'bg-[#FF8C00]'}`} 
+                                className={`h-1.5 rounded-full transition-all duration-300 ${uploadProgress['cover'] === 100 ? 'bg-yellow-500 animate-pulse' : 'bg-primary'}`} 
                                 style={{ width: `${uploadProgress['cover']}%` }}
                               ></div>
                             </div>
@@ -457,7 +457,7 @@ export default function CreateAlbum() {
                           key={track._id}
                           className={`flex items-center p-3 rounded-lg border cursor-pointer transition-all ${
                             selectedTrackIds.includes(track._id) 
-                              ? 'border-[#FF8C00] bg-[#FF8C00]/10' 
+                              ? 'border-primary bg-primary/10' 
                               : 'border-gray-700 hover:border-gray-600'
                           }`}
                           onClick={() => toggleTrackSelection(track._id)}
@@ -465,7 +465,7 @@ export default function CreateAlbum() {
                           <div className="flex items-center">
                             <div className={`w-5 h-5 rounded border flex items-center justify-center mr-3 ${
                               selectedTrackIds.includes(track._id) 
-                                ? 'bg-[#FF8C00] border-[#FF8C00]' 
+                                ? 'bg-primary border-primary' 
                                 : 'border-gray-600'
                             }`}>
                               {selectedTrackIds.includes(track._id) && (
@@ -491,7 +491,7 @@ export default function CreateAlbum() {
                       You haven't uploaded any tracks yet. <button 
                         type="button"
                         onClick={() => router.push('/upload')}
-                        className="text-[#FF8C00] hover:underline"
+                        className="text-primary hover:underline"
                       >
                         Upload tracks first
                       </button>
@@ -509,7 +509,7 @@ export default function CreateAlbum() {
                   <button
                     type="submit"
                     disabled={isUploading || !title.trim() || selectedTrackIds.length === 0}
-                    className="flex-1 px-6 py-3 bg-[#FF8C00] text-white rounded-lg hover:bg-[#FF8C00]/80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
+                    className="flex-1 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
                   >
                     {isUploading ? 'Creating Album...' : 'Create Album'}
                   </button>

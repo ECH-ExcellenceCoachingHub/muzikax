@@ -241,7 +241,7 @@ export default function AdminMessages() {
             <div className="lg:col-span-2 space-y-4">
               {loading ? (
                 <div className="text-center py-12">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FF8C00] mx-auto"></div>
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
                 </div>
               ) : messages.length === 0 ? (
                 <div className="bg-gray-800 rounded-lg p-8 text-center text-gray-400">

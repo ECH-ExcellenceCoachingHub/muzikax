@@ -36,6 +36,9 @@ const initializeServer = async () => {
     
     // Store io instance for use in other modules
     app.io = io;
+
+    // Live DJ sets (audio relay, chat, reactions)
+    require('./services/liveRelay').registerSocketHandlers(io);
     
     // Real-time chart updates
     io.on('connection', (socket) => {

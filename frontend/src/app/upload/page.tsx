@@ -105,7 +105,7 @@ export default function Upload() {
   // Show loading state while checking auth
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[var(--background)] flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-white">Loading...</div>
       </div>
     )
@@ -682,27 +682,27 @@ export default function Upload() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--background)] py-8 sm:py-12 overflow-x-hidden">
+    <div className="min-h-screen py-8 sm:py-12 overflow-x-hidden bg-background">
       {/* Background elements with better positioning for mobile */}
-      <div className="absolute top-10 left-10 w-64 h-64 sm:w-80 sm:h-80 bg-[#FF8C00]/10 rounded-full blur-3xl -z-10 hidden md:block"></div>
-      <div className="absolute bottom-10 right-10 w-64 h-64 sm:w-80 sm:h-80 bg-[#FFB020]/10 rounded-full blur-3xl -z-10 hidden md:block"></div>
+      <div className="absolute top-10 left-10 w-64 h-64 sm:w-80 sm:h-80 bg-primary/10 rounded-full blur-3xl -z-10 hidden md:block"></div>
+      <div className="absolute bottom-10 right-10 w-64 h-64 sm:w-80 sm:h-80 bg-primary-light/10 rounded-full blur-3xl -z-10 hidden md:block"></div>
       
       {/* Simpler mobile background */}
-      <div className="absolute top-5 left-5 w-32 h-32 bg-[#FF8C00]/5 rounded-full blur-2xl -z-10 md:hidden"></div>
-      <div className="absolute bottom-5 right-5 w-32 h-32 bg-[#FFB020]/5 rounded-full blur-2xl -z-10 md:hidden"></div>
+      <div className="absolute top-5 left-5 w-32 h-32 bg-primary/5 rounded-full blur-2xl -z-10 md:hidden"></div>
+      <div className="absolute bottom-5 right-5 w-32 h-32 bg-primary-light/5 rounded-full blur-2xl -z-10 md:hidden"></div>
       
       {/* Upgrade Prompt Modal */}
       {showUpgradePrompt && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
           <div className="card-bg rounded-2xl p-4 sm:p-5 md:p-8 max-w-sm sm:max-w-md w-full border border-gray-700/50 shadow-2xl my-4 sm:my-8">
             <div className="text-center">
-              <div className="mx-auto w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full bg-[#FF8C00]/10 flex items-center justify-center mb-2 sm:mb-3 md:mb-4">
-                <svg className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-[#FF8C00]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <div className="mx-auto w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full bg-primary/10 flex items-center justify-center mb-2 sm:mb-3 md:mb-4">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
                 </svg>
               </div>
               
-              <h2 className="text-base sm:text-lg md:text-2xl font-bold text-white mb-1 sm:mb-2 md:mb-3">Become a Creator</h2>
+              <h2 className="text-base sm:text-lg md:text-2xl font-bold mb-1 sm:mb-2 md:mb-3 text-text-primary">Become a Creator</h2>
               <p className="text-gray-400 text-xs sm:text-sm md:text-base mb-3 sm:mb-4 md:mb-6">
                 You need to upgrade your account to upload music. Please select your creator type below.
               </p>
@@ -714,7 +714,7 @@ export default function Upload() {
                     type="button"
                     className={`py-1.5 sm:py-2 md:py-3 px-1 sm:px-2 rounded-lg text-xs sm:text-sm md:text-base font-medium transition-all ${
                       selectedCreatorType === type
-                        ? 'bg-[#FF8C00] text-white'
+                        ? 'bg-primary text-white'
                         : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700/50'
                     }`}
                     onClick={() => setSelectedCreatorType(type)}
@@ -752,7 +752,7 @@ export default function Upload() {
         <div className="container mx-auto px-4 sm:px-8">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-8 sm:mb-12">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-clip-text text-transparent gradient-text mb-3 sm:mb-4">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold gradient-text mb-3 sm:mb-4 text-text-primary">
                 Upload Your Music
               </h1>
               <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
@@ -767,7 +767,7 @@ export default function Upload() {
                   onClick={() => setIsAlbumUpload(false)}
                   className={`px-4 py-2 rounded-lg font-medium transition-all ${
                     !isAlbumUpload
-                      ? 'bg-[#FF8C00] text-white'
+                      ? 'bg-primary text-white'
                       : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
                   }`}
                 >
@@ -777,7 +777,7 @@ export default function Upload() {
                   onClick={() => setIsAlbumUpload(true)}
                   className={`px-4 py-2 rounded-lg font-medium transition-all ${
                     isAlbumUpload
-                      ? 'bg-[#FF8C00] text-white'
+                      ? 'bg-primary text-white'
                       : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
                   }`}
                 >
@@ -792,7 +792,7 @@ export default function Upload() {
                 <>
                   {/* Audio Upload Section */}
                   <div className="card-bg rounded-2xl p-5 sm:p-6">
-                    <h2 className="text-lg sm:text-xl font-medium text-white mb-4">Audio File</h2>
+                    <h2 className="text-lg sm:text-xl font-medium mb-4 text-text-primary">Audio File</h2>
                     
                     {!audioUrl ? (
                       <div className="flex flex-col space-y-2">
@@ -800,7 +800,7 @@ export default function Upload() {
                           type="file"
                           accept="audio/*"
                           onChange={handleAudioFileChange}
-                          className="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-[#FF8C00] file:text-white hover:file:bg-[#FF8C00]/80"
+                          className="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/80"
                         />
                         {uploadProgress['audio'] > 0 && uploadProgress['audio'] <= 100 && (
                           <div className="space-y-1 mt-2">
@@ -810,7 +810,7 @@ export default function Upload() {
                             </div>
                             <div className="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
                               <div 
-                                className={`h-2 rounded-full transition-all duration-300 ${uploadProgress['audio'] === 100 ? 'bg-yellow-500 animate-pulse' : 'bg-[#FF8C00]'}`} 
+                                className={`h-2 rounded-full transition-all duration-300 ${uploadProgress['audio'] === 100 ? 'bg-yellow-500 animate-pulse' : 'bg-primary'}`} 
                                 style={{ width: `${uploadProgress['audio']}%` }}
                               ></div>
                             </div>
@@ -827,7 +827,7 @@ export default function Upload() {
 
                   {/* Cover Image Upload Section */}
                   <div className="card-bg rounded-2xl p-5 sm:p-6">
-                    <h2 className="text-lg sm:text-xl font-medium text-white mb-4">Cover Image</h2>
+                    <h2 className="text-lg sm:text-xl font-medium mb-4 text-text-primary">Cover Image</h2>
                     
                     {!coverUrl ? (
                       <div className="flex flex-col space-y-2">
@@ -835,7 +835,7 @@ export default function Upload() {
                           type="file"
                           accept="image/*"
                           onChange={handleCoverFileChange}
-                          className="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-[#FF8C00] file:text-white hover:file:bg-[#FF8C00]/80"
+                          className="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/80"
                         />
                         {uploadProgress['cover'] > 0 && uploadProgress['cover'] <= 100 && (
                           <div className="space-y-1 mt-2">
@@ -845,7 +845,7 @@ export default function Upload() {
                             </div>
                             <div className="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
                               <div 
-                                className={`h-2 rounded-full transition-all duration-300 ${uploadProgress['cover'] === 100 ? 'bg-yellow-500 animate-pulse' : 'bg-[#FF8C00]'}`} 
+                                className={`h-2 rounded-full transition-all duration-300 ${uploadProgress['cover'] === 100 ? 'bg-yellow-500 animate-pulse' : 'bg-primary'}`} 
                                 style={{ width: `${uploadProgress['cover']}%` }}
                               ></div>
                             </div>
@@ -880,7 +880,7 @@ export default function Upload() {
                         id="title"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
-                        className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent transition-all text-sm sm:text-base"
+                        className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-sm sm:text-base"
                         placeholder="Enter track title"
                         required
                       />
@@ -895,7 +895,7 @@ export default function Upload() {
                         rows={3}
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                        className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent transition-all text-sm sm:text-base"
+                        className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-sm sm:text-base"
                         placeholder="Tell us about your track..."
                       ></textarea>
                     </div>
@@ -909,7 +909,7 @@ export default function Upload() {
                           id="genre"
                           value={genre}
                           onChange={(e) => setGenre(e.target.value)}
-                          className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent transition-all text-sm sm:text-base"
+                          className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-sm sm:text-base"
                         >
                           {genres.map(genreOption => (
                             <option key={genreOption} value={genreOption}>
@@ -927,7 +927,7 @@ export default function Upload() {
                           id="type"
                           value={type}
                           onChange={(e) => setType(e.target.value as 'song' | 'beat' | 'mix')}
-                          className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent transition-all text-sm sm:text-base"
+                          className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-sm sm:text-base"
                         >
                           <option value="song">Song</option>
                           <option value="beat">Beat</option>
@@ -945,7 +945,7 @@ export default function Upload() {
                             id="paymentType"
                             value={paymentType}
                             onChange={(e) => setPaymentType(e.target.value as 'free' | 'paid')}
-                            className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent transition-all text-sm sm:text-base"
+                            className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-sm sm:text-base"
                           >
                             <option value="free">Free</option>
                             <option value="paid">Paid</option>
@@ -971,7 +971,7 @@ export default function Upload() {
                             step="0.01"
                             value={price}
                             onChange={(e) => setPrice(parseFloat(e.target.value) || 0)}
-                            className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent transition-all text-sm sm:text-base"
+                            className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-sm sm:text-base"
                             placeholder="0.00"
                           />
                           <p className="mt-1 text-xs text-gray-500">
@@ -991,7 +991,7 @@ export default function Upload() {
                           id="releaseDate"
                           value={releaseDate}
                           onChange={(e) => setReleaseDate(e.target.value)}
-                          className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent transition-all text-sm sm:text-base"
+                          className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-sm sm:text-base"
                         />
                       </div>
 
@@ -1003,7 +1003,7 @@ export default function Upload() {
                           id="visibility"
                           value={visibility}
                           onChange={(e) => setVisibility(e.target.value)}
-                          className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent transition-all text-sm sm:text-base"
+                          className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-sm sm:text-base"
                         >
                           <option value="public">Public</option>
                           <option value="fans">Fans Only</option>
@@ -1021,7 +1021,7 @@ export default function Upload() {
                         id="collaborators"
                         value={collaborators}
                         onChange={(e) => setCollaborators(e.target.value)}
-                        className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent transition-all text-sm sm:text-base"
+                        className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-sm sm:text-base"
                         placeholder="e.g., Producer: John Doe, Featuring: Jane Smith"
                       />
                       <p className="mt-1 text-xs text-gray-500">
@@ -1037,7 +1037,7 @@ export default function Upload() {
                           checked={copyrightAccepted}
                           onChange={(e) => setCopyrightAccepted(e.target.checked)}
                           required
-                          className="w-4 h-4 text-[#FF8C00] bg-gray-800 border-gray-700 rounded focus:ring-[#FF8C00] focus:ring-2"
+                          className="w-4 h-4 text-primary bg-gray-800 border-gray-700 rounded focus:ring-primary focus:ring-2"
                         />
                       </div>
                       <div className="ml-3 text-sm">
@@ -1065,7 +1065,7 @@ export default function Upload() {
                         id="albumTitle"
                         value={albumTitle}
                         onChange={(e) => setAlbumTitle(e.target.value)}
-                        className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent transition-all text-sm sm:text-base"
+                        className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-sm sm:text-base"
                         placeholder="Enter album title"
                         required
                       />
@@ -1080,7 +1080,7 @@ export default function Upload() {
                         rows={3}
                         value={albumDescription}
                         onChange={(e) => setAlbumDescription(e.target.value)}
-                        className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent transition-all text-sm sm:text-base"
+                        className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-sm sm:text-base"
                         placeholder="Tell us about your album..."
                       ></textarea>
                     </div>
@@ -1096,7 +1096,7 @@ export default function Upload() {
                             type="file"
                             accept="image/*"
                             onChange={handleAlbumCoverFileChange}
-                            className="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-[#FF8C00] file:text-white hover:file:bg-[#FF8C00]/80"
+                            className="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/80"
                           />
                           {uploadProgress['album-cover'] > 0 && uploadProgress['album-cover'] <= 100 && (
                             <div className="space-y-1 mt-2">
@@ -1106,7 +1106,7 @@ export default function Upload() {
                               </div>
                               <div className="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
                                 <div 
-                                  className={`h-2 rounded-full transition-all duration-300 ${uploadProgress['album-cover'] === 100 ? 'bg-yellow-500 animate-pulse' : 'bg-[#FF8C00]'}`} 
+                                  className={`h-2 rounded-full transition-all duration-300 ${uploadProgress['album-cover'] === 100 ? 'bg-yellow-500 animate-pulse' : 'bg-primary'}`} 
                                   style={{ width: `${uploadProgress['album-cover']}%` }}
                                 ></div>
                               </div>
@@ -1134,11 +1134,11 @@ export default function Upload() {
                   {/* Album Tracks */}
                   <div className="card-bg rounded-2xl p-5 sm:p-6">
                     <div className="flex justify-between items-center mb-4">
-                      <h2 className="text-lg sm:text-xl font-medium text-white">Album Tracks</h2>
+                      <h2 className="text-lg sm:text-xl font-medium text-text-primary">Album Tracks</h2>
                       <button
                         type="button"
                         onClick={addAlbumTrack}
-                        className="px-3 py-1 bg-[#FF8C00] text-white rounded-lg hover:bg-[#FF8C00]/80 transition-colors text-sm"
+                        className="px-3 py-1 bg-primary text-white rounded-lg hover:bg-primary/80 transition-colors text-sm"
                       >
                         Add Track
                       </button>
@@ -1153,7 +1153,7 @@ export default function Upload() {
                         {albumTracks.map((track, index) => (
                           <div key={track.id} className="border border-gray-700 rounded-lg p-4">
                             <div className="flex justify-between items-center mb-3">
-                              <h3 className="text-white font-medium">Track {index + 1}</h3>
+                              <h3 className="font-medium text-text-primary">Track {index + 1}</h3>
                               <button
                                 type="button"
                                 onClick={() => removeAlbumTrack(track.id)}
@@ -1173,7 +1173,7 @@ export default function Upload() {
                                     type="file"
                                     accept="audio/*"
                                     onChange={(e) => handleAlbumAudioFileChange(e, track.id)}
-                                    className="w-full text-sm text-gray-400 file:mr-4 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-[#FF8C00] file:text-white hover:file:bg-[#FF8C00]/80"
+                                    className="w-full text-sm text-gray-400 file:mr-4 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/80"
                                   />
                                   {uploadProgress[`album-audio-${track.id}`] > 0 && uploadProgress[`album-audio-${track.id}`] <= 100 && (
                                     <div className="w-full mt-2">
@@ -1183,7 +1183,7 @@ export default function Upload() {
                                       </div>
                                       <div className="w-full bg-gray-700 rounded-full h-1.5 overflow-hidden">
                                         <div 
-                                          className={`h-1.5 rounded-full transition-all duration-300 ${uploadProgress[`album-audio-${track.id}`] === 100 ? 'bg-yellow-500 animate-pulse' : 'bg-[#FF8C00]'}`} 
+                                          className={`h-1.5 rounded-full transition-all duration-300 ${uploadProgress[`album-audio-${track.id}`] === 100 ? 'bg-yellow-500 animate-pulse' : 'bg-primary'}`} 
                                           style={{ width: `${uploadProgress[`album-audio-${track.id}`]}%` }}
                                         ></div>
                                       </div>
@@ -1206,7 +1206,7 @@ export default function Upload() {
                                     type="file"
                                     accept="image/*"
                                     onChange={(e) => handleAlbumTrackCoverFileChange(e, track.id)}
-                                    className="w-full text-sm text-gray-400 file:mr-4 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-[#FF8C00] file:text-white hover:file:bg-[#FF8C00]/80"
+                                    className="w-full text-sm text-gray-400 file:mr-4 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/80"
                                   />
                                   {uploadProgress[`album-cover-${track.id}`] > 0 && uploadProgress[`album-cover-${track.id}`] <= 100 && (
                                     <div className="w-full mt-2">
@@ -1216,7 +1216,7 @@ export default function Upload() {
                                       </div>
                                       <div className="w-full bg-gray-700 rounded-full h-1.5 overflow-hidden">
                                         <div 
-                                          className={`h-1.5 rounded-full transition-all duration-300 ${uploadProgress[`album-cover-${track.id}`] === 100 ? 'bg-yellow-500 animate-pulse' : 'bg-[#FF8C00]'}`} 
+                                          className={`h-1.5 rounded-full transition-all duration-300 ${uploadProgress[`album-cover-${track.id}`] === 100 ? 'bg-yellow-500 animate-pulse' : 'bg-primary'}`} 
                                           style={{ width: `${uploadProgress[`album-cover-${track.id}`]}%` }}
                                         ></div>
                                       </div>
@@ -1327,7 +1327,7 @@ export default function Upload() {
                                     type="checkbox"
                                     checked={track.copyrightAccepted || false}
                                     onChange={(e) => updateAlbumTrack(track.id, 'copyrightAccepted', e.target.checked)}
-                                    className="w-3 h-3 text-[#FF8C00] bg-gray-800 border-gray-700 rounded focus:ring-[#FF8C00] focus:ring-2"
+                                    className="w-3 h-3 text-primary bg-gray-800 border-gray-700 rounded focus:ring-primary focus:ring-2"
                                   />
                                 </div>
                                 <div className="ml-2 text-xs">
@@ -1346,9 +1346,9 @@ export default function Upload() {
               )}
 
               {/* Tips Card */}
-              <div className="card-bg rounded-2xl p-5 sm:p-6 border-l-4 border-[#FFB020]">
-                <h3 className="font-medium text-white mb-2 flex items-center gap-2">
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#FFB020]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <div className="card-bg rounded-2xl p-5 sm:p-6 border-l-4 border-primary-light">
+                <h3 className="font-medium mb-2 flex items-center gap-2 text-text-primary">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 text-primary-light" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd"></path>
                   </svg>
                   Upload Tips
@@ -1386,7 +1386,7 @@ export default function Upload() {
                   {stemProcessingStatus === 'queued' && (
                     <div className="space-y-3">
                       <div className="flex items-center space-x-3">
-                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-[#FF8C00]"></div>
+                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"></div>
                         <p className="text-white font-medium">🎵 Stem Separation Queued</p>
                       </div>
                       <p className="text-gray-400 text-sm">
@@ -1457,7 +1457,7 @@ export default function Upload() {
                       </p>
                       <button
                         onClick={() => setStemProcessingStatus('idle')}
-                        className="text-xs text-[#FF8C00] hover:underline"
+                        className="text-xs text-primary hover:underline"
                       >
                         Dismiss
                       </button>

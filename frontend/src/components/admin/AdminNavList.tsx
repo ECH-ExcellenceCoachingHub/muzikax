@@ -48,20 +48,20 @@ export default function AdminNavList({
                       collapsed ? 'justify-center' : ''
                     } ${
                       active
-                        ? 'bg-[#FF8C00]/15 text-white'
+                        ? 'bg-primary/15 text-white'
                         : 'text-gray-400 hover:bg-gray-800/60 hover:text-white'
                     }`}
                   >
                     {active && (
                       <span
-                        className="absolute left-0 top-1/2 h-6 w-1 -translate-y-1/2 rounded-r-full bg-gradient-to-b from-[#FF8C00] to-[#FFB020]"
+                        className="absolute left-0 top-1/2 h-6 w-1 -translate-y-1/2 rounded-r-full bg-gradient-to-b from-primary to-primary-light"
                         aria-hidden="true"
                       />
                     )}
 
                     <AdminIcon
                       name={item.icon}
-                      className={`h-5 w-5 flex-shrink-0 ${active ? 'text-[#FF8C00]' : ''}`}
+                      className={`h-5 w-5 flex-shrink-0 ${active ? 'text-primary' : ''}`}
                     />
 
                     {!collapsed && <span className="truncate">{item.name}</span>}

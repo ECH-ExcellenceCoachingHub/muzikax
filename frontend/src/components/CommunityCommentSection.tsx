@@ -113,14 +113,14 @@ export default function CommunityCommentSection({
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
             placeholder="Add a comment..."
-            className="flex-1 px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+            className="flex-1 px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary"
           />
           <button
             type="submit"
             disabled={!newComment.trim() || isSubmitting}
             className={`px-4 py-2 rounded-lg font-medium text-sm transition-colors ${
               newComment.trim() && !isSubmitting
-                ? 'bg-[#FF8C00] text-white hover:bg-[#FF8C00]/80'
+                ? 'bg-primary text-white hover:bg-primary/80'
                 : 'bg-gray-700 text-gray-400 cursor-not-allowed'
             }`}
           >
@@ -131,7 +131,7 @@ export default function CommunityCommentSection({
         <div className="text-gray-400 text-sm text-center py-2">
           <button 
             onClick={() => window.location.href = '/login'}
-            className="text-[#FF8C00] hover:underline"
+            className="text-primary hover:underline"
           >
             Log in
           </button>
@@ -143,7 +143,7 @@ export default function CommunityCommentSection({
       <div className="space-y-3 max-h-96 overflow-y-auto pr-2">
         {isLoading && postComments.length === 0 ? (
           <div className="flex justify-center py-6">
-            <div className="inline-block animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-[#FF8C00]"></div>
+            <div className="inline-block animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-primary"></div>
           </div>
         ) : postComments.length === 0 ? (
           <div className="text-gray-400 text-center py-6 text-sm">
@@ -164,7 +164,7 @@ export default function CommunityCommentSection({
                       className="w-7 h-7 rounded-full object-cover"
                     />
                   ) : (
-                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#FF8C00] to-[#FFB020] flex items-center justify-center border border-[#FF8C00]/30">
+                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-primary to-primary-light flex items-center justify-center border border-primary/30">
                       <span className="text-white font-bold text-[10px]">
                         {comment.username ? comment.username.charAt(0).toUpperCase() : '?'}
                       </span>
@@ -210,7 +210,7 @@ export default function CommunityCommentSection({
                 <div className="mt-2">
                   <button
                     onClick={() => setShowReplies(prev => ({ ...prev, [comment.id]: !prev[comment.id] }))}
-                    className="text-xs text-[#FF8C00] hover:underline"
+                    className="text-xs text-primary hover:underline"
                   >
                     {showReplies[comment.id] 
                       ? `Hide ${comment.replies.length} repl${comment.replies.length === 1 ? 'y' : 'ies'}`
@@ -231,7 +231,7 @@ export default function CommunityCommentSection({
                                   className="w-5 h-5 rounded-full object-cover"
                                 />
                               ) : (
-                                <div className="w-5 h-5 rounded-full bg-gradient-to-br from-[#FF8C00] to-[#FFB020] flex items-center justify-center border border-[#FF8C00]/30">
+                                <div className="w-5 h-5 rounded-full bg-gradient-to-br from-primary to-primary-light flex items-center justify-center border border-primary/30">
                                   <span className="text-white font-bold text-[8px]">
                                     {reply.username ? reply.username.charAt(0).toUpperCase() : '?'}
                                   </span>

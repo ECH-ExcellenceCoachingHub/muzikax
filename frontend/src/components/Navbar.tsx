@@ -136,7 +136,7 @@ export default function Navbar() {
     if (isAuthenticated) {
       const fetchUnreadCount = async () => {
         try {
-          const token = localStorage.getItem('token');
+           const token = localStorage.getItem('accessToken') || localStorage.getItem('token');
           if (token) {
             notificationService.setToken(token);
             const response = await notificationService.getUnreadCount();
@@ -175,12 +175,12 @@ export default function Navbar() {
   return (
     <>
       {/* Desktop Navigation */}
-      <nav className="hidden md:block glass-strong sticky top-0 z-40">
+      <nav className="hidden md:block sticky top-0 z-30 bg-background/85 backdrop-blur-xl border-b border-border-light">
         <div className="max-w-[2000px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 gap-4">
             {/* Logo - Left Side */}
             <Link href="/" className="flex items-center gap-3 group flex-shrink-0">
-              <div className="w-9 h-9 rounded-xl overflow-hidden shadow-lg ring-2 ring-[#F59E0B]/30 transition-all duration-300 group-hover:ring-[#FFB020]/50">
+              <div className="w-9 h-9 rounded-xl overflow-hidden shadow-lg ring-2 ring-primary/30 transition-all duration-300 group-hover:ring-primary-light/50">
                 <img src="/muzikax.png" alt="MuzikaX Logo" className="w-full h-full object-cover" />
               </div>
               <span className="text-xl font-black text-white hidden lg:block">MuzikaX</span>
@@ -198,7 +198,7 @@ export default function Navbar() {
               className="flex-1 max-w-2xl hidden md:block"
             >
               <div className="relative group">
-                <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 group-focus-within:text-[#F59E0B] transition-colors">
+                <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 group-focus-within:text-primary transition-colors">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                   </svg>
@@ -208,7 +208,7 @@ export default function Navbar() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder={t('searchPlaceholder')}
-                  className="w-full pl-12 pr-24 py-2.5 bg-[#121821]/80 backdrop-blur-sm text-white placeholder-[#6B7280] focus:outline-none focus:ring-2 focus:ring-[#F59E0B]/40 focus:bg-[#1A2330] transition-all duration-300 rounded-full border border-[#1F2937] hover:border-[#374151] text-sm shadow-sm"
+                  className="w-full pl-12 pr-24 py-2.5 bg-surface/80 backdrop-blur-sm text-white placeholder-[#71717A] focus:outline-none focus:ring-2 focus:ring-primary/40 focus:bg-surface-elevated transition-all duration-300 rounded-full border border-surface-elevated hover:border-gray-700 text-sm shadow-sm"
                 />
                 {searchQuery ? (
                   <button
@@ -232,7 +232,7 @@ export default function Navbar() {
             {/* Mobile Search Button */}
             <button
               onClick={() => router.push('/search')}
-              className="md:hidden p-2.5 text-gray-400 hover:text-white hover:bg-[#121821] rounded-full transition-all"
+              className="md:hidden p-2.5 text-gray-400 hover:text-white hover:bg-surface rounded-full transition-all"
               aria-label="Search"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -245,7 +245,7 @@ export default function Navbar() {
               {/* Language Switcher */}
               <button 
                 onClick={() => setShowLanguageModal(true)}
-                className="flex items-center gap-2 px-4 py-2.5 bg-[#121821] hover:bg-[#1A2330] border border-[#1F2937] text-white rounded-full text-sm font-medium transition-all duration-300 active:scale-95"
+                className="flex items-center gap-2 px-4 py-2.5 bg-surface hover:bg-surface-elevated border border-surface-elevated text-white rounded-full text-sm font-medium transition-all duration-300 active:scale-95"
               >
                 <span>{language === 'en' ? '🇬🇧' : language === 'rw' ? '🇷🇼' : '🇫🇷'}</span>
                 <span className="hidden lg:inline">{t('language')}</span>
@@ -253,19 +253,19 @@ export default function Navbar() {
 
               {/* Authentication / Profile Buttons */}
               {!mounted ? (
-                <div className="w-24 h-9 bg-[#121821] rounded-full animate-pulse"></div>
+                <div className="w-24 h-9 bg-surface rounded-full animate-pulse"></div>
               ) : isAuthenticated ? (
                 user?.role === 'admin' && !pathname?.startsWith('/admin') ? (
                   <Link
                     href="/admin"
-                    className="flex items-center px-5 py-2.5 bg-gradient-to-r from-[#FF8C00] to-[#FFB020] hover:from-[#FF7A00] hover:to-[#FFA010] text-black rounded-full text-sm font-bold transition-all duration-300 active:scale-95 shadow-lg shadow-[#FF8C00]/30"
+                    className="flex items-center px-5 py-2.5 bg-gradient-to-r from-primary to-primary-light hover:from-primary hover:to-primary-light text-black rounded-full text-sm font-bold transition-all duration-300 active:scale-95 shadow-lg shadow-primary/30"
                   >
                     {t('adminDashboard')}
                   </Link>
                 ) : (
                   <Link
                     href="/library"
-                    className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#FF8C00] to-[#FFB020] hover:from-[#FF7A00] hover:to-[#FFA010] text-black rounded-full text-sm font-bold transition-all duration-300 active:scale-95 shadow-lg shadow-[#FF8C00]/30"
+                    className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary to-primary-light hover:from-primary hover:to-primary-light text-black rounded-full text-sm font-bold transition-all duration-300 active:scale-95 shadow-lg shadow-primary/30"
                   >
                     {user?.avatar ? (
                       <img src={user.avatar} alt={user.name} className="w-5 h-5 rounded-full object-cover" />
@@ -278,7 +278,7 @@ export default function Navbar() {
               ) : (
                 <Link
                   href="/login"
-                  className="flex items-center px-5 py-2.5 bg-gradient-to-r from-[#FF8C00] to-[#FFB020] hover:from-[#FF7A00] hover:to-[#FFA010] text-black rounded-full text-sm font-bold transition-all duration-300 active:scale-95 shadow-lg shadow-[#FF8C00]/30"
+                  className="flex items-center px-5 py-2.5 bg-gradient-to-r from-primary to-primary-light hover:from-primary hover:to-primary-light text-black rounded-full text-sm font-bold transition-all duration-300 active:scale-95 shadow-lg shadow-primary/30"
                 >
                   {t('login')}
                 </Link>
@@ -290,7 +290,7 @@ export default function Navbar() {
                   onClick={() => {
                     router.push('/upload');
                   }}
-                  className="flex items-center px-5 py-2.5 bg-[#121821] hover:bg-[#1A2330] text-white border border-[#1F2937] rounded-full text-sm font-bold transition-all duration-300"
+                  className="flex items-center px-5 py-2.5 bg-surface hover:bg-surface-elevated text-white border border-surface-elevated rounded-full text-sm font-bold transition-all duration-300"
                 >
                   <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
@@ -307,7 +307,7 @@ export default function Navbar() {
       {showLanguageModal && (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
           <div 
-            className="bg-gray-900/95 backdrop-blur-xl border border-gray-700/50 rounded-2xl shadow-2xl w-full max-w-md transform transition-all duration-200 scale-100 animate-in fade-in zoom-in-95 overflow-auto"
+            className="bg-surface-elevated border border-border-medium rounded-2xl shadow-2xl w-full max-w-md transform transition-all duration-200 scale-100 animate-in fade-in zoom-in-95 overflow-auto"
             onClick={(e) => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
@@ -315,7 +315,7 @@ export default function Navbar() {
           >
             {/* Header with Close Button */}
             <div className="px-6 py-4 border-b border-gray-800/50 flex items-center justify-between">
-              <h2 className="text-base font-semibold text-white">
+              <h2 className="text-base font-semibold text-text-primary">
                 Select Language
               </h2>
               <button
@@ -338,16 +338,16 @@ export default function Navbar() {
                   setLanguage('en');
                   setShowLanguageModal(false);
                 }}
-                className="w-full flex items-center justify-between px-5 py-4 rounded-xl bg-gradient-to-r from-blue-600/20 to-blue-600/10 border border-blue-500/30 hover:border-blue-400 transition-all duration-200 group active:scale-[0.98]"
+                className={`w-full flex items-center justify-between px-4 py-3.5 rounded-xl border transition-colors duration-150 active:scale-[0.99] ${actualLanguage === 'en' ? 'bg-primary/10 border-primary/40' : 'bg-surface border-transparent hover:bg-surface-overlay'}`}
               >
                 <div className="flex items-center space-x-4">
                   <span className="text-3xl">🇬🇧</span>
                   <div className="flex flex-col">
                     <span className="text-base font-semibold text-white">English</span>
-                    <span className="text-xs opacity-60">United Kingdom</span>
+                    <span className="text-xs text-text-muted">United Kingdom</span>
                   </div>
                 </div>
-                <svg className="w-6 h-6 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                <svg className={`w-5 h-5 text-primary ${actualLanguage === 'en' ? '' : 'invisible'}`} fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
               </button>
@@ -359,16 +359,16 @@ export default function Navbar() {
                   setLanguage('rw');
                   setShowLanguageModal(false);
                 }}
-                className="w-full flex items-center justify-between px-5 py-4 rounded-xl bg-gradient-to-r from-yellow-500/20 to-red-500/10 border border-yellow-500/30 hover:border-yellow-400 transition-all duration-200 group active:scale-[0.98]"
+                className={`w-full flex items-center justify-between px-4 py-3.5 rounded-xl border transition-colors duration-150 active:scale-[0.99] ${actualLanguage === 'rw' ? 'bg-primary/10 border-primary/40' : 'bg-surface border-transparent hover:bg-surface-overlay'}`}
               >
                 <div className="flex items-center space-x-4">
                   <span className="text-3xl">🇷🇼</span>
                   <div className="flex flex-col">
                     <span className="text-base font-semibold text-white">Kinyarwanda</span>
-                    <span className="text-xs opacity-60">Rwanda</span>
+                    <span className="text-xs text-text-muted">Rwanda</span>
                   </div>
                 </div>
-                <svg className="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                <svg className={`w-5 h-5 text-primary ${actualLanguage === 'rw' ? '' : 'invisible'}`} fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
               </button>
@@ -380,16 +380,16 @@ export default function Navbar() {
                   setLanguage('sw');
                   setShowLanguageModal(false);
                 }}
-                className="w-full flex items-center justify-between px-5 py-4 rounded-xl bg-gradient-to-r from-green-600/20 to-blue-600/10 border border-green-500/30 hover:border-green-400 transition-all duration-200 group active:scale-[0.98]"
+                className={`w-full flex items-center justify-between px-4 py-3.5 rounded-xl border transition-colors duration-150 active:scale-[0.99] ${actualLanguage === 'sw' ? 'bg-primary/10 border-primary/40' : 'bg-surface border-transparent hover:bg-surface-overlay'}`}
               >
                 <div className="flex items-center space-x-4">
                   <span className="text-3xl">🇹🇿</span>
                   <div className="flex flex-col">
                     <span className="text-base font-semibold text-white">Kiswahili</span>
-                    <span className="text-xs opacity-60">Tanzania/Kenya</span>
+                    <span className="text-xs text-text-muted">Tanzania/Kenya</span>
                   </div>
                 </div>
-                <svg className="w-6 h-6 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <svg className={`w-5 h-5 text-primary ${actualLanguage === 'sw' ? '' : 'invisible'}`} fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
               </button>

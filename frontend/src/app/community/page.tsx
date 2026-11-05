@@ -546,7 +546,7 @@ const CommunityContent = () => {
   // Show loading spinner while checking auth or during initial load
   if (!authChecked || isLoading || !user) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-background-deep via-background to-surface flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
       </div>
     );
@@ -557,7 +557,7 @@ const CommunityContent = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 pt-14 md:pt-0">
+    <div className="min-h-screen pt-14 md:pt-0 bg-background">
       {/* Mobile Header with Back Button */}
       <div className="md:hidden sticky top-0 z-50 bg-gray-900/95 backdrop-blur-lg border-b border-gray-800">
         <div className="container mx-auto px-4 py-4">
@@ -570,7 +570,7 @@ const CommunityContent = () => {
               <FaArrowLeft className="w-5 h-5" />
             </button>
             <div>
-              <h1 className="text-xl font-black text-white">Community</h1>
+              <h1 className="text-xl font-black text-text-primary">Community</h1>
               <p className="text-xs text-gray-400">Connect & share</p>
             </div>
           </div>
@@ -587,7 +587,7 @@ const CommunityContent = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2">
             <div className="text-center mb-6 sm:mb-8">
-              <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-primary to-primary-hover bg-clip-text text-transparent mb-2">{t('vibes')}</h1>
+              <h1 className="text-3xl sm:text-4xl font-bold mb-2 text-text-primary">{t('vibes')}</h1>
               <p className="text-text-secondary">{t('vibesSubtitle')}</p>
             </div>
 
@@ -618,7 +618,7 @@ const CommunityContent = () => {
                     onClick={() => setSelectedCategory('artist')}
                     className={`flex items-center px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm transition-colors whitespace-nowrap ${
                       selectedCategory === 'artist' 
-                        ? 'bg-gradient-to-r from-purple-600 to-purple-800 text-white shadow-lg' 
+                        ? 'bg-gradient-to-r from-primary to-primary-light text-white shadow-lg' 
                         : 'text-gray-400 hover:text-white'
                     }`}
                   >
@@ -779,7 +779,7 @@ const CommunityContent = () => {
           <div className="lg:col-span-1">
             <div className="sticky top-6">
               <div className="bg-gradient-to-b from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-2xl p-5 border border-gray-700/50">
-                <h2 className="text-xl font-bold text-white mb-4">{t('discoverArtists')}</h2>
+                <h2 className="text-xl font-bold mb-4 text-text-primary">{t('discoverArtists')}</h2>
                 <div className="flex gap-2 mb-4">
                   {['all', 'following', 'notFollowing'].map(filter => (
                     <button
@@ -808,7 +808,7 @@ const CommunityContent = () => {
                           </div>
                         )}
                         <div className="flex-1 min-w-0">
-                          <h3 className="font-semibold text-text-primary text-sm truncate">{artist.name}</h3>
+                          <h3 className="font-semibold text-sm truncate text-text-primary">{artist.name}</h3>
                           <p className="text-xs text-text-secondary">{t('followersCount', { count: artist.followersCount || 0 })}</p>
                         </div>
                         <button
@@ -831,7 +831,7 @@ const CommunityContent = () => {
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[70] p-4">
           <div className="bg-gray-800 rounded-2xl w-full max-w-md p-6 border border-gray-700 shadow-2xl">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-bold text-white">{t('shareVibe')}</h3>
+              <h3 className="text-xl font-bold text-text-primary">{t('shareVibe')}</h3>
               <button onClick={() => setShowCreateModal(false)} className="text-gray-400 hover:text-white">✕</button>
             </div>
             
@@ -957,13 +957,13 @@ const CommunityContent = () => {
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[80] lg:hidden flex items-end">
           <div className="bg-gray-800 w-full rounded-t-3xl p-6 max-h-[80vh] overflow-y-auto animate-slide-up">
             <div className="w-12 h-1.5 bg-gray-600 rounded-full mx-auto mb-6" onClick={() => setShowArtistsModal(false)}></div>
-            <h2 className="text-xl font-bold text-white mb-4">{t('discoverArtists')}</h2>
+            <h2 className="text-xl font-bold mb-4 text-text-primary">{t('discoverArtists')}</h2>
             <div className="space-y-4">
               {recommendedArtists.map((artist: any) => (
                 <div key={artist._id} className="flex items-center gap-3 p-3 rounded-xl bg-gray-700/30">
                   <img src={artist.avatar || '/default-avatar.png'} className="w-12 h-12 rounded-full object-cover" />
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-text-primary text-sm truncate">{artist.name}</h3>
+                    <h3 className="font-semibold text-sm truncate text-text-primary">{artist.name}</h3>
                     <p className="text-xs text-text-secondary">{t('followersCount', { count: artist.followersCount || 0 })}</p>
                   </div>
                   <button
@@ -985,7 +985,7 @@ const CommunityContent = () => {
 const CommunityPage = () => {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
       </div>
     }>

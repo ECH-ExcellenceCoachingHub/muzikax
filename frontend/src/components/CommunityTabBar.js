@@ -34,7 +34,7 @@ const CommunityTabBar = ({ activeTab, onTabChange }) => {
             onClick={() => onTabChange(tab.id)}
             className={`flex flex-col items-center justify-center py-3 px-2 rounded-lg transition-all duration-300 min-w-[100px] ${
               activeTab === tab.id
-                ? 'bg-gradient-to-r from-[#FF4D67] to-[#FF6B8B] text-white shadow-lg'
+                ? 'bg-gradient-to-r from-primary to-primary-hover text-white shadow-lg'
                 : 'text-gray-400 hover:text-white hover:bg-gray-700/50'
             }`}
           >

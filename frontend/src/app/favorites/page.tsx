@@ -167,7 +167,7 @@ export default function FavoritesPage() {
   // Show loading state while checking auth
   if (isLoading || loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black flex items-center justify-center px-4 pt-20">
+      <div className="min-h-screen flex items-center justify-center px-4 pt-20 bg-background">
         <div className="text-white text-center">
           <div className="animate-pulse text-lg">Loading...</div>
         </div>
@@ -181,16 +181,16 @@ export default function FavoritesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black pt-20 sm:pt-6 py-4 sm:py-8 md:py-12">
-      <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#FF8C00]/10 rounded-full blur-3xl -z-10"></div>
-      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-[#FFB020]/10 rounded-full blur-3xl -z-10"></div>
+    <div className="min-h-screen pt-20 sm:pt-6 py-4 sm:py-8 md:py-12 bg-background">
+      <div className="absolute -top-40 -left-40 w-96 h-96 bg-primary/10 rounded-full blur-3xl -z-10"></div>
+      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-primary-light/10 rounded-full blur-3xl -z-10"></div>
       
       <div className="container mx-auto px-3 sm:px-4 md:px-8">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-6 sm:mb-8 md:mb-12">
             <div className="flex-1">
-              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#FF8C00] to-[#FFB020] mb-1 sm:mb-2">
+              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-1 sm:mb-2 text-text-primary">
                 {t('favorites') || 'Your Favorites'}
               </h1>
               <p className="text-gray-400 text-xs sm:text-sm md:text-base">
@@ -199,7 +199,7 @@ export default function FavoritesPage() {
             </div>
             <button 
               onClick={() => router.push('/explore')}
-              className="px-4 py-2 sm:px-5 sm:py-2.5 bg-transparent border border-[#FF8C00] text-[#FF8C00] hover:bg-[#FF8C00]/10 rounded-full text-xs sm:text-sm font-medium transition-colors active:scale-95 touch-manipulation whitespace-nowrap"
+              className="px-4 py-2 sm:px-5 sm:py-2.5 bg-transparent border border-primary text-primary hover:bg-primary/10 rounded-full text-xs sm:text-sm font-medium transition-colors active:scale-95 touch-manipulation whitespace-nowrap"
             >
               {t('explore') || 'Add More'}
             </button>
@@ -213,7 +213,7 @@ export default function FavoritesPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                 </svg>
               </div>
-              <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 sm:mb-3">No favorites yet</h3>
+              <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3 text-text-primary">No favorites yet</h3>
               <p className="text-gray-500 text-sm sm:text-base mb-5 sm:mb-6 max-w-md mx-auto px-2">
                 Start exploring music and save your favorite tracks to see them here
               </p>
@@ -228,7 +228,7 @@ export default function FavoritesPage() {
             // Favorites List
             <div className="space-y-3 sm:space-y-4">
               {tracks.map((track) => (
-                <div key={track.id || track._id} className="card-bg rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-5 flex items-center gap-3 sm:gap-4 transition-all hover:border-[#FF8C00]/50 hover:bg-gradient-to-br hover:from-gray-900/70 hover:to-gray-900/50 active:scale-[0.98]">
+                <div key={track.id || track._id} className="card-bg rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-5 flex items-center gap-3 sm:gap-4 transition-all hover:border-primary/50 hover:bg-gradient-to-br hover:from-gray-900/70 hover:to-gray-900/50 active:scale-[0.98]">
                   <div className="relative flex-shrink-0">
                     <img 
                       src={track.coverImage || track.coverURL || '/placeholder-track.png'} 
@@ -252,7 +252,7 @@ export default function FavoritesPage() {
                   </div>
                   
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-white text-sm sm:text-base md:text-lg truncate">{track.title}</h3>
+                    <h3 className="font-bold text-sm sm:text-base md:text-lg truncate text-text-primary">{track.title}</h3>
                     <p className="text-gray-400 text-xs sm:text-sm md:text-base truncate">{track.artist}</p>
                   </div>
                   

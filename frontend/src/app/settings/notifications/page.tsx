@@ -94,7 +94,7 @@ export default function NotificationSettingsPage() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white pt-24 px-4">
+      <div className="min-h-screen text-white pt-24 px-4 bg-background">
         <div className="max-w-3xl mx-auto">
           <p className="text-center text-gray-400">Please log in to manage your notification settings</p>
         </div>
@@ -104,10 +104,10 @@ export default function NotificationSettingsPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white pt-24 px-4">
+      <div className="min-h-screen text-white pt-24 px-4 bg-background">
         <div className="max-w-3xl mx-auto">
           <div className="flex items-center justify-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#FF8C00]"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
           </div>
         </div>
       </div>
@@ -115,11 +115,11 @@ export default function NotificationSettingsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white pt-24 px-4 pb-12">
+    <div className="min-h-screen text-white pt-24 px-4 pb-12 bg-background">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-[#FF8C00] to-[#FF6B6B] bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold mb-2 text-text-primary">
             Email Notifications
           </h1>
           <p className="text-gray-400">
@@ -135,7 +135,7 @@ export default function NotificationSettingsPage() {
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
                   <span className="text-2xl">🎵</span>
-                  <h3 className="text-lg font-semibold">New Tracks from Following</h3>
+                  <h3 className="text-lg font-semibold text-text-primary">New Tracks from Following</h3>
                 </div>
                 <p className="text-gray-400 text-sm">
                   Get notified when artists you follow release new tracks
@@ -143,8 +143,8 @@ export default function NotificationSettingsPage() {
               </div>
               <button
                 onClick={() => handleToggleChange('newTrackFromFollowing')}
-                className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:ring-offset-2 focus:ring-offset-gray-900 ${
-                  preferences.newTrackFromFollowing ? 'bg-[#FF8C00]' : 'bg-gray-600'
+                className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 ${
+                  preferences.newTrackFromFollowing ? 'bg-primary' : 'bg-gray-600'
                 }`}
               >
                 <span
@@ -162,7 +162,7 @@ export default function NotificationSettingsPage() {
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
                   <span className="text-2xl">🎶</span>
-                  <h3 className="text-lg font-semibold">New Playlists</h3>
+                  <h3 className="text-lg font-semibold text-text-primary">New Playlists</h3>
                 </div>
                 <p className="text-gray-400 text-sm">
                   Receive curated playlists tailored to your taste
@@ -170,8 +170,8 @@ export default function NotificationSettingsPage() {
               </div>
               <button
                 onClick={() => handleToggleChange('newPlaylist')}
-                className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:ring-offset-2 focus:ring-offset-gray-900 ${
-                  preferences.newPlaylist ? 'bg-[#FF8C00]' : 'bg-gray-600'
+                className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 ${
+                  preferences.newPlaylist ? 'bg-primary' : 'bg-gray-600'
                 }`}
               >
                 <span
@@ -189,7 +189,7 @@ export default function NotificationSettingsPage() {
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
                   <span className="text-2xl">🔥</span>
-                  <h3 className="text-lg font-semibold">Trending This Week</h3>
+                  <h3 className="text-lg font-semibold text-text-primary">Trending This Week</h3>
                 </div>
                 <p className="text-gray-400 text-sm">
                   Weekly digest of the hottest tracks on MuzikaX
@@ -197,8 +197,8 @@ export default function NotificationSettingsPage() {
               </div>
               <button
                 onClick={() => handleToggleChange('trendingOfWeek')}
-                className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:ring-offset-2 focus:ring-offset-gray-900 ${
-                  preferences.trendingOfWeek ? 'bg-[#FF8C00]' : 'bg-gray-600'
+                className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 ${
+                  preferences.trendingOfWeek ? 'bg-primary' : 'bg-gray-600'
                 }`}
               >
                 <span
@@ -216,7 +216,7 @@ export default function NotificationSettingsPage() {
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
                   <span className="text-2xl">🌟</span>
-                  <h3 className="text-lg font-semibold">Recommended Artists</h3>
+                  <h3 className="text-lg font-semibold text-text-primary">Recommended Artists</h3>
                 </div>
                 <p className="text-gray-400 text-sm">
                   Discover new artists based on your listening habits
@@ -224,8 +224,8 @@ export default function NotificationSettingsPage() {
               </div>
               <button
                 onClick={() => handleToggleChange('recommendedArtists')}
-                className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:ring-offset-2 focus:ring-offset-gray-900 ${
-                  preferences.recommendedArtists ? 'bg-[#FF8C00]' : 'bg-gray-600'
+                className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 ${
+                  preferences.recommendedArtists ? 'bg-primary' : 'bg-gray-600'
                 }`}
               >
                 <span
@@ -243,7 +243,7 @@ export default function NotificationSettingsPage() {
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
                   <span className="text-2xl">📧</span>
-                  <h3 className="text-lg font-semibold">Account Updates</h3>
+                  <h3 className="text-lg font-semibold text-text-primary">Account Updates</h3>
                 </div>
                 <p className="text-gray-400 text-sm">
                   Important updates about your account and security
@@ -254,8 +254,8 @@ export default function NotificationSettingsPage() {
               </div>
               <button
                 onClick={() => handleToggleChange('accountUpdates')}
-                className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:ring-offset-2 focus:ring-offset-gray-900 ${
-                  preferences.accountUpdates ? 'bg-[#FF8C00]' : 'bg-gray-600'
+                className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-900 ${
+                  preferences.accountUpdates ? 'bg-primary' : 'bg-gray-600'
                 }`}
               >
                 <span
@@ -273,7 +273,7 @@ export default function NotificationSettingsPage() {
           <button
             onClick={handleSave}
             disabled={isSaving}
-            className="px-8 py-3 bg-gradient-to-r from-[#FF8C00] to-[#FF6B6B] rounded-lg font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+            className="px-8 py-3 bg-gradient-to-r from-primary to-[#FF6B6B] rounded-lg font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
           >
             {isSaving ? (
               <>

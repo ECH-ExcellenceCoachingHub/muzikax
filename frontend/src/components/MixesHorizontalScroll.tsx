@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import SectionHeader from './home/SectionHeader';
 import Link from 'next/link';
 import { useAudioPlayer } from '@/contexts/AudioPlayerContext';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -178,8 +179,8 @@ const MixesHorizontalScroll = ({ title, viewAllLink = '/mixes' }: MixesHorizonta
     return (
       <section className="px-4 md:px-6 py-8">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-white">{displayTitle}</h2>
-          <Link href={viewAllLink} className="text-[#FF8C00] hover:text-[#FFB020] transition-colors">
+          <h2 className="text-2xl font-bold text-text-primary">{displayTitle}</h2>
+          <Link href={viewAllLink} className="text-primary hover:text-primary-light transition-colors">
             {t('viewAll')}
           </Link>
         </div>
@@ -204,8 +205,8 @@ const MixesHorizontalScroll = ({ title, viewAllLink = '/mixes' }: MixesHorizonta
     return (
       <section className="px-4 md:px-6 py-8">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-white">{displayTitle}</h2>
-          <Link href={viewAllLink} className="text-[#FF8C00] hover:text-[#FFB020] transition-colors">
+          <h2 className="text-2xl font-bold text-text-primary">{displayTitle}</h2>
+          <Link href={viewAllLink} className="text-primary hover:text-primary-light transition-colors">
             {t('viewAll')}
           </Link>
         </div>
@@ -220,20 +221,7 @@ const MixesHorizontalScroll = ({ title, viewAllLink = '/mixes' }: MixesHorizonta
 
   return (
     <section className="px-4 md:px-6 py-8">
-      <div className="flex justify-between items-center mb-6 group">
-        <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-          <span className="relative inline-block">
-            <span className="bg-gradient-to-r from-amber-300 via-orange-400 to-amber-500 bg-clip-text text-transparent transition-all duration-300 group-hover:from-amber-400 group-hover:via-orange-500 group-hover:to-amber-600">
-              {displayTitle}
-            </span>
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-orange-500 transition-all duration-500 group-hover:w-full" />
-          </span>
-        </h2>
-        <Link href={viewAllLink} className="text-xs font-semibold text-white/70 hover:text-amber-300 transition-all duration-300 uppercase tracking-widest hover:underline decoration-amber-400 decoration-2 underline-offset-4 relative group/btn overflow-hidden">
-          <span className="relative z-10">{t('viewAll')}</span>
-          <span className="absolute inset-0 bg-gradient-to-r from-amber-500/20 to-orange-500/20 rounded transform scale-x-0 group-hover/btn:scale-x-100 transition-transform duration-300 origin-left" />
-        </Link>
-      </div>
+      <SectionHeader title={displayTitle} href={viewAllLink} actionLabel={t('viewAll')} />
       <div className="relative group/scroll">
         <div 
           ref={scrollContainerRef}
@@ -249,54 +237,39 @@ const MixesHorizontalScroll = ({ title, viewAllLink = '/mixes' }: MixesHorizonta
               const isActive = currentTrack?.id === track._id;
               
               return (
-                <div 
-                  key={track._id} 
-                  className={`flex-shrink-0 w-64 group/card bg-[#0a0604] rounded-2xl overflow-hidden transition-all duration-500 border border-[#1F2937] hover:border-[#374151] hover:-translate-y-1 hover:shadow-xl hover:shadow-[#F59E0B]/20 ${
-                    isActive ? 'ring-2 ring-[#F59E0B] shadow-lg shadow-[#F59E0B]/30 scale-[1.02]' : ''
-                  }`}
+                <div
+                  key={track._id}
+                  data-active={isActive}
+                  className="mx-card group/card flex-shrink-0 w-64 snap-start"
                 >
-                  {/* Shimmer effect on hover */}
-                  <div className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-700 pointer-events-none">
-                    <div className="absolute inset-0 -translate-x-full group-hover/card:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-                  </div>
-                  
-                  <div className="relative">
+                  <div className="mx-card-media aspect-[16/10] w-full">
                     {track.coverURL ? (
                       <img
                         src={track.coverURL}
                         alt={track.title}
-                        className="w-full h-40 object-cover transition-transform duration-500 group-hover/card:scale-110"
+                        className="w-full h-full object-cover"
                       />
                     ) : (
-                      <div className="w-full h-40 bg-gradient-to-br from-[#F59E0B] to-[#FFB020] flex items-center justify-center transition-transform duration-500 group-hover/card:scale-110">
-                        <span className="text-2xl font-bold text-black">
+                      <div className="mx-card-zoom flex items-center justify-center bg-surface-overlay">
+                        <span className="text-2xl font-bold text-text-secondary">
                           {track.title.charAt(0).toUpperCase()}
                         </span>
                       </div>
                     )}
                     
-                    {/* Gradient overlay on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover/card:opacity-100 transition-all duration-300" />
-                    
-                    {/* Play Button Overlay */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/card:opacity-100 transition-all duration-300">
-                      <button
-                        onClick={() => handlePlayTrack(track)}
-                        className="w-12 h-12 rounded-full bg-[#F59E0B] flex items-center justify-center text-black opacity-0 group-hover/card:opacity-100 transform translate-y-2 group-hover/card:translate-y-0 transition-all duration-300 shadow-lg shadow-[#F59E0B]/30 hover:shadow-[#F59E0B]/50 hover:scale-110"
-                        disabled={!track.audioURL}
-                      >
-                        {isActive && isPlaying ? (
-                          <FaPause className="w-5 h-5" />
-                        ) : (
-                          <FaPlay className="w-5 h-5 ml-1" />
-                        )}
-                      </button>
-                    </div>
-                    
+                    <button
+                      onClick={() => handlePlayTrack(track)}
+                      disabled={!track.audioURL}
+                      aria-label={isActive && isPlaying ? 'Pause' : 'Play'}
+                      className="mx-card-play pointer-events-auto hover:bg-primary-hover"
+                    >
+                      {isActive && isPlaying ? <FaPause className="w-4 h-4" /> : <FaPlay className="w-4 h-4 ml-0.5" />}
+                    </button>
+
                     {/* Now Playing Badge */}
                     {isActive && (
-                      <div className="absolute top-2 left-2 px-2 py-1 bg-[#F59E0B] text-black text-[10px] font-bold rounded-full shadow-lg animate-pulse">
-                        ▶ {t('nowPlaying')}
+                      <div className="absolute top-2 left-2 px-2 py-0.5 bg-primary text-black text-[10px] font-bold rounded-full">
+                        {t('nowPlaying')}
                       </div>
                     )}
                     
@@ -307,7 +280,7 @@ const MixesHorizontalScroll = ({ title, viewAllLink = '/mixes' }: MixesHorizonta
                           e.stopPropagation();
                           toggleFavorite(track._id, track);
                         }}
-                        className="p-1.5 rounded-full bg-black/30 backdrop-blur-sm text-white opacity-0 group-hover/card:opacity-100 transition-all duration-300 hover:scale-110"
+                        className="p-1.5 rounded-full bg-black/50 backdrop-blur-sm text-white opacity-0 group-hover/card:opacity-100 focus-visible:opacity-100 transition-opacity duration-200"
                       >
                         <FaHeart 
                           className={`w-4 h-4 ${favoriteStatus[track._id] ? 'text-red-500 fill-current scale-110' : 'text-white'}`}
@@ -317,19 +290,17 @@ const MixesHorizontalScroll = ({ title, viewAllLink = '/mixes' }: MixesHorizonta
                   </div>
                   
                   {/* Track Info */}
-                  <div className="p-4">
-                    <h3 className={`font-bold text-lg mb-1 truncate transition-colors duration-300 ${
-                      isActive ? 'text-[#F59E0B]' : 'text-white group-hover/card:text-white'
-                    }`} title={track.title}>
+                  <div className="min-w-0">
+                    <h3 className="mx-card-title" title={track.title}>
                       {track.title}
                     </h3>
-                    <p className="text-[#9CA3AF] text-sm mb-1 truncate group-hover/card:text-[#F5DEB3] transition-colors" title={artistName}>
+                    <p className="mx-card-subtitle" title={artistName}>
                       {artistName}
                     </p>
                     
                     {/* Stats */}
-                    <div className="flex justify-between text-xs text-gray-500 mt-2 pt-2 border-t border-white/10">
-                      <span className="group-hover/card:text-amber-400/80 transition-colors">{(track.plays || 0).toLocaleString()} {t('plays')}</span>
+                    <div className="flex justify-between text-xs text-text-muted mt-2 pt-2 border-t border-border-light">
+                      <span>{(track.plays || 0).toLocaleString()} {t('plays')}</span>
                       <div className="flex items-center gap-1">
                         <FaHeart className="w-3 h-3" />
                         <span>{track.likes || 0}</span>
@@ -344,7 +315,7 @@ const MixesHorizontalScroll = ({ title, viewAllLink = '/mixes' }: MixesHorizonta
 
         {/* Scroll Buttons with Modern Styling */}
         <button 
-          className="absolute left-2 md:left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-gray-800/80 backdrop-blur-lg flex items-center justify-center text-white shadow-xl hover:bg-[#F59E0B]/80 transition-all duration-300 hover:scale-110 opacity-0 group-hover/scroll:opacity-100"
+          className="absolute left-2 md:left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-gray-800/80 backdrop-blur-lg flex items-center justify-center text-white shadow-xl hover:bg-primary/80 transition-all duration-300 hover:scale-110 opacity-0 group-hover/scroll:opacity-100"
           onClick={() => scroll('left')}
           aria-label="Scroll left"
         >
@@ -354,7 +325,7 @@ const MixesHorizontalScroll = ({ title, viewAllLink = '/mixes' }: MixesHorizonta
         </button>
         
         <button 
-          className="absolute right-2 md:right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-gray-800/80 backdrop-blur-lg flex items-center justify-center text-white shadow-xl hover:bg-[#F59E0B]/80 transition-all duration-300 hover:scale-110 opacity-0 group-hover/scroll:opacity-100"
+          className="absolute right-2 md:right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-gray-800/80 backdrop-blur-lg flex items-center justify-center text-white shadow-xl hover:bg-primary/80 transition-all duration-300 hover:scale-110 opacity-0 group-hover/scroll:opacity-100"
           onClick={() => scroll('right')}
           aria-label="Scroll right"
         >

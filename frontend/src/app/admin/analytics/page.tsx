@@ -184,12 +184,12 @@ export default function AnalyticsPage() {
   // Prepare data for charts
   const userRoleColors = ['#FF8C00', '#FFB020', '#6366F1'];
   const creatorTypeColors = ['#10B981', '#8B5CF6', '#EC4899'];
-  const trackTypeColors = ['#3B82F6', '#10B981', '#EF4444', '#F59E0B', '#8B5CF6'];
+  const trackTypeColors = ['#3B82F6', '#10B981', '#EF4444', '#FF8C00', '#8B5CF6'];
 
   // Stats cards data
   const statsCards = [
-    { title: 'Total Users', value: totalUsers.toLocaleString(), change: '+12%', icon: 'users', color: 'from-[#FF8C00] to-[#FF8C00]' },
-    { title: 'Total Creators', value: totalCreators.toLocaleString(), change: '+8%', icon: 'creator', color: 'from-[#FFB020] to-[#FFB020]' },
+    { title: 'Total Users', value: totalUsers.toLocaleString(), change: '+12%', icon: 'users', color: 'from-primary to-primary' },
+    { title: 'Total Creators', value: totalCreators.toLocaleString(), change: '+8%', icon: 'creator', color: 'from-primary-light to-primary-light' },
     { title: 'Total Tracks', value: totalTracks.toLocaleString(), change: '+15%', icon: 'music', color: 'from-[#6366F1] to-[#6366F1]' },
     { title: 'Total Plays', value: totalPlays.toLocaleString(), change: '+18%', icon: 'play', color: 'from-[#10B981] to-[#10B981]' },
   ];
@@ -209,7 +209,7 @@ export default function AnalyticsPage() {
                   type="button"
                   className={`px-2 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm font-medium rounded-md transition-colors ${
                     timeRange === range
-                      ? 'bg-[#FF8C00] text-white'
+                      ? 'bg-primary text-white'
                       : 'text-gray-400 hover:text-white'
                   }`}
                   onClick={() => setTimeRange(range)}
@@ -223,7 +223,7 @@ export default function AnalyticsPage() {
           {/* Stats Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
             {statsCards.map((stat, index) => (
-              <div key={index} className="card-bg rounded-2xl p-4 sm:p-6 transition-all duration-300 hover:border-[#FF8C00]/50 hover:bg-gradient-to-br hover:from-gray-900/70 hover:to-gray-900/50 hover:shadow-xl hover:shadow-[#FF8C00]/10">
+              <div key={index} className="card-bg rounded-2xl p-4 sm:p-6 transition-all duration-300 hover:border-primary/50 hover:bg-gradient-to-br hover:from-gray-900/70 hover:to-gray-900/50 hover:shadow-xl hover:shadow-primary/10">
                 <div className="flex justify-between items-start">
                   <div>
                     <p className="text-gray-400 text-xs sm:text-sm mb-1">{stat.title}</p>
@@ -259,7 +259,7 @@ export default function AnalyticsPage() {
               </div>
             ))}
             {/* Unique Listeners Card */}
-            <div className="card-bg rounded-2xl p-4 sm:p-6 transition-all duration-300 hover:border-[#FF8C00]/50 hover:bg-gradient-to-br hover:from-gray-900/70 hover:to-gray-900/50 hover:shadow-xl hover:shadow-[#FF8C00]/10">
+            <div className="card-bg rounded-2xl p-4 sm:p-6 transition-all duration-300 hover:border-primary/50 hover:bg-gradient-to-br hover:from-gray-900/70 hover:to-gray-900/50 hover:shadow-xl hover:shadow-primary/10">
               <div className="flex justify-between items-start">
                 <div>
                   <p className="text-gray-400 text-xs sm:text-sm mb-1">Unique Listeners</p>
@@ -284,7 +284,7 @@ export default function AnalyticsPage() {
             <div className="chart-container">
               {loading ? (
                 <div className="flex justify-center items-center h-64">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#FF8C00]"></div>
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
                 </div>
               ) : error ? (
                 <div className="text-red-500 text-center py-8">{error}</div>
@@ -294,15 +294,15 @@ export default function AnalyticsPage() {
                   <CartesianGrid strokeDasharray="3 3" stroke="#444" />
                   <XAxis 
                     dataKey="date" 
-                    tick={{ fill: '#9CA3AF', fontSize: 12 }}
+                    tick={{ fill: '#A1A1AA', fontSize: 12 }}
                     tickFormatter={(value: string) => new Date(value).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                   />
                   <YAxis 
-                    tick={{ fill: '#9CA3AF', fontSize: 12 }}
+                    tick={{ fill: '#A1A1AA', fontSize: 12 }}
                     tickFormatter={(value: number) => value >= 1000 ? `${(value / 1000).toFixed(1)}k` : value.toString()}
                   />
                   <Tooltip 
-                    contentStyle={{ backgroundColor: '#1F2937', borderColor: '#374151', borderRadius: '0.5rem' }}
+                    contentStyle={{ backgroundColor: '#1A1A1D', borderColor: '#2A2A2E', borderRadius: '0.5rem' }}
                     itemStyle={{ color: 'white' }}
                     formatter={(value: any, name: any) => {
                       const label = name === 'plays' ? 'Total Plays' : 'Unique Listeners';
@@ -354,7 +354,7 @@ export default function AnalyticsPage() {
               <div className="chart-container">
                 {loading ? (
                 <div className="flex justify-center items-center h-64">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#FF8C00]"></div>
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
                 </div>
               ) : error ? (
                 <div className="text-red-500 text-center py-8">{error}</div>
@@ -364,15 +364,15 @@ export default function AnalyticsPage() {
                     <CartesianGrid strokeDasharray="3 3" stroke="#444" />
                     <XAxis 
                       dataKey="_id" 
-                      tick={{ fill: '#9CA3AF', fontSize: 12 }}
+                      tick={{ fill: '#A1A1AA', fontSize: 12 }}
                       tickFormatter={(value: string) => new Date(value).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                     />
                     <YAxis 
-                      tick={{ fill: '#9CA3AF', fontSize: 12 }}
+                      tick={{ fill: '#A1A1AA', fontSize: 12 }}
                       tickFormatter={(value: number) => value >= 1000 ? `${(value / 1000).toFixed(1)}k` : value.toString()}
                     />
                     <Tooltip 
-                      contentStyle={{ backgroundColor: '#1F2937', borderColor: '#374151', borderRadius: '0.5rem' }}
+                      contentStyle={{ backgroundColor: '#1A1A1D', borderColor: '#2A2A2E', borderRadius: '0.5rem' }}
                       itemStyle={{ color: 'white' }}
                       formatter={(value: number | undefined) => [value || 0, 'Users']}
                       labelFormatter={(label) => `Date: ${new Date(label).toLocaleDateString()}`}
@@ -403,7 +403,7 @@ export default function AnalyticsPage() {
               <div className="chart-container">
                 {loading ? (
                 <div className="flex justify-center items-center h-64">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#FF8C00]"></div>
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
                 </div>
               ) : error ? (
                 <div className="text-red-500 text-center py-8">{error}</div>
@@ -428,7 +428,7 @@ export default function AnalyticsPage() {
                       ))}
                     </Pie>
                     <Tooltip 
-                      contentStyle={{ backgroundColor: '#1F2937', borderColor: '#374151', borderRadius: '0.5rem' }}
+                      contentStyle={{ backgroundColor: '#1A1A1D', borderColor: '#2A2A2E', borderRadius: '0.5rem' }}
                       itemStyle={{ color: 'white' }}
                     />
                     <Legend />
@@ -448,7 +448,7 @@ export default function AnalyticsPage() {
               <div className="chart-container">
                 {loading ? (
                 <div className="flex justify-center items-center h-64">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#FF8C00]"></div>
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
                 </div>
               ) : error ? (
                 <div className="text-red-500 text-center py-8">{error}</div>
@@ -458,14 +458,14 @@ export default function AnalyticsPage() {
                     <CartesianGrid strokeDasharray="3 3" stroke="#444" />
                     <XAxis 
                       dataKey="_id" 
-                      tick={{ fill: '#9CA3AF', fontSize: 12 }}
+                      tick={{ fill: '#A1A1AA', fontSize: 12 }}
                     />
                     <YAxis 
-                      tick={{ fill: '#9CA3AF', fontSize: 12 }}
+                      tick={{ fill: '#A1A1AA', fontSize: 12 }}
                       tickFormatter={(value: number) => value >= 1000 ? `${(value / 1000).toFixed(1)}k` : value.toString()}
                     />
                     <Tooltip 
-                      contentStyle={{ backgroundColor: '#1F2937', borderColor: '#374151', borderRadius: '0.5rem' }}
+                      contentStyle={{ backgroundColor: '#1A1A1D', borderColor: '#2A2A2E', borderRadius: '0.5rem' }}
                       itemStyle={{ color: 'white' }}
                     />
                     <Legend />
@@ -483,7 +483,7 @@ export default function AnalyticsPage() {
               <div className="chart-container">
                 {loading ? (
                 <div className="flex justify-center items-center h-64">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#FF8C00]"></div>
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
                 </div>
               ) : error ? (
                 <div className="text-red-500 text-center py-8">{error}</div>
@@ -497,17 +497,17 @@ export default function AnalyticsPage() {
                     <CartesianGrid strokeDasharray="3 3" stroke="#444" />
                     <XAxis 
                       type="number" 
-                      tick={{ fill: '#9CA3AF', fontSize: 12 }}
+                      tick={{ fill: '#A1A1AA', fontSize: 12 }}
                       tickFormatter={(value: number) => value >= 1000 ? `${(value / 1000).toFixed(1)}k` : value.toString()}
                     />
                     <YAxis 
                       type="category" 
                       dataKey="name" 
-                      tick={{ fill: '#9CA3AF', fontSize: 12 }}
+                      tick={{ fill: '#A1A1AA', fontSize: 12 }}
                       width={90}
                     />
                     <Tooltip 
-                      contentStyle={{ backgroundColor: '#1F2937', borderColor: '#374151', borderRadius: '0.5rem' }}
+                      contentStyle={{ backgroundColor: '#1A1A1D', borderColor: '#2A2A2E', borderRadius: '0.5rem' }}
                       itemStyle={{ color: 'white' }}
                       formatter={(value: number | undefined) => [value ? value.toLocaleString() : '0', 'Plays']}
                     />
@@ -527,7 +527,7 @@ export default function AnalyticsPage() {
               
               {loading ? (
                 <div className="flex justify-center items-center h-64">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#FF8C00]"></div>
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
                 </div>
               ) : error ? (
                 <div className="text-red-500 text-center py-8">{error}</div>
@@ -580,7 +580,7 @@ export default function AnalyticsPage() {
               <div className="chart-container">
                 {loading ? (
                 <div className="flex justify-center items-center h-64">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#FF8C00]"></div>
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
                 </div>
               ) : error ? (
                 <div className="text-red-500 text-center py-8">{error}</div>
@@ -605,7 +605,7 @@ export default function AnalyticsPage() {
                       ))}
                     </Pie>
                     <Tooltip 
-                      contentStyle={{ backgroundColor: '#1F2937', borderColor: '#374151', borderRadius: '0.5rem' }}
+                      contentStyle={{ backgroundColor: '#1A1A1D', borderColor: '#2A2A2E', borderRadius: '0.5rem' }}
                       itemStyle={{ color: 'white' }}
                     />
                     <Legend />
@@ -623,7 +623,7 @@ export default function AnalyticsPage() {
             <div className="chart-container">
               {loading ? (
               <div className="flex justify-center items-center h-64">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#FF8C00]"></div>
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
               </div>
             ) : error ? (
               <div className="text-red-500 text-center py-8">{error}</div>
@@ -640,14 +640,14 @@ export default function AnalyticsPage() {
                       angle={-45}
                       textAnchor="end"
                       height={60}
-                      tick={{ fill: '#9CA3AF', fontSize: 12 }}
+                      tick={{ fill: '#A1A1AA', fontSize: 12 }}
                     />
                     <YAxis 
-                      tick={{ fill: '#9CA3AF', fontSize: 12 }}
+                      tick={{ fill: '#A1A1AA', fontSize: 12 }}
                       tickFormatter={(value) => value >= 1000 ? `${(value / 1000).toFixed(1)}k` : value}
                     />
                     <Tooltip 
-                      contentStyle={{ backgroundColor: '#1F2937', borderColor: '#374151', borderRadius: '0.5rem' }}
+                      contentStyle={{ backgroundColor: '#1A1A1D', borderColor: '#2A2A2E', borderRadius: '0.5rem' }}
                       itemStyle={{ color: 'white' }}
                       formatter={(value, name) => {
                         if (name === 'playCount') {

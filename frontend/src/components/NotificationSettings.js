@@ -107,7 +107,7 @@ export default function NotificationSettings() {
             className={`px-4 py-2 rounded-lg font-medium transition-colors ${
               isSubscribed
                 ? 'bg-red-500 hover:bg-red-600 text-white'
-                : 'bg-[#FF4D67] hover:bg-[#FF4D67]/80 text-white'
+                : 'bg-primary hover:bg-primary/80 text-white'
             } disabled:opacity-50`}
           >
             {loading ? (

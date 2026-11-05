@@ -477,7 +477,7 @@ const FullPagePlayer = () => {
   const generateAvatar = (name: string) => {
     const firstLetter = name.charAt(0).toUpperCase();
     return (
-      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#FF8C00] to-[#FFB020] flex items-center justify-center">
+      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-primary-light flex items-center justify-center">
         <span className="text-lg font-bold text-white">{firstLetter}</span>
       </div>
     );
@@ -501,7 +501,7 @@ const FullPagePlayer = () => {
         <div className="mt-2">
           <button
             onClick={() => setReplyingTo(replyingTo === comment.id ? null : comment.id)}
-            className="text-xs text-[#FF8C00] hover:text-[#ff3350]"
+            className="text-xs text-primary hover:text-[#E67E00]"
           >
             {replyingTo === comment.id ? 'Cancel' : 'Reply'}
           </button>
@@ -514,14 +514,14 @@ const FullPagePlayer = () => {
               value={replyText}
               onChange={(e) => setReplyText(e.target.value)}
               placeholder={`Reply to ${comment.username}...`}
-              className="w-full bg-gray-700 text-white rounded-lg p-2 mb-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+              className="w-full bg-gray-700 text-white rounded-lg p-2 mb-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
               rows={2}
             />
             <div className="flex space-x-2">
               <button
                 onClick={() => handleAddReply(comment.id, comment.username)}
                 disabled={!replyText.trim() || !isAuthenticated}
-                className="bg-[#FF8C00] hover:bg-[#ff3350] text-white px-3 py-1 rounded text-sm disabled:opacity-50"
+                className="bg-primary hover:bg-[#E67E00] text-white px-3 py-1 rounded text-sm disabled:opacity-50"
               >
                 Post Reply
               </button>
@@ -569,11 +569,11 @@ const FullPagePlayer = () => {
 
   // Removed music visualization effect as requested
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0f0f13] via-[#13131a] to-[#1a1a22] text-white relative overflow-hidden pb-28 md:pb-0">
+    <div className="min-h-screen text-white relative overflow-hidden pb-28 md:pb-0 bg-background">
       {/* Subtle animated gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-[#FF8C00]/5 via-transparent to-[#8B5CF6]/5 z-0"></div>
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#FF8C00]/10 rounded-full blur-3xl z-0 animate-pulse"></div>
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#8B5CF6]/10 rounded-full blur-3xl z-0 animate-pulse" style={{animationDelay: '1s'}}></div>      
+      <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-primary-light/5 z-0"></div>
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl z-0 animate-pulse"></div>
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary-light/10 rounded-full blur-3xl z-0 animate-pulse" style={{animationDelay: '1s'}}></div>      
       {/* Content Container */}
       <div className="relative z-10 w-full overflow-hidden">
         {/* Toast Notification */}
@@ -602,12 +602,24 @@ const FullPagePlayer = () => {
           </button>
           
           <div className="flex flex-col items-center">
-            <h1 className="text-sm font-semibold text-white/90 tracking-wide">NOW PLAYING</h1>
+            <h1 className="text-sm font-semibold tracking-wide text-text-primary">NOW PLAYING</h1>
             <p className="text-[10px] text-gray-500 mt-0.5">{currentTrack.artist}</p>
           </div>
 
-          <div className="relative">
-            <button 
+          <div className="relative flex items-center gap-1">
+            <button
+              onClick={() => router.push('/dj')}
+              className="h-9 px-3 rounded-full flex items-center gap-1.5 text-xs font-bold text-text-primary bg-white/10 hover:bg-white/15 border border-white/10 transition-colors"
+              title="Open DJ mode: two decks, mixer, Auto DJ, record and go live"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="8" cy="12" r="5" />
+                <circle cx="8" cy="12" r="1.5" />
+                <path strokeLinecap="round" d="M16 5v14M20 8v8M16 12h4" />
+              </svg>
+              DJ
+            </button>
+            <button
               onClick={(e) => {
                 e.stopPropagation();
                 setIsMenuOpen(!isMenuOpen);
@@ -704,7 +716,7 @@ const FullPagePlayer = () => {
                   className={`relative mb-6 sm:mb-8 group transition-all duration-500 ${isPlaying ? 'animate-[spin_20s_linear_infinite]' : ''}`}
                 >
                   {/* Glow effect */}
-                  <div className="absolute -inset-3 sm:-inset-4 bg-gradient-to-tr from-[#FF8C00]/40 via-[#8B5CF6]/30 to-[#FFB020]/40 rounded-3xl blur-2xl opacity-40 group-hover:opacity-60 transition-opacity duration-500"></div>
+                  <div className="absolute -inset-3 sm:-inset-4 bg-gradient-to-tr from-primary/40 via-primary-light/30 to-primary-light/40 rounded-3xl blur-2xl opacity-40 group-hover:opacity-60 transition-opacity duration-500"></div>
                   
                   {/* Shadow layer */}
                   <div className="absolute -inset-1 bg-black/40 rounded-3xl blur-xl"></div>
@@ -713,7 +725,7 @@ const FullPagePlayer = () => {
                   <img 
                     src={currentTrack.coverImage} 
                     alt={currentTrack.title} 
-                    className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-3xl object-cover shadow-2xl border border-white/10 group-hover:scale-[1.02] transition-transform duration-300"
+                    className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-3xl object-cover shadow-2xl border border-white/10 group-hover:scale-[1.04] transition-transform duration-300"
                   />
                   
                   {/* Overlay gradient */}
@@ -722,12 +734,12 @@ const FullPagePlayer = () => {
                 
                 {/* Track Info */}
                 <div className="text-center mb-6 sm:mb-8 w-full px-4 overflow-hidden">
-                  <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 drop-shadow-lg line-clamp-2 leading-tight">{currentTrack.title}</h2>
+                  <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 drop-shadow-lg line-clamp-2 leading-tight text-text-primary">{currentTrack.title}</h2>
                   <Link 
                     href={`/artists/${(typeof currentTrack.creatorId === 'object' && currentTrack.creatorId !== null) 
                       ? (currentTrack.creatorId as any)._id 
                       : currentTrack.creatorId}`}
-                    className="text-sm sm:text-base md:text-lg text-gray-300 hover:text-[#FFB020] mt-1 inline-block font-medium max-w-full truncate transition-colors"
+                    className="text-sm sm:text-base md:text-lg text-gray-300 hover:text-primary-light mt-1 inline-block font-medium max-w-full truncate transition-colors"
                   >
                     {currentTrack.artist}
                   </Link>
@@ -759,7 +771,7 @@ const FullPagePlayer = () => {
                   {/* Current Playlist Indicator */}
                   {currentPlaylistName && (
                     <div className="mt-2 flex flex-wrap justify-center gap-2">
-                      <div className="px-3 py-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-sm font-bold rounded-full flex items-center">
+                      <div className="px-3 py-1 bg-gradient-to-r from-primary to-primary-light text-white text-sm font-bold rounded-full flex items-center">
                         <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                           <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
                         </svg>
@@ -777,11 +789,11 @@ const FullPagePlayer = () => {
                   >
                     {/* Progress fill with gradient */}
                     <div 
-                      className="h-full bg-gradient-to-r from-[#FF8C00] to-[#FFB020] rounded-full relative transition-all duration-150 ease-linear"
+                      className="h-full bg-gradient-to-r from-primary to-primary-light rounded-full relative transition-all duration-150 ease-linear"
                       style={{ width: `${duration > 0 ? (progress / duration) * 100 : 0}%` }}
                     >
                       {/* Glow on progress bar */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-[#FF8C00] to-[#FFB020] blur-sm opacity-50"></div>
+                      <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary-light blur-sm opacity-50"></div>
                     </div>
                     
                     {/* Hover thumb */}
@@ -812,7 +824,7 @@ const FullPagePlayer = () => {
                   {/* Play / Pause - Large Center Button */}
                   <button
                     onClick={togglePlayPause}
-                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-[#FF8C00] to-[#FFB020] flex items-center justify-center text-white shadow-[0_8px_32px_rgba(255,77,103,0.5),0_0_60px_rgba(255,77,103,0.3)] hover:shadow-[0_12px_48px_rgba(255,77,103,0.7),0_0_80px_rgba(255,77,103,0.5)] hover:scale-105 active:scale-95 transition-all duration-300 touch-manipulation relative overflow-hidden"
+                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-primary to-primary-light flex items-center justify-center text-white shadow-[0_8px_32px_rgba(255, 140, 0,0.5),0_0_60px_rgba(255, 140, 0,0.3)] hover:shadow-[0_12px_48px_rgba(255, 140, 0,0.7),0_0_80px_rgba(255, 140, 0,0.5)] hover:scale-105 active:scale-95 transition-all duration-300 touch-manipulation relative overflow-hidden"
                   >
                     {/* Pulse animation when playing */}
                     {isPlaying && (
@@ -858,7 +870,7 @@ const FullPagePlayer = () => {
                     className={`
                       group flex flex-col items-center gap-1
                       text-xs sm:text-sm
-                      ${isFavorite ? 'text-[#FF8C00]' : 'text-gray-400'}
+                      ${isFavorite ? 'text-primary' : 'text-gray-400'}
                       hover:text-white
                       transition-all
                       min-w-[60px]
@@ -1007,7 +1019,7 @@ const FullPagePlayer = () => {
                     className={`
                       group flex flex-col items-center gap-1
                       text-xs sm:text-sm
-                      ${loopMode !== 'none' ? 'text-[#FF8C00]' : 'text-gray-400'}
+                      ${loopMode !== 'none' ? 'text-primary' : 'text-gray-400'}
                       hover:text-white
                       transition-all
                       min-w-[60px]
@@ -1017,7 +1029,7 @@ const FullPagePlayer = () => {
                     <div
                       className={`
                         w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full
-                        ${loopMode !== 'none' ? 'bg-[#FF8C00]/20' : 'bg-white/10'}
+                        ${loopMode !== 'none' ? 'bg-primary/20' : 'bg-white/10'}
                         backdrop-blur-md
                         flex items-center justify-center
                         group-hover:bg-white/20
@@ -1064,7 +1076,7 @@ const FullPagePlayer = () => {
                           className={`
                             group flex flex-col items-center gap-1
                             text-sm
-                            text-[#FF8C00]
+                            text-primary
                             hover:text-white
                             transition-all
                           `}
@@ -1182,8 +1194,8 @@ const FullPagePlayer = () => {
                 <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mt-4">
                   {/* Album Indicator */}
                   {(window as any).audioPlayerContext?.current?.type === 'album' && (
-                    <div className="px-3 py-2 bg-[#FF8C00]/20 rounded-lg text-sm flex items-center">
-                      <svg className="w-4 h-4 mr-1 text-[#FF8C00]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <div className="px-3 py-2 bg-primary/20 rounded-lg text-sm flex items-center">
+                      <svg className="w-4 h-4 mr-1 text-primary" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
                       </svg>
                       <span>Album Mode</span>
@@ -1205,19 +1217,19 @@ const FullPagePlayer = () => {
                 </div>
                 
                 {/* Queue Section */}
-                <div className={`mt-6 sm:mt-8 bg-gray-800/70 backdrop-blur-sm rounded-2xl w-full max-w-2xl overflow-hidden transition-all duration-500 border border-white/10 shadow-xl ${isQueueExpanded ? 'p-4 sm:p-5 ring-1 ring-[#FF8C00]/20 shadow-lg shadow-[#FF8C00]/10' : 'p-3'}`}>
+                <div className={`mt-6 sm:mt-8 bg-gray-800/70 backdrop-blur-sm rounded-2xl w-full max-w-2xl overflow-hidden transition-all duration-500 border border-white/10 shadow-xl ${isQueueExpanded ? 'p-4 sm:p-5 ring-1 ring-primary/20 shadow-lg shadow-primary/10' : 'p-3'}`}>
                   <div 
                     className={`flex justify-between items-center px-1 w-full gap-2 cursor-pointer transition-all duration-300 rounded-lg ${!isQueueExpanded ? 'hover:bg-white/10' : 'mb-3'}`}
                     onClick={() => setIsQueueExpanded(!isQueueExpanded)}
                   >
                     <div className="flex items-center gap-3">
-                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${isQueueExpanded ? 'bg-[#FF8C00]/20 text-[#FF8C00]' : 'bg-gray-700 text-gray-400'}`}>
+                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${isQueueExpanded ? 'bg-primary/20 text-primary' : 'bg-gray-700 text-gray-400'}`}>
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7"></path>
                         </svg>
                       </div>
                       <div className="flex flex-col">
-                        <h3 className="font-bold text-base sm:text-lg truncate">Up Next</h3>
+                        <h3 className="font-bold text-base sm:text-lg truncate text-text-primary">Up Next</h3>
                         {!isQueueExpanded && <span className="text-[10px] sm:text-xs text-gray-500">{queue?.length || 0} tracks in queue</span>}
                       </div>
                       <svg 
@@ -1289,7 +1301,7 @@ const FullPagePlayer = () => {
                                 moveQueueItem(draggedIndex, index);
                               }
                             }}
-                            className="flex items-center gap-2 sm:gap-3 p-2 rounded-lg hover:bg-[#FF8C00]/10 cursor-pointer transition-all group bg-gray-700/30 w-full border border-transparent hover:border-[#FF8C00]/20"
+                            className="flex items-center gap-2 sm:gap-3 p-2 rounded-lg hover:bg-primary/10 cursor-pointer group bg-gray-700/30 w-full border-transparent mx-surface"
                             onClick={() => {
                               // Play this track from the queue
                               playFromQueue(queuedTrack.id);
@@ -1298,7 +1310,7 @@ const FullPagePlayer = () => {
                           >
                             <div className="flex items-center gap-1 flex-shrink-0">
                               <span className="text-gray-500 text-xs sm:text-sm w-4 sm:w-5">{index + 1}</span>
-                              <svg className="w-3 h-3 sm:w-4 sm:h-4 text-gray-600 cursor-move group-hover:text-[#FF8C00]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <svg className="w-3 h-3 sm:w-4 sm:h-4 text-gray-600 cursor-move group-hover:text-primary/50" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                               </svg>
                             </div>
@@ -1308,7 +1320,7 @@ const FullPagePlayer = () => {
                               className="w-8 h-8 sm:w-10 sm:h-10 rounded-md object-cover flex-shrink-0 shadow-sm"
                             />
                             <div className="flex-1 min-w-0 overflow-hidden">
-                              <p className="text-xs sm:text-sm font-medium truncate line-clamp-1 group-hover:text-[#FF8C00] transition-colors">{queuedTrack.title}</p>
+                              <p className="text-xs sm:text-sm font-medium truncate line-clamp-1 group-hover:text-primary transition-colors">{queuedTrack.title}</p>
                               <p className="text-[10px] sm:text-xs text-gray-400 truncate">{queuedTrack.artist}</p>
                             </div>
                             <button 
@@ -1340,7 +1352,7 @@ const FullPagePlayer = () => {
                               setToast({message: 'No recommendations available', type: 'error'});
                             }
                           }}
-                          className="w-full mt-2 py-2.5 bg-gradient-to-r from-[#FF8C00] to-[#8B5CF6] hover:scale-[1.02] active:scale-[0.98] rounded-lg text-white text-sm sm:text-base font-medium transition-all shadow-lg shadow-[#FF8C00]/20 touch-manipulation"
+                          className="w-full mt-2 py-2.5 bg-gradient-to-r from-primary to-primary-light hover:scale-[1.02] active:scale-[0.98] rounded-lg text-white text-sm sm:text-base font-medium transition-all shadow-lg shadow-primary/20 touch-manipulation"
                         >
                           Discover & Add Recommendations
                         </button>
@@ -1350,19 +1362,19 @@ const FullPagePlayer = () => {
                 </div>
 
                 {/* Popular Playlist Section */}
-                <div className={`mt-6 sm:mt-8 bg-gray-800/70 backdrop-blur-sm rounded-2xl w-full max-w-2xl overflow-hidden transition-all duration-500 border border-white/10 shadow-xl ${isPopularExpanded ? 'p-4 sm:p-5 ring-1 ring-[#FFB020]/20 shadow-lg shadow-[#FFB020]/10' : 'p-3'}`}>
+                <div className={`mt-6 sm:mt-8 bg-gray-800/70 backdrop-blur-sm rounded-2xl w-full max-w-2xl overflow-hidden transition-all duration-500 border border-white/10 shadow-xl ${isPopularExpanded ? 'p-4 sm:p-5 ring-1 ring-primary-light/20 shadow-lg shadow-primary-light/10' : 'p-3'}`}>
                   <div 
                     className={`flex justify-between items-center px-1 w-full gap-2 cursor-pointer transition-all duration-300 rounded-lg ${!isPopularExpanded ? 'hover:bg-white/10' : 'mb-3'}`}
                     onClick={() => setIsPopularExpanded(!isPopularExpanded)}
                   >
                     <div className="flex items-center gap-3">
-                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${isPopularExpanded ? 'bg-[#FFB020]/20 text-[#FFB020]' : 'bg-gray-700 text-gray-400'}`}>
+                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${isPopularExpanded ? 'bg-primary-light/20 text-primary-light' : 'bg-gray-700 text-gray-400'}`}>
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
                         </svg>
                       </div>
                       <div className="flex flex-col">
-                        <h3 className="font-bold text-base sm:text-lg truncate">Popular This Month</h3>
+                        <h3 className="font-bold text-base sm:text-lg truncate text-text-primary">Popular This Month</h3>
                         {!isPopularExpanded && <span className="text-[10px] sm:text-xs text-gray-500">Trending tracks this month</span>}
                       </div>
                       <svg 
@@ -1399,14 +1411,14 @@ const FullPagePlayer = () => {
                   <div className={`transition-all duration-500 ease-in-out overflow-hidden ${isPopularExpanded ? 'max-h-[600px] opacity-100 mt-2' : 'max-h-0 opacity-0'}`}>
                     {loadingPopular ? (
                       <div className="flex items-center justify-center py-8">
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#FFB020]"></div>
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-light"></div>
                       </div>
                     ) : popularTracks.length > 0 ? (
                       <div className="space-y-2 max-h-[300px] sm:max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
                         {popularTracks.map((track, index) => (
                           <div 
                             key={track.id} 
-                            className="flex items-center gap-2 sm:gap-3 p-2 rounded-lg hover:bg-[#FFB020]/10 cursor-pointer transition-all group bg-gray-700/30 w-full border border-transparent hover:border-[#FFB020]/20"
+                            className="flex items-center gap-2 sm:gap-3 p-2 rounded-lg hover:bg-primary-light/10 cursor-pointer group bg-gray-700/30 w-full border-transparent mx-surface"
                             onClick={() => {
                               playTrack(track, popularTracks);
                               setToast({message: `Playing ${track.title}`, type: 'success'});
@@ -1419,7 +1431,7 @@ const FullPagePlayer = () => {
                               className="w-8 h-8 sm:w-10 sm:h-10 rounded-md object-cover flex-shrink-0 shadow-sm"
                             />
                             <div className="flex-1 min-w-0 overflow-hidden">
-                              <p className="text-xs sm:text-sm font-medium truncate line-clamp-1 group-hover:text-[#FFB020] transition-colors">{track.title}</p>
+                              <p className="text-xs sm:text-sm font-medium truncate line-clamp-1 group-hover:text-primary-light transition-colors">{track.title}</p>
                               <p className="text-[10px] sm:text-xs text-gray-400 truncate">{track.artist}</p>
                             </div>
                             <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
@@ -1429,7 +1441,7 @@ const FullPagePlayer = () => {
                                     addToQueue(track);
                                     setToast({message: 'Added to queue', type: 'success'});
                                   }}
-                                  className="p-1 sm:p-2 text-gray-400 hover:text-[#FFB020] transition-colors touch-manipulation opacity-0 group-hover:opacity-100"
+                                  className="p-1 sm:p-2 text-gray-400 hover:text-primary-light transition-colors touch-manipulation opacity-0 group-hover:opacity-100"
                                   title="Add to Queue"
                                 >
                                   <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1464,11 +1476,11 @@ const FullPagePlayer = () => {
             <div className="lg:col-span-1 space-y-3 sm:space-y-4 md:space-y-6">
               {/* Uploaded By Section */}
               <div className="bg-gray-800/50 rounded-xl p-3 sm:p-4 md:p-6">
-                <h3 className="text-xl font-bold mb-4">Uploaded By</h3>
+                <h3 className="text-xl font-bold mb-4 text-text-primary">Uploaded By</h3>
                 
                 {loadingCreator ? (
                   <div className="flex items-center justify-center py-4">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#FF8C00]"></div>
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
                   </div>
                 ) : creator ? (
                   <div className="space-y-4">
@@ -1539,7 +1551,7 @@ const FullPagePlayer = () => {
                     {/* View Full Profile Button */}
                     <button
                       onClick={() => router.push(`/artists/${creator._id}`)}
-                      className="w-full mt-4 py-2 bg-[#FF8C00] hover:bg-[#ff3350] rounded-lg text-white font-medium transition-colors"
+                      className="w-full mt-4 py-2 bg-primary hover:bg-[#E67E00] rounded-lg text-white font-medium transition-colors"
                     >
                       View Full Profile
                     </button>
@@ -1552,8 +1564,8 @@ const FullPagePlayer = () => {
               {/* Track Description & Collaborators Section */}
               {(currentTrack.description || (currentTrack.collaborators && currentTrack.collaborators.length > 0)) && (
                 <div className="bg-gray-800/50 rounded-xl p-3 sm:p-4 md:p-6">
-                  <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-                    <svg className="w-5 h-5 text-[#FF8C00]" fill="currentColor" viewBox="0 0 20 20">
+                  <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-text-primary">
+                    <svg className="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                     </svg>
                     Track Info
@@ -1571,7 +1583,7 @@ const FullPagePlayer = () => {
                   {currentTrack.collaborators && currentTrack.collaborators.length > 0 && (
                     <div>
                       <h4 className="text-sm font-semibold text-gray-300 mb-3 uppercase tracking-wider flex items-center gap-2">
-                        <svg className="w-4 h-4 text-[#FFB020]" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-4 h-4 text-primary-light" fill="currentColor" viewBox="0 0 20 20">
                           <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
                         </svg>
                         Collaborators
@@ -1580,7 +1592,7 @@ const FullPagePlayer = () => {
                         {currentTrack.collaborators.map((collaborator: string, index: number) => (
                           <div
                             key={index}
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30 rounded-full text-sm hover:border-purple-400/50 hover:bg-purple-600/30 transition-all cursor-default group"
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-primary/20 to-primary-light/20 border border-primary/30 rounded-full text-sm hover:border-primary/50 hover:bg-purple-600/30 transition-all cursor-default group"
                           >
                             <span className="w-1.5 h-1.5 bg-purple-400 rounded-full group-hover:bg-purple-300 transition-colors"></span>
                             <span className="text-purple-200 font-medium">{collaborator.trim()}</span>
@@ -1594,7 +1606,7 @@ const FullPagePlayer = () => {
               
               {/* Comments Section */}
               <div className="bg-gray-800/50 rounded-xl p-3 sm:p-4 md:p-6">
-                <h3 className="text-xl font-bold mb-4">Comments</h3>
+                <h3 className="text-xl font-bold mb-4 text-text-primary">Comments</h3>
                 
                 {/* Add Comment Form */}
                 <div className="mb-6">
@@ -1602,13 +1614,13 @@ const FullPagePlayer = () => {
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
                     placeholder="Add a comment..."
-                    className="w-full bg-gray-700 text-white rounded-lg p-3 mb-2 focus:outline-none focus:ring-2 focus:ring-[#FF8C00] touch-pan-y"
+                    className="w-full bg-gray-700 text-white rounded-lg p-3 mb-2 focus:outline-none focus:ring-2 focus:ring-primary touch-pan-y"
                     rows={3}
                   />
                   <button
                     onClick={handleAddComment}
                     disabled={!comment.trim() || !isAuthenticated}
-                    className="bg-[#FF8C00] hover:bg-[#ff3350] text-white px-4 py-3 rounded-lg disabled:opacity-50 touch-manipulation w-full sm:w-auto"
+                    className="bg-primary hover:bg-[#E67E00] text-white px-4 py-3 rounded-lg disabled:opacity-50 touch-manipulation w-full sm:w-auto"
                   >
                     Post Comment
                   </button>

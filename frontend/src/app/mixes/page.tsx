@@ -133,7 +133,7 @@ export default function PopularMixes() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black pt-20 sm:pt-6">
+      <div className="min-h-screen pt-20 sm:pt-6 bg-background">
         {/* Hero Section - Hidden on mobile */}
         <div className="relative py-6 sm:py-10 lg:py-16 overflow-hidden hidden sm:block">
           {/* Background image with gradient overlay */}
@@ -143,12 +143,12 @@ export default function PopularMixes() {
           </div>
                 
           {/* Decorative elements - smaller on mobile */}
-          <div className="absolute -top-10 -left-10 sm:-top-20 sm:-left-20 w-32 h-32 sm:w-64 sm:h-64 bg-[#FF8C00]/10 rounded-full blur-2xl sm:blur-3xl -z-10"></div>
-          <div className="absolute -bottom-10 -right-10 sm:-bottom-20 sm:-right-20 w-32 h-32 sm:w-64 sm:h-64 bg-[#FFB020]/10 rounded-full blur-2xl sm:blur-3xl -z-10"></div>
+          <div className="absolute -top-10 -left-10 sm:-top-20 sm:-left-20 w-32 h-32 sm:w-64 sm:h-64 bg-primary/10 rounded-full blur-2xl sm:blur-3xl -z-10"></div>
+          <div className="absolute -bottom-10 -right-10 sm:-bottom-20 sm:-right-20 w-32 h-32 sm:w-64 sm:h-64 bg-primary-light/10 rounded-full blur-2xl sm:blur-3xl -z-10"></div>
                 
           <div className="container mx-auto px-3 sm:px-6 lg:px-8 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-[#FF8C00] to-[#FFB020] mb-2 sm:mb-3 md:mb-4">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-2 sm:mb-3 md:mb-4 text-text-primary">
                 {t('mixes') || 'Popular Mixes'}
               </h1>
               <p className="text-sm sm:text-base lg:text-lg text-gray-300 max-w-2xl mx-auto mb-4 sm:mb-6 md:mb-8 px-2">
@@ -162,7 +162,7 @@ export default function PopularMixes() {
         <div className="container mx-auto px-3 sm:px-4 lg:px-8 py-4 sm:py-8 lg:py-12">
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
             {[...Array(8)].map((_, index) => (
-              <div key={index} className="group card-bg rounded-xl sm:rounded-2xl overflow-hidden transition-all duration-300">
+              <div key={index} className="group card-bg rounded-xl sm:rounded-2xl overflow-hidden">
                 <div className="relative">
                   <div className="w-full h-32 sm:h-40 md:h-44 lg:h-48 bg-gray-700 animate-pulse"></div>
                 </div>
@@ -187,13 +187,13 @@ export default function PopularMixes() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black flex items-center justify-center px-4 pt-20">
+      <div className="min-h-screen flex items-center justify-center px-4 pt-20 bg-background">
         <div className="text-center">
-          <h2 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">Error Loading Mixes</h2>
+          <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-text-primary">Error Loading Mixes</h2>
           <p className="text-red-500 text-sm sm:text-base mb-4 px-2">Error: {error}</p>
           <button 
             onClick={() => window.location.reload()} 
-            className="px-5 py-2.5 sm:px-6 sm:py-3 bg-[#FF8C00] text-white rounded-lg hover:bg-[#FFB020] transition-colors active:scale-95 touch-manipulation text-sm sm:text-base"
+            className="px-5 py-2.5 sm:px-6 sm:py-3 bg-primary text-white rounded-lg hover:bg-primary-light transition-colors active:scale-95 touch-manipulation text-sm sm:text-base"
           >
             {t('retry') || 'Retry'}
           </button>
@@ -203,7 +203,7 @@ export default function PopularMixes() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black pt-20 sm:pt-6">
+    <div className="min-h-screen pt-20 sm:pt-6 bg-background">
       {/* Hero Section - Hidden on mobile */}
       <div className="relative py-6 sm:py-10 lg:py-16 overflow-hidden hidden sm:block">
         {/* Background image with gradient overlay */}
@@ -213,12 +213,12 @@ export default function PopularMixes() {
         </div>
         
         {/* Decorative elements - smaller on mobile */}
-        <div className="absolute -top-10 -left-10 sm:-top-20 sm:-left-20 w-32 h-32 sm:w-64 sm:h-64 bg-[#FF8C00]/10 rounded-full blur-2xl sm:blur-3xl -z-10"></div>
-        <div className="absolute -bottom-10 -right-10 sm:-bottom-20 sm:-right-20 w-32 h-32 sm:w-64 sm:h-64 bg-[#FFB020]/10 rounded-full blur-2xl sm:blur-3xl -z-10"></div>
+        <div className="absolute -top-10 -left-10 sm:-top-20 sm:-left-20 w-32 h-32 sm:w-64 sm:h-64 bg-primary/10 rounded-full blur-2xl sm:blur-3xl -z-10"></div>
+        <div className="absolute -bottom-10 -right-10 sm:-bottom-20 sm:-right-20 w-32 h-32 sm:w-64 sm:h-64 bg-primary-light/10 rounded-full blur-2xl sm:blur-3xl -z-10"></div>
         
         <div className="container mx-auto px-3 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-[#FF8C00] to-[#FFB020] mb-2 sm:mb-3 md:mb-4">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-2 sm:mb-3 md:mb-4 text-text-primary">
               {t('mixes') || 'Popular Mixes'}
             </h1>
             <p className="text-sm sm:text-base lg:text-lg text-gray-300 max-w-2xl mx-auto mb-4 sm:mb-6 md:mb-8 px-2">
@@ -230,7 +230,7 @@ export default function PopularMixes() {
 
       {/* Mobile Hero - Visible only on mobile */}
       <div className="sm:hidden px-3 py-4">
-        <h1 className="text-xl sm:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#FF8C00] to-[#FFB020] mb-1">
+        <h1 className="text-xl sm:text-2xl font-bold mb-1 text-text-primary">
           {t('mixes') || 'Popular Mixes'}
         </h1>
         <p className="text-xs sm:text-sm text-gray-400">
@@ -247,7 +247,7 @@ export default function PopularMixes() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
               </svg>
             </div>
-            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2">No Mixes Found</h2>
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 text-text-primary">No Mixes Found</h2>
             <p className="text-sm sm:text-base text-gray-400 px-2">Check back later for new mixes</p>
           </div>
         ) : (
@@ -260,7 +260,7 @@ export default function PopularMixes() {
               return (
                 <div 
                   key={track._id} 
-                  className="group card-bg rounded-xl sm:rounded-2xl overflow-hidden transition-all duration-300 hover:border-[#FF8C00]/50 hover:bg-gradient-to-br hover:from-gray-900/70 hover:to-gray-900/50 hover:shadow-xl hover:shadow-[#FF8C00]/10 active:scale-[0.98]"
+                  className="group card-bg rounded-xl sm:rounded-2xl overflow-hidden active:scale-[0.98]"
                 >
                   <div className="relative">
                     {track.coverURL ? (
@@ -270,7 +270,7 @@ export default function PopularMixes() {
                         className="w-full h-32 sm:h-40 md:h-44 lg:h-48 object-cover"
                       />
                     ) : (
-                      <div className="w-full h-32 sm:h-40 md:h-44 lg:h-48 bg-gradient-to-br from-[#FF8C00] to-[#FFB020] flex items-center justify-center">
+                      <div className="w-full h-32 sm:h-40 md:h-44 lg:h-48 bg-gradient-to-br from-primary to-primary-light flex items-center justify-center">
                         <span className="text-lg sm:text-xl md:text-2xl font-bold text-white">
                           {track.title.charAt(0).toUpperCase()}
                         </span>
@@ -278,10 +278,10 @@ export default function PopularMixes() {
                     )}
                     
                     {/* Play Button Overlay - Always visible on mobile, hover on desktop */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center sm:opacity-0 sm:group-hover:opacity-100">
+                    <div className="absolute inset-0 flex items-end justify-end p-2 sm:p-3 pointer-events-none">
                       <button
                         onClick={() => handlePlayTrack(track)}
-                        className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full gradient-primary flex items-center justify-center text-white sm:transform sm:translate-y-2 sm:group-hover:translate-y-0 sm:transition-all sm:duration-300 touch-manipulation active:scale-90"
+                        className="mx-card-play !static pointer-events-auto hover:bg-primary-hover [&_svg]:w-4 [&_svg]:h-4"
                         disabled={!track.audioURL}
                         aria-label={`Play ${track.title}`}
                       >
@@ -311,7 +311,7 @@ export default function PopularMixes() {
                   </div>
                   
                   <div className="p-2.5 sm:p-3 md:p-4 lg:p-5">
-                    <h3 className="font-bold text-white text-sm sm:text-base md:text-lg mb-1 truncate" title={track.title}>{track.title}</h3>
+                    <h3 className="font-bold text-sm sm:text-base md:text-lg mb-1 truncate text-text-primary" title={track.title}>{track.title}</h3>
                     <p className="text-gray-400 text-[10px] sm:text-xs md:text-sm mb-2 truncate" title={artistName}>{artistName}</p>
                     
                     {/* Stats */}

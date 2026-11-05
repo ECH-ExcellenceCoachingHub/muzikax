@@ -64,6 +64,27 @@ export default function Sidebar() {
       ),
     },
     {
+      name: 'DJ Mode',
+      href: '/dj',
+      icon: (
+        <svg className="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <circle cx="8" cy="12" r="5" strokeWidth="2" />
+          <circle cx="8" cy="12" r="1.5" strokeWidth="2" />
+          <path strokeLinecap="round" strokeWidth="2" d="M16 5v14M20 8v8M16 12h4" />
+        </svg>
+      ),
+    },
+    {
+      name: 'Live',
+      href: '/live',
+      icon: (
+        <svg className="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="2" strokeWidth="2" />
+          <path strokeLinecap="round" strokeWidth="2" d="M8.5 15.5a5 5 0 010-7M15.5 8.5a5 5 0 010 7M5.6 18.4a9 9 0 010-12.8M18.4 5.6a9 9 0 010 12.8" />
+        </svg>
+      ),
+    },
+    {
       name: t('beats'),
       href: '/beats',
       icon: (
@@ -134,19 +155,23 @@ export default function Sidebar() {
       initial={false}
       animate={{ width: showExpanded ? 200 : 64 }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
-      className={`hidden md:flex flex-col fixed top-16 left-0 h-[calc(100vh-64px)] z-30 
-        bg-[#0B0F14] border-r border-[#1F2937]
-        overflow-y-auto scrollbar-hide sidebar-scrollbar-hide shadow-xl`}
+      // z-[55]: above page-level sticky headers (z-50) so nothing paints over the nav,
+      // below toasts (z-[60]) and modals (z-[9999]).
+      className={`hidden md:flex flex-col fixed top-0 left-0 h-screen z-[55]
+        bg-background border-r border-border-light
+        overflow-y-auto scrollbar-hide sidebar-scrollbar-hide
+        ${isHovered && !isExpanded ? 'shadow-[8px_0_32px_rgba(0,0,0,0.6)]' : ''}`}
       onMouseEnter={() => !isExpanded && setIsHovered(true)}
       onMouseLeave={() => !isExpanded && setIsHovered(false)}
       style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
     >
       {/* Toggle Button - Hamburger Menu */}
-      <div className="p-2 border-b border-[#1F2937]">
+      {/* h-16 + border-b matches the top navbar exactly so the two read as one bar */}
+      <div className="h-16 flex-shrink-0 flex items-center px-2 border-b border-border-light">
         <button
           onClick={toggleSidebar}
           className={`w-full flex items-center gap-3 px-2.5 py-2 rounded-xl 
-            text-[#9CA3AF] hover:text-white hover:bg-[#1A2330] 
+            text-text-secondary hover:text-white hover:bg-surface-elevated 
             transition-all duration-300
             ${!showExpanded && 'justify-center'}`}
           title={showExpanded ? 'Minimize Sidebar' : 'Maximize Sidebar'}
@@ -175,15 +200,15 @@ export default function Sidebar() {
             className={`group relative flex items-center gap-3 px-2.5 py-2.5 rounded-xl 
               transition-all duration-300
               ${isActive(item.href) 
-                ? 'bg-[rgba(245,158,11,0.15)] text-[#F59E0B]' 
-                : 'text-[#9CA3AF] hover:text-white hover:bg-[#1A2330]'
+                ? 'bg-primary/10 text-primary' 
+                : 'text-text-secondary hover:text-white hover:bg-surface-elevated'
               } 
               ${!isHovered && 'justify-center'}`}
             title={item.name}
           >
             {/* Active indicator with glow */}
             {isActive(item.href) && (
-              <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-[#F59E0B] rounded-r-full"></div>
+              <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-primary rounded-r-full"></div>
             )}
             
             <div className="relative z-10 flex items-center gap-3">
@@ -206,8 +231,8 @@ export default function Sidebar() {
             className={`group relative flex items-center gap-3 px-2.5 py-2.5 rounded-xl 
               transition-all duration-300
               ${isActive('/offline') 
-                ? 'bg-[rgba(245,158,11,0.15)] text-[#F59E0B]' 
-                : 'text-[#9CA3AF] hover:text-white hover:bg-[#1A2330]'
+                ? 'bg-primary/10 text-primary' 
+                : 'text-text-secondary hover:text-white hover:bg-surface-elevated'
               } 
               ${!isHovered && 'justify-center'}`}
             title="Offline Player"
@@ -231,7 +256,7 @@ export default function Sidebar() {
             }
           }}
           className={`group relative w-full flex items-center gap-3 px-2.5 py-2.5 rounded-xl 
-            text-[#9CA3AF] hover:text-white hover:bg-[#1A2330] 
+            text-text-secondary hover:text-white hover:bg-surface-elevated 
             transition-all duration-300
             ${!isHovered && 'justify-center'}`}
           title={t('upload')}
@@ -248,7 +273,7 @@ export default function Sidebar() {
       {/* Categories Section - Compact Grid */}
       {showExpanded && (
         <div className="px-2 py-3">
-          <h2 className="text-[9px] uppercase tracking-[0.2em] text-[#6B7280] font-bold mb-2 px-2">
+          <h2 className="text-[9px] uppercase tracking-[0.2em] text-text-muted font-bold mb-2 px-2">
             {t('categories')}
           </h2>
           <div className="grid grid-cols-2 gap-1.5">
@@ -257,7 +282,7 @@ export default function Sidebar() {
                 key={cat.name}
                 href={cat.href}
                 className="flex items-center gap-2 px-2.5 py-2 text-xs font-medium 
-                  text-[#9CA3AF] hover:text-white hover:bg-[#1A2330] 
+                  text-text-secondary hover:text-white hover:bg-surface-elevated 
                   rounded-lg transition-all duration-200"
               >
                 <span className="truncate">{cat.name}</span>
@@ -270,14 +295,14 @@ export default function Sidebar() {
       {/* Library Section - Compact */}
       {showExpanded && (
         <div className="px-2 py-3">
-          <h2 className="text-[9px] uppercase tracking-[0.2em] text-[#6B7280] font-bold mb-2 px-2">
+          <h2 className="text-[9px] uppercase tracking-[0.2em] text-text-muted font-bold mb-2 px-2">
             {t('library')}
           </h2>
           <div className="space-y-1">
             <Link
               href="/favorites"
               className="flex items-center gap-3 px-2.5 py-2 text-xs font-medium 
-                text-[#9CA3AF] hover:text-white hover:bg-[#1A2330] 
+                text-text-secondary hover:text-white hover:bg-surface-elevated 
                 rounded-lg transition-all duration-200"
             >
               <span className="truncate">{t('favorites') || 'Favorites'}</span>
@@ -285,7 +310,7 @@ export default function Sidebar() {
             <Link
               href="/recently-played"
               className="flex items-center gap-3 px-2.5 py-2 text-xs font-medium 
-                text-[#9CA3AF] hover:text-white hover:bg-[#1A2330] 
+                text-text-secondary hover:text-white hover:bg-surface-elevated 
                 rounded-lg transition-all duration-200"
             >
               <span className="truncate">{t('recentlyPlayed') || 'Recently Played'}</span>
@@ -297,23 +322,23 @@ export default function Sidebar() {
       {/* User Profile Card - Minimal */}
       {showExpanded && isAuthenticated && user && (
         <div className="mt-auto p-2">
-          <div className="bg-[#121821] rounded-xl p-2.5 flex items-center gap-2.5 border border-[#1F2937]">
+          <div className="bg-surface rounded-xl p-2.5 flex items-center gap-2.5 border border-surface-elevated">
             {user.avatar ? (
               <Image
                 src={user.avatar}
                 alt={user.name}
                 width={36}
                 height={36}
-                className="rounded-full object-cover ring-2 ring-[#F59E0B]/30"
+                className="rounded-full object-cover ring-2 ring-primary/30"
               />
             ) : (
-              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#F59E0B] to-[#FFB020] flex items-center justify-center text-xs font-bold text-white">
+              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-primary-light flex items-center justify-center text-xs font-bold text-white">
                 {user.name.charAt(0).toUpperCase()}
               </div>
             )}
             <div className="flex-1 min-w-0">
               <p className="text-xs font-semibold text-white truncate">{user.name}</p>
-              <p className="text-[10px] text-[#9CA3AF] capitalize truncate">{user.role}</p>
+              <p className="text-[10px] text-text-secondary capitalize truncate">{user.role}</p>
             </div>
           </div>
         </div>

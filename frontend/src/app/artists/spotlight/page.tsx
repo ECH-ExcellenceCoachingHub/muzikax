@@ -145,12 +145,12 @@ export default function ArtistSpotlightPage() {
   const selectedArtist = featuredArtists.find(artist => artist.id === activeArtist) || featuredArtists[0];
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen text-white bg-background">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#FF8C00] to-[#FFB020] py-16">
+      <div className="bg-gradient-to-r from-primary to-primary-light py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Artist Spotlight</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-text-primary">Artist Spotlight</h1>
             <p className="text-xl text-white/90 max-w-3xl mx-auto">
               In-depth interviews and stories from Rwanda's most influential music creators
             </p>
@@ -167,7 +167,7 @@ export default function ArtistSpotlightPage() {
               onClick={() => setActiveArtist(artist.id)}
               className={`px-6 py-3 rounded-full font-medium transition-all ${
                 selectedArtist.id === artist.id
-                  ? "bg-[#FF8C00] text-white"
+                  ? "bg-primary text-white"
                   : "bg-gray-800 text-gray-300 hover:bg-gray-700"
               }`}
             >
@@ -181,22 +181,22 @@ export default function ArtistSpotlightPage() {
           <div className="lg:col-span-1">
             <div className="bg-gray-800/30 backdrop-blur-lg rounded-xl p-6 border border-gray-700 sticky top-24">
               <div className="text-center mb-6">
-                <div className="w-32 h-32 bg-gradient-to-br from-[#FF8C00] to-[#FFB020] rounded-full mx-auto mb-4 flex items-center justify-center">
+                <div className="w-32 h-32 bg-gradient-to-br from-primary to-primary-light rounded-full mx-auto mb-4 flex items-center justify-center">
                   <span className="text-4xl font-bold text-white">
                     {selectedArtist.name.split(' ').map(n => n[0]).join('')}
                   </span>
                 </div>
-                <h2 className="text-2xl font-bold text-white mb-2">{selectedArtist.name}</h2>
-                <p className="text-[#FF8C00] font-medium">{selectedArtist.genre}</p>
+                <h2 className="text-2xl font-bold mb-2 text-text-primary">{selectedArtist.name}</h2>
+                <p className="text-primary font-medium">{selectedArtist.genre}</p>
               </div>
 
               <div className="space-y-4">
                 <div>
-                  <h3 className="font-semibold text-white mb-2">Achievements</h3>
+                  <h3 className="font-semibold mb-2 text-text-primary">Achievements</h3>
                   <ul className="text-gray-300 text-sm space-y-1">
                     {selectedArtist.achievements.map((achievement, index) => (
                       <li key={index} className="flex items-start">
-                        <span className="text-[#FF8C00] mr-2">•</span>
+                        <span className="text-primary mr-2">•</span>
                         {achievement}
                       </li>
                     ))}
@@ -204,7 +204,7 @@ export default function ArtistSpotlightPage() {
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-white mb-3">Follow</h3>
+                  <h3 className="font-semibold mb-3 text-text-primary">Follow</h3>
                   <div className="flex justify-center gap-3">
                     {selectedArtist.socialLinks.instagram && (
                       <a href={selectedArtist.socialLinks.instagram} className="w-10 h-10 bg-[#E4405F] rounded-full flex items-center justify-center hover:bg-[#d03756] transition-colors">
@@ -236,16 +236,16 @@ export default function ArtistSpotlightPage() {
           {/* Interview Content */}
           <div className="lg:col-span-2">
             <div className="bg-gray-800/30 backdrop-blur-lg rounded-xl p-8 border border-gray-700">
-              <h2 className="text-3xl font-bold mb-6 text-[#FF8C00]">Artist Biography</h2>
+              <h2 className="text-3xl font-bold mb-6 text-text-primary">Artist Biography</h2>
               <p className="text-gray-300 mb-8 leading-relaxed text-lg">
                 {selectedArtist.bio}
               </p>
 
-              <h2 className="text-3xl font-bold mb-6 text-[#FF8C00]">Exclusive Interview</h2>
+              <h2 className="text-3xl font-bold mb-6 text-text-primary">Exclusive Interview</h2>
               <div className="space-y-8">
                 {selectedArtist.interview.map((qa, index) => (
-                  <div key={index} className="border-l-4 border-[#FF8C00] pl-6">
-                    <h3 className="text-xl font-semibold text-white mb-3">{qa.question}</h3>
+                  <div key={index} className="border-l-4 border-primary pl-6">
+                    <h3 className="text-xl font-semibold mb-3 text-text-primary">{qa.question}</h3>
                     <p className="text-gray-300 leading-relaxed">{qa.answer}</p>
                   </div>
                 ))}
@@ -253,14 +253,14 @@ export default function ArtistSpotlightPage() {
 
               {/* Call to Action */}
               <div className="mt-12 pt-8 border-t border-gray-700">
-                <div className="bg-gradient-to-r from-[#FF8C00]/10 to-[#FFB020]/10 rounded-xl p-6 text-center">
-                  <h3 className="text-xl font-bold mb-3 text-[#FF8C00]">Listen to Their Music</h3>
+                <div className="bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-xl p-6 text-center">
+                  <h3 className="text-xl font-bold mb-3 text-text-primary">Listen to Their Music</h3>
                   <p className="text-gray-300 mb-4">
                     Experience {selectedArtist.name}'s artistry through their latest releases
                   </p>
                   <Link 
                     href={`/artists/${selectedArtist.id}`}
-                    className="inline-block bg-gradient-to-r from-[#FF8C00] to-[#FFB020] text-white px-8 py-3 rounded-full font-semibold hover:from-[#FF7A00] hover:to-[#FFA010] transition-all"
+                    className="inline-block bg-gradient-to-r from-primary to-primary-light text-white px-8 py-3 rounded-full font-semibold hover:from-primary hover:to-primary-light transition-all"
                   >
                     Explore Artist Profile
                   </Link>

@@ -145,9 +145,9 @@ export default function UserProfile() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#FF4D67]"></div>
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary"></div>
           <p className="mt-4 text-gray-400">Loading profile...</p>
         </div>
       </div>
@@ -156,11 +156,11 @@ export default function UserProfile() {
 
   if (error || !profile) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-white mb-4">User Not Found</h2>
+          <h2 className="text-2xl font-bold mb-4 text-text-primary">User Not Found</h2>
           <p className="text-gray-400 mb-6">{error || 'The user you are looking for does not exist.'}</p>
-          <Link href="/" className="inline-block bg-[#FF4D67] hover:bg-[#FF4D67]/80 text-white py-2 px-6 rounded-lg transition-colors">
+          <Link href="/" className="inline-block bg-primary hover:bg-primary/80 text-white py-2 px-6 rounded-lg transition-colors">
             Back Home
           </Link>
         </div>
@@ -173,12 +173,12 @@ export default function UserProfile() {
   const isCompact = scrollY > 200
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black pt-14 md:pt-0">
+    <div className="min-h-screen pt-14 md:pt-0 bg-background">
       {/* Sticky Profile Header */}
       <div className={`sticky top-0 z-50 transition-all duration-300 ${isCompact ? 'bg-gray-900/95 backdrop-blur-lg shadow-lg' : ''}`}>
         <div className="container mx-auto px-4 pt-4 pb-3">
           {/* Back Button */}
-          <Link href="/community" className="text-gray-400 hover:text-[#FF4D67] text-xs font-bold uppercase tracking-widest mb-4 inline-flex items-center gap-2 transition-colors">
+          <Link href="/community" className="text-gray-400 hover:text-primary text-xs font-bold uppercase tracking-widest mb-4 inline-flex items-center gap-2 transition-colors">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
@@ -189,7 +189,7 @@ export default function UserProfile() {
           <div className={`transition-all duration-300 ${isCompact ? 'flex items-center gap-4' : ''}`}>
             {/* Avatar */}
             <div className={`relative group transition-all duration-300 ${isCompact ? 'w-16 h-16 flex-shrink-0' : 'w-24 h-24 md:w-32 md:h-32'}`}>
-              <div className="absolute -inset-1 bg-gradient-to-r from-[#FF4D67] to-[#FFCB2B] rounded-full blur opacity-25"></div>
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary to-primary-light rounded-full blur opacity-25"></div>
               <div className="relative rounded-full border-2 border-gray-900 overflow-hidden shadow-xl bg-gray-800">
                 {profile.avatar ? (
                   <img
@@ -198,7 +198,7 @@ export default function UserProfile() {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-[#FF4D67] to-[#FFCB2B] flex items-center justify-center">
+                  <div className="w-full h-full bg-gradient-to-br from-primary to-primary-light flex items-center justify-center">
                     <span className={`${isCompact ? 'text-2xl' : 'text-3xl md:text-4xl'} font-black text-white`}>
                       {profile.name.charAt(0).toUpperCase()}
                     </span>
@@ -210,11 +210,11 @@ export default function UserProfile() {
             {/* Name & Stats */}
             <div className={`flex-1 ${isCompact ? 'py-2' : 'mt-4 md:mt-6'}`}>
               <div className="flex items-center gap-2 flex-wrap">
-                <h1 className={`${isCompact ? 'text-xl' : 'text-3xl md:text-4xl'} font-black text-white tracking-tight transition-all duration-300`}>
+                <h1 className={`${isCompact ? 'text-xl' : 'text-3xl md:text-4xl'} font-black tracking-tight transition-all duration-300 text-text-primary`}>
                   {profile.name}
                 </h1>
                 {profile.role === 'creator' && profile.creatorType && (
-                  <span className="px-2 py-1 bg-gradient-to-r from-[#FF8C00] to-[#FFB020] text-white text-xs font-bold rounded-full uppercase tracking-wide">
+                  <span className="px-2 py-1 bg-gradient-to-r from-primary to-primary-light text-white text-xs font-bold rounded-full uppercase tracking-wide">
                     {profile.creatorType}
                   </span>
                 )}
@@ -247,7 +247,7 @@ export default function UserProfile() {
       <div className="container mx-auto px-4 pb-12">
         {/* Action Row */}
         <div className="flex gap-3 my-6">
-          <button className="flex-1 bg-[#FF4D67] hover:bg-[#FF4D67]/90 text-white font-bold py-3.5 px-6 rounded-2xl transition-all active:scale-95 shadow-lg shadow-[#FF4D67]/20">
+          <button className="flex-1 bg-primary hover:bg-primary/90 text-white font-bold py-3.5 px-6 rounded-2xl transition-all active:scale-95 shadow-lg shadow-primary/20">
             Follow
           </button>
           <button className="flex-1 bg-gray-800 hover:bg-gray-700 text-white font-bold py-3.5 px-6 rounded-2xl transition-all active:scale-95 border border-gray-700">
@@ -270,7 +270,7 @@ export default function UserProfile() {
               className="w-full flex items-center justify-between p-5 text-left hover:bg-gray-800/40 transition-all"
             >
               <div className="flex items-center gap-3">
-                <svg className="w-5 h-5 text-[#FF4D67]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
                 <span className="font-bold text-white">About</span>
@@ -290,7 +290,7 @@ export default function UserProfile() {
                     {profile.bio.length > 150 && (
                       <button
                         onClick={() => setShowBioFull(!showBioFull)}
-                        className="text-[#FF4D67] text-sm font-bold mt-2 hover:underline"
+                        className="text-primary text-sm font-bold mt-2 hover:underline"
                       >
                         {showBioFull ? 'Show less' : 'Read more'}
                       </button>
@@ -311,7 +311,7 @@ export default function UserProfile() {
                 className="w-full flex items-center justify-between p-5 text-left hover:bg-gray-800/40 transition-all"
               >
                 <div className="flex items-center gap-3">
-                  <svg className="w-5 h-5 text-[#FF4D67]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
                   </svg>
                   <span className="font-bold text-white">Genres</span>
@@ -375,8 +375,8 @@ export default function UserProfile() {
         {/* Recently Played - Horizontal Scroll */}
         {recentlyPlayed.length > 0 && (
           <div className="mb-12">
-            <h2 className="text-xl font-black text-white tracking-tight mb-6 flex items-center gap-2">
-              <svg className="w-6 h-6 text-[#FF4D67]" fill="currentColor" viewBox="0 0 20 20">
+            <h2 className="text-xl font-black tracking-tight mb-6 flex items-center gap-2 text-text-primary">
+              <svg className="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
               </svg>
               Recently Played
@@ -387,13 +387,13 @@ export default function UserProfile() {
                 <Link
                   key={track._id}
                   href={`/tracks/${track._id}`}
-                  className="flex-shrink-0 w-40 group bg-gray-800/30 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-700/30 hover:bg-gray-800/50 hover:border-[#FF4D67]/40 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
+                  className="flex-shrink-0 w-40 group rounded-2xl overflow-hidden mx-surface"
                 >
                   <div className="aspect-square relative overflow-hidden">
                     <img
                       src={track.coverURL || '/placeholder-cover.jpg'}
                       alt={track.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement
                         target.src = '/placeholder-cover.jpg'
@@ -407,7 +407,7 @@ export default function UserProfile() {
                     </div>
                   </div>
                   <div className="p-3">
-                    <h3 className="font-bold text-white group-hover:text-[#FF4D67] transition-colors truncate text-sm">
+                    <h3 className="font-bold group-hover:text-primary transition-colors truncate text-sm text-text-primary">
                       {track.title}
                     </h3>
                     <p className="text-gray-400 text-xs truncate">{track.artist}</p>
@@ -420,7 +420,7 @@ export default function UserProfile() {
 
         {/* Uploaded Tracks Grid */}
         <div>
-          <h2 className="text-xl font-black text-white tracking-tight mb-6">
+          <h2 className="text-xl font-black tracking-tight mb-6 text-text-primary">
             {recentlyPlayed.length > 0 ? 'Uploaded Tracks' : 'Recent Activity'}
           </h2>
 
@@ -430,24 +430,24 @@ export default function UserProfile() {
                 <Link
                   key={track._id || track.id}
                   href={`/tracks/${track._id || track.id}`}
-                  className="group flex flex-col bg-gray-800/20 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-700/30 hover:bg-gray-800/40 hover:border-[#FF4D67]/40 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-[#FF4D67]/5"
+                  className="group flex flex-col rounded-2xl overflow-hidden mx-surface"
                 >
                   <div className="aspect-video relative overflow-hidden">
                     <img
                       src={track.coverURL || '/placeholder-cover.jpg'}
                       alt={track.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement
                         target.src = '/placeholder-cover.jpg'
                       }}
                     />
                     <div className="absolute bottom-3 left-3 flex gap-1">
-                      <span className="px-2 py-0.5 bg-[#FF4D67] text-[9px] font-black text-white uppercase rounded">Track</span>
+                      <span className="px-2 py-0.5 bg-primary text-[9px] font-black text-white uppercase rounded">Track</span>
                     </div>
                   </div>
                   <div className="p-4 flex-1">
-                    <h3 className="font-bold text-white group-hover:text-[#FF4D67] transition-colors mb-1 truncate text-sm">
+                    <h3 className="font-bold group-hover:text-primary transition-colors mb-1 truncate text-sm text-text-primary">
                       {track.title}
                     </h3>
                     <p className="text-gray-400 text-xs truncate mb-4">{track.artist}</p>
@@ -455,7 +455,7 @@ export default function UserProfile() {
                     <div className="flex items-center justify-between text-[10px] text-gray-500 font-bold uppercase tracking-widest pt-3 border-t border-gray-700/50">
                       <div className="flex items-center gap-3">
                         <span className="flex items-center gap-1.5">
-                          <svg className="w-3.5 h-3.5 text-[#FF4D67]" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-3.5 h-3.5 text-primary" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
                           </svg>
                           {track.plays || 0}
@@ -467,7 +467,7 @@ export default function UserProfile() {
                           {track.likes || 0}
                         </span>
                       </div>
-                      <span className="text-[#FF4D67]">Play →</span>
+                      <span className="text-primary">Play →</span>
                     </div>
                   </div>
                 </Link>
@@ -480,7 +480,7 @@ export default function UserProfile() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
                 </svg>
               </div>
-              <h3 className="text-lg font-bold text-white mb-2">No active tracks</h3>
+              <h3 className="text-lg font-bold mb-2 text-text-primary">No active tracks</h3>
               <p className="text-gray-500 text-sm max-w-xs mx-auto">This user hasn't uploaded any music or activity is currently hidden.</p>
             </div>
           )}

@@ -128,7 +128,7 @@ var ModernAudioPlayer = function () {
       {isShareModalOpen && (<div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
           <div className="bg-gray-800 rounded-xl p-6 w-full max-w-md mx-4">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-bold">Share Track</h3>
+              <h3 className="text-xl font-bold text-text-primary">Share Track</h3>
               <button onClick={function () { return setIsShareModalOpen(false); }} className="text-gray-400 hover:text-white">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -200,16 +200,16 @@ var ModernAudioPlayer = function () {
         </div>)}
       
       {/* Minimized Player */}
-      {isMinimized && (<div className={"\n          fixed bottom-20 sm:bottom-6 right-2 sm:right-6 \n          left-2 sm:left-auto\n          w-[calc(100vw-1rem)] sm:w-[".concat(isBeat ? '420px' : '380px', "] \n          max-w-[420px]\n          rounded-2xl \n          ").concat(isBeat ? 'bg-gradient-to-br from-gray-900 to-black backdrop-blur-xl border border-[#FF4D67]/30 shadow-2xl shadow-[#FF4D67]/20' : 'bg-black/70 backdrop-blur-xl border border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.6)]', " \n          z-40 animate-[fadeInUp_0.3s_ease-out]\n          sm:z-50\n        ")}>
+      {isMinimized && (<div className={"\n          fixed bottom-20 sm:bottom-6 right-2 sm:right-6 \n          left-2 sm:left-auto\n          w-[calc(100vw-1rem)] sm:w-[".concat(isBeat ? '420px' : '380px', "] \n          max-w-[420px]\n          rounded-2xl \n          ").concat(isBeat ? 'bg-gradient-to-br from-gray-900 to-black backdrop-blur-xl border border-primary/30 shadow-2xl shadow-primary/20' : 'bg-black/70 backdrop-blur-xl border border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.6)]', " \n          z-40 animate-[fadeInUp_0.3s_ease-out]\n          sm:z-50\n        ")}>
           {/* Beat-specific styling */}
-          {isBeat && (<div className="absolute inset-0 bg-gradient-to-r from-[#FF4D67]/20 via-[#FFCB2B]/20 to-[#8B5CF6]/20 rounded-2xl"></div>)}
+          {isBeat && (<div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary-light/20 to-primary-light/20 rounded-2xl"></div>)}
           
           {/* Player Content */}
           <div className="relative z-10 flex items-center p-2 sm:p-3">
             <div className="relative shrink-0">
               <img src={currentTrack.coverImage} alt={currentTrack.title} className={"w-10 h-10 md:w-12 md:h-12 rounded-xl object-cover transition-transform duration-300 ".concat(isPlaying ? 'scale-105' : '', " ").concat(isBeat ? 'rounded-lg' : '')}/>
               {/* Beat-specific glow effect */}
-              {isBeat && (<div className="absolute -inset-1 bg-[#FF4D67] rounded-lg blur opacity-30 animate-pulse"></div>)}
+              {isBeat && (<div className="absolute -inset-1 bg-primary rounded-lg blur opacity-30 animate-pulse"></div>)}
               {/* Regular glow effect for non-beats */}
               {!isBeat && (<div className="absolute -inset-1 bg-gradient-to-r from-pink-500 to-purple-500 blur opacity-30 rounded-xl"></div>)}
             </div>
@@ -217,9 +217,9 @@ var ModernAudioPlayer = function () {
             <div className="ml-2 sm:ml-3 flex-1 min-w-0 overflow-hidden">
               {isBeat ? (<>
                   <h4 className="text-white font-bold text-sm truncate">{currentTrack.title}</h4>
-                  <p className="text-[#FFCB2B] text-xs truncate">{currentTrack.artist}</p>
+                  <p className="text-primary-light text-xs truncate">{currentTrack.artist}</p>
                   <div className="flex items-center gap-1 mt-1 flex-wrap">
-                    <span className="text-[#FF4D67] text-xs font-medium">BEAT</span>
+                    <span className="text-primary text-xs font-medium">BEAT</span>
                     {(function () {
                     // Handle missing or null paymentType by defaulting to 'free'
                     var paymentType = currentTrack.paymentType || 'free';
@@ -234,15 +234,15 @@ var ModernAudioPlayer = function () {
               
               {/* Current Playlist Indicator in Mini Player */}
               {currentPlaylistName && (<div className="flex items-center gap-1 mt-1">
-                  <svg className="w-3 h-3 text-purple-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <svg className="w-3 h-3 text-primary-light" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z"/>
                   </svg>
-                  <p className="text-purple-400 text-xs truncate">from {currentPlaylistName}</p>
+                  <p className="text-primary-light text-xs truncate">from {currentPlaylistName}</p>
                 </div>)}
               
               {/* Mini Progress Bar */}
               <div ref={progressRef} onClick={handleProgressClick} className="mt-1 h-1.5 sm:h-1 w-full bg-white/10 rounded-full cursor-pointer touch-manipulation">
-                <div className="h-full bg-gradient-to-r from-[#FF4D67] to-[#8B5CF6] rounded-full transition-all" style={{ width: "".concat((progress / duration) * 100 || 0, "%") }}/>
+                <div className="h-full bg-gradient-to-r from-primary to-primary-light rounded-full transition-all" style={{ width: "".concat((progress / duration) * 100 || 0, "%") }}/>
               </div>
             </div>
             
@@ -304,7 +304,7 @@ var ModernAudioPlayer = function () {
               
               {/* Speed Control */}
               <div className="flex items-center">
-                <select value={playbackRate} onChange={function (e) { return setPlaybackRate(parseFloat(e.target.value)); }} className="bg-black/70 text-white text-xs rounded px-1 py-1 sm:px-2 sm:py-1 focus:outline-none focus:ring-1 focus:ring-[#FF4D67] min-w-[50px] appearance-none touch-manipulation">
+                <select value={playbackRate} onChange={function (e) { return setPlaybackRate(parseFloat(e.target.value)); }} className="bg-black/70 text-white text-xs rounded px-1 py-1 sm:px-2 sm:py-1 focus:outline-none focus:ring-1 focus:ring-primary min-w-[50px] appearance-none touch-manipulation">
                   <option value="0.5">0.5x</option>
                   <option value="0.75">0.75x</option>
                   <option value="1">1x</option>
@@ -315,7 +315,7 @@ var ModernAudioPlayer = function () {
               </div>
               
               {/* Loop Button */}
-              <button onClick={toggleLoop} className={"\n                  w-9 h-9 rounded-full\n                  flex items-center justify-center\n                  ".concat(isLooping ? 'text-[#FF4D67]' : 'text-gray-400', " hover:text-white\n                  hover:bg-white/10\n                  transition\n                  min-w-[48px] min-h-[48px]\n                  touch-manipulation\n                  p-1\n                ")} title="Loop track/playlist">
+              <button onClick={toggleLoop} className={"\n                  w-9 h-9 rounded-full\n                  flex items-center justify-center\n                  ".concat(isLooping ? 'text-primary' : 'text-gray-400', " hover:text-white\n                  hover:bg-white/10\n                  transition\n                  min-w-[48px] min-h-[48px]\n                  touch-manipulation\n                  p-1\n                ")} title="Loop track/playlist">
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
                 </svg>
@@ -344,7 +344,7 @@ var ModernAudioPlayer = function () {
                     w-20 sm:w-28 px-2 py-1
                     bg-black/70 rounded-lg
                     hidden group-hover:block
-                    accent-[#FF4D67]
+                    accent-primary
                     touch-manipulation
                   "/>
               </div>

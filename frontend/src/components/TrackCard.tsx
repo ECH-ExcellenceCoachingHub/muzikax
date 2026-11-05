@@ -112,7 +112,7 @@ export default function TrackCard({
   const isFavorite = favorites.some(fav => fav.id === track.id);
 
   return (
-    <div className="flex-shrink-0 w-40 sm:w-44 md:w-44 lg:w-48 group card-bg rounded-xl overflow-hidden transition-all duration-300 hover:border-[#FF8C00]/50 hover:bg-gradient-to-br hover:from-gray-900/70 hover:to-gray-900/50 hover:shadow-xl hover:shadow-[#FF8C00]/10">
+    <div className="flex-shrink-0 w-40 sm:w-44 md:w-44 lg:w-48 group card-bg rounded-xl overflow-hidden">
       <div className="relative">
         <div className="w-full aspect-square relative">
           <img
@@ -150,10 +150,10 @@ export default function TrackCard({
           )}
         </div>
         {showPlayButton && (
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+          <div className="absolute inset-0 flex items-end justify-end p-2 sm:p-3 pointer-events-none">
             <button
               onClick={handlePlay}
-              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full gradient-primary flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300"
+              className="mx-card-play !static pointer-events-auto hover:bg-primary-hover [&_svg]:w-4 [&_svg]:h-4"
             >
               {currentTrack?.id === track.id && isPlaying ? (
                 <svg
@@ -242,7 +242,7 @@ export default function TrackCard({
 
       <div className="p-3">
         <div className="mb-1">
-          <h3 className="font-bold text-white text-sm sm:text-base truncate">
+          <h3 className="font-bold text-sm sm:text-base truncate text-text-primary">
             {track.title}
           </h3>
           <p className="text-gray-400 text-xs sm:text-sm truncate">

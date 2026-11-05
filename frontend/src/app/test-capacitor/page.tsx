@@ -65,15 +65,15 @@ export default function CapacitorTestPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white p-6">
+    <div className="min-h-screen text-white p-6 bg-background">
       <div className="max-w-2xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6 text-pink-500">
+        <h1 className="text-3xl font-bold mb-6 text-pink-500 text-text-primary">
           🔧 Capacitor Native Features Test
         </h1>
 
         {/* Status Card */}
         <div className="bg-gray-900 rounded-lg p-6 mb-6">
-          <h2 className="text-xl font-semibold mb-4">📊 Environment Status</h2>
+          <h2 className="text-xl font-semibold mb-4 text-text-primary">📊 Environment Status</h2>
           
           <div className="space-y-3">
             <div className="flex justify-between items-center">
@@ -119,7 +119,7 @@ export default function CapacitorTestPage() {
 
         {/* Haptic Feedback Test */}
         <div className="bg-gray-900 rounded-lg p-6 mb-6">
-          <h2 className="text-xl font-semibold mb-4">📳 Haptic Feedback Test</h2>
+          <h2 className="text-xl font-semibold mb-4 text-text-primary">📳 Haptic Feedback Test</h2>
           <div className="grid grid-cols-3 gap-3">
             <button
               onClick={() => handleHapticTest('light')}
@@ -144,7 +144,7 @@ export default function CapacitorTestPage() {
 
         {/* Camera & Gallery Test */}
         <div className="bg-gray-900 rounded-lg p-6 mb-6">
-          <h2 className="text-xl font-semibold mb-4">📷 Camera & Gallery</h2>
+          <h2 className="text-xl font-semibold mb-4 text-text-primary">📷 Camera & Gallery</h2>
           <div className="grid grid-cols-2 gap-3">
             <button
               onClick={handleCameraTest}
@@ -163,7 +163,7 @@ export default function CapacitorTestPage() {
 
         {/* Share Test */}
         <div className="bg-gray-900 rounded-lg p-6 mb-6">
-          <h2 className="text-xl font-semibold mb-4">🔗 Native Share</h2>
+          <h2 className="text-xl font-semibold mb-4 text-text-primary">🔗 Native Share</h2>
           <button
             onClick={handleShareTest}
             className="w-full bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg font-medium transition-colors"
@@ -175,14 +175,14 @@ export default function CapacitorTestPage() {
         {/* Test Results */}
         {testResult && (
           <div className="bg-gray-800 rounded-lg p-6 mb-6 border-l-4 border-pink-500">
-            <h2 className="text-lg font-semibold mb-2">📝 Test Result</h2>
+            <h2 className="text-lg font-semibold mb-2 text-text-primary">📝 Test Result</h2>
             <p className="text-gray-300">{testResult}</p>
           </div>
         )}
 
         {/* Instructions */}
         <div className="bg-blue-900/30 border border-blue-800 rounded-lg p-6">
-          <h2 className="text-xl font-semibold mb-4">ℹ️ How to Test</h2>
+          <h2 className="text-xl font-semibold mb-4 text-text-primary">ℹ️ How to Test</h2>
           <ol className="list-decimal list-inside space-y-2 text-gray-300">
             <li>Build the app: <code className="bg-gray-800 px-2 py-1 rounded">npm run mobile:android</code></li>
             <li>Run on device or emulator</li>

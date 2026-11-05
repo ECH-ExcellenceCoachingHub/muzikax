@@ -40,7 +40,7 @@ const VibeCard: React.FC<VibeCardProps> = ({ vibe }) => {
   return (
     <Link 
       href={`/community?postId=${vibe.id}`} 
-      className="flex-shrink-0 w-64 sm:w-72 bg-surface/40 backdrop-blur-md border border-border-light/50 rounded-2xl overflow-hidden hover:border-primary/50 transition-all duration-500 group snap-start"
+      className="flex-shrink-0 w-64 sm:w-72 bg-surface/40 border-border-light/50 rounded-2xl overflow-hidden group snap-start mx-surface"
     >
       <div className="p-4 flex flex-col h-full">
         {/* User Info */}
@@ -64,7 +64,7 @@ const VibeCard: React.FC<VibeCardProps> = ({ vibe }) => {
             )}
           </div>
           <div className="overflow-hidden">
-            <h3 className="font-semibold text-text-primary text-sm truncate group-hover:text-primary transition-colors duration-300">
+            <h3 className="font-semibold text-sm truncate group-hover:text-primary transition-colors duration-300 text-text-primary">
               {vibe.userName}
             </h3>
             <p className="text-[10px] text-text-muted uppercase tracking-wider">Community Vibe</p>
@@ -79,7 +79,7 @@ const VibeCard: React.FC<VibeCardProps> = ({ vibe }) => {
                 <img 
                   src={vibe.mediaUrl} 
                   alt="Vibe media" 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-500"
                 />
               ) : (
                 <div className="relative w-full h-full">
@@ -87,7 +87,7 @@ const VibeCard: React.FC<VibeCardProps> = ({ vibe }) => {
                     <img 
                       src={vibe.mediaThumbnail} 
                       alt="Video thumbnail" 
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-500"
                     />
                   ) : vibe.mediaUrl ? (
                     // Show video with poster generated from first frame or fallback gradient

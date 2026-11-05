@@ -45,7 +45,7 @@ export default function SidebarLayoutWrapper({ children }: { children: React.Rea
     return <>{children}</>;
   }
   
-  const isPlayerPage = pathname === '/player';
+  const isPlayerPage = pathname === '/player' || pathname === '/dj'; // full-screen routes
   const isAdminPage = pathname?.startsWith('/admin');
   const isLoginPage = pathname === '/login';
   const isRegisterPage = pathname === '/register';

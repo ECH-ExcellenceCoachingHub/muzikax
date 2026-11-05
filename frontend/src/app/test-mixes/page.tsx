@@ -50,14 +50,14 @@ export default function TestMixes() {
 
   return (
     <div className="p-8">
-      <h1 className="text-2xl font-bold mb-4">Mix Tracks Test</h1>
+      <h1 className="text-2xl font-bold mb-4 text-text-primary">Mix Tracks Test</h1>
       <p className="mb-4">Found {tracks.length} mix tracks</p>
       
       {tracks.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {tracks.map((track) => (
             <div key={track._id} className="border p-4 rounded">
-              <h2 className="font-semibold">{track.title}</h2>
+              <h2 className="font-semibold text-text-primary">{track.title}</h2>
               <p className="text-sm text-gray-600">
                 Artist: {typeof track.creatorId === 'object' ? track.creatorId.name : 'Unknown'}
               </p>

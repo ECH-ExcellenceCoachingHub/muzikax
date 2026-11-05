@@ -61,7 +61,8 @@ const connectDB = async () => {
     const conn = await mongoose_1.default.connect(process.env['MONGO_URI'] || 'mongodb://localhost:27017/muzikax', {
       // Updated options for Mongoose 6+
       maxPoolSize: 10,
-      serverSelectionTimeoutMS: 5000,
+      serverSelectionTimeoutMS: 30000, // Atlas can take >5s to select a primary on slower networks
+      connectTimeoutMS: 30000,
       socketTimeoutMS: 45000,
       bufferCommands: false,  // Disable mongoose buffering
       // Ensure connection is ready before returning

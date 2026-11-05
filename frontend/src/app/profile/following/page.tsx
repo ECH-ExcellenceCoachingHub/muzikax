@@ -196,9 +196,9 @@ export default function FollowingPage() {
 
   if (isAuthLoading || loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#FF8C00]"></div>
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary"></div>
           <p className="mt-4 text-gray-400">{isAuthLoading ? 'Authenticating...' : 'Loading...'}</p>
         </div>
       </div>
@@ -207,13 +207,13 @@ export default function FollowingPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-white mb-4">Error</h2>
+          <h2 className="text-2xl font-bold mb-4 text-text-primary">Error</h2>
           <p className="text-gray-400 mb-6">{error}</p>
           <button
             onClick={() => router.back()}
-            className="bg-[#FF8C00] hover:bg-[#FF8C00]/80 text-white font-bold py-2 px-6 rounded-lg transition-all"
+            className="bg-primary hover:bg-primary/80 text-white font-bold py-2 px-6 rounded-lg transition-all"
           >
             Go Back
           </button>
@@ -224,7 +224,7 @@ export default function FollowingPage() {
 
   return (
     <div 
-      className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black pt-14 md:pt-0"
+      className="min-h-screen pt-14 md:pt-0 bg-background"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -233,7 +233,7 @@ export default function FollowingPage() {
       {pullRefresh && (
         <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 bg-gray-800/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg animate-in fade-in slide-in-from-top-4 duration-200">
           <div className="flex items-center gap-2">
-            <div className="w-4 h-4 border-2 border-[#FF8C00] border-t-transparent rounded-full animate-spin"></div>
+            <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
             <span className="text-sm text-white font-medium">Refreshing...</span>
           </div>
         </div>
@@ -245,14 +245,14 @@ export default function FollowingPage() {
           <div className="flex items-center gap-3 sm:gap-4">
             <button
               onClick={() => router.back()}
-              className="text-gray-400 hover:text-[#FF8C00] transition-colors p-2 -ml-2 rounded-full hover:bg-gray-800"
+              className="text-gray-400 hover:text-primary transition-colors p-2 -ml-2 rounded-full hover:bg-gray-800"
             >
               <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
             </button>
             <div className="flex-1 min-w-0">
-              <h1 className="text-lg sm:text-2xl font-black text-white truncate">Following</h1>
+              <h1 className="text-lg sm:text-2xl font-black truncate text-text-primary">Following</h1>
               <p className="text-xs sm:text-sm text-gray-400 truncate">You follow {following.length} creators</p>
             </div>
           </div>
@@ -267,10 +267,10 @@ export default function FollowingPage() {
               <Link
                 key={creator._id}
                 href={`/profile/${creator._id}`}
-                className="group bg-gray-800/30 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-gray-700/30 hover:bg-gray-800/50 hover:border-[#FF8C00]/40 transition-all duration-300 active:scale-[0.98]"
+                className="group rounded-xl sm:rounded-2xl p-4 sm:p-6 active:scale-[0.98] mx-surface"
               >
                 <div className="flex items-center gap-3 sm:gap-4">
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full overflow-hidden flex-shrink-0 border-2 border-gray-700 group-hover:border-[#FF8C00]/40 transition-colors">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full overflow-hidden flex-shrink-0 border-2 border-gray-700 group-hover:border-primary/40 transition-colors">
                     {creator.avatar ? (
                       <img
                         src={creator.avatar}
@@ -278,23 +278,23 @@ export default function FollowingPage() {
                         className="w-full h-full object-cover"
                       />
                     ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-[#FF8C00] to-[#FFB020] flex items-center justify-center text-white font-bold text-lg sm:text-xl">
+                      <div className="w-full h-full bg-gradient-to-br from-primary to-primary-light flex items-center justify-center text-white font-bold text-lg sm:text-xl">
                         {creator.name.charAt(0).toUpperCase()}
                       </div>
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-sm sm:text-base text-white truncate group-hover:text-[#FF8C00] transition-colors">
+                    <h3 className="font-bold text-sm sm:text-base truncate group-hover:text-primary transition-colors text-text-primary">
                       {creator.name}
                     </h3>
                     <p className="text-xs sm:text-sm text-gray-400 truncate">{creator.email}</p>
                     {creator.role === 'creator' && (
-                      <span className="inline-block mt-1 text-[10px] sm:text-xs px-2 py-0.5 sm:py-1 bg-[#FF8C00]/20 text-[#FF8C00] rounded-full font-medium">
+                      <span className="inline-block mt-1 text-[10px] sm:text-xs px-2 py-0.5 sm:py-1 bg-primary/20 text-primary rounded-full font-medium">
                         {creator.creatorType || 'Creator'}
                       </span>
                     )}
                   </div>
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500 group-hover:text-[#FF8C00] transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500 group-hover:text-primary transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </div>
@@ -308,13 +308,13 @@ export default function FollowingPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
             </div>
-            <h3 className="text-base sm:text-lg font-bold text-white mb-2">Not Following Anyone Yet</h3>
+            <h3 className="text-base sm:text-lg font-bold mb-2 text-text-primary">Not Following Anyone Yet</h3>
             <p className="text-gray-500 text-xs sm:text-sm max-w-xs mx-auto mb-4 sm:mb-6 px-4">
               Discover amazing creators and follow them to see their latest music here
             </p>
             <button
               onClick={() => router.push('/explore')}
-              className="bg-[#FF8C00] hover:bg-[#FF8C00]/90 text-white font-bold py-2.5 sm:py-3 px-6 sm:px-8 rounded-xl sm:rounded-2xl transition-all active:scale-95 shadow-lg shadow-[#FF8C00]/20 text-sm sm:text-base"
+              className="bg-primary hover:bg-primary/90 text-white font-bold py-2.5 sm:py-3 px-6 sm:px-8 rounded-xl sm:rounded-2xl transition-all active:scale-95 shadow-lg shadow-primary/20 text-sm sm:text-base"
             >
               Discover Creators
             </button>

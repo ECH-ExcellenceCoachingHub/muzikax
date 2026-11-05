@@ -187,7 +187,7 @@ export default function AdminWithdrawals() {
             }}
             className={`py-3 px-4 sm:px-6 font-medium text-sm sm:text-base transition-colors whitespace-nowrap ${
               activeTab === 'pending'
-                ? 'text-[#FF8C00] border-b-2 border-[#FF8C00]'
+                ? 'text-primary border-b-2 border-primary'
                 : 'text-gray-500 hover:text-gray-300'
             }`}
           >
@@ -201,7 +201,7 @@ export default function AdminWithdrawals() {
             }}
             className={`py-3 px-4 sm:px-6 font-medium text-sm sm:text-base transition-colors whitespace-nowrap ${
               activeTab === 'all'
-                ? 'text-[#FF8C00] border-b-2 border-[#FF8C00]'
+                ? 'text-primary border-b-2 border-primary'
                 : 'text-gray-500 hover:text-gray-300'
             }`}
           >
@@ -211,7 +211,7 @@ export default function AdminWithdrawals() {
             onClick={() => setActiveTab('dashboard')}
             className={`py-3 px-4 sm:px-6 font-medium text-sm sm:text-base transition-colors whitespace-nowrap ${
               activeTab === 'dashboard'
-                ? 'text-[#FF8C00] border-b-2 border-[#FF8C00]'
+                ? 'text-primary border-b-2 border-primary'
                 : 'text-gray-500 hover:text-gray-300'
             }`}
           >
@@ -234,7 +234,7 @@ export default function AdminWithdrawals() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               <div className="card-bg rounded-2xl p-5 border border-gray-700/50">
                 <p className="text-gray-400 text-sm font-medium">Total Platform Earnings</p>
-                <p className="text-2xl font-bold text-[#FF8C00] mt-2">
+                <p className="text-2xl font-bold text-primary mt-2">
                   ₽{dashboard.summary.totalPlatformEarnings.toLocaleString()}
                 </p>
               </div>
@@ -475,7 +475,7 @@ export default function AdminWithdrawals() {
                   value={rejectReason}
                   onChange={(e) => setRejectReason(e.target.value)}
                   placeholder="Explain why you're rejecting this request"
-                  className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent resize-none"
+                  className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
                   rows={3}
                 />
               </div>
@@ -515,7 +515,7 @@ export default function AdminWithdrawals() {
                   value={transactionRef}
                   onChange={(e) => setTransactionRef(e.target.value)}
                   placeholder="e.g., MTN_PAYMENT_12345"
-                  className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent"
+                  className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                 />
               </div>
               <div className="flex gap-3">

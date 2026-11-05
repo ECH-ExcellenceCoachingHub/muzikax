@@ -161,7 +161,7 @@ export default function RecentlyPlayed() {
   // Show loading state while checking auth
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black flex items-center justify-center px-4">
+      <div className="min-h-screen flex items-center justify-center px-4 bg-background">
         <div className="text-white text-center">
           <div className="animate-pulse text-lg">Loading...</div>
         </div>
@@ -175,16 +175,16 @@ export default function RecentlyPlayed() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black pt-20 sm:pt-24 md:pt-28 py-4 sm:py-8 md:py-12">
-      <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#FF8C00]/10 rounded-full blur-3xl -z-10"></div>
-      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-[#FFB020]/10 rounded-full blur-3xl -z-10"></div>
+    <div className="min-h-screen pt-20 sm:pt-24 md:pt-28 py-4 sm:py-8 md:py-12 bg-background">
+      <div className="absolute -top-40 -left-40 w-96 h-96 bg-primary/10 rounded-full blur-3xl -z-10"></div>
+      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-primary-light/10 rounded-full blur-3xl -z-10"></div>
       
       <div className="container mx-auto px-3 sm:px-4 md:px-8">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-6 sm:mb-8 md:mb-12">
             <div className="flex-1">
-              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#FF8C00] to-[#FFB020] mb-1 sm:mb-2">
+              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-1 sm:mb-2 text-text-primary">
                 {t('recentlyPlayed') || 'Recently Played'}
               </h1>
               <p className="text-gray-400 text-xs sm:text-sm md:text-base">
@@ -193,7 +193,7 @@ export default function RecentlyPlayed() {
             </div>
             <button 
               onClick={() => router.push('/explore')}
-              className="px-4 py-2 sm:px-5 sm:py-2.5 bg-transparent border border-[#FF8C00] text-[#FF8C00] hover:bg-[#FF8C00]/10 rounded-full text-xs sm:text-sm font-medium transition-colors active:scale-95 touch-manipulation whitespace-nowrap"
+              className="px-4 py-2 sm:px-5 sm:py-2.5 bg-transparent border border-primary text-primary hover:bg-primary/10 rounded-full text-xs sm:text-sm font-medium transition-colors active:scale-95 touch-manipulation whitespace-nowrap"
             >
               {t('explore') || 'Explore More'}
             </button>
@@ -213,7 +213,7 @@ export default function RecentlyPlayed() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
               </div>
-              <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 sm:mb-3">No recently played tracks</h3>
+              <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3 text-text-primary">No recently played tracks</h3>
               <p className="text-gray-500 text-sm sm:text-base mb-5 sm:mb-6 max-w-md mx-auto px-2">
                 Start listening to music and your recently played tracks will appear here
               </p>
@@ -228,7 +228,7 @@ export default function RecentlyPlayed() {
             // Recently Played List
             <div className="space-y-3 sm:space-y-4">
               {tracks.map((track) => (
-                <div key={track.id} className="card-bg rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-5 flex items-center gap-3 sm:gap-4 transition-all hover:border-[#FF8C00]/50 hover:bg-gradient-to-br hover:from-gray-900/70 hover:to-gray-900/50 active:scale-[0.98]">
+                <div key={track.id} className="card-bg rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-5 flex items-center gap-3 sm:gap-4 transition-all hover:border-primary/50 hover:bg-gradient-to-br hover:from-gray-900/70 hover:to-gray-900/50 active:scale-[0.98]">
                   <div className="relative flex-shrink-0">
                     <img 
                       src={track.coverImage} 
@@ -252,7 +252,7 @@ export default function RecentlyPlayed() {
                   </div>
                   
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-white text-sm sm:text-base md:text-lg truncate">{track.title}</h3>
+                    <h3 className="font-bold text-sm sm:text-base md:text-lg truncate text-text-primary">{track.title}</h3>
                     <p className="text-gray-400 text-xs sm:text-sm md:text-base truncate">{track.artist}</p>
                     <p className="text-gray-500 text-[10px] sm:text-xs mt-1">
                       Played {new Date(track.playedAt).toLocaleDateString()}
@@ -269,7 +269,7 @@ export default function RecentlyPlayed() {
                       aria-label={favoriteStatus[track.id] ? 'Remove from favorites' : 'Add to favorites'}
                     >
                       <svg 
-                        className={`w-4 h-4 sm:w-5 sm:h-5 transition-all duration-200 ${favoriteStatus[track.id] ? 'text-red-500 fill-current scale-110' : 'text-[#FF8C00] stroke-current'}`}
+                        className={`w-4 h-4 sm:w-5 sm:h-5 transition-all duration-200 ${favoriteStatus[track.id] ? 'text-red-500 fill-current scale-110' : 'text-primary stroke-current'}`}
                         fill={favoriteStatus[track.id] ? "currentColor" : "none"}
                         stroke="currentColor"
                         viewBox="0 0 24 24" 

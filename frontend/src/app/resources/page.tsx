@@ -278,12 +278,12 @@ Copyright duration varies by jurisdiction but typically lasts for the life of th
   const selectedResource = resources.find(resource => resource.id === activeResource) || resources[0];
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen text-white bg-background">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#FF8C00] to-[#FFB020] py-16">
+      <div className="bg-gradient-to-r from-primary to-primary-light py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Artist Resources</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-text-primary">Artist Resources</h1>
             <p className="text-xl text-white/90 max-w-3xl mx-auto">
               Professional tools, templates, and guides to help you succeed in the music industry
             </p>
@@ -300,7 +300,7 @@ Copyright duration varies by jurisdiction but typically lasts for the life of th
               onClick={() => setActiveCategory(category)}
               className={`px-6 py-2 rounded-full font-medium transition-all ${
                 activeCategory === category
-                  ? "bg-[#FF8C00] text-white"
+                  ? "bg-primary text-white"
                   : "bg-gray-800 text-gray-300 hover:bg-gray-700"
               }`}
             >
@@ -319,8 +319,8 @@ Copyright duration varies by jurisdiction but typically lasts for the life of th
                   onClick={() => setActiveResource(resource.id)}
                   className={`bg-gray-800/30 backdrop-blur-lg rounded-xl p-6 border cursor-pointer transition-all ${
                     selectedResource.id === resource.id
-                      ? "border-[#FF8C00] bg-gray-700/30"
-                      : "border-gray-700 hover:border-[#FF8C00]/50"
+                      ? "border-primary bg-gray-700/30"
+                      : "border-gray-700 hover:border-primary/50"
                   }`}
                 >
                   <div className="flex items-start justify-between mb-3">
@@ -331,7 +331,7 @@ Copyright duration varies by jurisdiction but typically lasts for the life of th
                           : resource.type === "Template"
                           ? "bg-green-900/30 text-green-300"
                           : resource.type === "Tool"
-                          ? "bg-purple-900/30 text-purple-300"
+                          ? "bg-purple-900/30 text-primary-light"
                           : "bg-yellow-900/30 text-yellow-300"
                       }`}>
                         {resource.type}
@@ -352,7 +352,7 @@ Copyright duration varies by jurisdiction but typically lasts for the life of th
                   </div>
                   
                   <h3 className={`font-semibold mb-2 ${
-                    selectedResource.id === resource.id ? "text-[#FF8C00]" : "text-white"
+                    selectedResource.id === resource.id ? "text-primary" : "text-white"
                   }`}>
                     {resource.title}
                   </h3>
@@ -375,7 +375,7 @@ Copyright duration varies by jurisdiction but typically lasts for the life of th
                     : selectedResource.type === "Template"
                     ? "bg-green-900/30 text-green-300"
                     : selectedResource.type === "Tool"
-                    ? "bg-purple-900/30 text-purple-300"
+                    ? "bg-purple-900/30 text-primary-light"
                     : "bg-yellow-900/30 text-yellow-300"
                 }`}>
                   {selectedResource.type}
@@ -394,7 +394,7 @@ Copyright duration varies by jurisdiction but typically lasts for the life of th
                 </span>
               </div>
 
-              <h2 className="text-3xl font-bold mb-6 text-[#FF8C00]">
+              <h2 className="text-3xl font-bold mb-6 text-text-primary">
                 {selectedResource.title}
               </h2>
 
@@ -414,7 +414,7 @@ Copyright duration varies by jurisdiction but typically lasts for the life of th
                   <a
                     href={selectedResource.downloadUrl}
                     download
-                    className="flex-1 bg-gradient-to-r from-[#FF8C00] to-[#FFB020] text-white px-6 py-3 rounded-lg font-semibold hover:from-[#FF7A00] hover:to-[#FFA010] transition-all text-center"
+                    className="flex-1 bg-gradient-to-r from-primary to-primary-light text-white px-6 py-3 rounded-lg font-semibold hover:from-primary hover:to-primary-light transition-all text-center"
                   >
                     Download Resource
                   </a>
@@ -438,7 +438,7 @@ Copyright duration varies by jurisdiction but typically lasts for the life of th
 
               {/* Related Resources */}
               <div className="mt-12 pt-8 border-t border-gray-700">
-                <h3 className="text-xl font-bold mb-4 text-white">Related Resources</h3>
+                <h3 className="text-xl font-bold mb-4 text-text-primary">Related Resources</h3>
                 <div className="grid md:grid-cols-2 gap-4">
                   {resources
                     .filter(r => r.category === selectedResource.category && r.id !== selectedResource.id)
@@ -472,35 +472,35 @@ Copyright duration varies by jurisdiction but typically lasts for the life of th
         </div>
 
         {/* Resource Categories Overview */}
-        <div className="mt-16 bg-gradient-to-r from-[#FF8C00]/10 to-[#FFB020]/10 rounded-xl p-8 border border-[#FF8C00]/20">
-          <h2 className="text-2xl font-bold mb-6 text-center text-[#FF8C00]">Resource Categories</h2>
+        <div className="mt-16 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-xl p-8 border border-primary/20">
+          <h2 className="text-2xl font-bold mb-6 text-center text-text-primary">Resource Categories</h2>
           <div className="grid md:grid-cols-4 gap-6">
             <div className="text-center">
               <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl">⚖️</span>
               </div>
-              <h3 className="font-semibold mb-2 text-white">Legal Templates</h3>
+              <h3 className="font-semibold mb-2 text-text-primary">Legal Templates</h3>
               <p className="text-gray-300 text-sm">Contracts, agreements, and legal documents for professional music business</p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl">🎛️</span>
               </div>
-              <h3 className="font-semibold mb-2 text-white">Production Tools</h3>
+              <h3 className="font-semibold mb-2 text-text-primary">Production Tools</h3>
               <p className="text-gray-300 text-sm">Workflows, checklists, and guides for professional music creation</p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl">📢</span>
               </div>
-              <h3 className="font-semibold mb-2 text-white">Marketing Guides</h3>
+              <h3 className="font-semibold mb-2 text-text-primary">Marketing Guides</h3>
               <p className="text-gray-300 text-sm">Strategies and tactics for building your audience and brand presence</p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl">💼</span>
               </div>
-              <h3 className="font-semibold mb-2 text-white">Business Resources</h3>
+              <h3 className="font-semibold mb-2 text-text-primary">Business Resources</h3>
               <p className="text-gray-300 text-sm">Financial tools, calculators, and business planning materials</p>
             </div>
           </div>

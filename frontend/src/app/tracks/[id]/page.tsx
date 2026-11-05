@@ -178,7 +178,7 @@ export default async function TrackDetailPage({ params }: { params: Promise<{ id
       : 'N/A';
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black py-8 pt-14 md:pt-8">
+    <div className="min-h-screen py-8 pt-14 md:pt-8 bg-background">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           {/* Track Detail Client (Header + Playback) */}
@@ -188,7 +188,7 @@ export default async function TrackDetailPage({ params }: { params: Promise<{ id
           {artistTracks.length > 0 && (
             <div className="mb-12">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold text-white">More from {track.artist}</h2>
+                <h2 className="text-2xl font-bold text-text-primary">More from {track.artist}</h2>
               </div>
               <div className="flex overflow-x-auto gap-4 pb-4 scrollbar-hide">
                 {artistTracks.map((t: any) => (
@@ -215,7 +215,7 @@ export default async function TrackDetailPage({ params }: { params: Promise<{ id
 
           {/* Additional track info */}
           <div className="card-bg rounded-2xl p-6 border border-gray-800/50">
-            <h2 className="text-2xl font-bold text-white mb-6">Track Details</h2>
+            <h2 className="text-2xl font-bold mb-6 text-text-primary">Track Details</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-400">
               <div className="space-y-4">
                 <div className="flex justify-between py-2 border-b border-gray-800/50">

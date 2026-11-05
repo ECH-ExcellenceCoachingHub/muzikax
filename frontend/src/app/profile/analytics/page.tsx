@@ -94,9 +94,9 @@ export default function ProfileAnalytics() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#FF8C00]"></div>
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary"></div>
           <p className="mt-4 text-gray-400">Loading analytics...</p>
         </div>
       </div>
@@ -105,14 +105,14 @@ export default function ProfileAnalytics() {
 
   if (error || !analytics) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-white mb-4">Error Loading Analytics</h2>
+          <h2 className="text-2xl font-bold mb-4 text-text-primary">Error Loading Analytics</h2>
           <p className="text-gray-400 mb-6 max-w-md">{error || 'Analytics data not available'}</p>
           <div className="flex gap-3 justify-center">
             <button
               onClick={() => router.push('/profile')}
-              className="bg-[#FF8C00] hover:bg-[#FF8C00]/80 text-white font-bold py-2 px-6 rounded-lg transition-all active:scale-95"
+              className="bg-primary hover:bg-primary/80 text-white font-bold py-2 px-6 rounded-lg transition-all active:scale-95"
             >
               Back to Profile
             </button>
@@ -129,19 +129,19 @@ export default function ProfileAnalytics() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black pt-14 md:pt-0">
+    <div className="min-h-screen pt-14 md:pt-0 bg-background">
       {/* Header */}
       <div className="sticky top-0 z-50 bg-gray-900/95 backdrop-blur-lg border-b border-gray-800">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Link href="/profile" className="text-gray-400 hover:text-[#FF8C00] transition-colors">
+              <Link href="/profile" className="text-gray-400 hover:text-primary transition-colors">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
               </Link>
               <div>
-                <h1 className="text-2xl font-black text-white">Analytics Dashboard</h1>
+                <h1 className="text-2xl font-black text-text-primary">Analytics Dashboard</h1>
                 <p className="text-sm text-gray-400">Track your music performance</p>
               </div>
             </div>
@@ -163,7 +163,7 @@ export default function ProfileAnalytics() {
             onClick={() => setSelectedPeriod('all')}
             className={`px-4 py-2 rounded-lg font-bold text-sm transition-all whitespace-nowrap ${
               selectedPeriod === 'all'
-                ? 'bg-[#FF8C00] text-white'
+                ? 'bg-primary text-white'
                 : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
             }`}
           >
@@ -173,7 +173,7 @@ export default function ProfileAnalytics() {
             onClick={() => setSelectedPeriod('month')}
             className={`px-4 py-2 rounded-lg font-bold text-sm transition-all whitespace-nowrap ${
               selectedPeriod === 'month'
-                ? 'bg-[#FF8C00] text-white'
+                ? 'bg-primary text-white'
                 : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
             }`}
           >
@@ -183,7 +183,7 @@ export default function ProfileAnalytics() {
             onClick={() => setSelectedPeriod('week')}
             className={`px-4 py-2 rounded-lg font-bold text-sm transition-all whitespace-nowrap ${
               selectedPeriod === 'week'
-                ? 'bg-[#FF8C00] text-white'
+                ? 'bg-primary text-white'
                 : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
             }`}
           >
@@ -193,14 +193,14 @@ export default function ProfileAnalytics() {
 
         {/* Overview Stats */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
-          <div className="bg-gradient-to-br from-[#FF8C00]/10 to-[#FF8C00]/5 rounded-2xl p-6 border border-[#FF8C00]/20">
+          <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-6 border border-primary/20">
             <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 bg-[#FF8C00]/20 rounded-xl flex items-center justify-center">
-                <svg className="w-6 h-6 text-[#FF8C00]" fill="currentColor" viewBox="0 0 20 20">
+              <div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center">
+                <svg className="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
                 </svg>
               </div>
-              <span className="text-xs text-[#FF8C00] font-bold uppercase tracking-wider">+12%</span>
+              <span className="text-xs text-primary font-bold uppercase tracking-wider">+12%</span>
             </div>
             <p className="text-gray-400 text-sm font-medium mb-1">Total Plays</p>
             <p className="text-3xl font-black text-white">{analytics.totalPlays.toLocaleString()}</p>
@@ -245,14 +245,14 @@ export default function ProfileAnalytics() {
             <p className="text-3xl font-black text-white">{analytics.totalLikes.toLocaleString()}</p>
           </div>
 
-          <div className="bg-gradient-to-br from-[#FFB020]/10 to-[#FFB020]/5 rounded-2xl p-6 border border-[#FFB020]/20">
+          <div className="bg-gradient-to-br from-primary-light/10 to-primary-light/5 rounded-2xl p-6 border border-primary-light/20">
             <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 bg-[#FFB020]/20 rounded-xl flex items-center justify-center">
-                <svg className="w-6 h-6 text-[#FFB020]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-12 h-12 bg-primary-light/20 rounded-xl flex items-center justify-center">
+                <svg className="w-6 h-6 text-primary-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
               </div>
-              <span className="text-xs text-[#FFB020] font-bold uppercase tracking-wider">Active</span>
+              <span className="text-xs text-primary-light font-bold uppercase tracking-wider">Active</span>
             </div>
             <p className="text-gray-400 text-sm font-medium mb-1">Total Tracks</p>
             <p className="text-3xl font-black text-white">{analytics.totalTracks}</p>
@@ -269,7 +269,7 @@ export default function ProfileAnalytics() {
                 </svg>
               </div>
               <div>
-                <h2 className="text-xl font-black text-white">Listener Geography</h2>
+                <h2 className="text-xl font-black text-text-primary">Listener Geography</h2>
                 <p className="text-sm text-gray-400">Where your fans are listening from</p>
               </div>
             </div>
@@ -299,13 +299,13 @@ export default function ProfileAnalytics() {
         {/* Track Performance */}
         <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-700/30 p-6">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 bg-[#FF8C00]/20 rounded-xl flex items-center justify-center">
-              <svg className="w-6 h-6 text-[#FF8C00]" fill="currentColor" viewBox="0 0 20 20">
+            <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center">
+              <svg className="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M18.896 0H1.104C.494 0 0 .494 0 1.104v17.793C0 19.506.494 20 1.104 20h9.58v-7.745H8.076V9.237h2.608V7.01c0-2.583 1.578-3.99 3.883-3.99 1.104 0 2.052.082 2.329.119v2.7h-1.598c-1.254 0-1.501.597-1.501 1.47v1.926h3.002l-.39 3.018h-2.612V20h5.11c.61 0 1.104-.494 1.104-1.104V1.104C20 .494 19.506 0 18.896 0z" />
               </svg>
             </div>
             <div>
-              <h2 className="text-xl font-black text-white">Track Performance</h2>
+              <h2 className="text-xl font-black text-text-primary">Track Performance</h2>
               <p className="text-sm text-gray-400">How each of your tracks is performing</p>
             </div>
           </div>
@@ -316,13 +316,13 @@ export default function ProfileAnalytics() {
                 <Link
                   key={track._id}
                   href={`/tracks/${track._id}`}
-                  className="group bg-gray-800/50 rounded-xl overflow-hidden border border-gray-700/50 hover:border-[#FF8C00]/40 transition-all duration-300 hover:scale-[1.02]"
+                  className="group rounded-xl overflow-hidden mx-surface"
                 >
                   <div className="aspect-square relative overflow-hidden">
                     <img
                       src={track.coverURL || '/placeholder-cover.jpg'}
                       alt={track.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement
                         target.src = '/placeholder-cover.jpg'
@@ -331,14 +331,14 @@ export default function ProfileAnalytics() {
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent"></div>
                     <div className="absolute bottom-3 left-3 right-3">
                       <div className="flex gap-2 text-xs">
-                        <span className="px-2 py-1 bg-[#FF8C00] text-white font-black uppercase rounded">
+                        <span className="px-2 py-1 bg-primary text-white font-black uppercase rounded">
                           {track.type}
                         </span>
                       </div>
                     </div>
                   </div>
                   <div className="p-4">
-                    <h3 className="font-bold text-white group-hover:text-[#FF8C00] transition-colors truncate mb-3">
+                    <h3 className="font-bold group-hover:text-primary transition-colors truncate mb-3 text-text-primary">
                       {track.title}
                     </h3>
                     

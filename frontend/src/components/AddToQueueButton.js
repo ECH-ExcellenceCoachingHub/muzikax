@@ -35,7 +35,7 @@ const AddToQueueButton = ({ track, size = 'md', variant = 'primary', showText = 
     };
     // Variant classes
     const variantClasses = {
-        primary: 'bg-[#FF4D67] hover:bg-[#ff3350] text-white',
+        primary: 'bg-primary hover:bg-[#E67E00] text-white',
         secondary: 'bg-gray-800 hover:bg-gray-700 text-white',
         ghost: 'bg-transparent hover:bg-white/10 text-gray-400 hover:text-white'
     };

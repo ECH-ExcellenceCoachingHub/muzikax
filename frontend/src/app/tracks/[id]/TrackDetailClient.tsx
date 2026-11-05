@@ -109,7 +109,7 @@ export default function TrackDetailClient({ track }: TrackDetailClientProps) {
               className="w-full rounded-2xl shadow-2xl"
             />
           ) : (
-            <div className="w-full aspect-square bg-gradient-to-br from-[#FF4D67] to-[#FFCB2B] rounded-2xl flex items-center justify-center">
+            <div className="w-full aspect-square bg-gradient-to-br from-primary to-primary-light rounded-2xl flex items-center justify-center">
               <svg className="w-24 h-24 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
               </svg>
@@ -137,10 +137,10 @@ export default function TrackDetailClient({ track }: TrackDetailClientProps) {
 
       <div className="md:w-2/3">
         <div className="flex flex-col justify-end h-full">
-          <p className="text-[#FFCB2B] text-sm uppercase tracking-wider mb-2">
+          <p className="text-primary-light text-sm uppercase tracking-wider mb-2">
             {track.genre || 'Song'}
           </p>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-text-primary">
             {track.title}
           </h1>
           <p className="text-xl text-gray-300 mb-6">
@@ -182,7 +182,7 @@ export default function TrackDetailClient({ track }: TrackDetailClientProps) {
           <div className="flex flex-wrap gap-4">
             <button 
               onClick={handlePlay}
-              className="px-8 py-3 gradient-primary rounded-full text-white font-medium hover:opacity-90 transition-all flex items-center gap-2 shadow-lg shadow-[#FF4D67]/20 active:scale-95"
+              className="px-8 py-3 gradient-primary rounded-full text-white font-medium hover:opacity-90 transition-all flex items-center gap-2 shadow-lg shadow-primary/20 active:scale-95"
             >
               {isCurrentTrack && isPlaying ? (
                 <>
@@ -225,7 +225,7 @@ export default function TrackDetailClient({ track }: TrackDetailClientProps) {
                 creatorWhatsapp: track.creatorId?.whatsappContact
               }}
               size="lg"
-              className="rounded-full w-12 h-12 flex items-center justify-center p-0 border border-gray-700 text-gray-400 hover:border-[#FF4D67] hover:text-[#FF4D67] transition-all"
+              className="rounded-full w-12 h-12 flex items-center justify-center p-0 border border-gray-700 text-gray-400 hover:border-primary hover:text-primary transition-all"
             />
 
             {track.paymentType === 'paid' && (
@@ -248,7 +248,7 @@ export default function TrackDetailClient({ track }: TrackDetailClientProps) {
 
           {track.description && (
             <div className="mt-8">
-              <h3 className="text-lg font-semibold text-white mb-2">About</h3>
+              <h3 className="text-lg font-semibold mb-2 text-text-primary">About</h3>
               <p className="text-gray-400 leading-relaxed">{track.description}</p>
             </div>
           )}

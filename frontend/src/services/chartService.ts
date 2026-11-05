@@ -55,14 +55,25 @@ export interface ChartTrack {
   reposts: number;
   playlistAdditions: number;
   rank: number;
-  previousRank: number;
-  rankChange: number;
-  score: number;
+  /** Real rank in the previous period; null when there is no history yet. */
+  previousRank: number | null;
+  /** previousRank - rank (positive = moved up); null when unknown. */
+  rankChange: number | null;
+  /** Entered the chart this period (only set once history exists). */
+  isNew?: boolean;
+  /** False for tracks with no plays inside the selected window (ranked by all-time popularity). */
+  activeInPeriod?: boolean;
+  score?: number;
+  growthPercent?: number | null;
   metrics?: {
+    periodPlays: number;
+    previousPeriodPlays?: number;
+    periodUniqueListeners: number;
+    periodLikes: number;
+    periodShares: number;
     totalPlays: number;
-    uniqueListeners: number;
-    velocity: number;
-    growthRate: number;
+    likes: number;
+    shares: number;
   };
 }
 

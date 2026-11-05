@@ -3,7 +3,7 @@
 import { useAudioPlayer } from '../contexts/AudioPlayerContext';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useAuth } from '../contexts/AuthContext';
 import { usePayment } from '../contexts/PaymentContext';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -32,6 +32,7 @@ const ModernAudioPlayer = () => {
     currentPlaylistName
   } = useAudioPlayer();  
   const router = useRouter();
+  const pathname = usePathname();
   const { isAuthenticated } = useAuth();
 
   const progressRef = useRef<HTMLDivElement>(null);
@@ -179,6 +180,9 @@ const ModernAudioPlayer = () => {
   // Don't render if there's no current track or if not mounted
   if (!mounted || !currentTrack) return null;
 
+  // DJ mode has its own decks; the regular player stays out of the way
+  if (pathname === '/dj') return null;
+
   // Don't render minimized player on mobile devices (handled by MobileNavbar)
   if (isMinimized && isMobile) {
     return null;
@@ -198,7 +202,7 @@ const ModernAudioPlayer = () => {
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
           <div className="bg-gray-800 rounded-xl p-6 w-full max-w-md mx-4">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-bold">{t('shareTrack')}</h3>
+              <h3 className="text-xl font-bold text-text-primary">{t('shareTrack')}</h3>
               <button 
                 onClick={() => setIsShareModalOpen(false)}
                 className="text-gray-400 hover:text-white"
@@ -301,13 +305,13 @@ const ModernAudioPlayer = () => {
           min-w-[300px] sm:min-w-[340px]
           max-w-[420px]
           rounded-2xl 
-          ${isBeat ? 'bg-gradient-to-br from-gray-900 to-black backdrop-blur-xl border border-[#FF8C00]/30 shadow-2xl shadow-[#FF8C00]/20' : 'bg-black/70 backdrop-blur-xl border border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.6)]'} 
+          ${isBeat ? 'bg-gradient-to-br from-gray-900 to-black backdrop-blur-xl border border-primary/30 shadow-2xl shadow-primary/20' : 'bg-black/70 backdrop-blur-xl border border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.6)]'} 
           z-40 animate-[fadeInUp_0.3s_ease-out]
           sm:z-50
         `}>
           {/* Beat-specific styling */}
           {isBeat && (
-            <div className="absolute inset-0 bg-gradient-to-r from-[#FF8C00]/20 via-[#FFB020]/20 to-[#8B5CF6]/20 rounded-2xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary-light/20 to-primary-light/20 rounded-2xl"></div>
           )}
           
           {/* Player Content */}
@@ -326,7 +330,7 @@ const ModernAudioPlayer = () => {
               />
               {/* Beat-specific glow effect */}
               {isBeat && (
-                <div className="absolute -inset-1 bg-[#FF8C00] rounded-lg blur opacity-30 animate-pulse"></div>
+                <div className="absolute -inset-1 bg-primary rounded-lg blur opacity-30 animate-pulse"></div>
               )}
               {/* Regular glow effect for non-beats */}
               {!isBeat && (
@@ -338,9 +342,9 @@ const ModernAudioPlayer = () => {
               {isBeat ? (
                 <>
                   <h4 className="text-white font-bold text-sm truncate">{currentTrack.title}</h4>
-                  <p className="text-[#FFB020] text-xs truncate">{currentTrack.artist}</p>
+                  <p className="text-primary-light text-xs truncate">{currentTrack.artist}</p>
                   <div className="flex items-center gap-1 mt-1 flex-wrap">
-                    <span className="text-[#FF8C00] text-xs font-medium">{t('beat')}</span>
+                    <span className="text-primary text-xs font-medium">{t('beat')}</span>
                     {(() => {
                       // Handle missing or null paymentType by defaulting to 'free'
                       const paymentType = currentTrack.paymentType || 'free';
@@ -363,10 +367,10 @@ const ModernAudioPlayer = () => {
               {/* Current Playlist Indicator in Mini Player */}
               {currentPlaylistName && (
                 <div className="flex items-center gap-1 mt-1">
-                  <svg className="w-3 h-3 text-purple-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <svg className="w-3 h-3 text-primary-light" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
                   </svg>
-                  <p className="text-purple-400 text-xs truncate">{t('fromPlaylist', { name: currentPlaylistName })}</p>
+                  <p className="text-primary-light text-xs truncate">{t('fromPlaylist', { name: currentPlaylistName })}</p>
                 </div>
               )}
               
@@ -377,7 +381,7 @@ const ModernAudioPlayer = () => {
                 className="mt-1 h-1.5 sm:h-1 w-full bg-white/10 rounded-full cursor-pointer touch-manipulation"
               >
                 <div
-                  className="h-full bg-gradient-to-r from-[#FF8C00] to-[#8B5CF6] rounded-full transition-all"
+                  className="h-full bg-gradient-to-r from-primary to-primary-light rounded-full transition-all"
                   style={{ width: `${(progress / duration) * 100 || 0}%` }}
                 />
               </div>

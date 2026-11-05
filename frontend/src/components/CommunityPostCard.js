@@ -56,7 +56,7 @@ const CommunityPostCard = ({ post, showFullContent = false }) => {
   const shouldTruncate = post.content.length > 200 && !showFullContent;
 
   return (
-    <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 mb-4 border border-gray-700 hover:border-[#FF4D67]/30 transition-all duration-300">
+    <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 mb-4 border border-gray-700 hover:border-primary/30 transition-all duration-300">
       {/* Post Header */}
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center space-x-3">
@@ -64,10 +64,10 @@ const CommunityPostCard = ({ post, showFullContent = false }) => {
             <img
               src={post.userAvatar}
               alt={post.userName}
-              className="w-10 h-10 rounded-full object-cover border-2 border-[#FF4D67]"
+              className="w-10 h-10 rounded-full object-cover border-2 border-primary"
             />
           ) : (
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#FF4D67] to-[#FFCB2B] flex items-center justify-center border-2 border-[#FF4D67]">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary-light flex items-center justify-center border-2 border-primary">
               <span className="text-white font-bold text-sm">
                 {post.userName ? post.userName.charAt(0).toUpperCase() : '?'}
               </span>
@@ -77,7 +77,7 @@ const CommunityPostCard = ({ post, showFullContent = false }) => {
             <div className="flex items-center space-x-2">
               <h3 className="font-semibold text-white">{post.userName}</h3>
               {post.userRole === 'Creator' && (
-                <span className="bg-gradient-to-r from-[#FF4D67] to-[#FF6B8B] text-white text-xs px-2 py-1 rounded-full">
+                <span className="bg-gradient-to-r from-primary to-primary-hover text-white text-xs px-2 py-1 rounded-full">
                   Creator
                 </span>
               )}
@@ -90,7 +90,7 @@ const CommunityPostCard = ({ post, showFullContent = false }) => {
               {post.circleName && (
                 <>
                   <span>•</span>
-                  <span className="text-[#FF4D67]">{post.circleName}</span>
+                  <span className="text-primary">{post.circleName}</span>
                 </>
               )}
             </p>
@@ -117,7 +117,7 @@ const CommunityPostCard = ({ post, showFullContent = false }) => {
               <p>{expanded ? post.content : post.content.substring(0, 200)}...</p>
               <button
                 onClick={toggleExpand}
-                className="text-[#FF4D67] text-sm mt-1 hover:underline"
+                className="text-primary text-sm mt-1 hover:underline"
               >
                 {expanded ? 'Show less' : 'Read more'}
               </button>

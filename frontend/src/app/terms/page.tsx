@@ -28,12 +28,12 @@ export default function TermsOfUse() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen text-white bg-background">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#FF8C00] to-[#FFB020] py-16">
+      <div className="bg-gradient-to-r from-primary to-primary-light py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Terms of Use</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-text-primary">Terms of Use</h1>
             <p className="text-xl text-white/90 max-w-3xl mx-auto">
               Last Updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
             </p>
@@ -46,7 +46,7 @@ export default function TermsOfUse() {
           {/* Table of Contents - Sticky sidebar */}
           <div className="lg:w-1/4">
             <div className="sticky top-24 bg-gray-800/50 backdrop-blur-lg rounded-xl p-6 border border-gray-700">
-              <h2 className="text-lg font-semibold mb-4 text-[#FF8C00]">Table of Contents</h2>
+              <h2 className="text-lg font-semibold mb-4 text-text-primary">Table of Contents</h2>
               <nav className="space-y-2">
                 {sections.map((section) => (
                   <button
@@ -54,7 +54,7 @@ export default function TermsOfUse() {
                     onClick={() => scrollToSection(section.id)}
                     className={`block text-left w-full px-3 py-2 rounded-lg transition-all ${
                       activeSection === section.id
-                        ? "bg-[#FF8C00] text-white"
+                        ? "bg-primary text-white"
                         : "text-gray-300 hover:text-white hover:bg-gray-700/50"
                     }`}
                   >
@@ -70,7 +70,7 @@ export default function TermsOfUse() {
             <div className="bg-gray-800/30 backdrop-blur-lg rounded-xl p-8 border border-gray-700">
               
               <section id="acceptance" className="mb-12 scroll-mt-24">
-                <h2 className="text-2xl font-bold mb-4 text-[#FF8C00]">1. Acceptance of Terms</h2>
+                <h2 className="text-2xl font-bold mb-4 text-text-primary">1. Acceptance of Terms</h2>
                 <p className="text-gray-300 mb-4">
                   By accessing or using MuzikaX ("the Service", "we", "us", or "our"), you agree to be bound by these Terms of Use ("Terms"). If you disagree with any part of these terms, you may not access the Service.
                 </p>
@@ -80,7 +80,7 @@ export default function TermsOfUse() {
               </section>
 
               <section id="use-of-service" className="mb-12 scroll-mt-24">
-                <h2 className="text-2xl font-bold mb-4 text-[#FF8C00]">2. Use of Service</h2>
+                <h2 className="text-2xl font-bold mb-4 text-text-primary">2. Use of Service</h2>
                 <p className="text-gray-300 mb-4">
                   MuzikaX provides a digital music ecosystem connecting Rwandan music creators with fans worldwide. The Service includes:
                 </p>
@@ -94,13 +94,13 @@ export default function TermsOfUse() {
               </section>
 
               <section id="user-content" className="mb-12 scroll-mt-24">
-                <h2 className="text-2xl font-bold mb-4 text-[#FF8C00]">3. User Content</h2>
-                <h3 className="text-xl font-semibold mb-3 text-white">3.1 Content Ownership</h3>
+                <h2 className="text-2xl font-bold mb-4 text-text-primary">3. User Content</h2>
+                <h3 className="text-xl font-semibold mb-3 text-text-primary">3.1 Content Ownership</h3>
                 <p className="text-gray-300 mb-4">
                   You retain all ownership rights to the content you upload, including music, lyrics, images, and other materials ("User Content"). By uploading content to MuzikaX, you grant us a worldwide, non-exclusive, royalty-free license to use, reproduce, distribute, display, and perform your content solely for the purpose of operating and promoting the Service.
                 </p>
                 
-                <h3 className="text-xl font-semibold mb-3 text-white">3.2 Content Responsibility</h3>
+                <h3 className="text-xl font-semibold mb-3 text-text-primary">3.2 Content Responsibility</h3>
                 <p className="text-gray-300">
                   You are solely responsible for all User Content you post. You represent and warrant that:
                 </p>
@@ -113,7 +113,7 @@ export default function TermsOfUse() {
               </section>
 
               <section id="intellectual-property" className="mb-12 scroll-mt-24">
-                <h2 className="text-2xl font-bold mb-4 text-[#FF8C00]">4. Intellectual Property</h2>
+                <h2 className="text-2xl font-bold mb-4 text-text-primary">4. Intellectual Property</h2>
                 <p className="text-gray-300 mb-4">
                   The Service and its original content, features, and functionality are owned by MuzikaX and are protected by international copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws.
                 </p>
@@ -123,7 +123,7 @@ export default function TermsOfUse() {
               </section>
 
               <section id="prohibited-activities" className="mb-12 scroll-mt-24">
-                <h2 className="text-2xl font-bold mb-4 text-[#FF8C00]">5. Prohibited Activities</h2>
+                <h2 className="text-2xl font-bold mb-4 text-text-primary">5. Prohibited Activities</h2>
                 <p className="text-gray-300 mb-4">
                   You agree not to engage in any of the following prohibited activities:
                 </p>
@@ -139,7 +139,7 @@ export default function TermsOfUse() {
               </section>
 
               <section id="account-security" className="mb-12 scroll-mt-24">
-                <h2 className="text-2xl font-bold mb-4 text-[#FF8C00]">6. Account Security</h2>
+                <h2 className="text-2xl font-bold mb-4 text-text-primary">6. Account Security</h2>
                 <p className="text-gray-300 mb-4">
                   You are responsible for maintaining the confidentiality of your account and password. You agree to accept responsibility for all activities that occur under your account.
                 </p>
@@ -149,7 +149,7 @@ export default function TermsOfUse() {
               </section>
 
               <section id="termination" className="mb-12 scroll-mt-24">
-                <h2 className="text-2xl font-bold mb-4 text-[#FF8C00]">7. Termination</h2>
+                <h2 className="text-2xl font-bold mb-4 text-text-primary">7. Termination</h2>
                 <p className="text-gray-300 mb-4">
                   We may terminate or suspend your account and bar access to the Service immediately, without prior notice or liability, under our sole discretion, for any reason whatsoever and without limitation, including but not limited to a breach of the Terms.
                 </p>
@@ -159,21 +159,21 @@ export default function TermsOfUse() {
               </section>
 
               <section id="disclaimer" className="mb-12 scroll-mt-24">
-                <h2 className="text-2xl font-bold mb-4 text-[#FF8C00]">8. Disclaimer of Warranties</h2>
+                <h2 className="text-2xl font-bold mb-4 text-text-primary">8. Disclaimer of Warranties</h2>
                 <p className="text-gray-300">
                   The Service is provided on an "AS IS" and "AS AVAILABLE" basis. The Service is provided without warranties of any kind, whether express or implied, including, but not limited to, implied warranties of merchantability, fitness for a particular purpose, non-infringement or course of performance.
                 </p>
               </section>
 
               <section id="limitation" className="mb-12 scroll-mt-24">
-                <h2 className="text-2xl font-bold mb-4 text-[#FF8C00]">9. Limitation of Liability</h2>
+                <h2 className="text-2xl font-bold mb-4 text-text-primary">9. Limitation of Liability</h2>
                 <p className="text-gray-300">
                   In no event shall MuzikaX, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use the Service.
                 </p>
               </section>
 
               <section id="changes" className="mb-12 scroll-mt-24">
-                <h2 className="text-2xl font-bold mb-4 text-[#FF8C00]">10. Changes to Terms</h2>
+                <h2 className="text-2xl font-bold mb-4 text-text-primary">10. Changes to Terms</h2>
                 <p className="text-gray-300">
                   We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.
                 </p>
@@ -184,7 +184,7 @@ export default function TermsOfUse() {
 
               {/* Contact Information */}
               <div className="mt-12 pt-8 border-t border-gray-700">
-                <h2 className="text-2xl font-bold mb-4 text-[#FF8C00]">Contact Us</h2>
+                <h2 className="text-2xl font-bold mb-4 text-text-primary">Contact Us</h2>
                 <p className="text-gray-300 mb-4">
                   If you have any questions about these Terms of Use, please contact us:
                 </p>

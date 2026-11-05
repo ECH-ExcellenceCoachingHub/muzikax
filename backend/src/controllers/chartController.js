@@ -10,6 +10,33 @@ const redisCache = require('../utils/redisCache');
 const { validateChartFreshness, validateChartsBulk } = require('../utils/chartValidator');
 
 /**
+ * Consistent movement fields for every chart entry.
+ * previousRank is only ever a stored, real rank from the previous period (never invented).
+ */
+function movementFields(rank, state) {
+  const previousRank = state && state.previousRank ? state.previousRank : null;
+  return {
+    previousRank,
+    rankChange: previousRank ? previousRank - rank : null,
+    isNew: !!(state && state.isNew),
+    hasHistory: !!(state && state.hasHistory),
+    activeInPeriod: state ? !!state.activeInPeriod : true
+  };
+}
+
+function metricsFromCalc(m = {}) {
+  return {
+    periodPlays: m.periodPlays || 0,
+    periodUniqueListeners: m.periodUniqueListeners || 0,
+    periodLikes: m.periodLikes || 0,
+    periodShares: m.periodShares || 0,
+    totalPlays: m.totalPlays || 0,
+    likes: m.likes || 0,
+    shares: m.shares || 0
+  };
+}
+
+/**
  * Get global charts
  * @route GET /api/charts/global
  * @query {string} timeWindow - 'daily', 'weekly', 'monthly' (default: weekly)
@@ -76,9 +103,9 @@ const getGlobalCharts = async (req, res) => {
           return {
             ...signedTrack,
             rank: track.rank,
-            previousRank: track.previousRank,
-            rankChange: track.previousRank ? track.previousRank - track.rank : 0,
-            score: track.chartScore
+            ...movementFields(track.rank, { activeInPeriod: track.chartMetrics?.activeInPeriod }),
+            score: track.chartScore,
+            metrics: metricsFromCalc(track.chartMetrics)
           };
         })
       );
@@ -105,24 +132,25 @@ const getGlobalCharts = async (req, res) => {
         if (!track) return null;
         
         const signedTrack = await signTrackUrls(track);
-        const previousRank = chart[`${timeWindow}PreviousRank`] || 0;
-        
+        const state = chart.windows && chart.windows[timeWindow];
+        const rank = index + 1;
+
         return {
           ...signedTrack,
-          rank: index + 1,
-          previousRank: previousRank || Math.floor(Math.random() * 20),
-          rankChange: previousRank ? previousRank - (index + 1) : 0,
+          rank,
+          ...movementFields(rank, state),
           score: chart[sortField],
-          metrics: {
-            totalPlays: chart.totalPlays,
-            uniqueListeners: chart.uniqueListeners,
-            likes: chart.likes,
-            shares: chart.shares,
-            reposts: chart.reposts,
-            playlistAdditions: chart.playlistAdditions,
-            velocity: chart.playVelocity,
-            growthRate: chart.growthRate
-          }
+          metrics: state && state.metrics
+            ? state.metrics
+            : {
+                periodPlays: 0,
+                periodUniqueListeners: 0,
+                periodLikes: 0,
+                periodShares: 0,
+                totalPlays: track.plays || 0,
+                likes: track.likes || 0,
+                shares: track.shares || 0
+              }
         };
       })
     );
@@ -213,17 +241,18 @@ const getCountryCharts = async (req, res) => {
         return {
           ...signedTrack,
           rank: track.rank || index + 1,
-          previousRank: track.previousRank || 0,
-          rankChange: track.rankChange || 0,
+          ...movementFields(track.rank || index + 1, { activeInPeriod: true }),
           country: countryCode,
           countryScore: track.countryScore,
           countryPlays: track.countryPlays,
           countryUniqueListeners: track.countryUniqueListeners,
           // Include metrics showing this is country-specific data
           metrics: {
-            totalPlays: track.countryPlays,
-            uniqueListeners: track.countryUniqueListeners,
-            globalPlays: track.globalPlays || track.plays || 0,
+            periodPlays: track.countryPlays || 0, // plays from this country in the window
+            periodUniqueListeners: track.countryUniqueListeners || 0,
+            periodLikes: 0,
+            periodShares: 0,
+            totalPlays: track.globalPlays || track.plays || 0,
             likes: track.likes || 0,
             shares: track.shares || 0
           }
@@ -276,11 +305,15 @@ const getGenreCharts = async (req, res) => {
     const formattedCharts = await Promise.all(
       charts.map(async (track, index) => {
         const signedTrack = await signTrackUrls(track);
+        const rank = index + 1;
         return {
           ...signedTrack,
-          rank: index + 1,
+          rank,
           genre: genre,
-          genreScore: track.chartScore
+          genreScore: track.chartScore,
+          // genre movement isn't tracked yet: report "no history" rather than guess
+          ...movementFields(rank, { activeInPeriod: track.chartMetrics?.activeInPeriod }),
+          metrics: metricsFromCalc(track.chartMetrics)
         };
       })
     );
@@ -306,45 +339,71 @@ const getGenreCharts = async (req, res) => {
 const getTrendingCharts = async (req, res) => {
   try {
     const limit = Math.min(parseInt(req.query.limit) || 20, 50);
-    
-    // Get tracks with highest growth rate
-    const trendingTracks = await ChartScore.find()
-      .sort({ growthRate: -1 })
-      .limit(limit)
-      .populate({
-        path: 'trackId',
-        select: 'title genre type coverURL audioURL plays likes shares creatorId createdAt',
-        populate: {
-          path: 'creatorId',
-          select: 'name avatar whatsappContact'
+    const DAY = 864e5;
+    const now = Date.now();
+    const recentStart = new Date(now - 7 * DAY);
+    const priorStart = new Date(now - 14 * DAY);
+
+    // Plays per track: last 7 days vs the 7 days before that
+    const rows = await DailyStats.aggregate([
+      { $match: { date: { $gte: priorStart } } },
+      {
+        $group: {
+          _id: '$trackId',
+          recent: { $sum: { $cond: [{ $gte: ['$date', recentStart] }, '$plays', 0] } },
+          prior: { $sum: { $cond: [{ $lt: ['$date', recentStart] }, '$plays', 0] } },
+          listeners: { $sum: { $cond: [{ $gte: ['$date', recentStart] }, '$uniqueListeners', 0] } }
         }
-      })
+      },
+      { $match: { recent: { $gt: 0 } } }
+    ]);
+
+    // Rising = gained the most plays vs last week; then by this week's plays
+    rows.forEach(r => {
+      r.gain = r.recent - r.prior;
+      r.growth = r.prior > 0 ? Math.round(((r.recent - r.prior) / r.prior) * 100) : null; // null = new this week
+    });
+    rows.sort((x, y) => y.gain - x.gain || y.recent - x.recent);
+
+    const Track = require('../models/Track');
+    const top = rows.slice(0, limit);
+    const tracks = await Track.find({ _id: { $in: top.map(r => r._id) }, isPublic: { $ne: false } })
+      .select('title genre type coverURL audioURL plays likes shares creatorId createdAt')
+      .populate('creatorId', 'name avatar whatsappContact')
       .lean();
-    
-    // Format and sign URLs
-    const formattedTracks = await Promise.all(
-      trendingTracks.map(async (chart, index) => {
-        const track = chart.trackId;
-        if (!track) return null;
-        
-        const signedTrack = await signTrackUrls(track);
-        return {
-          ...signedTrack,
-          rank: index + 1,
-          trendScore: chart.growthRate,
-          velocity: chart.playVelocity,
-          daysOld: Math.floor((Date.now() - new Date(track.createdAt)) / (1000 * 60 * 60 * 24)),
-          trajectory: chart.growthRate > 50 ? 'rising_fast' : chart.growthRate > 20 ? 'rising' : 'stable'
-        };
-      })
-    );
-    
-    const validTracks = formattedTracks.filter(t => t !== null);
-    
+    const byId = new Map(tracks.map(t => [String(t._id), t]));
+
+    const formatted = [];
+    for (const r of top) {
+      const track = byId.get(String(r._id));
+      if (!track) continue;
+      const signedTrack = await signTrackUrls(track);
+      const rank = formatted.length + 1;
+      formatted.push({
+        ...signedTrack,
+        rank,
+        ...movementFields(rank, { activeInPeriod: true }),
+        isNew: r.prior === 0,
+        growthPercent: r.growth,
+        trajectory: r.prior === 0 ? 'new' : r.growth >= 50 ? 'rising_fast' : r.growth > 0 ? 'rising' : 'stable',
+        metrics: {
+          periodPlays: r.recent,
+          previousPeriodPlays: r.prior,
+          periodUniqueListeners: r.listeners,
+          periodLikes: 0,
+          periodShares: 0,
+          totalPlays: track.plays || 0,
+          likes: track.likes || 0,
+          shares: track.shares || 0
+        }
+      });
+    }
+
     res.json({
-      charts: validTracks,
+      charts: formatted,
       type: 'trending',
-      total: validTracks.length,
+      timeWindow: 'weekly',
+      total: formatted.length,
       updatedAt: new Date()
     });
   } catch (error) {

@@ -39,7 +39,7 @@ export default function DataFetchError({ error, reset }: DataFetchErrorProps) {
     error?.message.includes('Cannot make API calls while offline');
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-900 flex items-center justify-center px-4">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-background">
       <div className="text-center max-w-2xl">
         {/* Error Illustration */}
         <div className="mb-8">
@@ -59,7 +59,7 @@ export default function DataFetchError({ error, reset }: DataFetchErrorProps) {
         </div>
 
         {/* Error Content */}
-        <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
+        <h1 className="text-5xl md:text-6xl font-bold mb-4 text-text-primary">
           {isNetworkError ? "You're Offline" : "Data Fetch Error"}
         </h1>
         
@@ -122,7 +122,7 @@ export default function DataFetchError({ error, reset }: DataFetchErrorProps) {
 
             {/* Info Box */}
             <div className="mt-8 p-4 bg-gray-800/50 border border-gray-700 rounded-lg">
-              <h3 className="text-white font-medium mb-2">💡 Did you know?</h3>
+              <h3 className="font-medium mb-2 text-text-primary">💡 Did you know?</h3>
               <p className="text-gray-400 text-sm">
                 The offline player lets you:
               </p>
@@ -157,7 +157,7 @@ export default function DataFetchError({ error, reset }: DataFetchErrorProps) {
               {reset && (
                 <button
                   onClick={reset}
-                  className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium rounded-lg transition-all duration-300 flex items-center justify-center"
+                  className="px-6 py-3 bg-gradient-to-r from-primary to-primary-light hover:from-primary-hover hover:to-primary-light text-white font-medium rounded-lg transition-all duration-300 flex items-center justify-center"
                 >
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -191,7 +191,7 @@ export default function DataFetchError({ error, reset }: DataFetchErrorProps) {
 
         {/* Helpful Links */}
         <div className="mt-12 pt-8 border-t border-gray-800">
-          <h3 className="text-lg font-medium text-white mb-4">Need Help?</h3>
+          <h3 className="text-lg font-medium mb-4 text-text-primary">Need Help?</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-md mx-auto">
             <Link 
               href="/offline" 

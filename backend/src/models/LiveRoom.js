@@ -85,6 +85,12 @@ const liveRoomSchema = new mongoose.Schema({
       default: false
     }
   }],
+  // dj_set rooms carry live audio from DJ mode (see services/liveRelay.js)
+  roomType: {
+    type: String,
+    enum: ['talk', 'dj_set'],
+    default: 'talk'
+  },
   isPublic: {
     type: Boolean,
     default: true

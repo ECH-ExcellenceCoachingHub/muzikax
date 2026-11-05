@@ -12,6 +12,7 @@ import AudioPlayerErrorBoundary from "./AudioPlayerErrorBoundary";
 import PlaylistCard from "./PlaylistCard";
 import BeatCard from "./BeatCard";
 import RecentlyPlayed from "./RecentlyPlayed";
+import SectionHeader from "./SectionHeader";
 import TrendingVibesSection from "./TrendingVibesSection";
 import MixesHorizontalScroll from "../MixesHorizontalScroll";
 
@@ -132,7 +133,7 @@ function Cover({
   const [err, setErr] = useState(false);
   return err || !src ? (
     <div
-      className={`flex items-center justify-center bg-gradient-to-br from-[#1A2330] to-[#121821] text-[#9CA3AF] text-xs font-semibold border border-[#1F2937] ${className}`}
+      className={`flex items-center justify-center bg-gradient-to-br from-surface-elevated to-surface text-text-secondary text-xs font-semibold border border-surface-elevated ${className}`}
     >
       {initials(alt)}
     </div>
@@ -163,7 +164,7 @@ function Avatar({
   return err || !src ? (
     <div
       style={style}
-      className={`rounded-full bg-gradient-to-br from-[#F59E0B] to-[#FFB020] flex items-center justify-center text-black font-bold text-xs ${className}`}
+      className={`rounded-full bg-gradient-to-br from-primary to-primary-light flex items-center justify-center text-black font-bold text-xs ${className}`}
     >
       {initials(name)}
     </div>
@@ -191,52 +192,27 @@ function TrackRow({
   isActive: boolean;
 }) {
   return (
-    <button
-      onClick={onPlay}
-      className={`group flex items-center gap-3 w-full px-3 py-2.5 rounded-xl transition-all duration-300 text-left hover:bg-gradient-to-r hover:from-white/8 hover:to-white/3 active:scale-[0.99] relative overflow-hidden ${
-        isActive ? "bg-gradient-to-r from-white/15 to-white/10 ring-1 ring-white/30" : ""
-      }`}
-    >
-      {/* Animated gradient border for active state */}
-      {isActive && (
-        <div className="absolute inset-0 bg-gradient-to-r from-white/10 via-white/15 to-white/10 animate-gradient opacity-50" />
-      )}
-      
-      {/* Index / play indicator */}
-      <span
-        className={`w-6 text-center text-sm shrink-0 relative z-10 ${
-          isActive
-            ? "text-white font-bold"
-            : "text-white/30 group-hover:text-white/60 transition-colors"
-        }`}
-      >
-        {isActive ? "▶" : index + 1}
+    <button onClick={onPlay} data-active={isActive} className="mx-row group">
+      {/* Index, swapped for a play icon on hover */}
+      <span className="relative w-6 shrink-0 flex items-center justify-center text-sm tabular-nums">
+        <span className={`mx-row-index transition-opacity ${isActive ? "text-primary font-semibold" : "text-text-muted"}`}>
+          {isActive ? "▶" : index + 1}
+        </span>
+        <svg className="mx-row-play absolute w-4 h-4 text-text-primary" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+          <path d="M6.3 2.84A1.5 1.5 0 004 4.11v11.78a1.5 1.5 0 002.3 1.27l9.344-5.891a1.5 1.5 0 000-2.538L6.3 2.84z" />
+        </svg>
       </span>
 
-      {/* Cover */}
-      <div className="relative shrink-0 w-12 h-12 rounded-lg overflow-hidden shadow-md group-hover:shadow-lg transition-shadow duration-300">
-        <Cover src={track.coverImage} alt={track.title} className="w-full h-full group-hover:scale-110 transition-transform duration-300" />
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M6.3 2.84A1.5 1.5 0 004 4.11v11.78a1.5 1.5 0 002.3 1.27l9.344-5.891a1.5 1.5 0 000-2.538L6.3 2.84z" />
-          </svg>
-        </div>
+      <div className="w-12 h-12 shrink-0 rounded-lg overflow-hidden bg-surface-elevated">
+        <Cover src={track.coverImage} alt={track.title} className="w-full h-full" />
       </div>
 
-      {/* Info */}
-      <div className="flex-1 min-w-0 relative z-10">
-        <p
-          className={`text-sm font-medium truncate transition-colors duration-300 ${
-            isActive ? "text-white font-semibold" : "text-white group-hover:text-white/90"
-          }`}
-        >
-          {track.title}
-        </p>
-        <p className="text-xs text-white/70 group-hover:text-white/90 transition-colors truncate">{track.artist}</p>
+      <div className="flex-1 min-w-0">
+        <p className="mx-card-title">{track.title}</p>
+        <p className="mx-card-subtitle">{track.artist}</p>
       </div>
 
-      {/* Plays */}
-      <span className="text-xs text-white/30 shrink-0 hidden sm:block group-hover:text-white/50 transition-colors relative z-10">
+      <span className="text-xs text-text-muted shrink-0 hidden sm:block tabular-nums">
         {formatPlays(track.plays)}
       </span>
     </button>
@@ -256,42 +232,23 @@ function TrackCard({
   t: (key: any) => string;
 }) {
   return (
-    <button
-      onClick={onPlay}
-      className={`group flex flex-col gap-3 p-3 rounded-2xl transition-all duration-500 text-left w-full active:scale-[0.98] relative overflow-hidden ${
-        isActive 
-          ? "bg-[#1A2330] ring-2 ring-white/40 shadow-lg shadow-white/10 scale-[1.02]" 
-          : "bg-[#0a0604] hover:bg-[#121821] border border-[#1F2937] hover:border-[#374151] hover:-translate-y-1 hover:shadow-xl hover:shadow-white/10"
-      }`}
-    >
-      {/* Animated gradient border effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-white/10 via-white/15 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-gradient" />
-      
-      {/* Shimmer effect on hover */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-        <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-      </div>
-      
-      <div className="relative aspect-square w-full rounded-xl overflow-hidden">
-        <Cover src={track.coverImage} alt={track.title} className="w-full h-full transition-transform duration-500 group-hover:scale-110" />
-        {/* Play button overlay with Modern Design */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300" />
-        <div className="absolute bottom-2 right-2 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 border border-white/30">
-          <svg className="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 20 20">
+    <button onClick={onPlay} data-active={isActive} className="mx-card group">
+      <div className="mx-card-media aspect-square w-full">
+        <Cover src={track.coverImage} alt={track.title} className="w-full h-full" />
+        <span className="mx-card-play">
+          <svg className="w-4 h-4 ml-0.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
             <path d="M6.3 2.84A1.5 1.5 0 004 4.11v11.78a1.5 1.5 0 002.3 1.27l9.344-5.891a1.5 1.5 0 000-2.538L6.3 2.84z" />
           </svg>
-        </div>
+        </span>
         {isActive && (
-          <div className="absolute top-2 left-2 px-2 py-1 bg-white/20 backdrop-blur-sm text-white text-[10px] font-bold rounded-full shadow-lg border border-white/30 animate-pulse">
-            ▶ {t('nowPlaying')}
-          </div>
+          <span className="absolute top-2 left-2 px-2 py-0.5 bg-primary text-black text-[10px] font-bold rounded-full">
+            {t('nowPlaying')}
+          </span>
         )}
       </div>
-      <div className="relative z-10">
-        <p className={`text-sm font-semibold truncate transition-all duration-300 ${isActive ? "text-white" : "text-white group-hover:text-white/90"}`}>
-          {track.title}
-        </p>
-        <p className="text-xs text-[#9CA3AF] truncate mt-0.5 group-hover:text-white/70 transition-colors">{track.artist}</p>
+      <div className="min-w-0">
+        <p className="mx-card-title">{track.title}</p>
+        <p className="mx-card-subtitle">{track.artist}</p>
       </div>
     </button>
   );
@@ -301,41 +258,22 @@ function TrackCard({
 function ArtistCard({ creator }: { creator: Creator }) {
   const router = useRouter();
   return (
-    <button
-      onClick={() => router.push(`/artists/${creator.id}`)}
-      className="group flex flex-col items-center gap-3 p-3 rounded-2xl hover:bg-gradient-to-br hover:from-white/10 hover:to-white/5 transition-all duration-500 active:scale-[0.98] text-center w-full relative overflow-hidden border border-[#1F2937] hover:border-[#374151] bg-[#0a0604] hover:-translate-y-1 hover:shadow-xl hover:shadow-white/10"
-    >
-      {/* Background gradient effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      
-      {/* Shimmer effect */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-        <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-      </div>
-      
-      <div className="relative z-10">
-        <div className="relative">
-          {/* Animated ring effect */}
-          <div className="absolute inset-0 rounded-full bg-white/20 blur-md opacity-0 group-hover:opacity-40 transition-opacity duration-300 animate-pulse" />
-          <Avatar src={creator.avatar} name={creator.name} size={64} className="transition-transform duration-500 group-hover:scale-110" />
-          {/* Decorative ring */}
-          <div className="absolute -inset-0.5 rounded-full bg-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-spin-slow" style={{ animationDuration: '3s' }} />
-          {creator.verified && (
-            <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg border border-white/30 transition-transform duration-300 group-hover:scale-110">
-              <svg className="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fillRule="evenodd"
-                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                  clipRule="evenodd"
-                />
+    <button onClick={() => router.push(`/artists/${creator.id}`)} className="mx-card mx-card-center group">
+      <div className="relative">
+        <div className="mx-card-avatar">
+          <Avatar src={creator.avatar} name={creator.name} size={64} />
+        </div>
+        {creator.verified && (
+            <span className="absolute -bottom-0.5 -right-0.5 w-5 h-5 bg-primary rounded-full flex items-center justify-center ring-2 ring-surface" aria-label="Verified">
+              <svg className="w-3 h-3 text-black" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
-            </div>
+            </span>
           )}
-        </div>
-        <div className="mt-2">
-          <p className="text-sm font-semibold text-white group-hover:text-white/90 transition-colors truncate max-w-[120px]">{creator.name}</p>
-          <p className="text-xs text-[#9CA3AF] group-hover:text-white/60 transition-colors">{formatPlays(creator.followers)} followers</p>
-        </div>
+      </div>
+      <div className="min-w-0 w-full">
+        <p className="mx-card-title">{creator.name}</p>
+        <p className="mx-card-subtitle">{formatPlays(creator.followers)} followers</p>
       </div>
     </button>
   );
@@ -345,98 +283,25 @@ function ArtistCard({ creator }: { creator: Creator }) {
 function AlbumCard({ album }: { album: Album }) {
   const router = useRouter();
   return (
-    <button
-      onClick={() => router.push(`/album/${album.id}`)}
-      className="group flex flex-col gap-3 p-3 rounded-2xl hover:bg-gradient-to-br hover:from-white/10 hover:to-white/5 transition-all duration-500 active:scale-[0.98] text-left w-full relative overflow-hidden border border-[#1F2937] hover:border-[#374151] bg-[#0a0604] hover:-translate-y-1 hover:shadow-xl hover:shadow-white/10"
-    >
-      {/* Animated background glow */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
-      
-      {/* Shimmer effect */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-        <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-      </div>
-      
-      <div className="relative aspect-square w-full rounded-xl overflow-hidden shadow-lg group-hover:shadow-2xl group-hover:shadow-white/15 transition-all duration-500">
-        {/* Main album cover */}
-        <Cover src={album.coverImage} alt={album.title} className="w-full h-full transition-transform duration-500 group-hover:scale-110" />
-        
-        {/* Layered stack effect for multi-track albums */}
+    <button onClick={() => router.push(`/album/${album.id}`)} className="mx-card group">
+      <div className="mx-card-media aspect-square w-full">
+        <Cover src={album.coverImage} alt={album.title} className="w-full h-full" />
+        <span className="mx-card-play">
+          <svg className="w-4 h-4 ml-0.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <path d="M6.3 2.84A1.5 1.5 0 004 4.11v11.78a1.5 1.5 0 002.3 1.27l9.344-5.891a1.5 1.5 0 000-2.538L6.3 2.84z" />
+          </svg>
+        </span>
         {album.tracks > 1 && (
-          <>
-            {/* Second layer */}
-            <div className="absolute top-1 left-1 w-full h-full rounded-xl overflow-hidden shadow-lg border border-white/15 pointer-events-none transition-transform duration-500 group-hover:top-2 group-hover:left-2">
-              <Cover src={album.coverImage} alt={album.title} className="w-full h-full opacity-80" />
-            </div>
-            
-            {/* Third layer for albums with many tracks */}
-            {album.tracks > 3 && (
-              <div className="absolute top-2 left-2 w-full h-full rounded-xl overflow-hidden shadow-lg border border-white/10 pointer-events-none transition-transform duration-500 group-hover:top-4 group-hover:left-4">
-                <Cover src={album.coverImage} alt={album.title} className="w-full h-full opacity-60" />
-              </div>
-            )}
-          </>
-        )}
-        
-        {/* Gradient overlay on hover */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300" />
-        
-        {/* Play button overlay */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-          <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg transform scale-50 group-hover:scale-100 transition-all duration-300 hover:scale-110 border border-white/30">
-            <svg className="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M6.3 2.84A1.5 1.5 0 004 4.11v11.78a1.5 1.5 0 002.3 1.27l9.344-5.891a1.5 1.5 0 000-2.538L6.3 2.84z" />
-            </svg>
-          </div>
-        </div>
-        
-        {/* Track count badge */}
-        {album.tracks > 1 && (
-          <div className="absolute bottom-2 right-2 bg-white/20 backdrop-blur-sm text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-lg min-w-[24px] text-center transition-transform duration-300 group-hover:scale-110 border border-white/30">
-            {album.tracks}
-          </div>
+          <span className="absolute top-2 left-2 px-2 py-0.5 bg-black/60 backdrop-blur-sm text-text-primary text-[10px] font-semibold rounded-full">
+            {album.tracks} tracks
+          </span>
         )}
       </div>
-      <div>
-        <p className="text-sm font-semibold text-white group-hover:text-white/90 transition-colors truncate">{album.title}</p>
-        <p className="text-xs text-[#9CA3AF] group-hover:text-white/60 transition-colors truncate">{album.artist} · {album.year}</p>
+      <div className="min-w-0">
+        <p className="mx-card-title">{album.title}</p>
+        <p className="mx-card-subtitle">{album.artist} · {album.year}</p>
       </div>
     </button>
-  );
-}
-
-/* ── Section Header ── */
-function SectionHeader({
-  title,
-  onSeeAll,
-  t,
-}: {
-  title: string;
-  onSeeAll?: () => void;
-  t?: (key: any) => string;
-}) {
-  return (
-    <div className="flex items-center justify-between mb-4 group">
-      <h2 className="text-lg sm:text-xl font-bold text-white tracking-tight flex items-center gap-2 relative">
-        {/* Animated gradient underline */}
-        <span className="relative inline-block">
-          <span className="text-white transition-all duration-300 group-hover:text-white/90">
-            {title}
-          </span>
-          <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-white/60 to-white/30 transition-all duration-500 group-hover:w-full" />
-        </span>
-        <div className="h-px flex-1 max-w-[100px] bg-gradient-to-r from-white/30 to-transparent hidden sm:block opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      </h2>
-      {onSeeAll && t && (
-        <button
-          onClick={onSeeAll}
-          className="text-xs font-semibold text-white/70 hover:text-white transition-all duration-300 uppercase tracking-widest hover:underline decoration-white/40 decoration-2 underline-offset-4 relative group/btn overflow-hidden"
-        >
-          <span className="relative z-10">{t('seeAll')}</span>
-          <span className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 rounded transform scale-x-0 group-hover/btn:scale-x-100 transition-transform duration-300 origin-left" />
-        </button>
-      )}
-    </div>
   );
 }
 
@@ -514,107 +379,142 @@ function HeroBanner({
 
   const currentTrack = featuredTracks[currentIndex];
   const isCurrentActive = currentTrack && isActive;
+  const hasMultiple = featuredTracks.length > 1;
+
+  // Touch swipe (mobile)
+  const touchStartX = useRef<number | null>(null);
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    setIsPaused(true);
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    const start = touchStartX.current;
+    touchStartX.current = null;
+    setIsPaused(false);
+    if (start === null || !hasMultiple) return;
+    const dx = e.changedTouches[0].clientX - start;
+    if (Math.abs(dx) < 40) return;
+    const n = featuredTracks.length;
+    goToSlide(dx < 0 ? (currentIndex + 1) % n : (currentIndex - 1 + n) % n);
+  };
 
   return (
-    <div 
-      className="relative rounded-3xl overflow-hidden min-h-[220px] sm:min-h-[280px] lg:min-h-[340px]"
+    <div
+      className="relative rounded-2xl sm:rounded-3xl overflow-hidden h-[208px] sm:h-[280px] lg:h-[340px] bg-surface border border-border-light"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
     >
-      {/* Slides */}
+      {/* Slides (blurred artwork backdrop) */}
       {featuredTracks.map((track, index) => {
         const isCurrent = index === currentIndex;
         return (
           <div
             key={track.id}
-            className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
-              isCurrent ? "opacity-100 scale-100" : "opacity-0 scale-105"
-            }`}
+            aria-hidden={!isCurrent}
+            className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${isCurrent ? "opacity-100" : "opacity-0"}`}
           >
-            {/* Background */}
             <div
-              className="absolute inset-0 bg-cover bg-center"
+              className="absolute inset-0 bg-cover bg-center scale-110"
               style={{
                 backgroundImage: `url(${track.coverImage})`,
-                filter: "blur(20px) saturate(1.4)",
-                transform: isCurrent ? 'scale(1.05)' : 'scale(1)',
-                transition: 'transform 6s ease-out',
+                filter: "blur(24px) saturate(1.3)",
               }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0d0d0d] via-black/50 to-transparent" />
+            {/* Scrims: bottom for text legibility, left for the cover/title column */}
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/10" />
+            <div className="absolute inset-0 bg-gradient-to-r from-background/70 via-transparent to-transparent" />
           </div>
         );
       })}
 
-      {/* Content */}
-      <div className="relative z-10 flex flex-col sm:flex-row sm:items-end gap-4 sm:gap-6 p-5 sm:p-7 lg:p-9 w-full">
-        {currentTrack && (
-          <>
-            <div 
-              key={currentTrack.id}
-              className="shrink-0 w-24 h-24 sm:w-32 sm:h-32 lg:w-44 lg:h-44 rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10 animate-fade-in-up"
+      {/* Content: cover + text side by side on every screen size, pinned to the bottom */}
+      {currentTrack && (
+        <div className="absolute inset-0 z-10 flex items-end gap-4 sm:gap-6 p-4 sm:p-7 lg:p-9">
+          <div
+            key={`cover-${currentTrack.id}`}
+            className="shrink-0 w-[104px] h-[104px] sm:w-36 sm:h-36 lg:w-48 lg:h-48 rounded-xl sm:rounded-2xl overflow-hidden bg-surface-elevated shadow-2xl shadow-black/60 ring-1 ring-white/10 animate-fade-in-up"
+          >
+            <Cover src={currentTrack.coverImage} alt={currentTrack.title} className="w-full h-full" />
+          </div>
+
+          <div
+            key={`meta-${currentTrack.id}`}
+            className="flex-1 min-w-0 pb-0.5 animate-fade-in-up"
+            style={{ animationDelay: "0.08s" }}
+          >
+            <p className="text-[10px] sm:text-xs font-semibold text-primary uppercase tracking-[0.14em] mb-1 sm:mb-1.5">
+              {t("featuredTrack")}
+            </p>
+            <h1
+              className="text-lg leading-snug sm:text-3xl lg:text-[2.5rem] sm:leading-tight font-extrabold line-clamp-2 break-words text-text-primary"
+              title={currentTrack.title}
             >
-              <Cover src={currentTrack.coverImage} alt={currentTrack.title} className="w-full h-full" />
-            </div>
-            <div className="flex-1 min-w-0 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-              <p className="text-xs font-semibold text-white/70 uppercase tracking-widest mb-1">
-                {t('featuredTrack')}
-              </p>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight truncate">
-                {currentTrack.title}
-              </h1>
-              <p className="text-sm text-white/50 mt-1 truncate">{currentTrack.artist}</p>
-              <div className="flex items-center gap-3 mt-4">
-                <button
-                  onClick={() => onPlay(currentIndex)}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-white/10 hover:bg-white/20 active:scale-95 text-white font-bold text-sm rounded-full transition-all duration-150 shadow-lg hover:shadow-xl hover:-translate-y-0.5 border border-white/20"
-                >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              {currentTrack.title}
+            </h1>
+            <p className="text-xs sm:text-sm text-text-secondary mt-0.5 sm:mt-1 truncate">
+              {currentTrack.artist}
+            </p>
+
+            <div className="flex items-center gap-2 sm:gap-3 mt-3 sm:mt-5">
+              <button
+                onClick={() => onPlay(currentIndex)}
+                className="inline-flex items-center gap-1.5 sm:gap-2 h-9 sm:h-11 px-4 sm:px-6 bg-primary hover:bg-primary-hover active:scale-95 text-black font-bold text-sm rounded-full transition-colors duration-150 shadow-lg shadow-black/40"
+              >
+                {isCurrentActive ? (
+                  <span className="flex items-end gap-[2px] h-3.5" aria-hidden="true">
+                    <span className="w-[3px] h-full bg-black rounded-sm animate-pulse" />
+                    <span className="w-[3px] h-2/3 bg-black rounded-sm animate-pulse [animation-delay:150ms]" />
+                    <span className="w-[3px] h-full bg-black rounded-sm animate-pulse [animation-delay:300ms]" />
+                  </span>
+                ) : (
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                     <path d="M6.3 2.84A1.5 1.5 0 004 4.11v11.78a1.5 1.5 0 002.3 1.27l9.344-5.891a1.5 1.5 0 000-2.538L6.3 2.84z" />
                   </svg>
-                  {isCurrentActive ? t('nowPlaying') : t('play')}
-                </button>
-                {!isAuthenticated && (
-                  <button
-                    onClick={() => router.push("/login")}
-                    className="px-5 py-2.5 border border-white/20 hover:border-white/40 text-white/80 hover:text-white font-semibold text-sm rounded-full transition-all duration-150 hover:-translate-y-0.5"
-                  >
-                    {t('signIn')}
-                  </button>
                 )}
-              </div>
+                <span className="truncate">{isCurrentActive ? t("nowPlaying") : t("play")}</span>
+              </button>
+              {!isAuthenticated && (
+                <button
+                  onClick={() => router.push("/login")}
+                  className="hidden sm:inline-flex items-center h-11 px-6 border border-white/20 hover:border-white/40 hover:bg-white/5 text-text-primary font-semibold text-sm rounded-full transition-colors duration-150"
+                >
+                  {t("signIn")}
+                </button>
+              )}
             </div>
-          </>
-        )}
-      </div>
-
-      {/* Navigation Dots */}
-      {featuredTracks.length > 1 && (
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 z-20">
-          {featuredTracks.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`transition-all duration-300 rounded-full ${
-                index === currentIndex
-                  ? "w-8 h-2 bg-white/80"
-                  : "w-2 h-2 bg-white/40 hover:bg-white/60"
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
+          </div>
         </div>
       )}
 
-      {/* Progress Bar */}
-      {featuredTracks.length > 1 && (
-        <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/10 z-20">
-          <div
-            className="h-full bg-gradient-to-r from-white/60 to-white/40 transition-all duration-100"
-            style={{
-              width: `${(progressRef.current / SLIDE_DURATION) * 100}%`,
-            }}
-          />
+      {/* Slide indicators: top-right so they never collide with the buttons.
+          The active pill fills up as the progress indicator for the current slide. */}
+      {hasMultiple && (
+        <div className="absolute top-3 right-3 sm:top-5 sm:right-5 z-20 flex items-center gap-1.5 px-2 py-1.5 rounded-full bg-black/30 backdrop-blur-md">
+          {featuredTracks.map((_, index) => {
+            const active = index === currentIndex;
+            return (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
+                aria-current={active}
+                className={`relative overflow-hidden rounded-full transition-all duration-300 h-1.5 ${active ? "w-5 sm:w-7 bg-white/30" : "w-1.5 bg-white/40 hover:bg-white/70"}`}
+              >
+                {active && (
+                  <span
+                    key={currentIndex}
+                    className="absolute inset-0 origin-left bg-white rounded-full"
+                    style={{
+                      animation: `heroProgress ${SLIDE_DURATION}ms linear forwards`,
+                      animationPlayState: isPaused ? "paused" : "running",
+                    }}
+                  />
+                )}
+              </button>
+            );
+          })}
         </div>
       )}
     </div>
@@ -647,54 +547,37 @@ function ArtistCardWithFollow({ creator, t }: { creator: Creator; t: (key: any) 
   };
 
   return (
-    <div className="group flex flex-col items-center gap-3 p-3 rounded-2xl hover:bg-gradient-to-br hover:from-white/10 hover:to-white/5 transition-all duration-300 active:scale-[0.98] text-center w-full relative overflow-hidden border border-white/10 hover:border-white/20">
-      {/* Background gradient effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      
-      {/* Clickable area for navigation */}
+    <div className="mx-card mx-card-center group">
+      {/* Whole card navigates; follow button sits above it */}
       <button
         onClick={() => router.push(`/artists/${creator.id}`)}
-        className="absolute inset-0 w-full h-full z-0"
+        className="absolute inset-0 w-full h-full rounded-2xl z-0"
         aria-label={`View ${creator.name}'s profile`}
       />
-      
-      {/* Content with higher z-index to be clickable */}
-      <div className="relative z-10 flex flex-col items-center w-full">
+      <div className="relative z-10 flex flex-col items-center gap-3 w-full pointer-events-none">
         <div className="relative">
-          {/* Animated ring effect */}
-          <div className="absolute inset-0 rounded-full bg-white/20 blur-md opacity-0 group-hover:opacity-40 transition-opacity duration-300 animate-pulse" />
-          <Avatar src={creator.avatar} name={creator.name} size={64} />
-          {/* Decorative African-inspired border */}
-          <div className="absolute -inset-0.5 rounded-full bg-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-spin-slow" style={{ animationDuration: '3s' }} />
+          <div className="mx-card-avatar">
+            <Avatar src={creator.avatar} name={creator.name} size={64} />
+          </div>
           {creator.verified && (
-            <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg border border-white/30">
-              <svg className="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fillRule="evenodd"
-                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                  clipRule="evenodd"
-                />
+            <span className="absolute -bottom-0.5 -right-0.5 w-5 h-5 bg-primary rounded-full flex items-center justify-center ring-2 ring-surface" aria-label="Verified">
+              <svg className="w-3 h-3 text-black" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
-            </div>
+            </span>
           )}
         </div>
-        <div className="w-full mt-2">
-          <p className="text-sm font-semibold text-white/90 group-hover:text-white transition-colors truncate max-w-[120px]">
-            {creator.name}
-          </p>
-          <p className="text-xs text-white/35 group-hover:text-white/60 transition-colors">
-            {formatPlays(creator.followers)} followers
-          </p>
+        <div className="min-w-0 w-full">
+          <p className="mx-card-title">{creator.name}</p>
+          <p className="mx-card-subtitle">{formatPlays(creator.followers)} followers</p>
         </div>
       </div>
-      
-      {/* Follow button with higher z-index */}
       <button
         onClick={handleFollow}
-        className={`relative z-10 w-full px-3 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all shadow-md hover:shadow-lg min-h-[32px] sm:min-h-[36px] ${
+        className={`relative z-10 w-full h-9 rounded-full text-xs sm:text-sm font-semibold transition-colors duration-150 ${
           isFollowing
-            ? 'bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white border border-white/20'
-            : 'bg-gradient-to-r from-white/20 to-white/10 hover:from-white/30 hover:to-white/20 text-white shadow-white/10 border border-white/20'
+            ? 'bg-transparent text-text-primary border border-border-strong hover:border-white/30'
+            : 'bg-primary text-black hover:bg-primary-hover'
         }`}
       >
         {isFollowing ? t('unfollow') : t('follow')}
@@ -1016,7 +899,7 @@ function HomeContent() {
 
   /* ─────────────────── RENDER ─────────────────── */
   return (
-    <div className="flex flex-col min-h-screen w-full bg-[#0d0d0d] text-white">
+    <div className="flex flex-col min-h-screen w-full text-white bg-background">
 
       {/* ── Background ambience ── */}
       <div
@@ -1067,7 +950,6 @@ function HomeContent() {
                 <SectionHeader
                   title={t('trendingNow' as any)}
                   onSeeAll={() => router.push("/tracks")}
-                  t={t}
                 />
               {/* Mobile: horizontal scroll */}
               <div className="lg:hidden">
@@ -1085,7 +967,7 @@ function HomeContent() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                       </svg>
                     </div>
-                    <h3 className="text-lg font-bold text-white mb-2">{t('notFollowingAnyArtists' as any)}</h3>
+                    <h3 className="text-lg font-bold mb-2 text-text-primary">{t('notFollowingAnyArtists' as any)}</h3>
                     <p className="text-sm text-white/50 mb-4">{t('followArtistsToSeeTracks' as any)}</p>
                     <button
                       onClick={() => router.push("/artists")}
@@ -1128,7 +1010,7 @@ function HomeContent() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                       </svg>
                     </div>
-                    <h3 className="text-lg font-bold text-white mb-2">{t('notFollowingAnyArtists' as any)}</h3>
+                    <h3 className="text-lg font-bold mb-2 text-text-primary">{t('notFollowingAnyArtists' as any)}</h3>
                     <p className="text-sm text-white/50 mb-4">{t('followArtistsToSeeTracks' as any)}</p>
                     <button
                       onClick={() => router.push("/artists")}
@@ -1166,7 +1048,6 @@ function HomeContent() {
                 <SectionHeader
                   title={t('featuredPlaylists')}
                   onSeeAll={() => router.push("/playlists")}
-                  t={t}
                 />
               {playlistsLoading ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
@@ -1193,7 +1074,6 @@ function HomeContent() {
               <SectionHeader
                 title={t('chartToppers' as any)}
                 onSeeAll={() => router.push("/charts")}
-                t={t}
               />
               <div className="rounded-2xl bg-white/3 border border-white/6 overflow-hidden divide-y divide-white/4 p-2 sm:p-3">
                 {currentTabTracks.slice(0, 8).map((track, i) => (
@@ -1214,7 +1094,6 @@ function HomeContent() {
                 <SectionHeader
                   title={t('popularAlbums')}
                   onSeeAll={() => router.push("/albums")}
-                  t={t}
                 />
               {albumsLoading ? (
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 sm:gap-3 lg:gap-4">
@@ -1253,7 +1132,6 @@ function HomeContent() {
                 <SectionHeader
                   title={t('popularBeats')}
                   onSeeAll={() => router.push("/beats")}
-                  t={t}
                 />
               {beatsLoading ? (
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 sm:gap-3 lg:gap-4">
@@ -1312,7 +1190,6 @@ function HomeContent() {
               <SectionHeader
                 title={t('browseArtists' as any)}
                 onSeeAll={() => router.push("/artists")}
-                t={t}
               />
               <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-4">
                 {unfollowedCreators.slice(0, 8).map((creator) => (
@@ -1326,7 +1203,6 @@ function HomeContent() {
               <SectionHeader
                 title={t('quickPicks' as any)}
                 onSeeAll={() => router.push("/tracks")}
-                t={t}
               />
               <div className="space-y-1 sm:space-y-2">
                 {quickPicksTracks.map((track, i) => (

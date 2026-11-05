@@ -97,7 +97,7 @@ function ReportTrackModal(_a) {
     return (<div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
       <div className="bg-gray-900 rounded-2xl border border-gray-700 w-full max-w-md p-6">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold text-white">Report Track</h2>
+          <h2 className="text-xl font-bold text-text-primary">Report Track</h2>
           <button onClick={onClose} className="text-gray-400 hover:text-white">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -110,7 +110,7 @@ function ReportTrackModal(_a) {
             <label className="block text-sm font-medium text-gray-300 mb-2">
               Reason for Report
             </label>
-            <select value={reason} onChange={function (e) { return setReason(e.target.value); }} required className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF4D67] focus:border-transparent">
+            <select value={reason} onChange={function (e) { return setReason(e.target.value); }} required className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
               <option value="">Select a reason</option>
               <option value="copyright">Copyright infringement</option>
               <option value="inappropriate">Inappropriate content</option>
@@ -122,7 +122,7 @@ function ReportTrackModal(_a) {
             <label className="block text-sm font-medium text-gray-300 mb-2">
               Additional Details (Optional)
             </label>
-            <textarea value={description} onChange={function (e) { return setDescription(e.target.value); }} rows={4} className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF4D67] focus:border-transparent" placeholder="Provide more details about why you're reporting this track..."/>
+            <textarea value={description} onChange={function (e) { return setDescription(e.target.value); }} rows={4} className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Provide more details about why you're reporting this track..."/>
           </div>
 
           {error && (<div className="mb-4 p-3 bg-red-900/30 border border-red-700 rounded-lg text-red-400 text-sm">
@@ -135,7 +135,7 @@ function ReportTrackModal(_a) {
             </button>
             <button type="submit" disabled={isSubmitting || !reason} className={"px-4 py-2 rounded-lg text-white transition-colors ".concat(isSubmitting || !reason
             ? 'bg-gray-700 cursor-not-allowed'
-            : 'bg-[#FF4D67] hover:bg-[#FF4D67]/90')}>
+            : 'bg-primary hover:bg-primary/90')}>
               {isSubmitting ? 'Submitting...' : 'Submit Report'}
             </button>
           </div>

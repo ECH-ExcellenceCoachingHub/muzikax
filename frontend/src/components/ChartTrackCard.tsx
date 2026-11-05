@@ -1,317 +1,199 @@
+'use client';
+
 import React, { useState } from 'react';
-import { trackShare } from '../services/chartService';
+import { trackShare, type ChartTrack } from '../services/chartService';
 import { shareContent } from '../utils/webShare';
 
-interface RankChange {
-  icon: string;
-  color: string;
-  label: string;
+/** 1234 -> "1,234", 15300 -> "15.3K" — never "0.0K". */
+export function formatCount(n: number | null | undefined): string {
+  const v = Number(n) || 0;
+  if (v < 10000) return v.toLocaleString();
+  return new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(v);
 }
 
-interface ChartTrack {
-  _id: string;
-  title: string;
-  creatorId: {
-    _id: string;
-    name: string;
-    avatar?: string;
-  };
-  coverURL: string;
-  genre: string;
-  plays: number;
-  likes: number;
-  shares: number;
+export function formatGenre(genre?: string): string {
+  if (!genre) return '';
+  const special: Record<string, string> = { 'r&b': 'R&B', rnb: 'R&B', hiphop: 'Hip Hop', 'hip-hop': 'Hip Hop', lofi: 'Lo-Fi' };
+  return special[genre.toLowerCase()] ?? genre.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
-interface ChartTrackCardProps {
+function Movement({ track }: { track: ChartTrack }) {
+  if (track.activeInPeriod === false) {
+    return <span className="text-text-muted" aria-label="Not ranked this period">–</span>;
+  }
+  if (track.isNew) {
+    return (
+      <span className="text-[10px] font-bold tracking-wide text-primary" aria-label="New entry">
+        NEW
+      </span>
+    );
+  }
+  const change = track.rankChange;
+  if (change == null || change === 0) {
+    return (
+      <span className="text-text-muted" aria-label={change === 0 ? 'No change' : 'No previous rank'}>
+        –
+      </span>
+    );
+  }
+  const up = change > 0;
+  return (
+    <span
+      className={`inline-flex items-center gap-0.5 text-[11px] font-semibold tabular-nums ${up ? 'text-emerald-400' : 'text-red-400'}`}
+      aria-label={`${up ? 'Up' : 'Down'} ${Math.abs(change)}`}
+    >
+      <svg className="w-2.5 h-2.5" viewBox="0 0 10 10" fill="currentColor" aria-hidden="true">
+        {up ? <path d="M5 1l4 6H1z" /> : <path d="M5 9L1 3h8z" />}
+      </svg>
+      {Math.abs(change)}
+    </span>
+  );
+}
+
+interface ChartRowProps {
   track: ChartTrack;
-  rank: number;
-  rankChange: RankChange;
   onPlay: () => void;
+  isCurrent: boolean;
   isPlaying: boolean;
-  onShare?: (platform: string) => void;
+  periodLabel: string; // e.g. "this week"
 }
 
-export default function ChartTrackCard({
-  track,
-  rank,
-  rankChange,
-  onPlay,
-  isPlaying,
-  onShare,
-}: ChartTrackCardProps) {
-  const [shareCount, setShareCount] = useState(track.shares || 0);
-  const [isSharing, setIsSharing] = useState(false);
+export default function ChartTrackCard({ track, onPlay, isCurrent, isPlaying, periodLabel }: ChartRowProps) {
+  const [sharing, setSharing] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const artistName =
-    typeof track.creatorId === 'object' && track.creatorId !== null
-      ? (track.creatorId as any).name
-      : 'Unknown Artist';
+    typeof track.creatorId === 'object' && track.creatorId !== null ? track.creatorId.name : track.artist || 'Unknown Artist';
+  const periodPlays = track.metrics?.periodPlays ?? 0;
+  const totalPlays = track.metrics?.totalPlays ?? track.plays ?? 0;
+  const inactive = track.activeInPeriod === false;
 
-  const handleShare = async (platform: string) => {
-    setIsSharing(true);
+  const handleShare = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (sharing) return;
+    setSharing(true);
     try {
-      // Construct track URL
-      const trackUrl = `${typeof window !== 'undefined' ? window.location.origin : 'https://muzikax.rw'}/tracks/${track._id}`;
-      
-      // Use modern Web Share API with fallback
-      const shareResult = await shareContent(platform, track.title, trackUrl, track.coverURL);
-      
-      if (shareResult.success) {
-        // Track the share in backend only if actually shared (not cancelled)
-        await trackShare(track._id, platform);
-        
-        // Update local count
-        setShareCount(prev => prev + 1);
-        
-        // Notify parent component if callback provided
-        if (onShare) {
-          onShare(platform);
-        }
-        
-        // Show success feedback based on share method
-        if (shareResult.method === 'native') {
-          showToast(`Shared via native share! 🎵`);
-        } else if (shareResult.method === 'copy') {
-          showToast(`Link copied to clipboard! 🔗`);
-        } else {
-          showToast(`Shared to ${platform}! 🎵`);
+      const url = `${window.location.origin}/tracks/${track._id}`;
+      const result = await shareContent('copy', track.title, url, track.coverURL);
+      if (result.success) {
+        trackShare(track._id, result.method === 'native' ? 'web_share' : 'copy').catch(() => {});
+        if (result.method !== 'native') {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 1800);
         }
       }
-    } catch (error) {
-      console.error('Share failed:', error);
-      showToast('Share failed. Please try again.');
     } finally {
-      setIsSharing(false);
+      setSharing(false);
     }
   };
 
-  const showToast = (message: string) => {
-    const toast = document.createElement('div');
-    toast.className = 'fixed bottom-20 left-1/2 transform -translate-x-1/2 bg-[#FF8C00] text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in';
-    toast.textContent = message;
-    document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 3000);
-  };
-
   return (
-    <div className="group bg-gray-800/30 hover:bg-gray-800/50 rounded-lg p-4 transition-all duration-200">
-      <div className="flex items-center gap-4">
-        {/* Rank */}
-        <div className="w-12 text-center flex-shrink-0">
-          <div className="text-2xl font-bold text-white">{rank}</div>
-          <div className={`text-sm ${rankChange.color}`}>{rankChange.icon}</div>
-        </div>
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={onPlay}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onPlay();
+        }
+      }}
+      data-active={isCurrent}
+      className="mx-row group cursor-pointer !py-2 md:grid md:grid-cols-[3rem_minmax(0,1fr)_9rem_7rem_7rem_2.5rem] md:gap-4"
+    >
+      {/* Rank + movement */}
+      <div className="w-9 md:w-auto shrink-0 flex flex-col items-center justify-center leading-none gap-1">
+        <span
+          className={`text-base md:text-lg font-bold tabular-nums ${
+            isCurrent ? 'text-primary' : inactive ? 'text-text-muted' : 'text-text-primary'
+          }`}
+        >
+          {track.rank}
+        </span>
+        <Movement track={track} />
+      </div>
 
-        {/* Cover Image */}
-        <div className="relative w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 rounded-lg overflow-hidden">
-          <img
-            src={track.coverURL || '/placeholder-playlist.png'}
-            alt={track.title}
-            className="w-full h-full object-cover"
-          />
-          {/* Play Button Overlay */}
-          <button
-            onClick={onPlay}
-            className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+      {/* Track */}
+      <div className="flex items-center gap-3 min-w-0 flex-1">
+        <div className="relative w-12 h-12 md:w-14 md:h-14 shrink-0 rounded-md overflow-hidden bg-surface-elevated">
+          {track.coverURL ? (
+            <img src={track.coverURL} alt="" className="w-full h-full object-cover" loading="lazy" />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-text-muted text-xs font-semibold">
+              {track.title.slice(0, 2).toUpperCase()}
+            </div>
+          )}
+          <span
+            className={`absolute inset-0 flex items-center justify-center bg-black/50 transition-opacity duration-150 ${
+              isCurrent ? 'opacity-100' : 'opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100'
+            }`}
+            aria-hidden="true"
           >
-            {isPlaying ? (
-              <svg
-                className="w-8 h-8 text-white"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z"
-                  clipRule="evenodd"
-                />
-              </svg>
+            {isCurrent && isPlaying ? (
+              <span className="flex items-end gap-[2px] h-4">
+                <span className="w-[3px] h-full bg-primary rounded-sm animate-pulse" />
+                <span className="w-[3px] h-2/3 bg-primary rounded-sm animate-pulse [animation-delay:150ms]" />
+                <span className="w-[3px] h-full bg-primary rounded-sm animate-pulse [animation-delay:300ms]" />
+              </span>
             ) : (
-              <svg
-                className="w-8 h-8 text-white ml-1"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-                  clipRule="evenodd"
-                />
+              <svg className="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M6.3 2.84A1.5 1.5 0 004 4.11v11.78a1.5 1.5 0 002.3 1.27l9.344-5.891a1.5 1.5 0 000-2.538L6.3 2.84z" />
               </svg>
             )}
-          </button>
+          </span>
         </div>
-
-        {/* Track Info */}
-        <div className="flex-1 min-w-0">
-          <h3 className="text-base sm:text-lg font-semibold text-white truncate">
+        <div className="min-w-0">
+          <p className="mx-card-title" title={track.title}>
             {track.title}
-          </h3>
-          <p className="text-sm text-gray-400 truncate">{artistName}</p>
-          <div className="flex items-center gap-3 mt-1 text-xs text-gray-500">
-            <span>{track.genre}</span>
-            <span>•</span>
-            <span>{(track.plays / 1000).toFixed(1)}K plays</span>
-          </div>
+          </p>
+          <p className="mx-card-subtitle">
+            {artistName}
+            {/* On mobile the stats columns are hidden, so show the period plays inline */}
+            <span className="md:hidden">
+              {' · '}
+              {inactive
+                ? `${formatCount(totalPlays)} ${totalPlays === 1 ? 'play' : 'plays'} total`
+                : `${formatCount(periodPlays)} ${periodPlays === 1 ? 'play' : 'plays'} ${periodLabel}`}
+            </span>
+          </p>
         </div>
+      </div>
 
-        {/* Stats */}
-        <div className="hidden sm:flex items-center gap-6 text-sm">
-          <div className="text-center">
-            <div className="text-gray-400">
-              <svg
-                className="w-5 h-5 mx-auto mb-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                />
-              </svg>
-            </div>
-            <div className="text-white">{(track.likes / 1000).toFixed(1)}K</div>
-          </div>
-          <div className="text-center">
-            <div className="text-gray-400">
-              <svg
-                className="w-5 h-5 mx-auto mb-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-                />
-              </svg>
-            </div>
-            <div className="text-white">{(shareCount / 1000).toFixed(1)}K</div>
-          </div>
-          {/* Share Button */}
-          <div className="relative group">
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                const shareMenu = e.currentTarget.nextElementSibling as HTMLElement;
-                if (shareMenu) {
-                  shareMenu.classList.toggle('hidden');
-                }
-              }}
-              disabled={isSharing}
-              className="p-2 rounded-full bg-gray-700/50 hover:bg-[#FF8C00] transition-colors disabled:opacity-50"
-              title="Share track"
-            >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-                />
-              </svg>
-            </button>
-            {/* Share Menu Dropdown */}
-            <div className="absolute right-0 bottom-full mb-2 hidden bg-gray-800 rounded-lg shadow-xl border border-gray-700 min-w-[160px]">
-              <div className="py-2">
-                <button
-                  onClick={() => handleShare('whatsapp')}
-                  className="w-full px-4 py-2 text-left text-sm hover:bg-gray-700 flex items-center gap-2"
-                >
-                  <span className="text-green-500">📱</span>
-                  WhatsApp
-                </button>
-                <button
-                  onClick={() => handleShare('twitter')}
-                  className="w-full px-4 py-2 text-left text-sm hover:bg-gray-700 flex items-center gap-2"
-                >
-                  <span className="text-blue-400">🐦</span>
-                  Twitter
-                </button>
-                <button
-                  onClick={() => handleShare('facebook')}
-                  className="w-full px-4 py-2 text-left text-sm hover:bg-gray-700 flex items-center gap-2"
-                >
-                  <span className="text-blue-600">📘</span>
-                  Facebook
-                </button>
-                <button
-                  onClick={() => handleShare('instagram')}
-                  className="w-full px-4 py-2 text-left text-sm hover:bg-gray-700 flex items-center gap-2"
-                >
-                  <span className="text-pink-500">📸</span>
-                  Instagram
-                </button>
-                <button
-                  onClick={() => handleShare('copy')}
-                  className="w-full px-4 py-2 text-left text-sm hover:bg-gray-700 flex items-center gap-2 border-t border-gray-700 mt-1 pt-2"
-                >
-                  <span className="text-gray-400">🔗</span>
-                  Copy Link
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+      {/* Genre */}
+      <div className="hidden md:block text-sm text-text-secondary truncate">{formatGenre(track.genre)}</div>
 
-        {/* Mobile Stats */}
-        <div className="sm:hidden text-xs text-gray-500 flex gap-3">
-          <div>❤️ {(track.likes / 1000).toFixed(1)}K</div>
-          <div className="relative">
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                const shareMenu = e.currentTarget.nextElementSibling as HTMLElement;
-                if (shareMenu) {
-                  shareMenu.classList.toggle('hidden');
-                }
-              }}
-              className="inline-flex items-center gap-1"
-            >
-              📤 {(shareCount / 1000).toFixed(1)}K
-            </button>
-            {/* Mobile Share Menu */}
-            <div className="absolute right-0 bottom-full mb-2 hidden bg-gray-800 rounded-lg shadow-xl border border-gray-700 min-w-[140px]">
-              <div className="py-2">
-                <button
-                  onClick={() => handleShare('whatsapp')}
-                  className="w-full px-3 py-2 text-left text-xs hover:bg-gray-700"
-                >
-                  📱 WhatsApp
-                </button>
-                <button
-                  onClick={() => handleShare('twitter')}
-                  className="w-full px-3 py-2 text-left text-xs hover:bg-gray-700"
-                >
-                  🐦 Twitter
-                </button>
-                <button
-                  onClick={() => handleShare('facebook')}
-                  className="w-full px-3 py-2 text-left text-xs hover:bg-gray-700"
-                >
-                  📘 Facebook
-                </button>
-                <button
-                  onClick={() => handleShare('copy')}
-                  className="w-full px-3 py-2 text-left text-xs hover:bg-gray-700 border-t border-gray-700 mt-1 pt-2"
-                >
-                  🔗 Copy Link
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+      {/* Plays in period */}
+      <div className="hidden md:block text-right text-sm tabular-nums">
+        {inactive ? (
+          <span className="text-text-muted">—</span>
+        ) : (
+          <span className="text-text-primary font-medium">{formatCount(periodPlays)}</span>
+        )}
+      </div>
+
+      {/* All-time plays */}
+      <div className="hidden md:block text-right text-sm tabular-nums text-text-secondary">{formatCount(totalPlays)}</div>
+
+      {/* Share */}
+      <div className="shrink-0 flex justify-end">
+        <button
+          type="button"
+          onClick={handleShare}
+          disabled={sharing}
+          title={copied ? 'Link copied' : 'Share'}
+          aria-label={copied ? 'Link copied' : `Share ${track.title}`}
+          className="w-9 h-9 rounded-full flex items-center justify-center text-text-secondary hover:text-text-primary hover:bg-white/10 transition-colors md:opacity-0 md:group-hover:opacity-100 md:focus-visible:opacity-100 disabled:opacity-50"
+        >
+          {copied ? (
+            <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+          ) : (
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 12v7a1 1 0 001 1h14a1 1 0 001-1v-7M16 6l-4-4-4 4M12 2v14" />
+            </svg>
+          )}
+        </button>
       </div>
     </div>
   );

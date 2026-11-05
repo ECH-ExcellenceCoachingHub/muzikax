@@ -102,7 +102,7 @@ const CreatePostModal = ({ isOpen, onClose, onSuccess }) => {
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 placeholder="Share something with the community..."
-                className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF4D67] focus:border-transparent resize-none"
+                className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
                 rows={4}
                 required
               />
@@ -119,7 +119,7 @@ const CreatePostModal = ({ isOpen, onClose, onSuccess }) => {
                     onClick={() => setPostType(type.value)}
                     className={`flex flex-col items-center justify-center p-3 rounded-lg border transition-colors ${
                       postType === type.value
-                        ? 'border-[#FF4D67] bg-[#FF4D67]/10 text-[#FF4D67]'
+                        ? 'border-primary bg-primary/10 text-primary'
                         : 'border-gray-600 bg-gray-700/50 text-gray-300 hover:border-gray-500'
                     }`}
                   >
@@ -141,7 +141,7 @@ const CreatePostModal = ({ isOpen, onClose, onSuccess }) => {
                   value={mediaUrl}
                   onChange={(e) => setMediaUrl(e.target.value)}
                   placeholder={`Enter ${postType} URL...`}
-                  className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF4D67] focus:border-transparent"
+                  className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                 />
               </div>
             )}
@@ -152,7 +152,7 @@ const CreatePostModal = ({ isOpen, onClose, onSuccess }) => {
               <select
                 value={language}
                 onChange={(e) => setLanguage(e.target.value)}
-                className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF4D67] focus:border-transparent"
+                className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               >
                 {languages.map((lang) => (
                   <option key={lang.code} value={lang.code}>
@@ -170,7 +170,7 @@ const CreatePostModal = ({ isOpen, onClose, onSuccess }) => {
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
                 placeholder="Where are you posting from?"
-                className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF4D67] focus:border-transparent"
+                className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               />
             </div>
 
@@ -182,7 +182,7 @@ const CreatePostModal = ({ isOpen, onClose, onSuccess }) => {
                 value={genre}
                 onChange={(e) => setGenre(e.target.value)}
                 placeholder="What genre is your post related to?"
-                className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF4D67] focus:border-transparent"
+                className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               />
             </div>
 
@@ -194,7 +194,7 @@ const CreatePostModal = ({ isOpen, onClose, onSuccess }) => {
                 value={tags}
                 onChange={(e) => setTags(e.target.value)}
                 placeholder="Add tags separated by commas (e.g., music, africa, rwanda)"
-                className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF4D67] focus:border-transparent"
+                className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               />
             </div>
 
@@ -207,7 +207,7 @@ const CreatePostModal = ({ isOpen, onClose, onSuccess }) => {
                   onClick={() => setPrivacy('public')}
                   className={`flex items-center space-x-2 px-4 py-2 rounded-lg border transition-colors ${
                     privacy === 'public'
-                      ? 'border-[#FF4D67] bg-[#FF4D67]/10 text-[#FF4D67]'
+                      ? 'border-primary bg-primary/10 text-primary'
                       : 'border-gray-600 bg-gray-700/50 text-gray-300'
                   }`}
                 >
@@ -219,7 +219,7 @@ const CreatePostModal = ({ isOpen, onClose, onSuccess }) => {
                   onClick={() => setPrivacy('private')}
                   className={`flex items-center space-x-2 px-4 py-2 rounded-lg border transition-colors ${
                     privacy === 'private'
-                      ? 'border-[#FF4D67] bg-[#FF4D67]/10 text-[#FF4D67]'
+                      ? 'border-primary bg-primary/10 text-primary'
                       : 'border-gray-600 bg-gray-700/50 text-gray-300'
                   }`}
                 >
@@ -241,7 +241,7 @@ const CreatePostModal = ({ isOpen, onClose, onSuccess }) => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="px-6 py-3 bg-gradient-to-r from-[#FF4D67] to-[#FF6B8B] text-white rounded-lg hover:from-[#FF6B8B] hover:to-[#FF8FA3] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-6 py-3 bg-gradient-to-r from-primary to-primary-hover text-white rounded-lg hover:from-primary-hover hover:to-primary-hover transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isLoading ? 'Creating...' : 'Create Post'}
               </button>

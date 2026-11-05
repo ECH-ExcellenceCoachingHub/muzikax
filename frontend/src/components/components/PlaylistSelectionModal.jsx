@@ -133,7 +133,7 @@ var PlaylistSelectionModal = function (_a) {
     return (<div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div className="card-bg rounded-2xl p-6 max-w-md w-full border border-gray-700/50">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-xl font-bold text-white">Add to Playlist</h3>
+          <h3 className="text-xl font-bold text-text-primary">Add to Playlist</h3>
           <button onClick={onClose} className="text-gray-400 hover:text-white transition-colors">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -151,7 +151,7 @@ var PlaylistSelectionModal = function (_a) {
                   <label className="block text-sm font-medium text-gray-400 mb-2">
                     Select Playlist
                   </label>
-                  <select value={selectedPlaylistId} onChange={function (e) { return setSelectedPlaylistId(e.target.value); }} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#FF4D67]">
+                  <select value={selectedPlaylistId} onChange={function (e) { return setSelectedPlaylistId(e.target.value); }} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-primary">
                     <option value="">Choose a playlist</option>
                     {playlists.map(function (playlist) { return (<option key={playlist.id} value={playlist.id}>
                         {playlist.name} ({playlist.tracks.length} tracks)
@@ -162,7 +162,7 @@ var PlaylistSelectionModal = function (_a) {
                 <div className="flex space-x-3">
                   <button onClick={handleAddToExistingPlaylist} disabled={loading || !selectedPlaylistId} className={"flex-1 px-4 py-2 rounded-lg font-medium ".concat(loading || !selectedPlaylistId
                     ? 'bg-gray-700 text-gray-400 cursor-not-allowed'
-                    : 'bg-[#FF4D67] text-white hover:bg-[#FF4D67]/90', " transition-colors")}>
+                    : 'bg-primary text-white hover:bg-primary/90', " transition-colors")}>
                     {loading ? 'Adding...' : 'Add to Playlist'}
                   </button>
                   <button onClick={function () { return setShowNewPlaylistForm(true); }} className="px-4 py-2 bg-gray-700 text-white rounded-lg font-medium hover:bg-gray-600 transition-colors">
@@ -171,7 +171,7 @@ var PlaylistSelectionModal = function (_a) {
                 </div>
               </div>) : (<div className="text-center py-6">
                 <p className="text-gray-400 mb-4">You don't have any playlists yet.</p>
-                <button onClick={function () { return setShowNewPlaylistForm(true); }} className="px-4 py-2 bg-[#FF4D67] text-white rounded-lg font-medium hover:bg-[#FF4D67]/90 transition-colors">
+                <button onClick={function () { return setShowNewPlaylistForm(true); }} className="px-4 py-2 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors">
                   Create New Playlist
                 </button>
               </div>)}
@@ -180,13 +180,13 @@ var PlaylistSelectionModal = function (_a) {
               <label className="block text-sm font-medium text-gray-400 mb-2">
                 Playlist Name
               </label>
-              <input type="text" value={newPlaylistName} onChange={function (e) { return setNewPlaylistName(e.target.value); }} placeholder="Enter playlist name" className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#FF4D67]"/>
+              <input type="text" value={newPlaylistName} onChange={function (e) { return setNewPlaylistName(e.target.value); }} placeholder="Enter playlist name" className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-primary"/>
             </div>
 
             <div className="flex space-x-3">
               <button onClick={handleCreatePlaylist} disabled={loading || !newPlaylistName.trim()} className={"flex-1 px-4 py-2 rounded-lg font-medium ".concat(loading || !newPlaylistName.trim()
                 ? 'bg-gray-700 text-gray-400 cursor-not-allowed'
-                : 'bg-[#FF4D67] text-white hover:bg-[#FF4D67]/90', " transition-colors")}>
+                : 'bg-primary text-white hover:bg-primary/90', " transition-colors")}>
                 {loading ? 'Creating...' : 'Create Playlist'}
               </button>
               <button onClick={function () {

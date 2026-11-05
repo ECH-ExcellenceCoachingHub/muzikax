@@ -33,9 +33,9 @@ export default class AudioPlayerErrorBoundary extends Component<Props, State> {
       }
 
       return (
-        <div className="flex items-center justify-center min-h-screen bg-[var(--background)]">
+        <div className="flex items-center justify-center min-h-screen bg-background">
           <div className="text-center p-8 max-w-md">
-            <h2 className="text-2xl font-bold text-white mb-4 gradient-text-animated">
+            <h2 className="text-2xl font-bold mb-4 text-text-primary">
               Loading Error
             </h2>
             <p className="text-gray-300 mb-6">

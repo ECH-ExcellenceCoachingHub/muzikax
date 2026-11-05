@@ -4,7 +4,7 @@ import pushNotificationService from './pushNotificationService';
 
 class NotificationService {
   constructor() {
-    this.token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
+    this.token = typeof window !== 'undefined' ? (localStorage.getItem('accessToken') || localStorage.getItem('token')) : null;
   }
 
   setToken(token) {

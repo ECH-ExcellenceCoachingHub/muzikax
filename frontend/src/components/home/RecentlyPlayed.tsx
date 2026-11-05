@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import SectionHeader from "./SectionHeader";
 import { useRouter } from "next/navigation";
 import { useAudioPlayer } from "../../contexts/AudioPlayerContext";
 import { useLanguage } from "../../contexts/LanguageContext";
@@ -62,32 +63,6 @@ function AnimatedSection({ children, className = "" }: { children: React.ReactNo
   );
 }
 
-function SectionHeader({ title, onSeeAll }: { title: string; onSeeAll?: () => void }) {
-  const { t } = useLanguage();
-  return (
-    <div className="flex items-center justify-between mb-4 group">
-      <h2 className="text-lg sm:text-xl font-bold text-white tracking-tight flex items-center gap-2 relative">
-        {/* Animated gradient underline */}
-        <span className="relative inline-block">
-          <span className="bg-gradient-to-r from-amber-300 via-orange-400 to-amber-500 bg-clip-text text-transparent transition-all duration-300 group-hover:from-amber-400 group-hover:via-orange-500 group-hover:to-amber-600">
-            {title}
-          </span>
-          <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-orange-500 transition-all duration-500 group-hover:w-full" />
-        </span>
-        <div className="h-px flex-1 max-w-[100px] bg-gradient-to-r from-amber-400/50 to-transparent hidden sm:block opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      </h2>
-      {onSeeAll && (
-        <button
-          onClick={onSeeAll}
-          className="text-xs font-semibold text-white/70 hover:text-amber-300 transition-all duration-300 uppercase tracking-widest hover:underline decoration-amber-400 decoration-2 underline-offset-4 relative group/btn overflow-hidden"
-        >
-          <span className="relative z-10">{t('seeAll')}</span>
-          <span className="absolute inset-0 bg-gradient-to-r from-amber-500/20 to-orange-500/20 rounded transform scale-x-0 group-hover/btn:scale-x-100 transition-transform duration-300 origin-left" />
-        </button>
-      )}
-    </div>
-  );
-}
 
 function HScrollRow({ children }: { children: React.ReactNode }) {
   const ref = React.useRef<HTMLDivElement>(null);
@@ -210,14 +185,14 @@ export default function RecentlyPlayed() {
           <HScrollRow>
             {Array.from({ length: 5 }).map((_, i) => (
               <div key={i} className="snap-start shrink-0 w-40 sm:w-44 md:w-48">
-                <div className="animate-pulse aspect-square rounded-2xl bg-gradient-to-br from-[#1A2330] to-[#121821] border border-[#1F2937]" />
+                <div className="animate-pulse aspect-square rounded-2xl bg-gradient-to-br from-surface-elevated to-surface border border-surface-elevated" />
               </div>
             ))}
           </HScrollRow>
         </div>
         <div className="hidden lg:grid grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-3 lg:gap-4">
           {Array.from({ length: 5 }).map((_, i) => (
-            <div key={i} className="aspect-square rounded-2xl bg-gradient-to-br from-[#1A2330] to-[#121821] border border-[#1F2937] animate-pulse" />
+            <div key={i} className="aspect-square rounded-2xl bg-gradient-to-br from-surface-elevated to-surface border border-surface-elevated animate-pulse" />
           ))}
         </div>
       </section>

@@ -66,16 +66,16 @@ export default function AlbumsPage() {
   })
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black py-8 sm:py-12 px-4 overflow-x-hidden relative">
+    <div className="min-h-screen py-8 sm:py-12 px-4 overflow-x-hidden relative bg-background">
       <div className="absolute inset-0 overflow-hidden -z-10">
-        <div className="absolute -top-40 left-0 w-96 h-96 bg-[#FF8C00]/10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 right-0 w-96 h-96 bg-[#FFB020]/10 rounded-full blur-3xl"></div>
+        <div className="absolute -top-40 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 right-0 w-96 h-96 bg-primary-light/10 rounded-full blur-3xl"></div>
       </div>
       
       <div className="w-full max-w-6xl mx-auto relative">
         {/* Header */}
         <div className="mb-8 sm:mb-12">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#FF8C00] to-[#FFB020] mb-3 sm:mb-4">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 text-text-primary">
             Albums
           </h1>
           <p className="text-gray-400 max-w-2xl">
@@ -90,7 +90,7 @@ export default function AlbumsPage() {
             <select 
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="bg-gray-800 text-white rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF8C00]"
+              className="bg-gray-800 text-white rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
             >
               <option value="popular">Most Popular</option>
               <option value="recent">Most Recent</option>
@@ -103,7 +103,7 @@ export default function AlbumsPage() {
         {loading ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {Array.from({ length: 12 }).map((_, index) => (
-              <div key={index} className="group card-bg rounded-xl overflow-hidden transition-all duration-300">
+              <div key={index} className="group card-bg rounded-xl overflow-hidden">
                 <div className="relative">
                   <div className="w-full aspect-square bg-gray-700 animate-pulse"></div>
                 </div>
@@ -125,7 +125,7 @@ export default function AlbumsPage() {
             {sortedAlbums.map((album) => (
               <div 
                 key={album.id} 
-                className="group card-bg rounded-xl overflow-hidden transition-all duration-300 hover:border-[#FF8C00]/50 hover:bg-gradient-to-br hover:from-gray-900/70 hover:to-gray-900/50 hover:shadow-xl hover:shadow-[#FF8C00]/10 cursor-pointer"
+                className="group card-bg rounded-xl overflow-hidden cursor-pointer"
                 onClick={() => router.push(`/album/${album.id}`)}
               >
                 <div className="relative">
@@ -136,14 +136,14 @@ export default function AlbumsPage() {
                       className="w-full aspect-square object-cover"
                     />
                   ) : (
-                    <div className="w-full aspect-square bg-gradient-to-br from-[#FF8C00] to-[#FFB020] flex items-center justify-center">
+                    <div className="w-full aspect-square bg-gradient-to-br from-primary to-primary-light flex items-center justify-center">
                       <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
                       </svg>
                     </div>
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <button className="w-10 h-10 rounded-full gradient-primary flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                  <div className="absolute inset-0 flex items-end justify-end p-2 sm:p-3 pointer-events-none">
+                    <button className="mx-card-play !static pointer-events-auto hover:bg-primary-hover [&_svg]:w-4 [&_svg]:h-4">
                       <svg 
                         className="w-4 h-4" 
                         fill="currentColor" 
@@ -152,7 +152,7 @@ export default function AlbumsPage() {
                       >
                         <path 
                           fillRule="evenodd" 
-                          d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" 
+                          d="M6.3 2.84A1.5 1.5 0 004 4.11v11.78a1.5 1.5 0 002.3 1.27l9.344-5.891a1.5 1.5 0 000-2.538L6.3 2.84z" 
                           clipRule="evenodd"
                         ></path>
                       </svg>
@@ -161,7 +161,7 @@ export default function AlbumsPage() {
                 </div>
                 
                 <div className="p-3">
-                  <h3 className="font-bold text-white text-sm mb-1 truncate">{album.title}</h3>
+                  <h3 className="font-bold text-sm mb-1 truncate text-text-primary">{album.title}</h3>
                   <p className="text-gray-400 text-xs truncate">{album.artist}</p>
                   
                   <div className="flex justify-between items-center mt-2 text-xs text-gray-500">
@@ -179,7 +179,7 @@ export default function AlbumsPage() {
             <svg className="w-16 h-16 mx-auto text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
-            <h3 className="mt-4 text-lg font-medium text-white">No albums found</h3>
+            <h3 className="mt-4 text-lg font-medium text-text-primary">No albums found</h3>
             <p className="mt-2 text-gray-400">Check back later for new releases.</p>
           </div>
         )}

@@ -267,10 +267,10 @@ export default function PlaylistDetail() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black py-8 sm:py-12">
+      <div className="min-h-screen py-8 sm:py-12 bg-background">
         <div className="container mx-auto px-4 sm:px-8">
           <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FF4D67]"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
           </div>
         </div>
       </div>
@@ -279,13 +279,13 @@ export default function PlaylistDetail() {
 
   if (error || !playlist) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-black py-8 sm:py-12">
+      <div className="min-h-screen py-8 sm:py-12 bg-background">
         <div className="container mx-auto px-4 sm:px-8">
           <div className="text-center py-12">
             <div className="text-red-500 text-xl mb-4">{error || 'Playlist not found'}</div>
             <button 
               onClick={() => router.push('/playlists')}
-              className="px-6 py-3 bg-[#FF4D67] hover:bg-[#FF4D67]/90 text-white font-semibold rounded-lg transition-colors"
+              className="px-6 py-3 bg-primary hover:bg-primary/90 text-white font-semibold rounded-lg transition-colors"
             >
               Back to Playlists
             </button>
@@ -299,26 +299,26 @@ export default function PlaylistDetail() {
   const totalTracks = playlist.tracks.length;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black pb-24 relative overflow-hidden pt-16 sm:pt-0">
+    <div className="min-h-screen pb-24 relative overflow-hidden pt-16 sm:pt-0 bg-background">
       {/* Animated background elements */}
-      <div className="absolute top-0 left-0 right-0 h-[500px] bg-gradient-to-b from-[#FF4D67]/10 via-[#8B5CF6]/5 to-transparent -z-10"></div>
-      <div className="absolute top-20 right-0 w-96 h-96 bg-[#FF4D67]/5 rounded-full blur-3xl -z-10 animate-pulse"></div>
-      <div className="absolute top-40 left-0 w-72 h-72 bg-[#FFCB2B]/5 rounded-full blur-3xl -z-10 animate-pulse delay-1000"></div>
+      <div className="absolute top-0 left-0 right-0 h-[500px] bg-gradient-to-b from-primary/10 via-primary-light/5 to-transparent -z-10"></div>
+      <div className="absolute top-20 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -z-10 animate-pulse"></div>
+      <div className="absolute top-40 left-0 w-72 h-72 bg-primary-light/5 rounded-full blur-3xl -z-10 animate-pulse delay-1000"></div>
       
       <div className="container mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 relative z-10">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row items-center md:items-end gap-4 sm:gap-6 mb-6 sm:mb-8 p-4 sm:p-6 lg:p-8 bg-white/5 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-white/10 shadow-2xl">
           {/* Playlist Cover */}
           <div className="relative group">
-            <div className="w-40 h-40 sm:w-52 sm:h-52 lg:w-64 lg:h-64 shadow-2xl overflow-hidden rounded-xl sm:rounded-2xl ring-4 ring-white/10 group-hover:ring-[#FF4D67]/50 transition-all duration-500">
+            <div className="w-40 h-40 sm:w-52 sm:h-52 lg:w-64 lg:h-64 shadow-2xl overflow-hidden rounded-xl sm:rounded-2xl ring-4 ring-white/10 group-hover:ring-primary/50 transition-all duration-500">
               {getPlaylistCover() ? (
                 <img
                   src={getPlaylistCover()}
                   alt={playlist.name}
-                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-full object-cover transform group-hover:scale-[1.04] transition-transform duration-500"
                 />
               ) : (
-                <div className="w-full h-full bg-gradient-to-br from-[#FF4D67] via-[#8B5CF6] to-[#FFCB2B] flex items-center justify-center">
+                <div className="w-full h-full bg-gradient-to-br from-primary via-primary-light to-primary-light flex items-center justify-center">
                   <span className="text-5xl sm:text-6xl font-black text-white drop-shadow-lg">
                     {playlist.name.charAt(0).toUpperCase()}
                   </span>
@@ -326,10 +326,10 @@ export default function PlaylistDetail() {
               )}
             </div>
             {/* Hover overlay with play button */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-xl sm:rounded-2xl flex items-center justify-center">
+            <div className="absolute inset-0 flex items-end justify-end p-2 sm:p-3 pointer-events-none">
               <button
                 onClick={handlePlayPlaylist}
-                className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-full bg-gradient-to-r from-[#FF4D67] to-[#FFCB2B] hover:from-[#FF4D67]/90 hover:to-[#FFCB2B]/90 flex items-center justify-center text-white transform scale-75 group-hover:scale-100 transition-all duration-300 shadow-2xl hover:shadow-[#FF4D67]/50"
+                className="mx-card-play !static pointer-events-auto hover:bg-primary-hover [&_svg]:w-4 [&_svg]:h-4"
               >
                 <FaPlay className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 ml-1" />
               </button>
@@ -338,13 +338,13 @@ export default function PlaylistDetail() {
 
           {/* Playlist Info */}
           <div className="flex-1 text-center md:text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-gradient-to-r from-[#FF4D67]/20 to-[#FFCB2B]/20 rounded-full mb-2 sm:mb-3 border border-[#FF4D67]/30">
-              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#FF4D67]" fill="currentColor" viewBox="0 0 20 20">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-full mb-2 sm:mb-3 border border-primary/30">
+              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
               </svg>
-              <p className="text-[10px] sm:text-xs font-bold text-[#FF4D67] uppercase tracking-wider">Playlist</p>
+              <p className="text-[10px] sm:text-xs font-bold text-primary uppercase tracking-wider">Playlist</p>
             </div>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-white mb-3 sm:mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-100 to-gray-300 leading-tight break-words">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-3 sm:mb-4 leading-tight break-words text-text-primary">
               {playlist.name}
             </h1>
             {playlist.description && (
@@ -354,7 +354,7 @@ export default function PlaylistDetail() {
             )}
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 sm:gap-3 text-[10px] sm:text-xs">
               <div className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 bg-white/5 rounded-full border border-white/10">
-                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gradient-to-r from-[#FF4D67] to-[#FFCB2B] flex items-center justify-center">
+                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gradient-to-r from-primary to-primary-light flex items-center justify-center">
                   <span className="text-[10px] sm:text-xs font-bold text-white">
                     {(typeof playlist.userId === 'object' ? playlist.userId.name : 'U').charAt(0).toUpperCase()}
                   </span>
@@ -365,7 +365,7 @@ export default function PlaylistDetail() {
               </div>
               <span className="text-gray-500 hidden xs:inline">•</span>
               <div className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 bg-white/5 rounded-full border border-white/10">
-                <svg className="w-3 h-3 sm:w-4 sm:h-4 text-[#FFCB2B]" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-3 h-3 sm:w-4 sm:h-4 text-primary-light" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
                   <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd" />
                 </svg>
@@ -375,7 +375,7 @@ export default function PlaylistDetail() {
                 <>
                   <span className="text-gray-500 hidden xs:inline">•</span>
                   <div className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 bg-white/5 rounded-full border border-white/10">
-                    <svg className="w-3 h-3 sm:w-4 sm:h-4 text-[#8B5CF6]" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-3 h-3 sm:w-4 sm:h-4 text-primary-light" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
                     </svg>
                     <span className="text-gray-300">{Math.floor(totalDuration / 60)} min</span>
@@ -390,7 +390,7 @@ export default function PlaylistDetail() {
         <div className="flex items-center justify-center md:justify-start gap-2 sm:gap-3 mb-6 sm:mb-8">
           <button
             onClick={handlePlayPlaylist}
-            className="group relative px-5 sm:px-6 lg:px-8 py-2.5 sm:py-3 bg-gradient-to-r from-[#FF4D67] to-[#FFCB2B] hover:from-[#FF4D67]/90 hover:to-[#FFCB2B]/90 text-white font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg shadow-[#FF4D67]/30 flex items-center gap-2 overflow-hidden text-sm sm:text-base"
+            className="group relative px-5 sm:px-6 lg:px-8 py-2.5 sm:py-3 bg-gradient-to-r from-primary to-primary-light hover:from-primary/90 hover:to-primary-light/90 text-white font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg shadow-primary/30 flex items-center gap-2 overflow-hidden text-sm sm:text-base"
           >
             <span className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
             {isPlaying && playlist.tracks.some(t => isCurrentTrack(t._id)) ? (
@@ -410,7 +410,7 @@ export default function PlaylistDetail() {
             onClick={handleShufflePlaylist}
             className={`group p-2.5 sm:p-3 lg:p-3.5 rounded-full transition-all duration-300 transform hover:scale-110 active:scale-95 ${
               isShuffled 
-                ? 'bg-gradient-to-r from-purple-600 to-pink-600 shadow-lg shadow-purple-500/30' 
+                ? 'bg-gradient-to-r from-primary to-primary-light shadow-lg shadow-primary/30' 
                 : 'bg-white/5 hover:bg-white/10 hover:shadow-lg'
             }`}
             title="Shuffle Playlist"
@@ -450,7 +450,7 @@ export default function PlaylistDetail() {
                   key={track._id}
                   className={`group relative flex items-center gap-3 sm:gap-4 px-3 sm:px-4 lg:px-6 py-3 sm:py-4 transition-all duration-300 cursor-pointer active:scale-[0.98] ${
                     isCurrent 
-                      ? 'bg-gradient-to-r from-[#FF4D67]/15 via-[#FFCB2B]/10 to-transparent border-l-4 border-[#FF4D67]' 
+                      ? 'bg-gradient-to-r from-primary/15 via-primary-light/10 to-transparent border-l-4 border-primary' 
                       : 'hover:bg-gradient-to-r hover:from-white/8 hover:to-transparent'
                   }`}
                   onMouseEnter={() => setHoveredTrack(track._id)}
@@ -461,13 +461,13 @@ export default function PlaylistDetail() {
                   <div className="w-8 sm:w-12 text-center flex-shrink-0">
                     {isCurrent && isPlaying ? (
                       <div className="flex items-center justify-center gap-0.5">
-                        <span className="w-0.5 sm:w-1 h-3 sm:h-4 bg-[#FF4D67] animate-pulse"></span>
-                        <span className="w-0.5 sm:w-1 h-2 sm:h-3 bg-[#FF4D67] animate-pulse delay-75"></span>
-                        <span className="w-0.5 sm:w-1 h-4 sm:h-5 bg-[#FF4D67] animate-pulse delay-150"></span>
+                        <span className="w-0.5 sm:w-1 h-3 sm:h-4 bg-primary animate-pulse"></span>
+                        <span className="w-0.5 sm:w-1 h-2 sm:h-3 bg-primary animate-pulse delay-75"></span>
+                        <span className="w-0.5 sm:w-1 h-4 sm:h-5 bg-primary animate-pulse delay-150"></span>
                       </div>
                     ) : (
                       <span className={`text-xs sm:text-sm font-medium transition-colors ${
-                        isHovered || isCurrent ? 'text-[#FF4D67]' : 'text-gray-500 group-hover:text-white'
+                        isHovered || isCurrent ? 'text-primary' : 'text-gray-500 group-hover:text-white'
                       }`}>
                         {isHovered || isCurrent ? (
                           <FaPlay className="w-3 h-3 sm:w-4 sm:h-4 mx-auto" />
@@ -495,7 +495,7 @@ export default function PlaylistDetail() {
                           }`}></div>
                         </>
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-[#FF4D67] via-[#8B5CF6] to-[#FFCB2B] flex items-center justify-center">
+                        <div className="w-full h-full bg-gradient-to-br from-primary via-primary-light to-primary-light flex items-center justify-center">
                           <span className="text-sm sm:text-base lg:text-lg font-black text-white drop-shadow-lg">
                             {track.title.charAt(0).toUpperCase()}
                           </span>
@@ -521,14 +521,14 @@ export default function PlaylistDetail() {
                       
                       {/* Current track indicator */}
                       {isCurrent && (
-                        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#FF4D67] to-[#FFCB2B]"></div>
+                        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-primary-light"></div>
                       )}
                     </div>
 
                     {/* Track Details */}
                     <div className="flex-1 min-w-0">
                       <p className={`font-bold truncate transition-colors mb-0.5 text-sm sm:text-base ${
-                        isCurrent ? 'text-[#FF4D67]' : 'text-white group-hover:text-[#FF4D67]'
+                        isCurrent ? 'text-primary' : 'text-white group-hover:text-primary'
                       }`}>
                         {track.title}
                       </p>
@@ -593,7 +593,7 @@ export default function PlaylistDetail() {
               <p className="text-gray-500 text-xs sm:text-sm mb-6">Discover amazing tracks to add to your collection</p>
               <button
                 onClick={() => router.push('/tracks')}
-                className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-[#FF4D67] to-[#FFCB2B] hover:from-[#FF4D67]/90 hover:to-[#FFCB2B]/90 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg shadow-[#FF4D67]/25 text-sm sm:text-base"
+                className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-primary to-primary-light hover:from-primary/90 hover:to-primary-light/90 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg shadow-primary/25 text-sm sm:text-base"
               >
                 <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />

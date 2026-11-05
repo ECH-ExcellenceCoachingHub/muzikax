@@ -108,7 +108,7 @@ export default function MuzikaXStemPlayer({ onClose }: MuzikaXStemPlayerProps) {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
-          <h3 className="text-2xl font-bold text-white flex items-center gap-3">
+          <h3 className="text-2xl font-bold flex items-center gap-3 text-text-primary">
             <span>🎵</span>
             Stem Player
           </h3>
@@ -158,7 +158,7 @@ export default function MuzikaXStemPlayer({ onClose }: MuzikaXStemPlayerProps) {
               !hasStems
                 ? 'bg-gray-800/30 border-gray-700 text-gray-500 cursor-not-allowed opacity-50'
                 : isKaraokeMode
-                  ? 'bg-gradient-to-br from-purple-500 to-pink-500 border-white/40 text-white'
+                  ? 'bg-gradient-to-br from-primary to-primary-light border-white/40 text-white'
                   : 'bg-white/5 border-white/10 text-white/70 hover:bg-white/10'
             }`}
           >
@@ -234,7 +234,7 @@ export default function MuzikaXStemPlayer({ onClose }: MuzikaXStemPlayerProps) {
         </button>
 
         {/* Info */}
-        <div className="mt-6 p-4 bg-purple-500/10 border border-purple-500/20 rounded-2xl">
+        <div className="mt-6 p-4 bg-purple-500/10 border border-primary/20 rounded-2xl">
           <p className="text-sm text-purple-200">
             💡 <strong>Pro Tip:</strong> Pre-processed stems provide studio-quality separation with zero noise!
           </p>

@@ -486,7 +486,7 @@ function ExploreContent() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--background)] text-white">
+    <div className="min-h-screen text-white bg-background">
 
       {/* ── Background ambience ── */}
       <div
@@ -582,7 +582,7 @@ function ExploreContent() {
             <button
               className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all flex-shrink-0 ${
                 selectedCategory === null
-                  ? 'bg-gradient-to-r from-[#FF8C00] to-[#FFA500] text-white shadow-lg shadow-[#FF8C00]/20 scale-105'
+                  ? 'bg-gradient-to-r from-primary to-primary-hover text-white shadow-lg shadow-primary/20 scale-105'
                   : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 border border-gray-700/50 hover:scale-105'
               }`}
               onClick={() => handleCategoryClick('')}
@@ -595,7 +595,7 @@ function ExploreContent() {
                 key={category.id}
                 className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 whitespace-nowrap flex-shrink-0 ${
                   selectedCategory === category.id
-                    ? 'bg-gradient-to-r from-[#FFB020] to-[#FFA500] text-gray-900 shadow-lg shadow-[#FFB020]/30 scale-105 ring-2 ring-[#FFB020]/40'
+                    ? 'bg-gradient-to-r from-primary-light to-primary-hover text-gray-900 shadow-lg shadow-primary-light/30 scale-105 ring-2 ring-primary-light/40'
                     : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 border border-gray-700/50 hover:scale-105 hover:text-white'
                 }`}
                 onClick={() => handleCategoryClick(category.id)}
@@ -614,9 +614,9 @@ function ExploreContent() {
                   </svg>
                 </summary>
                 <div className="fixed z-50 inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 sm:p-8" onClick={(e) => e.stopPropagation()}>
-                  <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-2xl shadow-[#FF8C00]/50 border border-gray-700/50 max-h-[80vh] w-full max-w-md overflow-hidden">
+                  <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-2xl shadow-primary/50 border border-gray-700/50 max-h-[80vh] w-full max-w-md overflow-hidden">
                     <div className="p-4 border-b border-gray-700/50 flex justify-between items-center">
-                      <h3 className="text-lg font-bold text-white">{t('moreGenres')}</h3>
+                      <h3 className="text-lg font-bold text-text-primary">{t('moreGenres')}</h3>
                       <button 
                         onClick={() => {
                           const details = document.querySelector('details');
@@ -636,7 +636,7 @@ function ExploreContent() {
                             key={category.id}
                             className={`px-3 py-2 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${
                               selectedCategory === category.id
-                                ? 'bg-gradient-to-r from-[#FFB020] to-[#FFA500] text-gray-900 shadow-lg shadow-[#FFB020]/20'
+                                ? 'bg-gradient-to-r from-primary-light to-primary-hover text-gray-900 shadow-lg shadow-primary-light/20'
                                 : 'bg-gray-700/50 text-gray-300 hover:bg-gray-600/50'
                             }`}
                             onClick={() => {
@@ -696,56 +696,56 @@ function ExploreContent() {
             <button
               className={`flex-1 flex flex-col items-center justify-center py-3 transition-all active:scale-95 ${
                 activeTab === 'tracks'
-                  ? 'text-[#FF8C00]'
+                  ? 'text-primary'
                   : 'text-gray-400'
               }`}
               onClick={() => setActiveTab('tracks')}
             >
-              <FaMusic className={`w-5 h-5 mb-1 ${activeTab === 'tracks' ? 'text-[#FF8C00]' : ''}`} />
+              <FaMusic className={`w-5 h-5 mb-1 ${activeTab === 'tracks' ? 'text-primary' : ''}`} />
               <span className="text-[10px] font-medium">{t('tracks')}</span>
             </button>
             <button
               className={`flex-1 flex flex-col items-center justify-center py-3 transition-all active:scale-95 ${
                 activeTab === 'beats'
-                  ? 'text-[#FF8C00]'
+                  ? 'text-primary'
                   : 'text-gray-400'
               }`}
               onClick={() => setActiveTab('beats')}
             >
-              <FaHeadphones className={`w-5 h-5 mb-1 ${activeTab === 'beats' ? 'text-[#FF8C00]' : ''}`} />
+              <FaHeadphones className={`w-5 h-5 mb-1 ${activeTab === 'beats' ? 'text-primary' : ''}`} />
               <span className="text-[10px] font-medium">{t('beats')}</span>
             </button>
             <button
               className={`flex-1 flex flex-col items-center justify-center py-3 transition-all active:scale-95 ${
                 activeTab === 'albums'
-                  ? 'text-[#FF8C00]'
+                  ? 'text-primary'
                   : 'text-gray-400'
               }`}
               onClick={() => setActiveTab('albums')}
             >
-              <FaCompactDisc className={`w-5 h-5 mb-1 ${activeTab === 'albums' ? 'text-[#FF8C00]' : ''}`} />
+              <FaCompactDisc className={`w-5 h-5 mb-1 ${activeTab === 'albums' ? 'text-primary' : ''}`} />
               <span className="text-[10px] font-medium">{t('albums')}</span>
             </button>
             <button
               className={`flex-1 flex flex-col items-center justify-center py-3 transition-all active:scale-95 ${
                 activeTab === 'playlists'
-                  ? 'text-[#FF8C00]'
+                  ? 'text-primary'
                   : 'text-gray-400'
               }`}
               onClick={() => setActiveTab('playlists')}
             >
-              <FaListUl className={`w-5 h-5 mb-1 ${activeTab === 'playlists' ? 'text-[#FF8C00]' : ''}`} />
+              <FaListUl className={`w-5 h-5 mb-1 ${activeTab === 'playlists' ? 'text-primary' : ''}`} />
               <span className="text-[10px] font-medium">{t('playlists')}</span>
             </button>
             <button
               className={`flex-1 flex flex-col items-center justify-center py-3 transition-all active:scale-95 ${
                 activeTab === 'creators'
-                  ? 'text-[#FFB020]'
+                  ? 'text-primary-light'
                   : 'text-gray-400'
               }`}
               onClick={() => setActiveTab('creators')}
             >
-              <FaUsers className={`w-5 h-5 mb-1 ${activeTab === 'creators' ? 'text-[#FFB020]' : ''}`} />
+              <FaUsers className={`w-5 h-5 mb-1 ${activeTab === 'creators' ? 'text-primary-light' : ''}`} />
               <span className="text-[10px] font-medium">{t('topCreators')}</span>
             </button>
           </div>
@@ -827,7 +827,7 @@ function ExploreContent() {
                     filteredBeats.map((beat, index) => (
                       <div key={`beat-${beat.id}-mobile`} className="w-full mb-2">
                         <div 
-                          className="group relative flex items-center gap-2 p-2 rounded-xl bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 hover:bg-gray-800/60 transition-all active:scale-[0.98] cursor-pointer"
+                          className="group relative flex items-center gap-2 p-2 rounded-xl active:scale-[0.98] cursor-pointer mx-surface"
                           onClick={() => {
                             if (beat.audioURL) {
                               playTrack({
@@ -869,9 +869,9 @@ function ExploreContent() {
                           <div className="w-6 text-center text-gray-400 text-xs font-bold">
                             {currentTrack?.id === beat.id && isPlaying ? (
                               <div className="flex items-end justify-center gap-0.5 h-4">
-                                <div className="w-1 bg-[#FF8C00] animate-[musicBar_0.6s_ease-in-out_infinite]"></div>
-                                <div className="w-1 bg-[#FF8C00] animate-[musicBar_0.8s_ease-in-out_infinite_0.2s]"></div>
-                                <div className="w-1 bg-[#FF8C00] animate-[musicBar_0.5s_ease-in-out_infinite_0.1s]"></div>
+                                <div className="w-1 bg-primary animate-[musicBar_0.6s_ease-in-out_infinite]"></div>
+                                <div className="w-1 bg-primary animate-[musicBar_0.8s_ease-in-out_infinite_0.2s]"></div>
+                                <div className="w-1 bg-primary animate-[musicBar_0.5s_ease-in-out_infinite_0.1s]"></div>
                               </div>
                             ) : (
                               <span>{index + 1}</span>
@@ -907,7 +907,7 @@ function ExploreContent() {
 
                           {/* Track Info */}
                           <div className="flex-1 min-w-0">
-                            <h3 className="font-bold text-white text-xs sm:text-sm truncate tracking-wide drop-shadow-md">
+                            <h3 className="font-bold text-xs sm:text-sm truncate tracking-wide drop-shadow-md text-text-primary">
                               {beat.title}
                             </h3>
                             <p className="text-gray-300 text-xs truncate font-medium">
@@ -918,14 +918,14 @@ function ExploreContent() {
                           {/* Stats */}
                           <div className="flex items-center gap-2">
                             <div className="flex items-center gap-1">
-                              <svg className="w-3 h-3 text-[#FF8C00]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                              <svg className="w-3 h-3 text-primary" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
                                 <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
                               </svg>
                               <span className="text-gray-400 text-xs font-semibold">{beat.plays.toLocaleString()}</span>
                             </div>
                             <div className="flex items-center gap-1">
-                              <svg className="w-3 h-3 text-[#FFB020]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                              <svg className="w-3 h-3 text-primary-light" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd"></path>
                               </svg>
                               <span className="text-gray-400 text-xs font-semibold">{beat.likes}</span>
@@ -945,7 +945,7 @@ function ExploreContent() {
                 <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 md:gap-6 lg:gap-8 pb-32">
                   {filteredBeats.length > 0 ? (
                     filteredBeats.map((beat) => (
-                      <div key={`beat-${beat.id}-desktop`} className="group card-bg rounded-lg sm:rounded-2xl overflow-hidden transition-all duration-300 hover:border-[#FF8C00]/50 hover:bg-gradient-to-br hover:from-gray-900/70 hover:to-gray-900/50 hover:shadow-xl hover:shadow-[#FF8C00]/10">
+                      <div key={`beat-${beat.id}-desktop`} className="group card-bg rounded-lg sm:rounded-2xl overflow-hidden">
                         <div className="relative">
                           <img 
                             src={beat.coverImage || beat.coverURL || '/placeholder-track.png'} 
@@ -973,7 +973,7 @@ function ExploreContent() {
                               </span>
                             </div>
                           )}
-                          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                          <div className="absolute inset-0 flex items-end justify-end p-2 sm:p-3 pointer-events-none">
                             <button 
                               onClick={() => {
                                 if (beat.audioURL) {
@@ -1011,9 +1011,9 @@ function ExploreContent() {
                                   setCurrentPlaylist(beatTracks);
                                 }
                               }}
-                              className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#FF8C00] flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 shadow-lg hover:bg-[#ff2a4d] hover:scale-105">
+                              className="mx-card-play !static pointer-events-auto hover:bg-primary-hover [&_svg]:w-4 [&_svg]:h-4">
                               <svg className="w-6 h-6 sm:w-7 sm:h-7 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd"></path>
+                                <path fillRule="evenodd" d="M6.3 2.84A1.5 1.5 0 004 4.11v11.78a1.5 1.5 0 002.3 1.27l9.344-5.891a1.5 1.5 0 000-2.538L6.3 2.84z" clipRule="evenodd"></path>
                               </svg>
                             </button>
                           </div>
@@ -1081,7 +1081,7 @@ function ExploreContent() {
                         </div>
                         
                         <div className="p-4 sm:p-5">
-                          <h3 className="font-bold text-white text-sm sm:text-lg mb-1 truncate">{beat.title}</h3>
+                          <h3 className="font-bold text-sm sm:text-lg mb-1 truncate text-text-primary">{beat.title}</h3>
                           <p className="text-gray-400 text-xs sm:text-base mb-2 sm:mb-3">{beat.artist}</p>
                           
                           <div className="flex justify-between text-xs sm:text-sm text-gray-500">
@@ -1118,7 +1118,7 @@ function ExploreContent() {
               <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 xs:gap-4 sm:gap-5 md:gap-6 lg:gap-8 -mt-2">
                 {albums.length > 0 ? (
                   albums.map((album) => (
-                  <div key={`album-${album.id}`} className="group card-bg rounded-lg xs:rounded-xl sm:rounded-2xl overflow-hidden transition-all duration-300 hover:border-[#FF8C00]/50 hover:bg-gradient-to-br hover:from-gray-900/70 hover:to-gray-900/50 hover:shadow-xl hover:shadow-[#FF8C00]/10">
+                  <div key={`album-${album.id}`} className="group card-bg rounded-lg xs:rounded-xl sm:rounded-2xl overflow-hidden">
                     <div className="relative">
                       <img 
                         src={album.coverImage || album.coverURL || '/placeholder-album.png'} 
@@ -1162,7 +1162,7 @@ function ExploreContent() {
                         </div>
                       )}
                       
-                      <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <div className="absolute inset-0 flex items-end justify-end p-2 sm:p-3 pointer-events-none">
                         <button 
                           onClick={() => {
                             // Play first track from album if available
@@ -1224,7 +1224,7 @@ function ExploreContent() {
                               }
                             }
                           }}
-                          className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#FF8C00] flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 shadow-lg hover:bg-[#ff2a4d] hover:scale-105">
+                          className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-primary flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 shadow-lg hover:bg-[#E67E00] hover:scale-105">
                           <svg className="w-6 h-6 sm:w-7 sm:h-7 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd"></path>
                           </svg>
@@ -1233,7 +1233,7 @@ function ExploreContent() {
                     </div>
                     
                     <div className="p-3 xs:p-4 sm:p-5">
-                      <h3 className="font-bold text-white text-xs xs:text-sm sm:text-lg mb-1 truncate">{album.title}</h3>
+                      <h3 className="font-bold text-xs xs:text-sm sm:text-lg mb-1 truncate text-text-primary">{album.title}</h3>
                       <p className="text-gray-400 text-xs xs:text-sm sm:text-base mb-2 xs:mb-3 sm:mb-4">{album.artist}</p>
                       
                       <div className="flex justify-between text-xs sm:text-sm text-gray-500">
@@ -1269,7 +1269,7 @@ function ExploreContent() {
               <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 xs:gap-4 sm:gap-5 md:gap-6 lg:gap-8 -mt-2">
                 {playlists.length > 0 ? (
                   playlists.map((playlist) => (
-                  <div key={`playlist-${playlist.id}`} className="group card-bg rounded-lg xs:rounded-xl sm:rounded-2xl overflow-hidden transition-all duration-300 hover:border-[#FF8C00]/50 hover:bg-gradient-to-br hover:from-gray-900/70 hover:to-gray-900/50 hover:shadow-xl hover:shadow-[#FF8C00]/10">
+                  <div key={`playlist-${playlist.id}`} className="group card-bg rounded-lg xs:rounded-xl sm:rounded-2xl overflow-hidden">
                     <div className="relative">
                       <img 
                         src={playlist.tracks && playlist.tracks.length > 0 ? 
@@ -1319,7 +1319,7 @@ function ExploreContent() {
                         </div>
                       )}
                       
-                      <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <div className="absolute inset-0 flex items-end justify-end p-2 sm:p-3 pointer-events-none">
                         <button 
                           onClick={() => {
                             // Play first track from playlist if available
@@ -1384,7 +1384,7 @@ function ExploreContent() {
                               }
                             }
                           }}
-                          className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#FF8C00] flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 shadow-lg hover:bg-[#ff2a4d] hover:scale-105">
+                          className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-primary flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 shadow-lg hover:bg-[#E67E00] hover:scale-105">
                           <svg className="w-6 h-6 sm:w-7 sm:h-7 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd"></path>
                           </svg>
@@ -1393,7 +1393,7 @@ function ExploreContent() {
                     </div>
                     
                     <div className="p-3 xs:p-4 sm:p-5">
-                      <h3 className="font-bold text-white text-xs xs:text-sm sm:text-lg mb-1 truncate">{playlist.name}</h3>
+                      <h3 className="font-bold text-xs xs:text-sm sm:text-lg mb-1 truncate text-text-primary">{playlist.name}</h3>
                       <p className="text-gray-400 text-xs xs:text-sm sm:text-base mb-2 xs:mb-3 sm:mb-4">
                         {playlist.description ? `${playlist.description.substring(0, 60)}...` : t('playlists')}
                       </p>
@@ -1430,7 +1430,7 @@ function ExploreContent() {
                   {filteredTracks.map((track, index) => (
                     <div key={`track-${track.id}-mobile`} className="w-full mb-2">
                       <div 
-                        className="group relative flex items-center gap-2 p-2 rounded-xl bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 hover:bg-gray-800/60 transition-all active:scale-[0.98] cursor-pointer"
+                        className="group relative flex items-center gap-2 p-2 rounded-xl active:scale-[0.98] cursor-pointer mx-surface"
                         onClick={() => {
                           const fullTrack = trendingTracksData.find(t => t._id === track._id);
                           if (fullTrack && fullTrack.audioURL) {
@@ -1473,9 +1473,9 @@ function ExploreContent() {
                         <div className="w-6 text-center text-gray-400 text-xs font-bold">
                           {currentTrack?.id === track.id && isPlaying ? (
                             <div className="flex items-end justify-center gap-0.5 h-4">
-                              <div className="w-1 bg-[#FF8C00] animate-[musicBar_0.6s_ease-in-out_infinite]"></div>
-                              <div className="w-1 bg-[#FF8C00] animate-[musicBar_0.8s_ease-in-out_infinite_0.2s]"></div>
-                              <div className="w-1 bg-[#FF8C00] animate-[musicBar_0.5s_ease-in-out_infinite_0.1s]"></div>
+                              <div className="w-1 bg-primary animate-[musicBar_0.6s_ease-in-out_infinite]"></div>
+                              <div className="w-1 bg-primary animate-[musicBar_0.8s_ease-in-out_infinite_0.2s]"></div>
+                              <div className="w-1 bg-primary animate-[musicBar_0.5s_ease-in-out_infinite_0.1s]"></div>
                             </div>
                           ) : (
                             <span>{index + 1}</span>
@@ -1505,7 +1505,7 @@ function ExploreContent() {
 
                         {/* Track Info */}
                         <div className="flex-1 min-w-0">
-                          <h3 className="font-bold text-white text-xs sm:text-sm truncate tracking-wide drop-shadow-md">
+                          <h3 className="font-bold text-xs sm:text-sm truncate tracking-wide drop-shadow-md text-text-primary">
                             {track.title}
                           </h3>
                           <p className="text-gray-300 text-xs truncate font-medium">
@@ -1516,14 +1516,14 @@ function ExploreContent() {
                         {/* Stats */}
                         <div className="flex items-center gap-2">
                           <div className="flex items-center gap-1">
-                            <svg className="w-3 h-3 text-[#FF8C00]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <svg className="w-3 h-3 text-primary" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                               <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
                               <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
                             </svg>
                             <span className="text-gray-400 text-xs font-semibold">{track.plays.toLocaleString()}</span>
                           </div>
                           <div className="flex items-center gap-1">
-                            <svg className="w-3 h-3 text-[#FFB020]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <svg className="w-3 h-3 text-primary-light" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                               <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd"></path>
                             </svg>
                             <span className="text-gray-400 text-xs font-semibold">{track.likes}</span>
@@ -1537,7 +1537,7 @@ function ExploreContent() {
                 {/* Desktop Grid View */}
                 <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 md:gap-6 lg:gap-8 pb-32">
                   {filteredTracks.map((track) => (
-                    <div key={`track-${track.id}-desktop`} className="group card-bg rounded-lg sm:rounded-2xl overflow-hidden transition-all duration-300 hover:border-[#FF8C00]/50 hover:bg-gradient-to-br hover:from-gray-900/70 hover:to-gray-900/50 hover:shadow-xl hover:shadow-[#FF8C00]/10">
+                    <div key={`track-${track.id}-desktop`} className="group card-bg rounded-lg sm:rounded-2xl overflow-hidden">
                       <div className="relative">
                         <img 
                           src={track.coverImage || track.coverURL || '/placeholder-track.png'} 
@@ -1548,7 +1548,7 @@ function ExploreContent() {
                             target.src = '/placeholder-track.png';
                           }}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <div className="absolute inset-0 flex items-end justify-end p-2 sm:p-3 pointer-events-none">
                           <button 
                             onClick={() => {
                               const fullTrack = trendingTracksData.find(t => t._id === track._id);
@@ -1587,7 +1587,7 @@ function ExploreContent() {
                                 setCurrentPlaylist(playlistTracks);
                               }
                             }}
-                            className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#FF8C00] flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 shadow-lg hover:bg-[#ff2a4d] hover:scale-105">
+                            className="mx-card-play !static pointer-events-auto hover:bg-primary-hover [&_svg]:w-4 [&_svg]:h-4">
                             {currentTrack?.id === track.id && isPlaying ? (
                               <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd"></path>
@@ -1674,7 +1674,7 @@ function ExploreContent() {
                       </div>
                       
                       <div className="p-4 sm:p-5">
-                        <h3 className="font-bold text-white text-sm sm:text-lg mb-1 truncate">{track.title}</h3>
+                        <h3 className="font-bold text-sm sm:text-lg mb-1 truncate text-text-primary">{track.title}</h3>
                         <p className="text-gray-400 text-xs sm:text-base mb-2 sm:mb-3">{track.artist}</p>
                         
                         <div className="flex justify-between text-xs sm:text-sm text-gray-500">
@@ -1706,7 +1706,7 @@ function ExploreContent() {
               <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 xs:gap-4 sm:gap-5 md:gap-6 -mt-2">
                 {filteredCreators.length > 0 ? (
                   filteredCreators.map((creator) => (
-                  <div key={`creator-${creator._id || creator.id}`} className="group card-bg rounded-lg xs:rounded-xl sm:rounded-2xl p-3 xs:p-4 sm:p-5 md:p-6 transition-all duration-300 hover:border-[#FFB020]/50 hover:bg-gradient-to-br hover:from-gray-900/70 hover:to-gray-900/50 hover:shadow-xl hover:shadow-[#FFB020]/10 cursor-pointer"
+                  <div key={`creator-${creator._id || creator.id}`} className="group card-bg rounded-lg xs:rounded-xl sm:rounded-2xl p-3 xs:p-4 sm:p-5 md:p-6 cursor-pointer"
                     onClick={() => {
                       router.push(`/artists/${creator._id || creator.id}`);
                     }}>
@@ -1718,14 +1718,14 @@ function ExploreContent() {
                           className="w-14 h-14 xs:w-16 xs:h-16 rounded-full object-cover"
                         />
                         {creator.verified && (
-                          <div className="absolute -bottom-1 -right-1 w-5 h-5 xs:w-6 xs:h-6 bg-[#FF8C00] rounded-full flex items-center justify-center">
+                          <div className="absolute -bottom-1 -right-1 w-5 h-5 xs:w-6 xs:h-6 bg-primary rounded-full flex items-center justify-center">
                             <svg className="w-2.5 h-2.5 xs:w-3 xs:h-3 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                               <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
                             </svg>
                           </div>
                         )}
                       </div>
-                      <h3 className="font-bold text-white text-xs xs:text-sm sm:text-base truncate w-full">{creator.name}</h3>
+                      <h3 className="font-bold text-xs xs:text-sm sm:text-base truncate w-full text-text-primary">{creator.name}</h3>
                       <p className="text-gray-400 text-xs sm:text-sm mb-1 xs:mb-2">{creator.creatorType}</p>
                     </div>
                     
@@ -1734,7 +1734,7 @@ function ExploreContent() {
                     </div>
                     
                     <button 
-                      className={`w-full py-2 xs:py-2.5 sm:py-3 rounded-lg font-bold hover:opacity-90 transition-all duration-300 text-xs xs:text-sm sm:text-base shadow-md hover:shadow-lg transform hover:-translate-y-0.5 ${followStatus[creator._id || creator.id || ''] ? 'bg-gray-600 text-white' : 'bg-gradient-to-r from-[#FFB020] to-[#FFA726] text-gray-900'}`}
+                      className={`w-full py-2 xs:py-2.5 sm:py-3 rounded-lg font-bold hover:opacity-90 transition-all duration-300 text-xs xs:text-sm sm:text-base shadow-md hover:shadow-lg transform hover:-translate-y-0.5 ${followStatus[creator._id || creator.id || ''] ? 'bg-gray-600 text-white' : 'bg-gradient-to-r from-primary-light to-primary-hover text-gray-900'}`}
                       onClick={async (e) => {
                         e.stopPropagation();
                         const creatorId = creator._id || creator.id;

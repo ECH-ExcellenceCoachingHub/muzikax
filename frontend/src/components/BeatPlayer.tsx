@@ -87,13 +87,13 @@ const BeatPlayer = ({ className = '' }: BeatPlayerProps) => {
   if (!currentTrack || !isBeat) return null
 
   return (
-    <div className={`fixed bottom-4 right-4 w-[380px] rounded-2xl bg-gradient-to-br from-gray-900 to-black backdrop-blur-xl border border-[#FF8C00]/30 shadow-2xl shadow-[#FF8C00]/20 z-50 animate-[fadeInUp_0.3s_ease-out] ${className}`}>
+    <div className={`fixed bottom-4 right-4 w-[380px] rounded-2xl bg-gradient-to-br from-gray-900 to-black backdrop-blur-xl border border-primary/30 shadow-2xl shadow-primary/20 z-50 animate-[fadeInUp_0.3s_ease-out] ${className}`}>
       {/* Beat-specific header */}
       <div className="px-4 py-3 border-b border-gray-800/50">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3 min-w-0 flex-1">
             <div className="relative flex-shrink-0">
-              <div className="absolute -inset-1 bg-[#FF8C00] rounded-lg blur opacity-30 animate-pulse"></div>
+              <div className="absolute -inset-1 bg-primary rounded-lg blur opacity-30 animate-pulse"></div>
               <img
                 src={currentTrack.coverImage}
                 alt={currentTrack.title}
@@ -104,9 +104,9 @@ const BeatPlayer = ({ className = '' }: BeatPlayerProps) => {
             </div>
             <div className="min-w-0 flex-1">
               <h4 className="text-white font-bold text-sm truncate max-w-[160px]">{currentTrack.title}</h4>
-              <p className="text-[#FFB020] text-xs truncate max-w-[140px]">{currentTrack.artist}</p>
+              <p className="text-primary-light text-xs truncate max-w-[140px]">{currentTrack.artist}</p>
               <div className="flex items-center gap-1 mt-1">
-                <span className="text-[#FF8C00] text-xs font-bold whitespace-nowrap">{t('beat')}</span>
+                <span className="text-primary text-xs font-bold whitespace-nowrap">{t('beat')}</span>
                 {currentTrack.paymentType === 'paid' ? (
                   <span className="text-green-400 text-xs font-semibold whitespace-nowrap">• {t('paid')}</span>
                 ) : (
@@ -138,7 +138,7 @@ const BeatPlayer = ({ className = '' }: BeatPlayerProps) => {
           className="h-1.5 w-full bg-gray-800 rounded-full cursor-pointer group"
         >
           <div
-            className="h-full bg-gradient-to-r from-[#FF8C00] to-[#FFB020] rounded-full transition-all group-hover:h-2"
+            className="h-full bg-gradient-to-r from-primary to-primary-light rounded-full transition-all group-hover:h-2"
             style={{ width: `${(progress / duration) * 100 || 0}%` }}
           />
         </div>
@@ -161,7 +161,7 @@ const BeatPlayer = ({ className = '' }: BeatPlayerProps) => {
           {/* Play/Pause */}
           <button
             onClick={togglePlayPause}
-            className="w-12 h-12 rounded-full bg-gradient-to-r from-[#FF8C00] to-[#FFB020] flex items-center justify-center text-white hover:scale-105 transition-transform shadow-lg"
+            className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-primary-light flex items-center justify-center text-white hover:scale-105 transition-transform shadow-lg"
           >
             {isPlaying ? (
               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
@@ -263,7 +263,7 @@ const BeatPlayer = ({ className = '' }: BeatPlayerProps) => {
             <select
               value={playbackRate}
               onChange={(e) => setPlaybackRate(parseFloat(e.target.value))}
-              className="bg-gray-800/50 text-gray-300 text-xs rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-[#FF8C00]"
+              className="bg-gray-800/50 text-gray-300 text-xs rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-primary"
             >
               <option value="0.5">0.5x</option>
               <option value="0.75">0.75x</option>
@@ -294,7 +294,7 @@ const BeatPlayer = ({ className = '' }: BeatPlayerProps) => {
                   step="0.01"
                   value={volume}
                   onChange={handleVolumeChange}
-                  className="w-20 accent-[#FF8C00]"
+                  className="w-20 accent-primary"
                 />
               </div>
             )}

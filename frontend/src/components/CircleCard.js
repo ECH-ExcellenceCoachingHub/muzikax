@@ -48,10 +48,10 @@ const CircleCard = ({ circle, onJoinLeaveClick }) => {
   };
 
   return (
-    <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 border border-gray-700 hover:border-[#FF4D67]/30 transition-all duration-300">
+    <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 border border-gray-700 hover:border-primary/30 transition-all duration-300">
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center space-x-3">
-          <div className="bg-gradient-to-br from-[#FF4D67] to-[#FF6B8B] w-12 h-12 rounded-full flex items-center justify-center">
+          <div className="bg-gradient-to-br from-primary to-primary-hover w-12 h-12 rounded-full flex items-center justify-center">
             {getCircleIcon(circle.type)}
           </div>
           <div>
@@ -93,7 +93,7 @@ const CircleCard = ({ circle, onJoinLeaveClick }) => {
         className={`w-full py-2 px-4 rounded-lg font-medium transition-colors flex items-center justify-center space-x-2 ${
           isMember
             ? 'bg-gray-700 text-white hover:bg-gray-600'
-            : 'bg-gradient-to-r from-[#FF4D67] to-[#FF6B8B] text-white hover:from-[#FF6B8B] hover:to-[#FF8FA3]'
+            : 'bg-gradient-to-r from-primary to-primary-hover text-white hover:from-primary-hover hover:to-primary-hover'
         }`}
       >
         {joining ? (
